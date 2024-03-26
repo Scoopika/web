@@ -14,10 +14,11 @@ const tasks = new Tasks({
 tasks.run("summarize", "TEXT TO SUMMARIZE");
 
 // Add a custom task (method 1)
-tasks.extend(search, {
+tasks.extend({
     name: "search",
     description: "Search something",
     type: "function",
+    function: search,
     parameters: {
         query: {
             type: "string",
@@ -40,7 +41,7 @@ tasks.run("search", {
 })
 
 // Add a custom task (method 2)
-tasks.extend(search, {
+tasks.extend({
     name: "custom_summarize",
     description: "Summarize something",
     type: "prompt",

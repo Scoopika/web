@@ -63,7 +63,7 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
     >
       <NavbarContent>
         <div className="flex items-center h-full">
-          <NavbarBrand className="mr-6" as={NextLink} href={path ? path : "/"}>
+          <NavbarBrand className="mr-6" as={NextLink} href={path ? `/${path}` : "/"}>
             <Logo />
             <p className="font-bold text-inherit text-[1.05rem] ml-3">
               Scoopika
