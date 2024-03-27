@@ -77,16 +77,6 @@ export default function Why() {
             RAG using vector stores, and everything is optimized for
             performance.
           </p>
-          <div className="flex flex-col gap-4 justify-end h-full">
-            <div className="flex items-center gap-2">
-              <div className="text-xs p-1 pl-3 pr-3 bg-black/10 dark:bg-accent/40 rounded-3xl font-semibold">
-                $9
-              </div>
-              <div className="text-xs dark:text-[var(--brandgreen)]">
-                you have enough credits for production
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
