@@ -2,7 +2,7 @@ import { SiteConfig } from "types"
 
 export const siteConfig: SiteConfig = {
   name: "Scoopika",
-  title: "Scoopika: Open-source AI tools for Developers",
+  title: "Scoopika: Build controllable AI-powered applications",
   description:
     "An open source for building AI-powered products that enable users to interact with their data in natural language.",
   url: "https://scoopika.vercel.app",
