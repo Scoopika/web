@@ -10,7 +10,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "LLM Tasks",
   description: "Ready APIs for different LLM tasks for your agents",
-}
+};
 
 export default function Page() {
   return (

@@ -1,4 +1,4 @@
-import { SiteConfig } from "types"
+import { SiteConfig } from "types";
 
 export const siteConfig: SiteConfig = {
   name: "Scoopika",
@@ -11,4 +11,4 @@ export const siteConfig: SiteConfig = {
     twitter: "https://twitter.com/multineonteam",
     github: "https://github.com/scoopika",
   },
-}
+};

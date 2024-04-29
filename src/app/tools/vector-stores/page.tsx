@@ -5,8 +5,9 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Vector Stores",
-  description: "Connect your database with vector stores optimized for performance",
-}
+  description:
+    "Connect your database with vector stores optimized for performance",
+};
 
 export default function Page() {
   return (

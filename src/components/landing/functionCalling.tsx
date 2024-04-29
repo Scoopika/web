@@ -24,9 +24,8 @@ export default function FunctionCalling() {
             it is almost impossible in real products, Usually due to LLMs
             sending unexpected arguments values to the function, making up new
             arguments, or missing arguments. And not talking about other
-            problems like costs and tools taking up the whole context
-            window. Scoopika works with ANY LLM, and tries to solve all of these
-            issues:
+            problems like costs and tools taking up the whole context window.
+            Scoopika works with ANY LLM, and tries to solve all of these issues:
           </p>
           <div className="mt-4 flex flex-col gap-4">
             <div className="flex gap-4 text-sm">

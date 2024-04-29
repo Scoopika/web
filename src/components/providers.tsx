@@ -8,7 +8,7 @@ import { NextUIProvider } from "@nextui-org/react";
 
 const Providers: FC<ThemeProviderProps> = ({ children }) => {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
+    <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
       <SessionProvider>
         <NextUIProvider>{children}</NextUIProvider>
       </SessionProvider>

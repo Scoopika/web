@@ -2,7 +2,6 @@
 
 import { FC } from "react";
 import {
-  Skeleton,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
@@ -18,18 +17,15 @@ import { signOut } from "next-auth/react";
 import NextLink from "next/link";
 
 interface Props {
-  session: Session | "loading" | null;
+  session: Session | null;
+  type: "avatar" | "button";
 }
 
-const UserDropdown: FC<Props> = ({ session }) => {
+const UserDropdown: FC<Props> = ({ session, type }) => {
   const { theme, setTheme } = useTheme();
 
   if (!session) {
     return null;
-  }
-
-  if (session === "loading") {
-    return <Skeleton className="w-14 h-7 rounded" />;
   }
 
   return (
@@ -40,7 +36,7 @@ const UserDropdown: FC<Props> = ({ session }) => {
       }}
     >
       <DropdownTrigger>
-        <Avatar className="w-[2.1rem] h-[2.1rem] cursor-pointer">
+        <Avatar className="w-[2.05rem] h-[2.05rem] cursor-pointer border-1">
           <AvatarImage src={session.user?.image || ""} />
           <AvatarFallback>
             {(session.user?.name || session.user?.email)?.substring(0, 2)}
@@ -64,7 +60,6 @@ const UserDropdown: FC<Props> = ({ session }) => {
       >
         <DropdownSection showDivider>
           <DropdownItem
-            isReadOnly
             key="profile"
             className="h-14 gap-2 opacity-100"
           >
@@ -119,7 +114,6 @@ const UserDropdown: FC<Props> = ({ session }) => {
             Command menu
           </DropdownItem>
           <DropdownItem
-            isReadOnly
             key="logout"
             endContent={<Icons.LogoutIcon size={17} />}
             onClick={() => signOut()}
@@ -128,12 +122,12 @@ const UserDropdown: FC<Props> = ({ session }) => {
           </DropdownItem>
         </DropdownSection>
 
-        {!session.user?.plan || session.user?.plan === "free" ? (
+        {!session.user?.plan || session.user?.plan === "none" ? (
           <DropdownItem
             variant="flat"
             color="default"
             key="upgrade"
-            className="bg-gradient-to-r from-brandpink to-brandblue data-[hover:true]:text-black rounded-lg text-black border-1"
+            className="bg-purple-500/5 border-[var(--brandpurple)] border-1"
             endContent={<Icons.SparklesIcon size={17} />}
           >
             Upgrade plan

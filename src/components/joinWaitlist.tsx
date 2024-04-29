@@ -13,7 +13,6 @@ import {
 import { Button } from "@nextui-org/react";
 import { IconChevronRight } from "@tabler/icons-react";
 import { toast } from "sonner";
-import { createClient } from "@/utils/supabase/client";
 
 export default function WaitlistDialog({
   color,
@@ -22,7 +21,6 @@ export default function WaitlistDialog({
   color: string;
   triggerClassName?: string;
 }) {
-  const supabase = createClient();
   const [open, setOpen] = useState<boolean>(false);
   const [email, setEmail] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
@@ -36,16 +34,16 @@ export default function WaitlistDialog({
         return;
       }
       setLoading(true);
-      const { error } = await supabase
-        .from("waitlist")
-        .insert({ email: email });
-      if (error) {
-        if (error.code === "23505") {
-          toast.error("You're already on the waitlist");
-          return;
-        }
-        throw error;
-      }
+      // const { error } = await supabase
+      //   .from("waitlist")
+      //   .insert({ email: email });
+      // if (error) {
+      //   if (error.code === "23505") {
+      //     toast.error("You're already on the waitlist");
+      //     return;
+      //   }
+      //   throw error;
+      // }
 
       toast.success("Joined the waitlist");
       setOpen(false);

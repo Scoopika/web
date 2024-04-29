@@ -22,7 +22,7 @@ import NextLink from "next/link";
 interface Props {
   active?: string;
   items?: Item[];
-  session: Session | "loading" | null;
+  session: Session | null;
   children?: React.ReactNode;
   path?: string;
   disabled?: boolean;
@@ -63,7 +63,11 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
     >
       <NavbarContent>
         <div className="flex items-center h-full">
-          <NavbarBrand className="mr-6" as={NextLink} href={path ? `/${path}` : "/"}>
+          <NavbarBrand
+            className="mr-6"
+            as={NextLink}
+            href={path ? `/${path}` : "/"}
+          >
             <Logo />
             <p className="font-bold text-inherit text-[1.05rem] ml-3">
               Scoopika
@@ -105,7 +109,7 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
             Join the waitlist
           </Button>
         )}
-        <UserDropdown session={session} />
+        <UserDropdown type="avatar" session={session} />
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"

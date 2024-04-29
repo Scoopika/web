@@ -1,13 +1,13 @@
 import Logo from "@/components/logo";
 import Link from "next/link";
-import { docsConfig } from "@/config/docs"
-import { DocsSidebarNav } from "@/components/docs/sidebar"
+import { docsConfig } from "@/config/docs";
+import { DocsSidebarNav } from "@/components/docs/sidebar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Docs",
   description: "Scoopika documentation - getting started with Scoopika",
-}
+};
 
 export default function Page() {
   return (

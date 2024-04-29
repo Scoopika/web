@@ -12,7 +12,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Function Calling",
   description: "Controllable function calling that works",
-}
+};
 
 export default function Page() {
   return (

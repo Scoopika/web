@@ -5,7 +5,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Docs",
   description: "Scoopika documentation",
-}
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
