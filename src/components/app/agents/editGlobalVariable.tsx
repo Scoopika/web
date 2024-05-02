@@ -80,7 +80,10 @@ export default function EditGlobalVariable({
 
       toast.success("Updated variable successfully!", { id: t });
       setOpen(false);
-      updateAgent(newAgent, "Variables");
+      setTimeout(() => {
+        updateAgent(newAgent, "Variables");
+        closeEdit();
+      }, 300);
     } catch {
       toast.error("Can't update variable. try again later!", { id: t });
     } finally {

@@ -12,6 +12,7 @@ import { FaBook } from "react-icons/fa";
 
 import UserDropdown from "../userDropdown";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Props {
   session: Session | null;
@@ -47,7 +48,7 @@ const links: SideItem[] = [
   {
     type: "link",
     name: "Smart Boxes",
-    path: "/app",
+    path: "/app/boxes",
     icon: <Tb3DCubeSphere size={18} />,
   },
   // {
@@ -61,18 +62,9 @@ const links: SideItem[] = [
   },
   {
     type: "link",
-    name: "External tools",
-    path: "/app",
-    icon: <BsFillGridFill size={18} />,
-  },
-  {
-    type: "link",
     name: "Edge APIs",
     path: "/app",
     icon: <MdApi size={18} />,
-  },
-  {
-    type: "sep",
   },
   {
     type: "link",
@@ -83,7 +75,7 @@ const links: SideItem[] = [
   {
     type: "link",
     name: "Settings",
-    path: "/app",
+    path: "/app/settings",
     icon: <RiSettings4Fill size={18} />,
   },
 ];
@@ -94,9 +86,11 @@ const Sidebar: FC<Props> = ({ session, active }) => {
       <div className="min-w-64 max-w-64 fixed border-r-1 min-h-full max-h-full overflow-auto flex flex-col z-50">
         <div className="flex items-center gap-2 h-14 p-4 border-b-1">
           <div className="flex items-center justify-center w-9 h-9 rounded-full bg-black dark:bg-white overflow-hidden pl-1 group">
-            <img
+            <Image
               src="/logo.png"
               alt="Scoopika logo"
+              width={40}
+              height={40}
               className="rotate-[-10deg] mt-1.5 group-hover:scale-110 transition-transform duration-500"
             />
           </div>
@@ -119,8 +113,8 @@ const Sidebar: FC<Props> = ({ session, active }) => {
               <Link
                 href={link.path}
                 key={`sidelink-${link.name}`}
-                className={`p-2 text-sm flex items-center gap-3 font-base hover:bg-black/10 dark:hover:bg-foreground/5 rounded-md transition-all ${
-                  active === link.name && "bg-foreground text-background"
+                className={`p-2 text-sm flex items-center gap-3 font-base rounded-md transition-all ${
+                  active === link.name ? "bg-foreground text-background" : "hover:bg-black/10 dark:hover:bg-foreground/5"
                 }`}
               >
                 {link.icon}

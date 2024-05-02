@@ -2,6 +2,7 @@ import { Prompt } from "@scoopika/types";
 
 export interface Model {
   id: string;
+  name?: string;
   options: Record<
     string,
     { min: number; max: number; default: number; step: number }
@@ -45,6 +46,26 @@ const engines: SpecificEngines = {
             presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
           },
         },
+        {
+          id: "gpt-4",
+          options: {
+            max_tokens: { min: 50, max: 8192, default: 500, step: 1 },
+            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
+            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
+            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+          },
+        },
+        {
+          id: "gpt-4-turbo",
+          options: {
+            max_tokens: { min: 50, max: 4096, default: 500, step: 1 },
+            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
+            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
+            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+          },
+        },
       ],
       image: [],
       json: [],
@@ -71,7 +92,49 @@ const engines: SpecificEngines = {
   together: {
     name: "Together AI",
     models: {
-      text: [],
+      text: [
+        {
+          id: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+          name: "Mixtral-8x7B-Instruct-v0.1",
+          options: {
+            max_tokens: { min: 5, max: 32768, default: 500, step: 1 },
+            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
+            top_p: { min: 0, max: 1, default: 0.7, step: 0.01 },
+            top_k: { min: 1, max: 100, default: 50, step: 1 },
+            repetition_penalty: { min: 1, max: 2, default: 1, step: 0.01 },
+          },
+        },
+        {
+          id: "mistralai/Mistral-7B-Instruct-v0.1",
+          name: "Mistral-7B-Instruct-v0.1",
+          options: {
+            max_tokens: { min: 5, max: 4096, default: 512, step: 1 },
+            temperature: { min: 0, max: 2, default: 0.7, step: 0.01 },
+            top_p: { min: 0, max: 1, default: 0.7, step: 0.01 },
+            top_k: { min: 1, max: 100, default: 50, step: 1 },
+            repetition_penalty: { min: 1, max: 2, default: 1, step: 0.01 },
+          },
+        },
+      ],
+      image: [],
+      json: [],
+    },
+  },
+  fireworks: {
+    name: "Fireworks AI",
+    models: {
+      text: [
+        {
+          id: "accounts/fireworks/models/firefunction-v1",
+          name: "firefunction-v1",
+          options: {
+            max_tokens: { min: 5, max: 32768, default: 4096, step: 1 },
+            temperature: { min: 0.01, max: 5, default: 0.7, step: 0.01 },
+            top_p: { min: 0.01, max: 1, default: 1, step: 0.01 },
+            repetition_penalty: { min: -2, max: 2, default: 0, step: 0.01 },
+          },
+        },
+      ],
       image: [],
       json: [],
     },

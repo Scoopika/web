@@ -23,6 +23,7 @@ interface Props {
   prompt: Prompt;
   variables: AgentVariables[];
   closePrompt: () => void;
+  newPrompt?: boolean;
 }
 
 export default function PromptEditor({
@@ -32,6 +33,7 @@ export default function PromptEditor({
   openEditor,
   updateAgent,
   closePrompt,
+  newPrompt
 }: Props) {
   const [data, setData] = useState<Prompt>({} as Prompt);
   const [open, setOpen] = useState<boolean>(false);
@@ -134,6 +136,11 @@ export default function PromptEditor({
       <Drawer
         open={open}
         onOpenChange={(state: boolean) => {
+
+          if (!state && newPrompt) {
+            
+          }
+
           setOpen(state);
 
           if (!state) {

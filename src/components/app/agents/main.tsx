@@ -18,6 +18,8 @@ export default function AgentsMainPage({ session, agents }: Props) {
   const [filteredAgents, setFilteredAgents] = useState<AgentData[]>(agents);
   const [openAgent, setOpenAgent] = useState<AgentData | undefined>(undefined);
   const [openAgentTab, setOpenAgentTab] = useState<string>();
+  const [openAgentFullScreen, setOpenAgentFullScreen] =
+    useState<boolean>(false);
 
   const updateState = (agent: AgentData) => {
     setAgentsState((prev) => [...prev, agent]);
@@ -78,7 +80,11 @@ export default function AgentsMainPage({ session, agents }: Props) {
 
   return (
     <div className="w-full flex min-h-full max-h-full">
-      <div className="w-full p-6 flex flex-col overflow-auto">
+      <div
+        className={`w-full p-6 flex flex-col overflow-auto ${
+          openAgentFullScreen && "hidden"
+        }`}
+      >
         <div className="w-full flex items-center gap-4">
           <input
             onInput={(e) => {
@@ -129,6 +135,7 @@ export default function AgentsMainPage({ session, agents }: Props) {
           updateAgent={updateAgent}
           openId="dummy"
           tab={openAgentTab}
+          setOpenAgentTab={setOpenAgentTab}
         />
       </div>
     </div>

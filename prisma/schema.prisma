@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
 }
 
@@ -48,7 +48,21 @@ model User {
 }
 
 model Agent {
-  id            String @id
-  userId        String
-  payload       String
+  id      String @id
+  userId  String
+  payload String
+}
+
+model Box {
+  id      String @id
+  name    String
+  userId  String
+  payload String
+}
+
+model Token {
+  id     String @id
+  userId String
+  name   String
+  value  String
 }

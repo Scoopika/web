@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { MdTextSnippet, MdImage, MdEdit } from "react-icons/md";
+import { MdTextSnippet, MdImage, MdEdit, MdDelete } from "react-icons/md";
 import agentVariables from "@/scripts/agents/variables";
 import engines, { getDefaultOptions } from "@/scripts/agents/engines";
 import updateAgentData from "@/functions/agents/update";
@@ -72,6 +72,36 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
     setOpenPrompt(prompt);
   };
 
+  const deletePrompt = async (id: string) => {
+    setLoading(true);
+    const newAgent: AgentData = JSON.parse(JSON.stringify(data));
+
+    newAgent.prompts = data.prompts.filter((p) => p.id !== id);
+    newAgent.prompts = newAgent.prompts
+      .sort((a, b) => a.index - b.index)
+      .map((prompt, index) => {
+        prompt.index = index;
+        return prompt;
+      });
+
+    const t = toast.loading("Deleting prompt...");
+
+    try {
+      const res = await updateAgentData(agent.id, newAgent);
+
+      if (!res.success) {
+        throw new Error("update error");
+      }
+
+      toast.success("Deleted prompt", { id: t });
+      updateAgent(newAgent);
+    } catch {
+      toast.error("Can't delete prompt. try again later!", { id: t });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const swap = (index: number, prompt: Prompt, direction: "up" | "down") => {
     const sortedData = data.prompts.sort((a, b) => a.index - b.index);
     const sortedIds = sortedData.map((d) => d.id);
@@ -120,16 +150,24 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
           openEditor={true}
           variables={agentVariables(agent)}
           closePrompt={closeOpenPrompt}
+          newPrompt={
+            agent.prompts.filter((p) => p.id === openPrompt.id).length === 0
+          }
         />
       )}
 
       {(agent.chained || agent.prompts.length < 1) && (
         <div className="flex items-center gap-4 w-full">
           <div className="w-full border-t-1 border-dashed"></div>
-          <DropdownMenu open={newOpen} onOpenChange={!editOrder ? setNewOpen : () => {}}>
+          <DropdownMenu
+            open={newOpen}
+            onOpenChange={!editOrder ? setNewOpen : () => {}}
+          >
             <DropdownMenuTrigger>
               <div
-                className={`min-w-[10rem] border-1 border-dashed border-black/30 dark:border-white/20 hover:border-black/50 dark:hover:border-white/50 bg-accent/30 relative overflow-visible flex items-center justify-center rounded-lg text-xs p-1.5 transition-all ${editOrder && "cursor-not-allowed"}`}
+                className={`min-w-[10rem] border-1 border-dashed border-black/30 dark:border-white/20 hover:border-black/50 dark:hover:border-white/50 bg-accent/30 relative overflow-visible flex items-center justify-center rounded-lg text-xs p-1.5 transition-all ${
+                  editOrder && "cursor-not-allowed"
+                }`}
                 onClick={() => {
                   if (!editOrder) {
                     setNewOpen(true);
@@ -170,7 +208,9 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
       {agent.prompts.length > 0 && (
         <div className="flex flex-col w-full gap-3 p-3 border-1 rounded-md border-dashed border-black/20 dark:border-white/20 mt-4">
           <div className="w-full flex items-center">
-            <p className="text-sm min-w-max opacity-80">Prompts {agent.chained && "chain"}</p>
+            <p className="text-sm min-w-max opacity-80">
+              Prompts {agent.chained && "chain"}
+            </p>
             <div className="flex items-center w-full justify-end">
               {!editOrder && agent.prompts.length > 0 && (
                 <div className="w-full flex items-center justify-end">
@@ -179,6 +219,7 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
                     variant="flat"
                     startContent={<TbReorder size={17} />}
                     onPress={() => setEditOrder(true)}
+                    isLoading={loading}
                   >
                     Change order
                   </Button>
@@ -226,15 +267,26 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
                 <p className="text-sm min-w-max">{prompt.variable_name}</p>
                 <div className="w-full flex items-center justify-end opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all gap-2">
                   {!editOrder && (
-                    <Button
-                      isIconOnly
-                      size="sm"
-                      color="default"
-                      variant="flat"
-                      onPress={() => setOpenPrompt(prompt)}
-                    >
-                      <MdEdit />
-                    </Button>
+                    <>
+                      <Button
+                        isIconOnly
+                        size="sm"
+                        color="default"
+                        variant="flat"
+                        onPress={() => setOpenPrompt(prompt)}
+                      >
+                        <MdEdit />
+                      </Button>
+                      <Button
+                        isIconOnly
+                        size="sm"
+                        color="danger"
+                        variant="light"
+                        onPress={() => deletePrompt(prompt.id)}
+                      >
+                        <MdDelete size={17} />
+                      </Button>
+                    </>
                   )}
                   {editOrder && index !== 0 && (
                     <Button

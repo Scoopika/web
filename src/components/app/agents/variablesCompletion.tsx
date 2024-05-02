@@ -25,15 +25,19 @@ export default function VariablesCompletion({
   addVariable,
   close,
 }: Props) {
-  const [all, setAll] = useState<AgentVariables[]>([
-    ...prompt.inputs.map((i) => ({
-      source: {
-        id: prompt.id,
-        name: prompt.variable_name,
-      },
-      variable: i,
-    })),
-    ...variables.filter(v => (prompt.inputs.filter(i => i.id === v.variable.id).length === 0))
+  const [all, _setAll] = useState<AgentVariables[]>([
+    ...prompt.inputs
+      .filter((i) => i.id.includes((latestVariable || "").replace("$", "")))
+      .map((i) => ({
+        source: {
+          id: prompt.id,
+          name: prompt.variable_name,
+        },
+        variable: i,
+      })),
+    ...variables.filter(
+      (v) => prompt.inputs.filter((i) => i.id === v.variable.id).length === 0
+    ),
   ]);
   const [focused, setFocused] = useState<number>(0);
 
@@ -115,34 +119,40 @@ export default function VariablesCompletion({
         </div>
       </div>
       <div className="flex flex-col gap-1 mt-3">
-        {all.map((variable, index) => (
-          <div
-            id={`variablecompletion-${index}`}
-            key={`variablecompletion-${index}`}
-            className={`w-full p-1.5 pl-3 pr-3 text-sm rounded-md flex items-center ${
-              index === focused && "bg-black/20 dark:bg-accent/50"
-            }`}
-          >
-            <div className="flex flex-col w-full">
-              <div className="flex items-center gap-1">
-                {variable.variable.id}:
-                <span className={`${typesColors[variable.variable.type]}`}>
-                  {variable.variable.type}
-                </span>
+        {all.map((variable, index) =>
+          variable.variable.id.includes(
+            String(latestVariable || "").replace("$", "")
+          ) ? (
+            <div
+              id={`variablecompletion-${index}`}
+              key={`variablecompletion-${index}`}
+              className={`w-full p-1.5 pl-3 pr-3 text-sm rounded-md flex items-center ${
+                index === focused && "bg-black/20 dark:bg-accent/50"
+              }`}
+            >
+              <div className="flex flex-col w-full">
+                <div className="flex items-center gap-1">
+                  {variable.variable.id}:
+                  <span className={`${typesColors[variable.variable.type]}`}>
+                    {variable.variable.type}
+                  </span>
+                </div>
+                {variable.variable.description && (
+                  <p className="text-xs opacity-80 mt-1">
+                    {variable.variable.description}
+                  </p>
+                )}
               </div>
-              {variable.variable.description && (
-                <p className="text-xs opacity-80 mt-1">
-                  {variable.variable.description}
-                </p>
+              {variable.source.id !== prompt.id && (
+                <div className="min-w-max text-sm opacity-80">
+                  Import from: {variable.source.name}
+                </div>
               )}
             </div>
-            {variable.source.id !== prompt.id && (
-              <div className="min-w-max text-sm opacity-80">
-                Import from: {variable.source.name}
-              </div>
-            )}
-          </div>
-        ))}
+          ) : (
+            <></>
+          )
+        )}
       </div>
     </div>
   );

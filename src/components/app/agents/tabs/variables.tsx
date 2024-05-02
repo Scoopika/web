@@ -6,6 +6,8 @@ import { AgentData, PromptInput } from "@scoopika/types";
 import { useState } from "react";
 import { MdEdit } from "react-icons/md";
 import EditGlobalVariable from "../editGlobalVariable";
+import { FaInfoCircle } from "react-icons/fa";
+import { MdInfo } from "react-icons/md";
 
 interface Props {
   agent: AgentData;
@@ -26,7 +28,7 @@ export default function AgentVariablesTab({ agent, updateAgent }: Props) {
     <div className="flex flex-col items-center p-6 pt-0 w-full">
       <p className="text-sm w-full mb-1">All variables</p>
       <p className="text-sm opacity-80 w-full mb-3">
-        Editing a variable from here will update it in all prompts it exists in
+        Editing a variable from here will update it in all prompts using it
       </p>
       {agentVariables(agent).map((variable, index) => (
         <div
@@ -35,7 +37,7 @@ export default function AgentVariablesTab({ agent, updateAgent }: Props) {
             !(index & 1) && "bg-black/20 dark:bg-accent/30"
           }`}
         >
-          <div className="min-w-max flex items-center gap-1">
+          <div className="min-w-max flex items-center gap-1 text-sm">
             <div>{variable.variable.id}: </div>
             <div className={`${typesColors[variable.variable.type]}`}>
               {variable.variable.type}
@@ -63,6 +65,12 @@ export default function AgentVariablesTab({ agent, updateAgent }: Props) {
           updateAgent={updateAgent}
         />
       )}
+
+      <p className="text-sm opacity-80 w-full mb-3 border-1 p-3 rounded-md flex flex-col gap-2 border-dashed border-cyan-400 bg-cyan-500/5 mt-4">
+        <MdInfo size={24} className="text-cyan-300" />
+        To create a new variable go to a prompt and add it. you can then import
+        it in other prompts
+      </p>
     </div>
   );
 }

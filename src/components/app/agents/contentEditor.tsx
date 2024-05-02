@@ -33,7 +33,7 @@ const varRegex = (
   variables: PromptInput[],
   state: "done" | "many" | "none",
   callback: (start: number, end: number) => void,
-  allowNone?: boolean,
+  allowNone?: boolean
 ) => {
   let matchArr: RegExpExecArray | null, start: number;
   while ((matchArr = dollarRegex.exec(text)) !== null) {
@@ -50,6 +50,52 @@ const varRegex = (
 
     callback(start, start + matchArr[0].length);
   }
+};
+
+const VarSpanComp = ({ prompt, props }: { prompt: Prompt; props: any }) => {
+  const variable = prompt.inputs.filter(
+    (i) => i.id === (props?.children[0]?.props?.text || "").replace("$", "")
+  )[0];
+
+  if (!variable) {
+    return null;
+  }
+
+  return (
+    <VariableSpan variable={variable} offsetKey={props.offsetKey}>
+      {props.children}
+    </VariableSpan>
+  );
+};
+
+const PosVarSpanComp = ({
+  props,
+  updateVariables,
+}: {
+  props: any;
+  updateVariables: (
+    key: string,
+    value: string,
+    position: [number, number]
+  ) => any;
+}) => {
+  useEffect(() => {
+    if (props) {
+      updateVariables(props?.offsetKey, props?.children[0]?.props?.text, [
+        props.start,
+        props.end,
+      ]);
+    }
+  }, [props]);
+
+  return (
+    <span
+      data-offset-key={props.offsetKey}
+      className="p-0.5 pl-1 pr-1 rounded-md bg-gray-500/10 relative"
+    >
+      {props.children}
+    </span>
+  );
 };
 
 export default function PromptContentEditor({
@@ -90,24 +136,7 @@ export default function PromptContentEditor({
       strategy: (contentBlock, callback) => {
         varRegex(contentBlock.getText(), prompt.inputs, "done", callback);
       },
-      component: (props) => {
-        const variable = prompt.inputs.filter(
-          (i) =>
-            i.id === (props?.children[0]?.props?.text || "").replace("$", "")
-        )[0];
-
-        if (!variable) {
-          return null;
-        }
-
-        return (
-          <VariableSpan
-            variable={variable}
-            children={props.children}
-            offsetKey={props.offsetKey}
-          />
-        );
-      },
+      component: (props) => <VarSpanComp prompt={prompt} props={props} />,
     },
     {
       strategy: (contentBlock, callback) => {
@@ -118,26 +147,9 @@ export default function PromptContentEditor({
           callback
         );
       },
-      component: (props) => {
-        useEffect(() => {
-          if (props) {
-            updateUsedVariables(
-              props?.offsetKey,
-              props?.children[0]?.props?.text,
-              [props.start, props.end]
-            );
-          }
-        }, [props]);
-
-        return (
-          <span
-            data-offset-key={props.offsetKey}
-            className="p-0.5 pl-1 pr-1 rounded-md bg-gray-500/10 relative"
-          >
-            {props.children}
-          </span>
-        );
-      },
+      component: (props) => (
+        <PosVarSpanComp props={props} updateVariables={updateUsedVariables} />
+      ),
     },
     {
       strategy: (contentBlock, callback) => {
@@ -151,10 +163,9 @@ export default function PromptContentEditor({
       },
       component: (props) => {
         return (
-          <InvalidVariableSpan
-            children={props.children}
-            offsetKey={props.offsetKey}
-          />
+          <InvalidVariableSpan offsetKey={props.offsetKey}>
+            {props.children}
+          </InvalidVariableSpan>
         );
       },
     },
