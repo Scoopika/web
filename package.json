@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cd docs && npx contentlayer2 build && cd .. && next build",
+    "build": "cd docs && npx contentlayer2 build && cd .. && npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
