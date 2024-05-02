@@ -4,11 +4,9 @@ import { ChevronRightIcon } from "@radix-ui/react-icons";
 import { HiMiniHome } from "react-icons/hi2";
 import { RiRobot2Fill, RiSettings4Fill } from "react-icons/ri";
 import { Tb3DCubeSphere } from "react-icons/tb";
-import { AiFillApi } from "react-icons/ai";
-import { BiSolidBookContent } from "react-icons/bi";
-import { BsFillGridFill } from "react-icons/bs";
 import { MdApi } from "react-icons/md";
 import { FaBook } from "react-icons/fa";
+import { FaDatabase } from "react-icons/fa6";
 
 import UserDropdown from "../userDropdown";
 import Link from "next/link";
@@ -51,6 +49,12 @@ const links: SideItem[] = [
     path: "/app/boxes",
     icon: <Tb3DCubeSphere size={18} />,
   },
+  {
+    type: "link",
+    name: "Data Stores",
+    path: "/app/data-stores",
+    icon: <FaDatabase size={18} />,
+  },
   // {
   //   type: "link",
   //   name: "AI-gen Content",
@@ -59,12 +63,6 @@ const links: SideItem[] = [
   // },
   {
     type: "sep",
-  },
-  {
-    type: "link",
-    name: "Edge APIs",
-    path: "/app",
-    icon: <MdApi size={18} />,
   },
   {
     type: "link",

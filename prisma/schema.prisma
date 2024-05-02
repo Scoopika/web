@@ -66,3 +66,11 @@ model Token {
   name   String
   value  String
 }
+
+model Datastore {
+  id            String @id @default(cuid())
+  userId        String
+  name          String
+  db_id         String
+  deployment_id String
+}
