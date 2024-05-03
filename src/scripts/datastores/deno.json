@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "dev": "deno run --unstable-kv --allow-net --allow-env --watch main.ts",
+    "test": "deno test --allow-net"
+  },
+  "imports": {
+    "hono": "https://deno.land/x/hono/mod.ts",
+    "hono/cors": "https://deno.land/x/hono/middleware.ts"
+  }
+}

@@ -4,4 +4,5 @@ export interface DataStore {
   userId: string;
   db_id: string;
   deployment_id: string;
+  url: string;
 }

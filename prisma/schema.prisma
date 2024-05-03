@@ -73,4 +73,5 @@ model Datastore {
   name          String
   db_id         String
   deployment_id String
+  url           String
 }
