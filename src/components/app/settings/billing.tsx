@@ -157,7 +157,7 @@ export default function BillingSettings({
               </div>
               <div className="w-full flex items-center justify-end">
                 <DropdownMenu open={open} onOpenChange={setOpen}>
-                  <DropdownMenuTrigger className="bg-black dark:bg-accent/30 rounded-lg text-sm font-semibold p-2 pl-3 pr-3 hover:opacity-80 transition-all flex items-center gap-3">
+                  <DropdownMenuTrigger className="bg-black text-background dark:text-foreground dark:bg-accent/30 rounded-lg text-sm font-semibold p-2 pl-3 pr-3 hover:opacity-80 transition-all flex items-center gap-3 text-sm">
                     Manage plan
                     <FaChevronDown />
                   </DropdownMenuTrigger>
@@ -231,6 +231,7 @@ export default function BillingSettings({
                 <Button
                   size="sm"
                   variant="flat"
+                  className="font-semibold"
                   disabled={cancelLoading}
                   onPress={() => {
                     if (!cancelLoading) {
@@ -268,6 +269,7 @@ export default function BillingSettings({
                 <Button
                   size="sm"
                   variant="flat"
+                  className="font-semibold"
                   disabled={resumeLoading}
                   onPress={() => {
                     if (!resumeLoading) {

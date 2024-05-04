@@ -30,6 +30,10 @@ interface Props {
   updateBox: (box: RawBoxData) => void;
 }
 
+const modelsShortname: Record<string, string> = {
+  "accounts/fireworks/models/firefunction-v1": "firefunction-v1",
+};
+
 export default function BoxEngineSelection({
   box,
   open,
@@ -47,13 +51,14 @@ export default function BoxEngineSelection({
             className="font-semibold"
             startContent={<LuBrainCircuit size={17} />}
           >
-            AI engine: {engines[box.llm_client].name} {"->"} {box.manager}
+            LLM: {engines[box.llm_client].name} {"->"}{" "}
+            {modelsShortname[box.manager] || box.manager}
           </Button>
         </PopoverTrigger>
         <PopoverContent>
-          <p className="text-sm mb-1">Select AI Engine</p>
+          <p className="text-sm mb-1">Select LLM</p>
           <p className="text-xs opacity-80 mb-4">
-            The engine that will drive this box
+            The LLM that will drive this box
           </p>
 
           <div className="flex flex-col gap-3">
@@ -63,7 +68,12 @@ export default function BoxEngineSelection({
                 <Select
                   defaultValue={box.llm_client}
                   onValueChange={(value) => {
-                    updateBox({ ...box, llm_client: value });
+                    updateBox({
+                      ...box,
+                      llm_client: value,
+                      manager:
+                        getEngines("text")[value].models["text"][0]?.id || "",
+                    });
                   }}
                 >
                   <SelectTrigger>
@@ -93,8 +103,11 @@ export default function BoxEngineSelection({
                     updateBox({ ...box, manager: value });
                   }}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select model" />
+                  <SelectTrigger className="truncate max-w-36">
+                    <SelectValue
+                      className="truncate"
+                      placeholder="Select model"
+                    />
                   </SelectTrigger>
                   <SelectContent className="max-h-64">
                     <SelectGroup>
@@ -104,7 +117,7 @@ export default function BoxEngineSelection({
                             key={`model-select-${model.id}`}
                             value={model.id}
                           >
-                            {model.id}
+                            {model.name || model.id}
                           </SelectItem>
                         ))}
                     </SelectGroup>

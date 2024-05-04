@@ -7,6 +7,8 @@ import NewAgent from "./new";
 import { useState } from "react";
 import AgentItem from "./agentItem";
 import AgentPreview from "./agentPreview";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@nextui-org/react";
 
 interface Props {
   session: Session;
@@ -14,8 +16,8 @@ interface Props {
 }
 
 export default function AgentsMainPage({ session, agents }: Props) {
+  const isPro = (session.user.plan === "none" || !session.user.plan.includes(":::")) ? false : true;
   const [agentsState, setAgentsState] = useState<AgentData[]>(agents);
-  const [filteredAgents, setFilteredAgents] = useState<AgentData[]>(agents);
   const [openAgent, setOpenAgent] = useState<AgentData | undefined>(undefined);
   const [openAgentTab, setOpenAgentTab] = useState<string>();
   const [openAgentFullScreen, setOpenAgentFullScreen] =
@@ -23,7 +25,6 @@ export default function AgentsMainPage({ session, agents }: Props) {
 
   const updateState = (agent: AgentData) => {
     setAgentsState((prev) => [...prev, agent]);
-    setFilteredAgents((prev) => [...prev, agent]);
     setOpenAgent(agent);
   };
 
@@ -44,8 +45,6 @@ export default function AgentsMainPage({ session, agents }: Props) {
       });
     }
 
-    setFilteredAgents((_prev) => agentsState);
-
     if (openAgent && openAgent.id === agent.id) {
       setOpenAgent(agent);
       setOpenAgentTab(tab);
@@ -54,7 +53,6 @@ export default function AgentsMainPage({ session, agents }: Props) {
 
   const onDelete = (id: string) => {
     setAgentsState((prev) => prev.filter((agent) => agent.id !== id));
-    setFilteredAgents((prev) => prev.filter((agent) => agent.id !== id));
 
     if (openAgent && openAgent.id === id) {
       setOpenAgent(undefined);
@@ -86,29 +84,19 @@ export default function AgentsMainPage({ session, agents }: Props) {
         }`}
       >
         <div className="w-full flex items-center gap-4">
-          <input
-            onInput={(e) => {
-              const value = (e?.currentTarget?.value || "").toLowerCase();
-              const filtered = agentsState.filter(
-                (agent) =>
-                  agent.name.toLowerCase().includes(value) ||
-                  value.includes(agent.name.toLowerCase())
-              );
-
-              setFilteredAgents(filtered);
-            }}
-            className="h-9 w-full pl-3 pr-3 border-1 rounded-lg text-sm"
-            placeholder="Filter agents by name..."
-          />
+          <h1 className="w-full flex items-center gap-2">
+            Your agents
+            <Badge variant="secondary">
+              {agentsState.length}{"/"}{isPro ? "10" : "2"}
+            </Badge>
+          </h1>
           <NewAgent updateState={updateState} triggerFull={false}>
-            <div className="p-2 pl-4 pr-4 h-9 min-w-max bg-foreground text-background rounded-lg flex items-center justify-center text-xs font-semibold cursor-pointer transition-all">
-              New agent
-            </div>
+            <Button size="sm" color="primary" className="font-semibold">New agent</Button>
           </NewAgent>
         </div>
 
-        <div className="flex flex-col gap-4 mt-6">
-          {filteredAgents.map((agent) => (
+        <div className={`grid gap-4 mt-6 ${!openAgent ? "grid-cols-3" : "grid-cols-1"}`}>
+          {agentsState.map((agent) => (
             <div
               key={`agentItem-${agent.id}`}
               className="w-full flex flex-col gap-4"
@@ -119,7 +107,6 @@ export default function AgentsMainPage({ session, agents }: Props) {
                 openAgent={openAgent}
                 setOpenAgent={setOpenAgent}
               />
-              <div className="w-full border-t-1"></div>
             </div>
           ))}
         </div>

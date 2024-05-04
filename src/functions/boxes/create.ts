@@ -15,6 +15,23 @@ export default async function createBox(
     return { success: false };
   }
 
+  const isPro =
+    session.user.plan === "none" || !session.user.plan.includes(":::")
+      ? false
+      : true;
+  const existBoxes = await db.box.findMany({
+    where: {
+      userId: session.user.id,
+    },
+  });
+
+  if (
+    (!isPro && existBoxes.length === 1) ||
+    (isPro && existBoxes.length === 4)
+  ) {
+    return { success: false };
+  }
+
   const userId = session?.user.id;
   const id = randomUUID();
   payload.id = id;

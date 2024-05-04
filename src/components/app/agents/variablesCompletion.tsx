@@ -3,9 +3,9 @@ import { Prompt, PromptInput } from "@scoopika/types";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export const typesColors = {
-  string: "text-green-500",
-  number: "text-orange-500",
-  boolean: "text-purple-500",
+  string: "text-green-600 dark:text-green-500",
+  number: "text-orange-600 dark:text-orange-500",
+  boolean: "text-purple-600 dark:text -purple-500",
 };
 
 interface Props {

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@nextui-org/react";
+import { Badge } from "@/components/ui/badge";
 import { AgentData, Prompt } from "@scoopika/types";
 import { useEffect, useState } from "react";
 import PromptEditor from "../promptEditor";
@@ -194,10 +195,11 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
 
               <DropdownMenuItem
                 className="gap-2 text-sm"
-                onClick={() => newPrompt("image")}
+                disabled
               >
                 <MdImage size={17} />
-                Image generation
+                Image generation 
+                <Badge>coming soon</Badge>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -208,11 +210,11 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
       {agent.prompts.length > 0 && (
         <div className="flex flex-col w-full gap-3 p-3 border-1 rounded-md border-dashed border-black/20 dark:border-white/20 mt-4">
           <div className="w-full flex items-center">
-            <p className="text-sm min-w-max opacity-80">
+            <p className="text-sm min-w-max opacity-80 font-semibold">
               Prompts {agent.chained && "chain"}
             </p>
             <div className="flex items-center w-full justify-end">
-              {!editOrder && agent.prompts.length > 0 && (
+              {(!editOrder && agent.prompts.length > 0 && agent.chained) && (
                 <div className="w-full flex items-center justify-end">
                   <Button
                     size="sm"
@@ -258,9 +260,9 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
             .map((prompt, index) => (
               <div
                 key={`promptitem-${prompt.id}`}
-                className={`flex items-center p-2 text-sm rounded-md group ${
+                className={`flex items-center p-2 text-sm rounded-lg group ${
                   !(index & 1)
-                    ? "bg-black/20 dark:bg-accent/30"
+                    ? "bg-black/10 dark:bg-accent/30"
                     : "bg-transparent"
                 }`}
               >

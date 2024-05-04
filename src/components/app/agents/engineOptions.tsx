@@ -35,7 +35,6 @@ export default function EngineOptions({ prompt, setPrompt }: Props) {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="max-h-72 overflow-auto">
-        <div className="text-sm mb-3">Options</div>
         <div className="flex flex-col gap-2 w-full">
           {options &&
             Object.keys(options).map((key) => (

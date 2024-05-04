@@ -25,7 +25,7 @@ export default async function createDatastore(
     return { success: false };
   }
 
-  name = name.toLowerCase().replaceAll(" ", "-");
+  name = name.toLowerCase().replaceAll(" ", "-").replaceAll(".", "-");
 
   const session = await getServerSession(authOptions);
 

@@ -39,6 +39,10 @@ const promptTypeMapping = (type: Prompt["type"]): "text" | "image" => {
   return mapping[type];
 };
 
+const modelsShortname: Record<string, string> = {
+  "accounts/fireworks/models/firefunction-v1": "firefunction-v1",
+};
+
 export default function PromptEngineSelection({
   prompt,
   updatePrompt,
@@ -53,16 +57,17 @@ export default function PromptEngineSelection({
             size="sm"
             color="default"
             variant="flat"
-            className="font-semibold"
+            className="font-semibold truncate"
             startContent={<LuBrainCircuit size={17} />}
           >
-            AI engine: {engines[prompt.llm_client].name} {"->"} {prompt.model}
+            LLM: {engines[prompt.llm_client].name} {"->"}{" "}
+            {modelsShortname[prompt.model] || prompt.model}
           </Button>
         </PopoverTrigger>
         <PopoverContent>
-          <p className="text-sm mb-1">Select AI Engine</p>
+          <p className="text-sm mb-1">Select LLM</p>
           <p className="text-xs opacity-80 mb-4">
-            The engine that will drive this prompt
+            The LLM that will drive this prompt
           </p>
 
           <div className="flex flex-col gap-3">
@@ -122,8 +127,8 @@ export default function PromptEngineSelection({
                   }}
                   defaultValue={prompt.model}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select model" />
+                  <SelectTrigger className="truncate max-w-36">
+                    <SelectValue placeholder="Select model" className="truncate" />
                   </SelectTrigger>
                   <SelectContent className="max-h-64">
                     <SelectGroup>
@@ -135,7 +140,7 @@ export default function PromptEngineSelection({
                             key={`model-select-${model.id}`}
                             value={model.id}
                           >
-                            {model.id}
+                            {model.name || model.id}
                           </SelectItem>
                         ))}
                     </SelectGroup>

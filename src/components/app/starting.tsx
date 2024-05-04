@@ -8,7 +8,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import frontend from "@/scripts/frontend";
-import Logo from "../logo";
 import { Badge } from "@/components/ui/badge";
 import {
   Carousel,

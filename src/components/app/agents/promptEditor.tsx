@@ -136,10 +136,7 @@ export default function PromptEditor({
       <Drawer
         open={open}
         onOpenChange={(state: boolean) => {
-
-          if (!state && newPrompt) {
-            
-          }
+          if (loading) return;
 
           setOpen(state);
 

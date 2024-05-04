@@ -9,8 +9,8 @@ import {
 import cleanText from "@/scripts/cleanText";
 import itemValue from "@/scripts/itemValue";
 import { Avatar, Button } from "@nextui-org/react";
+import { FaChevronRight } from "react-icons/fa6";
 import { AgentData } from "@scoopika/types";
-import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { LuLayoutList } from "react-icons/lu";
@@ -20,6 +20,8 @@ import { TbLayoutSidebarRightExpandFilled } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 import { toast } from "sonner";
 import DeleteAgent from "./delete";
+import { FaHashtag } from "react-icons/fa";
+import { useTheme } from "next-themes";
 
 interface Props {
   agent: AgentData;
@@ -34,51 +36,44 @@ export default function AgentItem({
   setOpenAgent,
   onDelete,
 }: Props) {
-  const [hovered, setHovered] = useState<string | undefined>(undefined);
   const [dropdown, setDropdown] = useState<boolean>(false);
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
+  const { theme } = useTheme();
 
   return (
     <div
       key={`agent-${agent.id}`}
-      className="w-full flex flex-col p-3 gap-3 overflow-hidden group transition-all"
-      onMouseEnter={() => setHovered(agent.id)}
-      onMouseLeave={() => setHovered(undefined)}
+      className="w-full flex flex-col gap-3 overflow-hidden group transition-all border-1 rounded-lg hover:shadow"
     >
-      <div className="w-full flex items-center gap-3">
-        <div
-          className="relative rounded-xl transition-all duration-500"
-          style={
-            hovered === agent.id
-              ? {
-                  boxShadow: "0px 0px 80px 0px rgba(255, 255, 255, .5)",
-                }
-              : {}
-          }
-        >
+      <div className="w-full flex items-center gap-3 p-4 pb-0">
+        <div className="relative rounded-xl transition-all duration-500">
           <div className="absolute -top-1 -right-1 z-20 w-5 h-5 bg-background-70 backdrop-blur rounded-full flex items-center justify-center p-1 rotate-[-10deg]">
             {agent.chained ? <LuLayoutList /> : <PiChatsFill />}
           </div>
           {itemValue(agent, "avatar") ? (
             <Avatar
               src={agent.avatar}
-              className="min-w-10 max-w-10 min-h-10 max-h-10 rounded-xl border-1"
+              className="min-w-10 max-w-10 min-h-10 max-h-10 rounded-full border-1 border-black/50 dark:border-border"
             ></Avatar>
           ) : (
-            <div className="min-w-10 max-w-10 min-h-10 max-h-10 rounded-xl flex items-center justify-center bg-accent/50">
+            <div className="min-w-10 max-w-10 min-h-10 max-h-10 rounded-full flex items-center justify-center bg-accent/50">
               <RiRobot2Fill />
             </div>
           )}
         </div>
         <div className="flex flex-col">
-          <Link
-            href={`/app/agents/${agent.id}`}
-            className="text-sm truncate hover:underline transition-all"
-          >
+          <div className="text-sm font-semibold truncate transition-all">
             {agent.name}
-          </Link>
-          <div className="text-xs opacity-70 truncate">
-            @{cleanText(agent.name)}
+          </div>
+          <div
+            onClick={() => {
+              navigator.clipboard.writeText(agent.id);
+              toast.success("Copied agent ID");
+            }}
+            className="text-xs max-w-max cursor-pointer flex items-center gap-1 hover:underline min-w-max opacity-80"
+          >
+            <FaHashtag />
+            {agent.id.split("-")[0]}
           </div>
         </div>
         <div
@@ -128,21 +123,31 @@ export default function AgentItem({
           </DropdownMenu>
         </div>
       </div>
-      <div className="flex flex-col gap-2 mt-1">
-        {itemValue(agent, "description") && (
-          <p className="text-sm opacity-70">{agent.description}</p>
-        )}
-        <div
-          onClick={() => {
-            navigator.clipboard.writeText(agent.id);
-            toast.success("Copied agent ID");
-          }}
-          className="text-xs p-1 pl-1.5 pr-1.5 bg-accent/50 rounded-md max-w-max cursor-pointer hover:bg-accent/60"
-        >
-          {agent.id.split("-")[0]}
+      {itemValue(agent, "description") && (
+        <p className="text-sm opacity-70 pl-4 pr-4 truncate">
+          {agent.description}
+        </p>
+      )}
+      <div className="flex items-center gap-2 p-3">
+        <div className="w-full flex items-center justify-end">
+          <Button
+            size="sm"
+            color={theme === "dark" ? "default" : "primary"}
+            variant={theme === "dark" ? "flat" : "solid"}
+            className="font-semibold"
+            endContent={<FaChevronRight />}
+            onPress={() => setOpenAgent(agent)}
+          >
+            Open agent
+          </Button>
         </div>
       </div>
-      <DeleteAgent onDelete={onDelete} agent={agent} open={deleteOpen} openChange={setDeleteOpen} />
+      <DeleteAgent
+        onDelete={onDelete}
+        agent={agent}
+        open={deleteOpen}
+        openChange={setDeleteOpen}
+      />
     </div>
   );
 }

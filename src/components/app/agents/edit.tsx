@@ -3,7 +3,6 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@nextui-org/react";
 import { AgentData } from "@scoopika/types";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import AgentAvatarEdit from "./avatar";
@@ -20,7 +19,6 @@ export default function EditAgent({ agent, updateAgent }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const [data, setData] = useState<AgentData>({} as AgentData);
   const [loading, setLoading] = useState<boolean>(false);
-  const { theme } = useTheme();
 
   useEffect(() => {
     setData(agent);
@@ -60,14 +58,7 @@ export default function EditAgent({ agent, updateAgent }: Props) {
         <MdEdit size={16} />
       </Button>
       <DialogContent
-        className="bg=background backdrop-blur-xl flex flex-col items-center max-h-screen overflow-auto"
-        style={
-          theme === "dark"
-            ? {
-                background: "var(--background)",
-              }
-            : {}
-        }
+        className="flex flex-col items-center max-h-screen overflow-auto"
       >
         <AgentAvatarEdit
           agentData={data}

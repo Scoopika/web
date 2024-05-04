@@ -51,7 +51,6 @@ export default function NewBox({
     tools: [],
   };
 
-  const { theme } = useTheme();
   const [open, setOpen] = useState<boolean>(false);
   const [engineOpen, setEngineOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -166,16 +165,9 @@ export default function NewBox({
         {children}
       </DialogTrigger>
       <DialogContent
-        className="backdrop-blur-xl max-h-screen overflow-auto flex flex-col items-center min-w-lg"
-        style={
-          theme === "dark"
-            ? {
-                background: "var(--background)",
-              }
-            : {}
-        }
+        className="max-h-screen overflow-auto flex flex-col items-center min-w-lg"
       >
-        <div className="text-xs opacity-60 mb-3">New box</div>
+        <div className="text-xs opacity-60 mb-3">{newBox.new ? "New" : "Edit"} box</div>
 
         <div className="w-full flex flex-col gap-6">
           <input
@@ -274,7 +266,7 @@ export default function NewBox({
           <Button
             size="sm"
             color="primary"
-            className="w-full"
+            className="w-full font-semibold"
             isLoading={loading}
             onPress={() => {
               if (!loading) {

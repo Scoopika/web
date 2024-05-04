@@ -101,7 +101,6 @@ const engines: SpecificEngines = {
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_k: { min: 1, max: 100, default: 50, step: 1 },
-            repetition_penalty: { min: 1, max: 2, default: 1, step: 0.01 },
           },
         },
         {
@@ -112,7 +111,6 @@ const engines: SpecificEngines = {
             temperature: { min: 0, max: 2, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_k: { min: 1, max: 100, default: 50, step: 1 },
-            repetition_penalty: { min: 1, max: 2, default: 1, step: 0.01 },
           },
         },
       ],
@@ -131,7 +129,6 @@ const engines: SpecificEngines = {
             max_tokens: { min: 5, max: 32768, default: 4096, step: 1 },
             temperature: { min: 0.01, max: 5, default: 0.7, step: 0.01 },
             top_p: { min: 0.01, max: 1, default: 1, step: 0.01 },
-            repetition_penalty: { min: -2, max: 2, default: 0, step: 0.01 },
           },
         },
       ],

@@ -7,12 +7,16 @@ import { BsPlusCircleDotted } from "react-icons/bs";
 import BoxItem from "./boxItem";
 import { AgentData } from "@scoopika/types";
 import { Button } from "@nextui-org/react";
+import { Badge } from "@/components/ui/badge";
+import { Session } from "next-auth";
 
 interface Props {
+  session: Session;
   boxes: RawBoxData[];
 }
 
-export default function MainBoxes({ boxes }: Props) {
+export default function MainBoxes({ boxes, session }: Props) {
+  const isPro = (session.user.plan === "none" || !session.user.plan.includes(":::")) ? false : true;
   const [state, updateState] = useState<RawBoxData[]>(boxes);
   const [editOpen, setEditOpen] = useState<boolean>(false);
   const [editBox, setEditBox] = useState<RawBoxData>();
@@ -48,19 +52,33 @@ export default function MainBoxes({ boxes }: Props) {
 
   return (
     <div className="w-full p-6 flex flex-col">
-      <div className="w-full flex items-center justify-end mb-4">
-        <NewBox
-          updateState={updateState}
-          newBox={{ new: true }}
-          updateAgentsList={setAgentsList}
-          agentsList={agentsList}
-          triggerFull
-          triggerAsChild
-        >
-          <Button size="sm" color="primary" className="font-semibold max-w-max">
-            New box
-          </Button>
-        </NewBox>
+      <div className="w-full flex items-center mb-4">
+        <h1 className="min-w-max flex items-center gap-2">
+          Your smart boxes
+          <Badge variant="secondary">
+            {state.length}
+            {"/"}
+            {isPro ? "4" : "1"}
+          </Badge>
+        </h1>
+        <div className="w-full flex items-center justify-end mb-4">
+          <NewBox
+            updateState={updateState}
+            newBox={{ new: true }}
+            updateAgentsList={setAgentsList}
+            agentsList={agentsList}
+            triggerFull
+            triggerAsChild
+          >
+            <Button
+              size="sm"
+              color="primary"
+              className="font-semibold max-w-max"
+            >
+              New box
+            </Button>
+          </NewBox>
+        </div>
       </div>
       {editBox && (
         <NewBox

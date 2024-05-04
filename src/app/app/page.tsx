@@ -18,8 +18,8 @@ export default async function Page() {
   return (
     <AppLayout
       session={session}
-      title="Overview"
-      sidebarActive="Overview"
+      title="Agents"
+      sidebarActive="Agents"
     >
       <AgentsMainPage session={session} agents={agentsData} />
     </AppLayout>

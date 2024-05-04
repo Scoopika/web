@@ -51,14 +51,14 @@ export default function BoxItem({ box, updateState, setEditBox }: Props) {
   };
 
   return (
-    <div className="w-full flex flex-col p-3 border-b-1 gap-3 group">
+    <div className="w-full flex flex-col p-3 border-1 rounded-lg hover:shadow transition-all gap-3 group">
       <div className="w-full flex items-center gap-3">
-        <div className="min-w-9 min-h-9 max-w-9 max-h-9 bg-accent/50 flex items-center justify-center rounded-lg font-semibold cursor-default">
+        <div className="min-w-9 min-h-9 max-w-9 max-h-9 bg-primary text-background flex items-center justify-center rounded-lg font-semibold cursor-default">
           {(box?.name || "").substring(0, 1)}
         </div>
         <p className="font-semibold min-w-max truncate">{box.name}</p>
         <p
-          className="text-xs p-1 pl-1.5 pr-1.5 cursor-pointer bg-accent/30 hover:bg-accent/40 min-w-max truncate rounded-md transition-all"
+          className="text-xs p-1 pl-1.5 pr-1.5 cursor-pointer bg-black/20 dark:bg-accent/30 dark:hover:bg-accent/40 min-w-max truncate rounded-md transition-all"
           onClick={() => copyId(box.id)}
         >
           {(box.id || "").split("-")[0]}

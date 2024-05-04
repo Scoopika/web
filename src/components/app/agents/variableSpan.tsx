@@ -4,15 +4,15 @@ import { PromptInput } from "@scoopika/types";
 import { useState } from "react";
 
 const textColors: Record<PromptInput["type"], string> = {
-  string: "text-green-300",
-  number: "text-orange-300",
-  boolean: "text-purple-300",
+  string: "text-green-500 dark:text-green-300",
+  number: "text-orange-500 dark:text-orange-300",
+  boolean: "text-purple-500 dark:text-purple-300",
 };
 
 const bgColors: Record<PromptInput["type"], string> = {
-  string: "bg-green-500/10",
-  number: "bg-orange-500/10",
-  boolean: "bg-purple-500/10",
+  string: "bg-green-500/20 dark:bg-green-500/10",
+  number: "bg-orange-500/20 dark:bg-orange-500/10",
+  boolean: "bg-purple-500/20 dark:bg-purple-500/10",
 };
 
 const bgHoverColors: Record<PromptInput["type"], string> = {

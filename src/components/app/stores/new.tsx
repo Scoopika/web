@@ -74,11 +74,7 @@ export default function NewDataStore({ children, updateState }: Props) {
           placeholder="Data store name"
           defaultValue={newName}
           onInput={(e) => {
-            const name = (e.currentTarget.value || "")
-              .replace(/[^\w\s]/gi, "")
-              .toLowerCase()
-              .replaceAll(" ", "-");
-            setNewName(name);
+            setNewName(e.currentTarget.value);
           }}
           className="text-sm"
         />
@@ -91,14 +87,16 @@ export default function NewDataStore({ children, updateState }: Props) {
         >
           Create data store
         </Button>
-        <div
-          className={`mt-2 w-full border-1 border-dashed rounded-lg p-4 text-sm transition-all ${
-            loading ? "scale-100 opacity-100" : "scale-0 opacity-0"
-          }`}
-        >
-          Deploying your data store, this process could take a few seconds to
-          complete!
-        </div>
+        {loading && (
+          <div
+            className={`mt-2 w-full border-1 border-dashed rounded-lg p-4 text-sm transition-all ${
+              loading ? "scale-100 opacity-100" : "scale-0 opacity-0"
+            }`}
+          >
+            Deploying your data store, this process could take a few seconds to
+            complete!
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

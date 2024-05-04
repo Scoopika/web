@@ -60,28 +60,8 @@ const UserDropdown: FC<Props> = ({ session, type }) => {
       >
         <DropdownSection showDivider>
           <DropdownItem
-            key="profile"
-            className="h-14 gap-2 opacity-100"
-          >
-            <User
-              name={session.user?.name || session.user?.email}
-              description={"@" + (session.user?.email || "User").split("@")[0]}
-              classNames={{
-                name: "text-default-600",
-                description: "text-default-500",
-              }}
-              avatarProps={{
-                size: "sm",
-                src: session.user?.image || "",
-              }}
-            />
-          </DropdownItem>
-          <DropdownItem as={NextLink} href="/ai-boxes" key="ai-boxes">
-            AI Boxes
-          </DropdownItem>
-          <DropdownItem
             as={NextLink}
-            href="/settings"
+            href="/app/settings"
             key="settings"
             endContent={<Icons.SettingsIcon size={17} />}
           >
@@ -107,12 +87,11 @@ const UserDropdown: FC<Props> = ({ session, type }) => {
           >
             Theme
           </DropdownItem>
-        </DropdownSection>
-
-        <DropdownSection aria-label="Preferences" showDivider>
           <DropdownItem key="command_menu" shortcut="⌘K">
             Command menu
           </DropdownItem>
+        </DropdownSection>
+        <DropdownSection>
           <DropdownItem
             key="logout"
             endContent={<Icons.LogoutIcon size={17} />}
@@ -121,20 +100,6 @@ const UserDropdown: FC<Props> = ({ session, type }) => {
             Logout
           </DropdownItem>
         </DropdownSection>
-
-        {!session.user?.plan || session.user?.plan === "none" ? (
-          <DropdownItem
-            variant="flat"
-            color="default"
-            key="upgrade"
-            className="bg-purple-500/5 border-[var(--brandpurple)] border-1"
-            endContent={<Icons.SparklesIcon size={17} />}
-          >
-            Upgrade plan
-          </DropdownItem>
-        ) : (
-          <DropdownItem key="upgrade">Manage plan</DropdownItem>
-        )}
       </DropdownMenu>
     </Dropdown>
   );

@@ -6,6 +6,10 @@ import NewDataStore from "./new";
 import { BsPlusCircleDotted } from "react-icons/bs";
 import { useState } from "react";
 import { FaDatabase } from "react-icons/fa6";
+import { FaLink } from "react-icons/fa6";
+import { toast } from "sonner";
+import { MdDelete } from "react-icons/md";
+import DeleteDataStore from "./delete";
 
 interface Props {
   datastores: DataStore[];
@@ -13,6 +17,12 @@ interface Props {
 
 export default function DataStoresMain({ datastores }: Props) {
   const [state, setState] = useState<DataStore[]>(datastores);
+  const [deleteOpen, setDeleteOpen] = useState<[string, string] | undefined>();
+
+  const deleteStore = (id: string): void => {
+    setState((prev) => [...prev.filter((d) => d.id !== id)]);
+    setDeleteOpen(undefined);
+  };
 
   if (state.length < 1) {
     return (
@@ -34,29 +44,70 @@ export default function DataStoresMain({ datastores }: Props) {
   }
 
   return (
-    <div className="w-full flex flex-col p-6">
-      <div className="w-full flex items-center">
-        <p className="min-w-max">Your data stores</p>
-        <div className="w-full flex items-center justify-end">
-          <Button size="sm" color="primary" className="font-semibold">
-            New store
-          </Button>
+    <>
+      <div className="w-full flex flex-col p-4 pl-6 pr-6 border-b-1 border-orange-400/30 bg-orange-500/10 text-sm">
+        <p>
+          Currently you can only have one data store, If you need another data
+          store please contact us and {"We'll"} do our best to help you
+        </p>
+      </div>
+      <div className="w-full flex flex-col p-6">
+        <div className="w-full flex items-center">
+          <p className="min-w-max">Your data stores</p>
         </div>
-      </div>
 
-      <div className="w-full flex flex-col gap-4">
-        {state.map((datastore) => (
-          <div
-            key={`datastoreitem-${datastore.id}`}
-            className="w-full flex flex-col p-2 border-b-1"
-          >
-            <div className="w-9 h-9 flex items-center justify-center border-1 rounded-lg">
-              <FaDatabase />
+        <div className="w-full flex flex-col gap-4 mt-6">
+          {state.map((datastore) => (
+            <div
+              key={`datastoreitem-${datastore.id}`}
+              className="w-full flex flex-col p-4 border-1 rounded-lg hover:shadow transition-all group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="min-w-9 min-h-9 max-w-9 max-h-9 flex items-center justify-center border-1 rounded-lg">
+                  <FaDatabase />
+                </div>
+                <p className="font-semibold min-w-max">{datastore.name}</p>
+                <div className="w-full flex items-center justify-end translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all">
+                  <Button
+                    isIconOnly
+                    size="sm"
+                    variant="flat"
+                    color="danger"
+                    onPress={() =>
+                      setDeleteOpen([datastore.id, datastore.deployment_id])
+                    }
+                  >
+                    <MdDelete size={17} />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="flex items-center mt-4">
+                <div
+                  className="flex items-center text-sm gap-2 cursor-pointer hover:underline transition-all"
+                  onClick={() => {
+                    navigator.clipboard.writeText(datastore?.url);
+                    toast.success("Copied Data store Url");
+                  }}
+                >
+                  <FaLink />
+                  {datastore?.url}
+                </div>
+              </div>
             </div>
-            {datastore.name}
-          </div>
-        ))}
+          ))}
+        </div>
+
+        {deleteOpen && (
+          <DeleteDataStore
+            data={deleteOpen}
+            deleteStore={deleteStore}
+            close={() => {
+              setDeleteOpen(undefined);
+            }}
+          />
+        )}
       </div>
-    </div>
+    </>
   );
 }

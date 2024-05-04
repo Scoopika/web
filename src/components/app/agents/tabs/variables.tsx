@@ -33,8 +33,8 @@ export default function AgentVariablesTab({ agent, updateAgent }: Props) {
       {agentVariables(agent).map((variable, index) => (
         <div
           key={`variableinputitem-${variable.variable.id}`}
-          className={`flex items-center w-full mt-2 rounded-md group p-2 pl-3 pr-3 ${
-            !(index & 1) && "bg-black/20 dark:bg-accent/30"
+          className={`flex items-center w-full mt-2 rounded-lg group p-2 pl-3 pr-3 ${
+            !(index & 1) && "bg-black/10 dark:bg-accent/30"
           }`}
         >
           <div className="min-w-max flex items-center gap-1 text-sm">

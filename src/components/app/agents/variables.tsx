@@ -152,16 +152,6 @@ export default function PromptVariables({
                     <Button
                       isIconOnly
                       size="sm"
-                      color="default"
-                      variant="flat"
-                      className="w-6 h-6"
-                      onPress={() => setEdit(variable)}
-                    >
-                      <MdEdit />
-                    </Button>
-                    <Button
-                      isIconOnly
-                      size="sm"
                       color="danger"
                       variant="flat"
                       className="w-6 h-6"

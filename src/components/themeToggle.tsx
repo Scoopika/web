@@ -4,45 +4,50 @@ import Icons from "@/components/icons";
 import { useTheme } from "next-themes";
 
 import {
-  Dropdown,
-  DropdownTrigger,
   DropdownMenu,
-  DropdownItem,
-  Button,
-} from "@nextui-org/react";
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+  DropdownMenuContent,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@nextui-org/react";
+import { useState } from "react";
 
 export default function ThemeToggle() {
   const { setTheme } = useTheme();
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <Dropdown className="border-1 bg-background/70 backdrop-blur-sm">
-      <DropdownTrigger>
-        <Button size="sm" variant="bordered" isIconOnly className="border-1">
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger asChild>
+        <Button size="sm" variant="bordered" isIconOnly className="border-1 shadow" onPress={() => setOpen(true)}>
           <Icons.SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Icons.MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </Button>
-      </DropdownTrigger>
-      <DropdownMenu variant="solid">
-        <DropdownItem
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="border-1 bg-background/70 backdrop-blur-sm">
+        <DropdownMenuItem
+          className="flex items-center gap-2"
           onClick={() => setTheme("light")}
-          startContent={<Icons.SunIcon />}
         >
+          <Icons.SunIcon />
           Light
-        </DropdownItem>
-        <DropdownItem
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="flex items-center gap-2"
           onClick={() => setTheme("dark")}
-          startContent={<Icons.MoonIcon />}
         >
+          <Icons.MoonIcon />
           Dark
-        </DropdownItem>
-        <DropdownItem
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="flex items-center gap-2"
           onClick={() => setTheme("system")}
-          startContent={<Icons.LaptopIcon />}
         >
+          <Icons.LaptopIcon />
           System
-        </DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

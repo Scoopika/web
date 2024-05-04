@@ -82,7 +82,6 @@ export default function NewAgent({
     wanted_responses: [],
   };
 
-  const { theme } = useTheme();
   const [name, setName] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState<boolean>(false);
   const [data, setData] = useState<AgentData>(sampleData);
@@ -117,18 +116,11 @@ export default function NewAgent({
 
   return (
     <Dialog open={open} onOpenChange={!loading ? setOpen : (o: boolean) => {}}>
-      <DialogTrigger className={`${triggerFull !== false && "w-full"}`}>
+      <DialogTrigger asChild className={`${triggerFull !== false && "w-full"}`}>
         {children}
       </DialogTrigger>
       <DialogContent
-        className="backdrop-blur-xl max-h-screen overflow-auto flex flex-col items-center min-w-lg"
-        style={
-          theme === "dark"
-            ? {
-                background: "var(--background)",
-              }
-            : {}
-        }
+        className="max-h-screen overflow-auto flex flex-col items-center min-w-lg"
       >
         <div className="text-xs opacity-60 mb-3">New agent</div>
 
@@ -174,7 +166,7 @@ export default function NewAgent({
 
         <div className="flex w-full items-center justify-center gap-3 mt-2">
           <TypeChoice
-            title="Chained agent"
+            title="Chained agent (demo)"
             description="Has a chain of prompts. best for multi-step and complex tasks"
             icon={<LuLayoutList size={16} />}
             onClick={() => setData((prev) => ({ ...prev, chained: true }))}
