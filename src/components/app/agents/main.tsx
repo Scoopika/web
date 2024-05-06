@@ -9,6 +9,7 @@ import AgentItem from "./agentItem";
 import AgentPreview from "./agentPreview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@nextui-org/react";
+import { FaPlus } from "react-icons/fa6";
 
 interface Props {
   session: Session;
@@ -16,7 +17,10 @@ interface Props {
 }
 
 export default function AgentsMainPage({ session, agents }: Props) {
-  const isPro = (session.user.plan === "none" || !session.user.plan.includes(":::")) ? false : true;
+  const isPro =
+    session.user.plan === "none" || !session.user.plan.includes(":::")
+      ? false
+      : true;
   const [agentsState, setAgentsState] = useState<AgentData[]>(agents);
   const [openAgent, setOpenAgent] = useState<AgentData | undefined>(undefined);
   const [openAgentTab, setOpenAgentTab] = useState<string>();
@@ -87,15 +91,28 @@ export default function AgentsMainPage({ session, agents }: Props) {
           <h1 className="w-full flex items-center gap-2">
             Your agents
             <Badge variant="secondary">
-              {agentsState.length}{"/"}{isPro ? "10" : "2"}
+              {agentsState.length}
+              {"/"}
+              {isPro ? "10" : "2"}
             </Badge>
           </h1>
           <NewAgent updateState={updateState} triggerFull={false}>
-            <Button size="sm" color="primary" className="font-semibold">New agent</Button>
+            <Button
+              size="sm"
+              color="primary"
+              className="font-semibold min-w-max"
+              startContent={<FaPlus />}
+            >
+              New agent
+            </Button>
           </NewAgent>
         </div>
 
-        <div className={`grid gap-4 mt-6 ${!openAgent ? "grid-cols-3" : "grid-cols-1"}`}>
+        <div
+          className={`grid gap-4 mt-6 ${
+            !openAgent ? "grid-cols-3" : "grid-cols-1"
+          }`}
+        >
           {agentsState.map((agent) => (
             <div
               key={`agentItem-${agent.id}`}

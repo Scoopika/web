@@ -7,7 +7,6 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownItem,
-  User,
 } from "@nextui-org/react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { type Session } from "next-auth";
@@ -15,6 +14,7 @@ import Icons from "@/components/icons";
 import { useTheme } from "next-themes";
 import { signOut } from "next-auth/react";
 import NextLink from "next/link";
+import { RiRobot2Fill, RiSettings4Fill } from "react-icons/ri";
 
 interface Props {
   session: Session | null;
@@ -59,11 +59,19 @@ const UserDropdown: FC<Props> = ({ session, type }) => {
         }}
       >
         <DropdownSection showDivider>
+        <DropdownItem
+            as={NextLink}
+            href="/app/"
+            key="settings"
+            startContent={<RiRobot2Fill size={17} />}
+          >
+            Agents
+          </DropdownItem>
           <DropdownItem
             as={NextLink}
             href="/app/settings"
             key="settings"
-            endContent={<Icons.SettingsIcon size={17} />}
+            startContent={<RiSettings4Fill size={17} />}
           >
             Settings
           </DropdownItem>
@@ -86,9 +94,6 @@ const UserDropdown: FC<Props> = ({ session, type }) => {
             }
           >
             Theme
-          </DropdownItem>
-          <DropdownItem key="command_menu" shortcut="⌘K">
-            Command menu
           </DropdownItem>
         </DropdownSection>
         <DropdownSection>

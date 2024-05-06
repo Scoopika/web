@@ -30,16 +30,6 @@ interface Props {
 
 const initialItems: Props["items"] = [
   { name: "Home", href: "/", type: "link" },
-  {
-    name: "Tools",
-    href: "/tools",
-    type: "option",
-    items: [
-      { name: "Function Calling", href: "/tools/function-calling" },
-      { name: "LLM Tasks", href: "/tools/llm-tasks" },
-      { name: "Vector Stores", href: "/tools/vector-stores" },
-    ],
-  },
   { name: "Docs", href: "/docs", type: "link" },
   { name: "Blog", href: "/blog", type: "link", disabled: true },
 ];
@@ -75,7 +65,7 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
             {path && <p className="text-xs opacity-60 mb-2">{path}</p>}
           </NavbarBrand>
           <div className="min-h-[45%] border-r-1 opacity-80 mr-6"></div>
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="hidden sm:flex items-center justify-center gap-4">
             {items?.length &&
               items.map((item) => (
                 <NavbarItem key={`nav-item-${item.name}`}>
@@ -96,17 +86,10 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
           <Button
             color="primary"
             size="sm"
-            radius="full"
             endContent={<Icons.ChevronRIghtIcon size={18} />}
-            className="text-[0.8rem] bg-transparent bg-black dark:bg-purple-500/10 border-1 dark:border-purple-300/10 dark:hover:border-purple-300/50 text-white dark:text-purple-300"
-            onPress={() => {
-              const elm = document.getElementById("waitlistTrigger");
-              if (elm) {
-                elm.click();
-              }
-            }}
+            className="font-semibold"
           >
-            Join the waitlist
+            Log in
           </Button>
         )}
         <UserDropdown type="avatar" session={session} />

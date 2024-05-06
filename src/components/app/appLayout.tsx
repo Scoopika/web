@@ -7,6 +7,11 @@ import Sidebar from "./sidebar";
 import Starting from "./starting";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
+import { TbSlash } from "react-icons/tb";
+import { RxSlash } from "react-icons/rx";
+import { RiExpandUpDownLine } from "react-icons/ri";
 
 interface Props {
   session: Session;
@@ -36,7 +41,21 @@ export default function AppLayout({
               <HiOutlineMenuAlt1 size={16} />
             </Button>
           </Sidebar>
-          <h3 className="text-md font-semibold min-w-max pl-3">{title}</h3>
+          <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2 ml-4 min-w-max">
+              <div className="flex items-center justify-center min-w-8 min-h-8 max-w-8 max-h-8 rounded-full bg-black dark:bg-white overflow-hidden pl-1 group">
+                <Image
+                  src="/logo.png"
+                  alt="Scoopika logo"
+                  width={35}
+                  height={35}
+                  className="rotate-[-10deg] mt-1.5 group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              <RxSlash />
+              <div className="text-xs">{title}</div>
+            </div>
+          </div>
           <div className="w-full flex items-center justify-end gap-5">
             {session?.user.plan === "none" && (
               <Button
