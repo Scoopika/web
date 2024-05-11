@@ -59,7 +59,7 @@ export default function Bento() {
                   <p className="opacity-70">LLM</p>
                 </div>
               </div>
-              <div className="w-full flex flex-col justify-end border-t-1 absolute bottom-0 left-0 p-4 gap-2 bg-accent/30">
+              <div className="w-full flex flex-col justify-end border-t-1 rounded-b-lg absolute bottom-0 left-0 p-4 gap-2 bg-accent/80 dark:bg-accent/30">
                 <h3 className="font-semibold">Plug any data</h3>
                 <p className="text-xs opacity-80">
                   Easily integrate various types of data into your agents,
@@ -80,7 +80,7 @@ export default function Bento() {
                   {initCode}
                 </SyntaxHighlighter>
               </div>
-              <div className="w-full flex flex-col justify-end border-t-1 absolute bottom-0 left-0 p-4 gap-2 bg-accent/60 dark:bg-accent/30 backdrop-blur-xl rounded-b-lg">
+              <div className="w-full flex flex-col justify-end border-t-1 absolute bottom-0 left-0 p-4 gap-2 bg-accent/80 dark:bg-accent/30 backdrop-blur-xl rounded-b-lg">
                 <h3 className="font-semibold">Straight to the point</h3>
                 <p className="text-xs opacity-80">
                   Streamlined interface ensures straightforward usage with no
@@ -102,11 +102,11 @@ export default function Bento() {
                   {runCode}
                 </SyntaxHighlighter>
               </div>
-              <div className="w-full flex flex-col justify-end border-t-1 absolute bottom-0 left-0 p-4 gap-2 bg-accent/30 backdrop-blur-xl rounded-b-lg">
+              <div className="w-full flex flex-col justify-end border-t-1 absolute bottom-0 left-0 p-4 gap-2 bg-accent/80 dark:bg-accent/30 backdrop-blur-xl rounded-b-lg">
                 <h3 className="font-semibold">Web-first approach</h3>
                 <p className="text-xs opacity-80">
-                  Designed with a focus on web-first integration, Scoopika
-                  provides real-time hooks between client and server.
+                  Designed with a focus on web-first integration, providing
+                  real-time hooks between client and server.
                 </p>
               </div>
             </div>
@@ -143,9 +143,9 @@ export default function Bento() {
                   </p>
                 </div>
               </div>
-              <div className="w-full flex flex-col justify-end border-t-1 absolute bottom-0 left-0 p-4 gap-2 bg-accent/30">
+              <div className="w-full flex flex-col justify-end border-t-1 absolute bottom-0 left-0 p-4 gap-2 bg-accent/80 dark:bg-accent/30 rounded-b-lg">
                 <h3 className="font-semibold">
-                  Error Normalization and Reporting
+                  Error healing and reporting
                 </h3>
                 <p className="text-xs opacity-80">
                   Agents automatically detect and report errors, communicating

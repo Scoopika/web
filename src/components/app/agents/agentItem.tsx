@@ -47,9 +47,6 @@ export default function AgentItem({
     >
       <div className="w-full flex items-center gap-3 p-4 pb-0">
         <div className="relative rounded-xl transition-all duration-500">
-          <div className="absolute -top-1 -right-1 z-20 w-5 h-5 bg-background-70 backdrop-blur rounded-full flex items-center justify-center p-1 rotate-[-10deg]">
-            {agent.chained ? <LuLayoutList /> : <PiChatsFill />}
-          </div>
           {itemValue(agent, "avatar") ? (
             <Avatar
               src={agent.avatar}

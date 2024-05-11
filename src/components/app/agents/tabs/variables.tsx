@@ -66,7 +66,7 @@ export default function AgentVariablesTab({ agent, updateAgent }: Props) {
         />
       )}
 
-      <p className="text-sm opacity-80 w-full mb-3 border-1 p-3 rounded-md flex flex-col gap-2 border-dashed border-cyan-400 bg-cyan-500/5 mt-4">
+      <p className="text-sm w-full mb-3 border-1 p-3 rounded-md flex flex-col gap-2 border-dashed mt-4 border-black/20 dark:border-wite/20">
         <MdInfo size={24} className="text-cyan-300" />
         To create a new variable go to the prompt and add it
       </p>

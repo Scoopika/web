@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { BsStars } from "react-icons/bs";
 
 interface Props {
   prompt: Prompt;
@@ -86,7 +87,7 @@ export default function PromptEngineSelection({
                       options: getDefaultOptions(
                         getEngines(prompt.type)[value].models[
                           promptTypeMapping(prompt.type)
-                        ][0]?.options || {}
+                        ][0]?.options || {},
                       ),
                     });
                   }}
@@ -121,14 +122,17 @@ export default function PromptEngineSelection({
                       options: getDefaultOptions(
                         getEngines(prompt.type)[prompt.llm_client].models[
                           prompt.type
-                        ].filter((m) => m.id === value)[0]?.options || {}
+                        ].filter((m) => m.id === value)[0]?.options || {},
                       ),
                     });
                   }}
                   defaultValue={prompt.model}
                 >
                   <SelectTrigger className="truncate max-w-36">
-                    <SelectValue placeholder="Select model" className="truncate" />
+                    <SelectValue
+                      placeholder="Select model"
+                      className="truncate"
+                    />
                   </SelectTrigger>
                   <SelectContent className="max-h-64">
                     <SelectGroup>
@@ -139,8 +143,12 @@ export default function PromptEngineSelection({
                           <SelectItem
                             key={`model-select-${model.id}`}
                             value={model.id}
+                            className="flex items-center gap-1"
                           >
-                            {model.name || model.id}
+                            <div className="text-sm flex items-center gap-1">
+                              {model.recommended && <BsStars />}
+                              {model.name || model.id}
+                            </div>
                           </SelectItem>
                         ))}
                     </SelectGroup>

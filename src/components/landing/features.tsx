@@ -13,6 +13,7 @@ import { IoChevronForwardOutline } from "react-icons/io5";
 import { FaUser } from "react-icons/fa6";
 import Link from "next/link";
 import { IoMdClose } from "react-icons/io";
+import { RiSendPlane2Fill } from "react-icons/ri";
 
 interface Tab {
   id: string;
@@ -34,8 +35,8 @@ const tabs: Tab[] = [
       "Create custom AI agents tailored to your application's needs allowing users to interact with their data in natural language.",
     features: [
       "Define the personality of your agents to match the tone and style of your application",
-      "Generate dynamic responses based on user input and context, and auto heal from any error",
-      "Stream responses with +10 built-in hooks",
+      "Plug any custom knowledge data you want, allowing maximum flexibility out-of-the-box",
+      "Stream responses with +10 built-in hooks between server and client",
     ],
     comp: (
       <>
@@ -66,13 +67,13 @@ const tabs: Tab[] = [
   {
     id: "Multi-agent boxes",
     icon: <HiMiniCubeTransparent size={16} />,
-    title: "Multi-agent smart boxes",
+    title: "Multi-agent Smart Boxes",
     link: "",
     description:
       "Foster collaboration between multiple agents by organizing them into smart boxes, allowing them to work together towards common goals.",
     features: [
       "The best agent for the task is hand is used based on the context. all agents will share the session history",
-      "Mention agents using @ to assign specific tasks to them",
+      "Pass any agent as a tool to other agents, so your agents can collaborate and talk together",
       "Add global tools that all agent in a box has access to, or assign specific tools to specific agents",
     ],
     comp: (
@@ -111,11 +112,11 @@ const tabs: Tab[] = [
     title: "External Tools",
     link: "",
     description:
-      "Effortlessly connect agents to your custom tools, APIs, and functions, enabling seamless communication and data exchange.",
+      "Effortlessly connect agents to your custom tools, APIs, and functions, enabling your agents to perform actions or retreive data",
     features: [
-      "Built-in tools inputs validation, with custom data rules and manual user approval",
-      "Plug the tool and it'll just flow with the process with no additional work by you.",
-      "Errors smart healing from any invalid or missing inputs with reports saved to the platform",
+      "Built-in tools inputs validation with full type-safety",
+      "Plug the tool and it'll just flow with the process. no additional work required by you.",
+      "Errors auto healing from any invalid or missing inputs with reports saved to the platform",
     ],
     comp: (
       <>
@@ -124,7 +125,7 @@ const tabs: Tab[] = [
             <FaUser />
           </div>
           <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
-            Search Twitter for results about space
+            Search Bing for results about space
           </p>
         </div>
         <div className="w-64 flex flex-col text-sm gap-2 transition-all hover:translate-x-2 duration-500">
@@ -140,7 +141,8 @@ const tabs: Tab[] = [
               <IoMdClose />
               search_web validation failed
             </p>
-            Sorry, but I {"can't"} search Twitter, only Google and Bing.
+            Sorry, but I {"can't"} search using Bing, only Google is
+            available...
           </p>
         </div>
       </>
@@ -149,14 +151,14 @@ const tabs: Tab[] = [
   {
     id: "History stores",
     icon: <HiDatabase size={16} />,
-    title: "History stores",
+    title: "History Stores",
     link: "",
     description:
-      "Deploy and connect a managed Serverless data store for chat history sessions with one click and no additional setup",
+      "Deploy and connect a managed Serverless data store for chat history sessions with one click and zero setup",
     features: [
-      "Save and retrieve chat sessions history with no with no extra effort",
-      "Sessions and users management out-of-the-box",
-      "List and retrieve sessions based on the user ID just like that ;)",
+      "Just connect your database URL and history will be persistent based on session IDs",
+      "No need to manage history yourself, We've done it for you already",
+      "List and retrieve sessions based on user ID just like that ;)",
     ],
     comp: (
       <>
@@ -181,16 +183,16 @@ const tabs: Tab[] = [
     ),
   },
   {
-    id: "Missions",
-    icon: <GoTasklist size={18} />,
-    title: "Missions",
+    id: "Client-side actions",
+    icon: <RiSendPlane2Fill size={16} />,
+    title: "Client-Side Actions",
     link: "",
     description:
-      "Handle complex requests that require multiple tasks by multiple agents and tools with ease using Missions",
+      "Give your agents the power to perform actions on client-side by simply just passing functions from the client-side",
     features: [
-      "Describe the mission requirements, and assign the wanted agents and tools to it",
-      "Scoopika will create a list tasks that are automatically assigned to the most suitable agents",
-      "All agents results results are auto verification, making sure the mission has bee achieved with a final report.",
+      "Agents are able to call tools that are executed on the client-side in real time",
+      "Build better interactive AI-powered interfaces with focus on user experience",
+      "Full type-safety and data validation, so your tools never receive invalid inputs",
     ],
     comp: (
       <>
@@ -199,52 +201,8 @@ const tabs: Tab[] = [
             <FaUser />
           </div>
           <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
-            Get my recent website traffic data, make a report about it with
-            future expectations, and publish it to my blog
-          </p>
-        </div>
-        <div className="w-64 flex flex-col text-sm gap-2 transition-all hover:translate-x-2 duration-500">
-          <div className="w-7 h-7 rounded-full flex items-center justify-center bg-foreground text-background">
-            <GoTasklist size={20} />
-          </div>
-          <p className="text-xs opacity-60">Created 3 tasks</p>
-          <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
-            <p className="p-1 w-64 rounded-full text-xs flex items-center gap-1 mb-2 opacity-60">
-              <FaCheck />
-              @webtraf called web_traffic
-            </p>
-            <p className="p-1 w-64 rounded-full text-xs flex items-center gap-1 mb-2 opacity-60">
-              <FaCheck />
-              @webtraf completed task #1
-            </p>
-            <p className="w-64 rounded-full text-xs flex items-center gap-1 mb-2">
-              Making a report about the traffic...
-            </p>
-          </p>
-        </div>
-      </>
-    ),
-  },
-  {
-    id: "RAG",
-    icon: <LiaVectorSquareSolid size={18} />,
-    title: "Retrieval-Augmented Generation (RAG)",
-    link: "",
-    description:
-      "Enhance the capabilities of your agents with custom knowledge about your application and users, retrieved based on the context",
-    features: [
-      "Enable agents to access custom knowledge sources and incorporate them into the generation process",
-      "Provide users with more relevant and meaningful results",
-      "Load any file and website to your RAG vector store with one line of code",
-    ],
-    comp: (
-      <>
-        <div className="w-64 flex flex-col text-sm gap-2 mb-6 transition-all hover:translate-x-2 duration-500">
-          <div className="w-7 h-7 rounded-full flex items-center justify-center bg-foreground text-background">
-            <FaUser />
-          </div>
-          <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
-            How to use this platform to create new agents?
+            Filter my deployments to show only failed deployments before 1 May
+            2024
           </p>
         </div>
         <div className="w-64 flex flex-col text-sm gap-2 transition-all hover:translate-x-2 duration-500">
@@ -252,13 +210,95 @@ const tabs: Tab[] = [
             <RiRobot2Fill />
           </div>
           <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
-            {"Here's"} a step-by-step guide to help you create new agents:
-            {"\n\n..."}
+            <p className="p-1 w-64 rounded-full text-xs flex items-center gap-1 mb-2 opacity-60">
+              <FaCheck />
+              called filter_deployments
+            </p>
+            I just filtered your deployments...
           </p>
         </div>
       </>
     ),
   },
+  // {
+  //   id: "Missions",
+  //   icon: <GoTasklist size={18} />,
+  //   title: "Missions",
+  //   link: "",
+  //   description:
+  //     "Handle complex requests that require multiple tasks by multiple agents and tools with ease using Missions",
+  //   features: [
+  //     "Describe the mission requirements, and assign the wanted agents and tools to it",
+  //     "Scoopika will create a list tasks that are automatically assigned to the most suitable agents",
+  //     "All agents results results are auto verification, making sure the mission has bee achieved with a final report.",
+  //   ],
+  //   comp: (
+  //     <>
+  //       <div className="w-64 flex flex-col text-sm gap-2 mb-6 transition-all hover:translate-x-2 duration-500">
+  //         <div className="w-7 h-7 rounded-full flex items-center justify-center bg-foreground text-background">
+  //           <FaUser />
+  //         </div>
+  //         <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
+  //           Get my recent website traffic data, make a report about it with
+  //           future expectations, and publish it to my blog
+  //         </p>
+  //       </div>
+  //       <div className="w-64 flex flex-col text-sm gap-2 transition-all hover:translate-x-2 duration-500">
+  //         <div className="w-7 h-7 rounded-full flex items-center justify-center bg-foreground text-background">
+  //           <GoTasklist size={20} />
+  //         </div>
+  //         <p className="text-xs opacity-60">Created 3 tasks</p>
+  //         <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
+  //           <p className="p-1 w-64 rounded-full text-xs flex items-center gap-1 mb-2 opacity-60">
+  //             <FaCheck />
+  //             @webtraf called web_traffic
+  //           </p>
+  //           <p className="p-1 w-64 rounded-full text-xs flex items-center gap-1 mb-2 opacity-60">
+  //             <FaCheck />
+  //             @webtraf completed task #1
+  //           </p>
+  //           <p className="w-64 rounded-full text-xs flex items-center gap-1 mb-2">
+  //             Making a report about the traffic...
+  //           </p>
+  //         </p>
+  //       </div>
+  //     </>
+  //   ),
+  // },
+  // {
+  //   id: "RAG",
+  //   icon: <LiaVectorSquareSolid size={18} />,
+  //   title: "Retrieval-Augmented Generation (RAG)",
+  //   link: "",
+  //   description:
+  //     "Enhance the capabilities of your agents with custom knowledge about your application and users, retrieved based on the context",
+  //   features: [
+  //     "Enable agents to access custom knowledge sources and incorporate them into the generation process",
+  //     "Provide users with more relevant and meaningful results",
+  //     "Load any file and website to your RAG vector store with one line of code",
+  //   ],
+  //   comp: (
+  //     <>
+  //       <div className="w-64 flex flex-col text-sm gap-2 mb-6 transition-all hover:translate-x-2 duration-500">
+  //         <div className="w-7 h-7 rounded-full flex items-center justify-center bg-foreground text-background">
+  //           <FaUser />
+  //         </div>
+  //         <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
+  //           How to use this platform to create new agents?
+  //         </p>
+  //       </div>
+  //       <div className="w-64 flex flex-col text-sm gap-2 transition-all hover:translate-x-2 duration-500">
+  //         <div className="w-7 h-7 rounded-full flex items-center justify-center bg-foreground text-background">
+  //           <RiRobot2Fill />
+  //         </div>
+  //         <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
+  //           {"Here's"} a step-by-step guide to help you create new agents:
+  //           {"\n\n..."}
+  //         </p>
+  //       </div>
+  //     </>
+  //   ),
+  // },
 ];
 
 const TabPage = ({ tab }: { tab: Tab }) => {

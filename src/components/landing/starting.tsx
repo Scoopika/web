@@ -24,7 +24,7 @@ const steps: Step[] = [
   {
     title: "Integrate into your application",
     description:
-      "Generate a token, and use it to run the agent in your application using our SDKs for both server-side and client-side",
+      "Generate an access token, and use it to run the agent in your application using our libraries for both server and client side",
     img: "",
   },
   {

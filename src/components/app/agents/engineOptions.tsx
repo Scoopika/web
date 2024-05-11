@@ -14,7 +14,7 @@ import { Slider } from "@/components/ui/slider";
 
 interface Props {
   prompt: Prompt;
-  setPrompt: Dispatch<SetStateAction<Prompt>>
+  setPrompt: Dispatch<SetStateAction<Prompt>>;
 }
 
 export default function EngineOptions({ prompt, setPrompt }: Props) {
@@ -31,7 +31,7 @@ export default function EngineOptions({ prompt, setPrompt }: Props) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button isIconOnly size="sm" color="default" variant="flat">
-          <IoMdSettings />
+          <IoMdSettings size={17} />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="max-h-72 overflow-auto">
@@ -43,8 +43,10 @@ export default function EngineOptions({ prompt, setPrompt }: Props) {
                 className="flex flex-col w-full gap-2"
               >
                 <p className="text-sm opacity-80 flex items-center gap-2">
-                    {key}
-                    <span className="text-xs opacity-90 p-1 pl-1.5 pr-1.5 bg-accent/30 rounded-md">{usedOptions[key]}</span>
+                  {key}
+                  <span className="text-xs opacity-90 p-1 pl-1.5 pr-1.5 bg-accent/30 rounded-md">
+                    {usedOptions[key]}
+                  </span>
                 </p>
                 <Slider
                   defaultValue={[usedOptions[key] || options[key].default]}
@@ -52,7 +54,10 @@ export default function EngineOptions({ prompt, setPrompt }: Props) {
                   max={options[key].max}
                   step={options[key].step}
                   onValueChange={(v: number[]) => {
-                    setPrompt(prev => ({...prev, options: {...prev.options, [key]: v[0]}}))
+                    setPrompt((prev) => ({
+                      ...prev,
+                      options: { ...prev.options, [key]: v[0] },
+                    }));
                   }}
                 />
                 <div className="w-full mt-1"></div>

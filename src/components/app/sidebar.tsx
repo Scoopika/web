@@ -118,7 +118,7 @@ const Sidebar: FC<Props> = ({ session, active, children }) => {
                 <Link
                   href={link.path}
                   key={`sidelink-${link.name}`}
-                  className={`p-2 text-sm flex items-center gap-3 font-base rounded-md transition-all ${
+                  className={`p-2 text-sm flex items-center gap-3 font-base rounded-lg transition-all ${
                     active === link.name
                       ? "bg-black/20 dark:bg-accent/50"
                       : "hover:bg-black/10 dark:hover:bg-foreground/5"

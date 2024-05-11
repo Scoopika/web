@@ -121,7 +121,7 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
         />
       )}
 
-      {(agent.chained || agent.prompts.length < 1) && (
+      {(agent.prompts.length < 1) && (
         <div className="flex items-center gap-4 w-full mt-2">
           <div className="w-full border-t-1 border-dashed"></div>
           <DropdownMenu
@@ -154,7 +154,7 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
                 onClick={() => newPrompt("text")}
               >
                 <MdTextSnippet size={17} />
-                Normal prompt (text)
+                Text generation
               </DropdownMenuItem>
 
               <DropdownMenuItem className="gap-2 text-sm" disabled>

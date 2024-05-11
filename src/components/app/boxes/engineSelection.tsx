@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RawBoxData } from "@/types/rawBox";
+import { BsStars } from "react-icons/bs";
 
 interface Props {
   box: RawBoxData;
@@ -117,7 +118,10 @@ export default function BoxEngineSelection({
                             key={`model-select-${model.id}`}
                             value={model.id}
                           >
-                            {model.name || model.id}
+                            <div className="text-sm flex items-center gap-1">
+                              {model.recommended && <BsStars />}
+                              {model.name || model.id}
+                            </div>
                           </SelectItem>
                         ))}
                     </SelectGroup>

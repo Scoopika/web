@@ -3,6 +3,7 @@ import { Prompt } from "@scoopika/types";
 export interface Model {
   id: string;
   name?: string;
+  recommended?: boolean;
   options: Record<
     string,
     { min: number; max: number; default: number; step: number }
@@ -37,10 +38,33 @@ const engines: SpecificEngines = {
           },
         },
         {
-          id: "gpt-3.5-turbo-instruct",
+          id: "gpt-3.5-turbo-0125",
+          recommended: true,
           options: {
-            max_tokens: { min: 50, max: 4096, default: 200, step: 1 },
+            max_tokens: { min: 50, max: 4096, default: 1024, step: 1 },
             temperature: { min: 0, max: 1, default: 0.5, step: 0.01 },
+            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
+            frequency_penalty: { min: 0, max: 1, default: 1, step: 0.01 },
+            presence_penalty: { min: 0, max: 1, default: 1, step: 0.01 },
+          },
+        },
+        {
+          id: "gpt-4-turbo",
+          recommended: true,
+          options: {
+            max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
+            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
+            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
+            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+          },
+        },
+        {
+          id: "gpt-4-0125-preview",
+          recommended: true,
+          options: {
+            max_tokens: { min: 50, max: 4096, default: 500, step: 1 },
+            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
             frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
             presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
@@ -57,9 +81,29 @@ const engines: SpecificEngines = {
           },
         },
         {
-          id: "gpt-4-turbo",
+          id: "gpt-4-32k",
           options: {
-            max_tokens: { min: 50, max: 4096, default: 500, step: 1 },
+            max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
+            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
+            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
+            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+          },
+        },
+        {
+          id: "gpt-4-32k-0613",
+          options: {
+            max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
+            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
+            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
+            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
+          },
+        },
+        {
+          id: "gpt-4-turbo-preview",
+          options: {
+            max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
             frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
@@ -170,7 +214,7 @@ export const getOptions = (prompt: Prompt): Model["options"] => {
   if (!engine) return {};
 
   const model = engine.models[prompt.type].filter(
-    (m) => m.id === prompt.model
+    (m) => m.id === prompt.model,
   )[0];
   if (!model) return {};
 
@@ -181,7 +225,7 @@ export const getDefaultOptions = (options: Model["options"]) => {
   const defaultValues: Record<string, any> = {};
 
   Object.keys(options).map(
-    (key) => (defaultValues[key] = options[key].default)
+    (key) => (defaultValues[key] = options[key].default),
   );
 
   return defaultValues;

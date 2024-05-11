@@ -33,7 +33,7 @@ export default function PromptEditor({
   openEditor,
   updateAgent,
   closePrompt,
-  newPrompt
+  newPrompt,
 }: Props) {
   const [data, setData] = useState<Prompt>({} as Prompt);
   const [open, setOpen] = useState<boolean>(false);
@@ -261,16 +261,7 @@ export default function PromptEditor({
                     />
                   )}
                 </div>
-                <div className="flex items-center justify-end gap-3">
-                  <Button
-                    size="sm"
-                    color="default"
-                    variant="flat"
-                    startContent={<BsStars size={17} />}
-                  >
-                    Generate prompt
-                  </Button>
-                </div>
+                <div className="flex items-center justify-end gap-3"></div>
               </div>
               {!updating && (
                 <PromptContentEditor

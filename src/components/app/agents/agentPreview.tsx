@@ -8,12 +8,8 @@ import { RiRobot2Fill } from "react-icons/ri";
 import { TbTextRecognition } from "react-icons/tb";
 import { TbPrompt } from "react-icons/tb";
 import EditAgent from "./edit";
-import { TbTools } from "react-icons/tb";
 import AgentPrompts from "./tabs/prompts";
 import AgentVariablesTab from "./tabs/variables";
-import AgentTools from "./tabs/tools";
-import AgentConfig from "./tabs/config";
-import { IoSettingsSharp } from "react-icons/io5";
 
 interface Props {
   agent: AgentData | undefined;
@@ -42,12 +38,6 @@ export const AgentAvatar = ({
             src={agent.avatar}
             className={`${mainSize} rounded-full absolute z-10`}
           ></Avatar>
-          {shadow !== false && (
-            <Avatar
-              src={agent.avatar}
-              className="min-w-12 max-w-12 min-h-12 max-h-12 rounded-full absolute blur-2xl top-0 left-0 z-0"
-            ></Avatar>
-          )}
         </div>
       ) : (
         <div className="min-w-10 max-w-10 min-h-10 max-h-10 rounded-xl flex items-center justify-center bg-accent/50">
@@ -95,7 +85,7 @@ export default function AgentPreview({
           openId={openId}
         />
       ),
-    }
+    },
   ];
 
   return (
