@@ -71,8 +71,7 @@ export default function AgentsMainPage({ session, agents }: Props) {
             <BsPlusCircleDotted size={30} className="opacity-80 mb-4" />
             <h3 className="font-semibold">Create your first agent</h3>
             <p className="text-sm opacity-70 mt-2 text-center">
-              Agents are smart AI assistants with access to tools, prompts
-              chains, and real-time data.
+              Agents are smart AI assistants with access to tools, functions, APIs, and real-time data.
             </p>
           </div>
         </NewAgent>

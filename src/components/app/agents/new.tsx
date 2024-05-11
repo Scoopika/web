@@ -102,7 +102,7 @@ export default function NewAgent({
         throw new Error("Agent creation error");
       }
 
-      toast.success(`Create agent '${data.name}'`, { id: t });
+      toast.success(`Created agent '${data.name}'`, { id: t });
       setLoading(false);
       updateState({ ...data, id: res.id });
       setOpen(false);
