@@ -5,19 +5,15 @@ import { Avatar, Button } from "@nextui-org/react";
 import { AgentData } from "@scoopika/types";
 import { useEffect, useState } from "react";
 import { RiRobot2Fill } from "react-icons/ri";
-import { BsInputCursor } from "react-icons/bs";
 import { TbTextRecognition } from "react-icons/tb";
-import { BsTextareaT } from "react-icons/bs";
-import { MdOutlineInput } from "react-icons/md";
-import { BsFillGridFill } from "react-icons/bs";
-import { MdDataset } from "react-icons/md";
 import { TbPrompt } from "react-icons/tb";
-import AgentConfig from "./config";
 import EditAgent from "./edit";
 import { TbTools } from "react-icons/tb";
 import AgentPrompts from "./tabs/prompts";
 import AgentVariablesTab from "./tabs/variables";
 import AgentTools from "./tabs/tools";
+import AgentConfig from "./tabs/config";
+import { IoSettingsSharp } from "react-icons/io5";
 
 interface Props {
   agent: AgentData | undefined;
@@ -30,13 +26,12 @@ interface Props {
 export const AgentAvatar = ({
   agent,
   shadow,
-  size
+  size,
 }: {
   agent: AgentData;
   shadow?: boolean;
-  size?: string
+  size?: string;
 }) => {
-
   let mainSize = size || "min-w-10 max-w-10 min-h-10 max-h-10";
 
   return (
@@ -74,7 +69,7 @@ export default function AgentPreview({
   const [id, setId] = useState<string>(String(crypto.randomUUID()));
 
   useEffect(() => {
-    setActiveTab(tab || "Prompts");
+    setActiveTab(tab || "Prompt");
     setId(openId);
   }, [agent, openId]);
 
@@ -84,7 +79,7 @@ export default function AgentPreview({
 
   const tabs = [
     {
-      id: "Prompts",
+      id: "Prompt",
       icon: <TbPrompt size={17} />,
       component: () => (
         <AgentPrompts agent={agent} updateAgent={updateAgent} openId={openId} />
@@ -100,12 +95,7 @@ export default function AgentPreview({
           openId={openId}
         />
       ),
-    },
-    {
-      id: "Tools",
-      icon: <TbTools size={16} />,
-      component: () => <AgentTools agent={agent} updateAgent={updateAgent} />,
-    },
+    }
   ];
 
   return (

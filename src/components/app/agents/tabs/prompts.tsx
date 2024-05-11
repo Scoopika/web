@@ -5,15 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { AgentData, Prompt } from "@scoopika/types";
 import { useEffect, useState } from "react";
 import PromptEditor from "../promptEditor";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
-import { TbReorder } from "react-icons/tb";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { MdTextSnippet, MdImage, MdEdit, MdDelete } from "react-icons/md";
+import { MdTextSnippet, MdImage, MdEdit } from "react-icons/md";
 import agentVariables from "@/scripts/agents/variables";
 import engines, { getDefaultOptions } from "@/scripts/agents/engines";
 import updateAgentData from "@/functions/agents/update";
@@ -46,7 +44,7 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
     type: "text",
     id: String(crypto.randomUUID()),
     index: agent.prompts.length === 0 ? 0 : agent.prompts.length - 1,
-    variable_name: `prompt${agent.prompts.length}`,
+    variable_name: `main`,
     content: "",
     inputs: [],
     llm_client: "openai",
@@ -103,46 +101,12 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
     }
   };
 
-  const swap = (index: number, prompt: Prompt, direction: "up" | "down") => {
-    const sortedData = data.prompts.sort((a, b) => a.index - b.index);
-    const sortedIds = sortedData.map((d) => d.id);
-    const sourceIndex = sortedIds.indexOf(prompt.id);
-
-    if (direction === "up") {
-      sortedData[sourceIndex].index = sourceIndex - 1;
-      sortedData[sourceIndex - 1].index = sourceIndex;
-    }
-
-    if (direction === "down") {
-      sortedData[sourceIndex].index = sourceIndex + 1;
-      sortedData[sourceIndex + 1].index = sourceIndex;
-    }
-
-    setData((prev) => ({ ...prev, prompts: sortedData }));
-  };
-
-  const saveOrder = async () => {
-    setLoading(true);
-    const t = toast.loading("Saving order...");
-
-    try {
-      const res = await updateAgentData(agent.id, agent);
-
-      if (!res.success) {
-        throw new Error("save error");
-      }
-
-      toast.success("Saved new order", { id: t });
-      updateAgent(data);
-    } catch (err) {
-      toast.error("Can't save new order. try again later!", { id: t });
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="flex flex-col items-center p-6 pt-0">
+      <div className="text-sm mb-1 w-full">Prompt</div>
+      <div className="text-xs opacity-80 w-full mb-4">
+        Give {agent.name} instructions on how to act and behave
+      </div>
       {openPrompt && !editOrder && (
         <PromptEditor
           agent={agent}
@@ -158,7 +122,7 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
       )}
 
       {(agent.chained || agent.prompts.length < 1) && (
-        <div className="flex items-center gap-4 w-full">
+        <div className="flex items-center gap-4 w-full mt-2">
           <div className="w-full border-t-1 border-dashed"></div>
           <DropdownMenu
             open={newOpen}
@@ -193,12 +157,9 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
                 Normal prompt (text)
               </DropdownMenuItem>
 
-              <DropdownMenuItem
-                className="gap-2 text-sm"
-                disabled
-              >
+              <DropdownMenuItem className="gap-2 text-sm" disabled>
                 <MdImage size={17} />
-                Image generation 
+                Image generation
                 <Badge>coming soon</Badge>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -210,111 +171,21 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
       {agent.prompts.length > 0 && (
         <div className="flex flex-col w-full gap-3 p-3 border-1 rounded-md border-dashed border-black/20 dark:border-white/20 mt-4">
           <div className="w-full flex items-center">
-            <p className="text-sm min-w-max opacity-80 font-semibold">
-              Prompts {agent.chained && "chain"}
-            </p>
+            <p className="text-sm min-w-max opacity-80 font-semibold">Prompt</p>
             <div className="flex items-center w-full justify-end">
-              {(!editOrder && agent.prompts.length > 0 && agent.chained) && (
-                <div className="w-full flex items-center justify-end">
-                  <Button
-                    size="sm"
-                    variant="flat"
-                    startContent={<TbReorder size={17} />}
-                    onPress={() => setEditOrder(true)}
-                    isLoading={loading}
-                  >
-                    Change order
-                  </Button>
-                </div>
-              )}
-              {editOrder && (
-                <div className="w-full flex items-center justify-end gap-2">
-                  <Button
-                    color="warning"
-                    variant="light"
-                    size="sm"
-                    className="font-semibold"
-                    disabled={loading}
-                    onPress={() => {
-                      setData(JSON.parse(JSON.stringify(agent)));
-                      setEditOrder(false);
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    color="primary"
-                    size="sm"
-                    className="font-semibold"
-                    onPress={() => saveOrder()}
-                    isLoading={loading}
-                  >
-                    Save order
-                  </Button>
-                </div>
-              )}
+              <div className="w-full flex items-center justify-end">
+                <Button
+                  size="sm"
+                  variant="flat"
+                  startContent={<MdEdit size={17} />}
+                  onPress={() => setOpenPrompt(agent.prompts[0])}
+                  isLoading={loading}
+                >
+                  Edit prompt
+                </Button>
+              </div>
             </div>
           </div>
-          {data.prompts
-            .sort((a, b) => a.index - b.index)
-            .map((prompt, index) => (
-              <div
-                key={`promptitem-${prompt.id}`}
-                className={`flex items-center p-2 text-sm rounded-lg group ${
-                  !(index & 1)
-                    ? "bg-black/10 dark:bg-accent/30"
-                    : "bg-transparent"
-                }`}
-              >
-                <p className="text-sm min-w-max">{prompt.variable_name}</p>
-                <div className="w-full flex items-center justify-end opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all gap-2">
-                  {!editOrder && (
-                    <>
-                      <Button
-                        isIconOnly
-                        size="sm"
-                        color="default"
-                        variant="flat"
-                        onPress={() => setOpenPrompt(prompt)}
-                      >
-                        <MdEdit />
-                      </Button>
-                      <Button
-                        isIconOnly
-                        size="sm"
-                        color="danger"
-                        variant="light"
-                        onPress={() => deletePrompt(prompt.id)}
-                      >
-                        <MdDelete size={17} />
-                      </Button>
-                    </>
-                  )}
-                  {editOrder && index !== 0 && (
-                    <Button
-                      isIconOnly
-                      size="sm"
-                      color="default"
-                      variant="flat"
-                      onPress={() => swap(prompt.index, prompt, "up")}
-                    >
-                      <FaChevronUp />
-                    </Button>
-                  )}
-                  {editOrder && index < agent.prompts.length - 1 && (
-                    <Button
-                      isIconOnly
-                      size="sm"
-                      color="default"
-                      variant="flat"
-                      onPress={() => swap(prompt.index, prompt, "down")}
-                    >
-                      <FaChevronDown />
-                    </Button>
-                  )}
-                </div>
-              </div>
-            ))}
         </div>
       )}
     </div>

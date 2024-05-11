@@ -1,6 +1,6 @@
 export default function Logo() {
   return (
-    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black dark:bg-white overflow-hidden pl-1 group">
+    <div className="flex items-center justify-center w-9 h-9 rounded-full bg-black dark:bg-white overflow-hidden pl-1 group">
       <img
         src="/logo.png"
         alt="Scoopika logo"

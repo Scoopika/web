@@ -119,9 +119,7 @@ export default function NewAgent({
       <DialogTrigger asChild className={`${triggerFull !== false && "w-full"}`}>
         {children}
       </DialogTrigger>
-      <DialogContent
-        className="max-h-screen overflow-auto flex flex-col items-center min-w-lg"
-      >
+      <DialogContent className="max-h-screen overflow-auto flex flex-col items-center min-w-lg">
         <div className="text-xs opacity-60 mb-3">New agent</div>
 
         <div className="flex w-full items-center gap-4">
@@ -164,30 +162,6 @@ export default function NewAgent({
           />
         </div>
 
-        <div className="flex w-full items-center justify-center gap-3 mt-2">
-          <TypeChoice
-            title="Chained agent (demo)"
-            description="Has a chain of prompts. best for multi-step and complex tasks"
-            icon={<LuLayoutList size={16} />}
-            onClick={() => setData((prev) => ({ ...prev, chained: true }))}
-            isActive={data.chained}
-          />
-          <TypeChoice
-            title="Conversational agent"
-            description="Interactive, has one prompt. best for chatbots"
-            icon={<PiChatsFill size={16} />}
-            onClick={() => setData((prev) => ({ ...prev, chained: false }))}
-            isActive={!data.chained}
-          />
-        </div>
-
-        <Link
-          href=""
-          className="w-full text-end text-sm opacity-80 hover:opacity-100 transition-all"
-        >
-          {"Don't"} know what type to choose?
-        </Link>
-
         <div className="w-full flex flex-col items-center justify-center gap-2">
           <Button
             size="sm"
@@ -198,19 +172,6 @@ export default function NewAgent({
             onPress={() => create()}
           >
             Create agent
-          </Button>
-          <Button
-            size="sm"
-            variant="light"
-            color="warning"
-            className="w-full font-semibold"
-            disabled={loading}
-            onPress={() => {
-              setData(sampleData);
-              setName(undefined);
-            }}
-          >
-            Reset agent
           </Button>
         </div>
       </DialogContent>

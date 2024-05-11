@@ -78,7 +78,7 @@ export default function PromptVariables({
 
   const getOtherSource = () =>
     variables.filter(
-      (v) => v.variable.id === id && v.source.id !== prompt.id
+      (v) => v.variable.id === id && v.source.id !== prompt.id,
     )[0];
 
   const importVariable = () => {
@@ -146,9 +146,18 @@ export default function PromptVariables({
                 {prompt.inputs.map((variable) => (
                   <div
                     key={`variableselection-${variable.id}`}
-                    className="text-sm p-1 border-1 rounded-md flex items-center gap-2"
+                    className="text-sm p-1 border-1 rounded-md flex items-center gap-2 pl-2"
                   >
                     <p className="text-sm w-full">{variable.id}</p>
+                    <Button
+                      isIconOnly
+                      size="sm"
+                      variant="flat"
+                      className="w-6 h-6"
+                      onPress={() => setEdit(variable)}
+                    >
+                      <MdEdit />
+                    </Button>
                     <Button
                       isIconOnly
                       size="sm"
@@ -183,7 +192,7 @@ export default function PromptVariables({
                 placeholder="Description"
                 defaultValue={edit.description}
                 onInput={(e) => {
-                  const value =  e?.currentTarget?.value;
+                  const value = e?.currentTarget?.value;
                   setEdit((prev) => {
                     if (!prev) return;
                     return {
@@ -195,7 +204,7 @@ export default function PromptVariables({
               />
               <input
                 onInput={(e) => {
-                  const value =  e?.currentTarget?.value;
+                  const value = e?.currentTarget?.value;
                   setEdit((prev) => {
                     if (!prev) return;
                     return {
@@ -309,22 +318,6 @@ export default function PromptVariables({
                 onPress={() => add()}
               >
                 Add variable
-              </Button>
-              <Button
-                size="sm"
-                color="default"
-                variant="flat"
-                disabled={!getOtherSource()}
-                className="w-full"
-                onPress={() => {
-                  if (getOtherSource()) {
-                    importVariable();
-                  }
-                }}
-              >
-                {!getOtherSource()
-                  ? "Can't import variable"
-                  : `Import from ${getOtherSource().source.name}`}
               </Button>
             </div>
           </div>

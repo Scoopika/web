@@ -30,8 +30,9 @@ interface Props {
 
 const initialItems: Props["items"] = [
   { name: "Home", href: "/", type: "link" },
+  { name: "Dashboard", href: "/app", type: "link" },
+  { name: "Pricing", href: "/pricing", type: "link" },
   { name: "Docs", href: "/docs", type: "link" },
-  { name: "Blog", href: "/blog", type: "link", disabled: true },
 ];
 
 const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
@@ -45,37 +46,34 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
     <NextNavbar
       position="sticky"
       onMenuOpenChange={setIsMenuOpen}
-      className="border-b-1 fixed"
+      className="fixed backdrop-blur-xl border-b-1 z-50"
       classNames={{
         wrapper: "min-w-full justify-between",
         content: "",
       }}
     >
       <NavbarContent>
-        <div className="flex items-center h-full">
+        <div className="flex items-center h-full w-full">
           <NavbarBrand
             className="mr-6"
             as={NextLink}
             href={path ? `/${path}` : "/"}
           >
             <Logo />
-            <p className="font-bold text-inherit text-[1.05rem] ml-3">
-              Scoopika
-            </p>
+            <p className="font-semibold text-inherit text-sm ml-2">Scoopika</p>
             {path && <p className="text-xs opacity-60 mb-2">{path}</p>}
           </NavbarBrand>
-          <div className="min-h-[45%] border-r-1 opacity-80 mr-6"></div>
-          <div className="hidden sm:flex items-center justify-center gap-4">
-            {items?.length &&
-              items.map((item) => (
-                <NavbarItem key={`nav-item-${item.name}`}>
-                  <NavItem item={item} active={active} />
-                </NavbarItem>
-              ))}
-          </div>
         </div>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <div className="hidden sm:flex items-center justify-center w-full gap-4">
+          {items?.length &&
+            items.map((item) => (
+              <NavbarItem key={`nav-item-${item.name}`}>
+                <NavItem item={item} active={active} />
+              </NavbarItem>
+            ))}
+        </div>
         {children && children}
       </NavbarContent>
       <NavbarContent justify="end">

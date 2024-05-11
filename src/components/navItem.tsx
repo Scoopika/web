@@ -49,7 +49,6 @@ export default function NavItem({
         variant={`${active === item.name ? "solid" : "light"}`}
         href={!item.disabled ? item.href : ""}
         disabled={item.disabled ? true : false}
-        radius="full"
         className={`
                 text-[0.84rem] dark:bg-transparent hover:bg-black/20 dark:hover:bg-accent/30 hover:opacity-100 dark:text-white
                 ${

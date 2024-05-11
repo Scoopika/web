@@ -27,7 +27,7 @@ export default function AgentVariablesTab({ agent, updateAgent }: Props) {
   return (
     <div className="flex flex-col items-center p-6 pt-0 w-full">
       <p className="text-sm w-full mb-1">All variables</p>
-      <p className="text-sm opacity-80 w-full mb-3">
+      <p className="text-xs opacity-80 w-full mb-4">
         Editing a variable from here will update it in all prompts using it
       </p>
       {agentVariables(agent).map((variable, index) => (
@@ -47,8 +47,8 @@ export default function AgentVariablesTab({ agent, updateAgent }: Props) {
             <Button
               isIconOnly
               size="sm"
-              variant="flat"
               onPress={() => setEditVariable(variable.variable)}
+              variant="flat"
             >
               <MdEdit />
             </Button>
@@ -68,8 +68,7 @@ export default function AgentVariablesTab({ agent, updateAgent }: Props) {
 
       <p className="text-sm opacity-80 w-full mb-3 border-1 p-3 rounded-md flex flex-col gap-2 border-dashed border-cyan-400 bg-cyan-500/5 mt-4">
         <MdInfo size={24} className="text-cyan-300" />
-        To create a new variable go to a prompt and add it. you can then import
-        it in other prompts
+        To create a new variable go to the prompt and add it
       </p>
     </div>
   );

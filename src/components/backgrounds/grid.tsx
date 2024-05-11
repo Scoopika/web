@@ -26,12 +26,12 @@ export default function GridSmallBackground({
 
   return (
     <div
-      className={`h-full w-full bg-grid-black/[0.06] dark:bg-grid-white/[0.04] relative ${className}`}
+      className={`h-full w-full bg-grid-black/[0.06] dark:bg-grid-white/[0.05] ${className}`}
       style={style}
     >
       {/* Radial gradient for the container to give a faded look */}
       {shadow && (
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_5%,black)]"></div>
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_2%,black)]"></div>
       )}
       {children && children}
     </div>
