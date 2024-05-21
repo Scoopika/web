@@ -27,13 +27,13 @@ export type SidebarNavItem = {
 );
 
 export type SiteConfig = {
-  name: string
-  title: string
-  description: string
-  url: string
-  ogImage: string
+  name: string;
+  title: string;
+  description: string;
+  url: string;
+  ogImage: string;
   links: {
-    twitter: string
-    github: string
-  }
-}
+    twitter: string;
+    github: string;
+  };
+};

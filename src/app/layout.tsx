@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils";
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/footer";
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/config/site";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,13 +29,13 @@ export const metadata: Metadata = {
     "context-aware applications",
     "AI agents",
     "AI tools",
-    "Developers tools"
+    "Developers tools",
   ],
   authors: [
     {
       name: "Kais Radwan",
       url: "https://twitter.com/multineonteam",
-    }
+    },
   ],
   creator: "Kais Radwan",
   openGraph: {
@@ -50,11 +51,10 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [`${siteConfig.url}/scoopika_og.jpg`],
-    creator: "@multineonteam",
   },
   verification: {
-    google: "iZELF-QTTz2xWE3U2-FPllqMtRpVw-1Ok4GZEO2_--A"
-  }
+    google: "iZELF-QTTz2xWE3U2-FPllqMtRpVw-1Ok4GZEO2_--A",
+  },
 };
 
 export default function RootLayout({
@@ -68,17 +68,18 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
         )}
       >
         <Providers>
           <Toaster position="bottom-right" />
           {children}
+          <GoogleAnalytics gaId="G-3KS7DQFER8" />
           <div className="fixed top-0 left-0 z-50 bg-background w-screen h-screen flex items-center justify-center text-center md:hidden">
             This website does not work on this device size at the moment. <br />
             Please use a larger screen.
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </Providers>
       </body>
     </html>
