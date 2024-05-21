@@ -36,7 +36,7 @@ export default function VariablesCompletion({
         variable: i,
       })),
     ...variables.filter(
-      (v) => prompt.inputs.filter((i) => i.id === v.variable.id).length === 0
+      (v) => prompt.inputs.filter((i) => i.id === v.variable.id).length === 0,
     ),
   ]);
   const [focused, setFocused] = useState<number>(0);
@@ -48,7 +48,7 @@ export default function VariablesCompletion({
   useEffect(() => {
     const scrollToFocused = (index: number) => {
       const focusedElement = document.getElementById(
-        `variablecompletion-${index}`
+        `variablecompletion-${index}`,
       );
       if (focusedElement) {
         focusedElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -121,7 +121,7 @@ export default function VariablesCompletion({
       <div className="flex flex-col gap-1 mt-3">
         {all.map((variable, index) =>
           variable.variable.id.includes(
-            String(latestVariable || "").replace("$", "")
+            String(latestVariable || "").replace("$", ""),
           ) ? (
             <div
               id={`variablecompletion-${index}`}
@@ -151,7 +151,7 @@ export default function VariablesCompletion({
             </div>
           ) : (
             <></>
-          )
+          ),
         )}
       </div>
     </div>

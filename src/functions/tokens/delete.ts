@@ -5,9 +5,9 @@ import { db } from "@/lib/db";
 import generateSecret from "@/scripts/secret";
 import { getServerSession } from "next-auth";
 
-export default async function deleteTokenForever(id: string): Promise<
-    {success: boolean}
-> {
+export default async function deleteTokenForever(
+  id: string,
+): Promise<{ success: boolean }> {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -35,18 +35,18 @@ export default async function deleteTokenForever(id: string): Promise<
 
     const data = await res.json();
     if (!data || !data.success) {
-        return {success: false};
+      return { success: false };
     }
 
     await db.token.delete({
-        where: {
-            id,
-            userId: session.user.id
-        }
-    })
+      where: {
+        id,
+        userId: session.user.id,
+      },
+    });
 
-    return {success: true}
+    return { success: true };
   } catch {
-    return {success: false}
+    return { success: false };
   }
 }

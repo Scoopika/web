@@ -44,17 +44,27 @@ export default function SettingsMain({ session, openTab }: Props) {
           tabList: "p-0 pt-3",
           tabContent: "p-6",
           panel: "p-6",
-          tab: "pb-3"
+          tab: "pb-3",
         }}
       >
-        <Tab key="basic" title="Basic" className="mt-0" as={Link} href="?tab=basic">
+        <Tab
+          key="basic"
+          title="Basic"
+          className="mt-0"
+          as={Link}
+          href="?tab=basic"
+        >
           <AccountSettings session={session} />
         </Tab>
         <Tab key="tokens" title="Tokens" as={Link} href="?tab=tokens">
           <TokensSettings tokens={tokens} setTokens={setTokens} />
         </Tab>
         <Tab key="billing" title="Billing" as={Link} href="?tab=billing">
-          <BillingSettings session={session} planData={planData} setPlanData={setPlanData} />
+          <BillingSettings
+            session={session}
+            planData={planData}
+            setPlanData={setPlanData}
+          />
         </Tab>
       </Tabs>
     </div>

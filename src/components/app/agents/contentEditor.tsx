@@ -33,7 +33,7 @@ const varRegex = (
   variables: PromptInput[],
   state: "done" | "many" | "none",
   callback: (start: number, end: number) => void,
-  allowNone?: boolean
+  allowNone?: boolean,
 ) => {
   let matchArr: RegExpExecArray | null, start: number;
   while ((matchArr = dollarRegex.exec(text)) !== null) {
@@ -54,7 +54,7 @@ const varRegex = (
 
 const VarSpanComp = ({ prompt, props }: { prompt: Prompt; props: any }) => {
   const variable = prompt.inputs.filter(
-    (i) => i.id === (props?.children[0]?.props?.text || "").replace("$", "")
+    (i) => i.id === (props?.children[0]?.props?.text || "").replace("$", ""),
   )[0];
 
   if (!variable) {
@@ -76,7 +76,7 @@ const PosVarSpanComp = ({
   updateVariables: (
     key: string,
     value: string,
-    position: [number, number]
+    position: [number, number],
   ) => any;
 }) => {
   useEffect(() => {
@@ -106,7 +106,6 @@ export default function PromptContentEditor({
   variables,
   addVariable,
 }: Props) {
-
   return (
     <textarea
       className="border-0 w-full h-full bg-transparent text-sm resize-none mt-2"
@@ -115,9 +114,8 @@ export default function PromptContentEditor({
       autoFocus
       onInput={(e) => {
         const content = e?.currentTarget?.value;
-        updatePrompt(prev => ({...prev, content}))
+        updatePrompt((prev) => ({ ...prev, content }));
       }}
     />
-  )
-
+  );
 }

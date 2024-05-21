@@ -16,7 +16,7 @@ function sleep(ms?: number) {
 }
 
 export default async function createDatastore(
-  name: string
+  name: string,
 ): Promise<
   { success: false; error?: string } | { success: true; data: DataStore }
 > {
@@ -54,7 +54,7 @@ export default async function createDatastore(
       headers: {
         authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
-    }
+    },
   );
 
   const data = await githubRes.json();
@@ -75,7 +75,7 @@ export default async function createDatastore(
       body: JSON.stringify({
         description: name,
       }),
-    }
+    },
   );
 
   const newKVState = newKV.status;
@@ -99,7 +99,7 @@ export default async function createDatastore(
       headers: {
         Authorization: `Bearer ${process.env.DENO_TOKEN}`,
       },
-    }
+    },
   );
 
   if (newProjectRes.status !== 200) {
@@ -150,7 +150,7 @@ export default async function createDatastore(
           default: kvId,
         },
       }),
-    }
+    },
   );
 
   const status = deploymentRes.status;
@@ -172,12 +172,12 @@ export default async function createDatastore(
         headers: {
           Authorization: `Bearer ${process.env.DENO_TOKEN}`,
         },
-      }
+      },
     );
     const newDep = await newDepRes.json();
 
     if (newDep.status === "failed") {
-      return {success: false, error: "Deployment failed. try again later!"};
+      return { success: false, error: "Deployment failed. try again later!" };
     }
 
     if (newDep.status === "success") {

@@ -53,7 +53,7 @@ const Code = ({ code, language }: { code: string; language: string }) => {
 
 const serverCode = (
   id: string,
-  engines: string
+  engines: string,
 ) => `import { Scoopika, Agent } from "@scoopika/scoopika";
 
 const scoopika = new Scoopika({
@@ -113,7 +113,7 @@ app.listen(4149, () => {
 `;
 
 const clientCode = (
-  id: string
+  id: string,
 ) => `// Make sure you have an API running with Scoopika. check API tab ☝
 
 import { Client, Agent } from "@scoopika/client";

@@ -52,13 +52,13 @@ export default function AgentAvatarEdit({
     try {
       const data = await generateAvatar(
         itemValue(agentData, "name") as string,
-        itemValue(agentData, "description") as string
+        itemValue(agentData, "description") as string,
       );
 
       if (data.success === false || !data.data) {
         return toast.error(
           "Unable to generate an avatar. please try again later",
-          { id: t }
+          { id: t },
         );
       }
 
@@ -67,7 +67,7 @@ export default function AgentAvatarEdit({
     } catch {
       toast.error(
         "Unable to generate an agent avatar. please try again later",
-        { id: t }
+        { id: t },
       );
     } finally {
       setLoading(false);

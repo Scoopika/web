@@ -1,6 +1,1 @@
-
-export default function buildDatastoreApi(code: string) {
-
-    
-
-}
+export default function buildDatastoreApi(code: string) {}

@@ -7,7 +7,7 @@ import { randomUUID } from "crypto";
 import { getServerSession } from "next-auth";
 
 export default async function createAgent(
-  payload: AgentData
+  payload: AgentData,
 ): Promise<{ success: false } | { success: true; id: string }> {
   const session = await getServerSession(authOptions);
 

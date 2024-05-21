@@ -144,9 +144,7 @@ export default function Bento() {
                 </div>
               </div>
               <div className="w-full flex flex-col justify-end border-t-1 absolute bottom-0 left-0 p-4 gap-2 bg-accent/80 dark:bg-accent/30 rounded-b-lg">
-                <h3 className="font-semibold">
-                  Error healing and reporting
-                </h3>
+                <h3 className="font-semibold">Error healing and reporting</h3>
                 <p className="text-xs opacity-80">
                   Agents automatically detect and report errors, communicating
                   with users regarding missing or incorrect data to ensure

@@ -32,7 +32,12 @@ const initialItems: Props["items"] = [
   { name: "Home", href: "/", type: "link" },
   { name: "Dashboard", href: "/app", type: "link" },
   { name: "Pricing", href: "/pricing", type: "link" },
-  { name: "Docs", href: "https://docs.scoopika.com", type: "link", target: "_blank" },
+  {
+    name: "Docs",
+    href: "https://docs.scoopika.com",
+    type: "link",
+    target: "_blank",
+  },
 ];
 
 const Navbar: FC<Props> = ({ items, active, session, children, path }) => {

@@ -7,7 +7,7 @@ import { RawBoxData } from "@/types/rawBox";
 
 export default async function updateBoxData(
   id: string,
-  payload: RawBoxData
+  payload: RawBoxData,
 ): Promise<{ success: boolean }> {
   const session = await getServerSession(authOptions);
 

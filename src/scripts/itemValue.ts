@@ -2,7 +2,7 @@ import { AgentData } from "@scoopika/types";
 
 const itemValue = <K extends keyof AgentData>(
   data: AgentData,
-  key: K
+  key: K,
 ): AgentData[K] | undefined => {
   const value = data[key];
 

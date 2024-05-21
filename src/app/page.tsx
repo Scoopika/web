@@ -211,7 +211,7 @@ export default async function Home() {
                       >
                         session_{i}
                       </div>
-                    )
+                    ),
                   )}
                 </div>
                 <div className="mt-2 flex items-center gap-2 overflow-hidden group-hover:-translate-x-36 transition-all">
@@ -223,7 +223,7 @@ export default async function Home() {
                       >
                         session_{i}
                       </div>
-                    )
+                    ),
                   )}
                 </div>
               </div>
@@ -271,7 +271,8 @@ export default async function Home() {
             What you waiting for?
           </div>
           <div className="opacity-70 mb-8">
-            Hop in and try it for yourself. Start for free ({"It's"} free forever actually)
+            Hop in and try it for yourself. Start for free ({"It's"} free
+            forever actually)
           </div>
           <Button
             color="primary"
@@ -280,7 +281,6 @@ export default async function Home() {
             href="/login"
           >
             {"Let's goooo"}
-
           </Button>
         </div>
       </div>

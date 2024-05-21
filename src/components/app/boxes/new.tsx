@@ -40,7 +40,7 @@ export default function NewBox({
   agentsList,
   newBox,
   triggerFull,
-  triggerAsChild
+  triggerAsChild,
 }: Props) {
   const sampleData: RawBoxData = {
     id: String(crypto.randomUUID()),
@@ -55,10 +55,10 @@ export default function NewBox({
   const [engineOpen, setEngineOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [allAgents, setAllAgents] = useState<AgentData[] | undefined>(
-    undefined
+    undefined,
   );
   const [data, setData] = useState<RawBoxData>(
-    newBox.new === true ? sampleData : newBox.box
+    newBox.new === true ? sampleData : newBox.box,
   );
 
   const loadAgents = async () => {
@@ -121,7 +121,7 @@ export default function NewBox({
         throw new Error("update error");
       }
 
-      toast.success("Updated box!", {id: t});
+      toast.success("Updated box!", { id: t });
       updateState((prev) => [
         ...prev.filter((a) => a.id !== newBox.box.id),
         data,
@@ -164,10 +164,10 @@ export default function NewBox({
       >
         {children}
       </DialogTrigger>
-      <DialogContent
-        className="max-h-screen overflow-auto flex flex-col items-center min-w-lg"
-      >
-        <div className="text-xs opacity-60 mb-3">{newBox.new ? "New" : "Edit"} box</div>
+      <DialogContent className="max-h-screen overflow-auto flex flex-col items-center min-w-lg">
+        <div className="text-xs opacity-60 mb-3">
+          {newBox.new ? "New" : "Edit"} box
+        </div>
 
         <div className="w-full flex flex-col gap-6">
           <input
@@ -257,7 +257,7 @@ export default function NewBox({
                         </Button>
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </>
             )}

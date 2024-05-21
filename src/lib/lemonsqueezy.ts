@@ -1,11 +1,11 @@
-import { lemonSqueezySetup } from '@lemonsqueezy/lemonsqueezy.js'
+import { lemonSqueezySetup } from "@lemonsqueezy/lemonsqueezy.js";
 
 export function configureLemonSqueezy() {
   const requiredVars = [
     "LEMONSQUEEZY_API_KEY",
     "LEMONSQUEEZY_STORE_ID",
     "LEMONSQUEEZY_WEBHOOK_SECRET",
-    "LEMONSQUEEZY_VARIANT_ID"
+    "LEMONSQUEEZY_VARIANT_ID",
   ];
 
   const missingVars = requiredVars.filter((varName) => !process.env[varName]);
@@ -13,8 +13,8 @@ export function configureLemonSqueezy() {
   if (missingVars.length > 0) {
     throw new Error(
       `Missing required LEMONSQUEEZY env variables: ${missingVars.join(
-        ", "
-      )}. Please, set them in your .env file.`
+        ", ",
+      )}. Please, set them in your .env file.`,
     );
   }
 

@@ -42,7 +42,7 @@ export default function NewDataStore({ children, updateState }: Props) {
       if (!res.success && res.error) {
         return toast.error(
           res.error.toLowerCase().replaceAll("project", "data store"),
-          { id: t }
+          { id: t },
         );
       }
 

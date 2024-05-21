@@ -30,7 +30,7 @@ export default async function Page({
         <div className="w-full p-12 lg:max-w-[50%] bg-background/50 backdrop-blur-xl rounded-2xl border-1 flex flex-col items-center justify-center drop-shadow-md border-black/10 dark:border-white/10">
           <div className="w-full flex flex-col items-center justify-center">
             <div className="flex flex-col items-center justify-center gap-2 mb-10">
-            <div className="flex items-center justify-center min-w-10 min-h-10 max-w-10 max-h-10 rounded-full bg-black dark:bg-white overflow-hidden pl-1 group">
+              <div className="flex items-center justify-center min-w-10 min-h-10 max-w-10 max-h-10 rounded-full bg-black dark:bg-white overflow-hidden pl-1 group">
                 <Image
                   src="/logo.png"
                   alt="Scoopika logo"

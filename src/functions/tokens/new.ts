@@ -6,7 +6,7 @@ import generateSecret from "@/scripts/secret";
 import { getServerSession } from "next-auth";
 
 export default async function newToken(
-  name: string
+  name: string,
 ): Promise<
   { success: false } | { success: true; token: { id: string; token: string } }
 > {

@@ -31,7 +31,7 @@ const agentVariables = (agent: AgentData): AgentVariables[] => {
 
 export const previousPrompts = (
   agent: AgentData,
-  prompt: Prompt
+  prompt: Prompt,
 ): PromptInput[] => {
   if (agent.prompts.length < 2 || prompt.index === 0) {
     return [];
@@ -70,7 +70,7 @@ export const typesColors = {
 
 export const matchVariables = (
   text: string,
-  variables: PromptInput[]
+  variables: PromptInput[],
 ): Highlight => {
   if (!text.startsWith("$")) {
     return null;
@@ -78,7 +78,7 @@ export const matchVariables = (
 
   const varId = text.substring(1, text.length);
   const wantedVariable = variables.filter(
-    (variable) => variable.id === varId
+    (variable) => variable.id === varId,
   )[0];
 
   if (wantedVariable) {
@@ -92,7 +92,7 @@ export const matchVariables = (
     (variable) =>
       variable.id.includes(varId) ||
       varId.includes(variable.id) ||
-      variable.description?.includes(varId)
+      variable.description?.includes(varId),
   );
 
   if (matchingVariables.length < 1) {

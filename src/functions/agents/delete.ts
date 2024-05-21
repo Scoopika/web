@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 
 export default async function deleteAgent(
-  id: string
+  id: string,
 ): Promise<{ success: boolean }> {
   const session = await getServerSession(authOptions);
 

@@ -6,7 +6,7 @@ import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/footer";
 import { siteConfig } from "@/config/site";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const fontSans = FontSans({
   subsets: ["latin"],

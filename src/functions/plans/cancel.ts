@@ -20,14 +20,14 @@ export default async function cancelSub(id: string | number) {
       {
         method: "DELETE",
         headers: {
-          authorization: `Bearer ${process.env.LEMONSQUEEZY_API_KEY}`
-        }
-      }
+          authorization: `Bearer ${process.env.LEMONSQUEEZY_API_KEY}`,
+        },
+      },
     );
 
     const data = await res.json();
 
-    if (data.errors && data.errors?.length > 0 || data.erro) {
+    if ((data.errors && data.errors?.length > 0) || data.erro) {
       throw new Error("cancel error");
     }
 

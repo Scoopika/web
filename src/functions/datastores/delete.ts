@@ -4,7 +4,10 @@ import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 
-export default async function deleteDataStore(id: string, deploymentId: string) {
+export default async function deleteDataStore(
+  id: string,
+  deploymentId: string,
+) {
   if (!id || !deploymentId) {
     return { success: false };
   }
@@ -20,9 +23,9 @@ export default async function deleteDataStore(id: string, deploymentId: string) 
     {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${process.env.DENO_TOKEN}`
-      }
-    }
+        Authorization: `Bearer ${process.env.DENO_TOKEN}`,
+      },
+    },
   );
 
   if (res.status !== 200) {

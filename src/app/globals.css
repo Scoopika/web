@@ -170,7 +170,7 @@
   }
 
   .prompt-editor-wrapper {
-    @apply bg-background text-foreground border-1
+    @apply bg-background text-foreground border-1;
   }
 }
 

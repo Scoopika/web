@@ -57,9 +57,7 @@ export default function EditAgent({ agent, updateAgent }: Props) {
       >
         <MdEdit size={16} />
       </Button>
-      <DialogContent
-        className="flex flex-col items-center max-h-screen overflow-auto"
-      >
+      <DialogContent className="flex flex-col items-center max-h-screen overflow-auto">
         <AgentAvatarEdit
           agentData={data}
           fallbackIcon={<RiRobot2Fill />}

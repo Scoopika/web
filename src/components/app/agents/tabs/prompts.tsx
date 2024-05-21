@@ -117,7 +117,7 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
         />
       )}
 
-      {(agent.prompts.length < 1) && (
+      {agent.prompts.length < 1 && (
         <div className="flex items-center gap-4 w-full mt-6">
           <div className="w-full border-t-1 border-dashed"></div>
           <DropdownMenu

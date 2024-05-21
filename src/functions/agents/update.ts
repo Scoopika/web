@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 
 export default async function updateAgentData(
   id: string,
-  payload: AgentData
+  payload: AgentData,
 ): Promise<{ success: boolean }> {
   const session = await getServerSession(authOptions);
 

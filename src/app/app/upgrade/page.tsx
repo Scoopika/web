@@ -43,13 +43,15 @@ export default async function Page() {
         "Scoopika does not handle LLM costs for you. you'll pass your API keys for the LLM providers you're using from your code. all keys are kept safe on your servers and are never shared with us.",
     },
     {
-        title: "Can I cancel my plan at anytime?",
-        description: "Yes, you can cancel your plan at anytime. Once you cancel a plan It won't be renewed in the next month unless you resume it."
+      title: "Can I cancel my plan at anytime?",
+      description:
+        "Yes, you can cancel your plan at anytime. Once you cancel a plan It won't be renewed in the next month unless you resume it.",
     },
     {
-        title: "How chat sessions are stored in the Pro plan?",
-        description: "In the Pro plan you can deploy a Serverless managed data store with zero setup. after the deployment is successful you can just copy its url and add it to your Scoopika instance, and boom, you have a managed persistent history for all chat sessions in your application."
-    }
+      title: "How chat sessions are stored in the Pro plan?",
+      description:
+        "In the Pro plan you can deploy a Serverless managed data store with zero setup. after the deployment is successful you can just copy its url and add it to your Scoopika instance, and boom, you have a managed persistent history for all chat sessions in your application.",
+    },
   ];
 
   return (
@@ -99,7 +101,10 @@ export default async function Page() {
           <div className="mt-12 w-[80%]">
             <Accordion type="single" collapsible>
               {faqs.map((f, index) => (
-                <AccordionItem key={`upgradefaq-${index}`} value={`faqitem-${index}`}>
+                <AccordionItem
+                  key={`upgradefaq-${index}`}
+                  value={`faqitem-${index}`}
+                >
                   <AccordionTrigger>{f.title}</AccordionTrigger>
                   <AccordionContent>{f.description}</AccordionContent>
                 </AccordionItem>

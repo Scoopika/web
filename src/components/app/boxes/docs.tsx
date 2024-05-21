@@ -15,22 +15,22 @@ interface Props {
 }
 
 function getEngines(box: BoxData): string {
-    const used: string[] = [];
+  const used: string[] = [];
 
-    for (const agent of box.agents) {
-        const prompt = agent.prompts[0];
-        if (!prompt) {
-            continue;
-        }
-
-        if (used.indexOf(prompt.llm_client) !== -1) {
-            continue;
-        }
-
-        used.push(prompt.llm_client);
+  for (const agent of box.agents) {
+    const prompt = agent.prompts[0];
+    if (!prompt) {
+      continue;
     }
 
-    const hosts = used.map(u => `${u}: "YOUR_API_KEY"`);
+    if (used.indexOf(prompt.llm_client) !== -1) {
+      continue;
+    }
+
+    used.push(prompt.llm_client);
+  }
+
+  const hosts = used.map((u) => `${u}: "YOUR_API_KEY"`);
 
   return `engines: {
         ${hosts}
@@ -63,7 +63,7 @@ const Code = ({ code, language }: { code: string; language: string }) => {
 
 const serverCode = (
   id: string,
-  engines: string
+  engines: string,
 ) => `import { Scoopika, Agent } from "@scoopika/scoopika";
 
 const scoopika = new Scoopika({
@@ -123,7 +123,7 @@ app.listen(4149, () => {
 `;
 
 const clientCode = (
-  id: string
+  id: string,
 ) => `// Make sure you have an API running with Scoopika. check API tab ☝
 
 import { Client, Agent } from "@scoopika/client";

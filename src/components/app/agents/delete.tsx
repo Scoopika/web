@@ -14,7 +14,12 @@ interface Props {
   onDelete: (id: string) => void;
 }
 
-export default function DeleteAgent({ agent, open, openChange, onDelete }: Props) {
+export default function DeleteAgent({
+  agent,
+  open,
+  openChange,
+  onDelete,
+}: Props) {
   const { theme } = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
 

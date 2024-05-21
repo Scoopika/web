@@ -7,7 +7,7 @@ import { randomUUID } from "crypto";
 import { getServerSession } from "next-auth";
 
 export default async function createBox(
-  payload: RawBoxData
+  payload: RawBoxData,
 ): Promise<{ success: false } | { success: true; id: string }> {
   const session = await getServerSession(authOptions);
 

@@ -75,13 +75,8 @@ export default function AgentPreview({
             {agent.name}
           </h3>
           <div className="min-w-max flex items-center justify-end absolute top-4 right-4 gap-4">
-            <AgentDocs agent={agent} >
-              <Button
-                isIconOnly
-                size="sm"
-                color="default"
-                variant="flat"
-              >
+            <AgentDocs agent={agent}>
+              <Button isIconOnly size="sm" color="default" variant="flat">
                 <FaCode size={16} />
               </Button>
             </AgentDocs>

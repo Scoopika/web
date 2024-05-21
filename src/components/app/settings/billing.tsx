@@ -206,7 +206,7 @@ export default function BillingSettings({
                 Next billing date:{" "}
                 {String(planData?.data?.attributes?.renews_at || "").substring(
                   0,
-                  10
+                  10,
                 )}
               </div>
               <div className="w-full flex items-center justify-end">

@@ -61,10 +61,7 @@ interface AvailableProps {
   offsetKey: string;
 }
 
-export function InvalidVariableSpan({
-  children,
-  offsetKey,
-}: AvailableProps) {
+export function InvalidVariableSpan({ children, offsetKey }: AvailableProps) {
   const [open, setOpen] = useState<boolean>(false);
 
   return (

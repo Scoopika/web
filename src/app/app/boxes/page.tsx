@@ -37,7 +37,7 @@ export default async function Page() {
 
   return (
     <Suspense
-      fallback={(
+      fallback={
         <AppLayout
           session={session}
           title="Smart Boxes"
@@ -45,7 +45,7 @@ export default async function Page() {
         >
           <Loading />
         </AppLayout>
-  )}
+      }
     >
       <Boxes session={session} />
     </Suspense>

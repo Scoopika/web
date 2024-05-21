@@ -50,7 +50,7 @@ export default function AddAgentTool({ data, updateAgent, closeEdit }: Props) {
 
   const updateFunction = <K extends keyof ApiToolSchema["tool"]["function"]>(
     key: K,
-    data: ToolSchema["tool"]["function"][K]
+    data: ToolSchema["tool"]["function"][K],
   ) => {
     setTool((prev) => ({
       ...prev,
@@ -63,7 +63,7 @@ export default function AddAgentTool({ data, updateAgent, closeEdit }: Props) {
 
   const updateTool = <K extends keyof ApiToolSchema>(
     key: K,
-    data: ApiToolSchema[K]
+    data: ApiToolSchema[K],
   ) => {
     setTool((prev) => ({
       ...prev,
@@ -214,7 +214,7 @@ export default function AddAgentTool({ data, updateAgent, closeEdit }: Props) {
                       variant="light"
                       onPress={() => {
                         const headers = JSON.parse(
-                          JSON.stringify(tool.headers)
+                          JSON.stringify(tool.headers),
                         );
                         delete headers[key];
                         updateTool("headers", headers);
@@ -231,7 +231,6 @@ export default function AddAgentTool({ data, updateAgent, closeEdit }: Props) {
 
         <div className="w-full flex flex-col p-3 border-1 rounded-md">
           <div className="text-sm mb-3">Parameters</div>
-          
         </div>
       </div>
     </>

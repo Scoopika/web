@@ -8,21 +8,19 @@ import AgentsMainPage from "@/components/app/agents/main";
 export const maxDuration = 60;
 
 export default async function Page() {
-  const session = await getServerSession(authOptions) as Session;
+  const session = (await getServerSession(authOptions)) as Session;
   const agents = await db.agent.findMany({
     where: {
-      userId: session?.user.id
-    }
+      userId: session?.user.id,
+    },
   });
 
-  const agentsData = agents.map(agent => JSON.parse(agent.payload) as AgentData);
+  const agentsData = agents.map(
+    (agent) => JSON.parse(agent.payload) as AgentData,
+  );
 
   return (
-    <AppLayout
-      session={session}
-      title="Agents"
-      sidebarActive="Agents"
-    >
+    <AppLayout session={session} title="Agents" sidebarActive="Agents">
       <AgentsMainPage session={session} agents={agentsData} />
     </AppLayout>
   );

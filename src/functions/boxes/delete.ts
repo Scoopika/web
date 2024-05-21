@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 
 export default async function deleteBox(
-  id: string
+  id: string,
 ): Promise<{ success: boolean }> {
   const session = await getServerSession(authOptions);
 

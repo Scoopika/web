@@ -5,9 +5,7 @@ import { configureLemonSqueezy } from "@/lib/lemonsqueezy";
 import { createCheckout } from "@lemonsqueezy/lemonsqueezy.js";
 import { getServerSession } from "next-auth";
 
-export default async function getCheckoutUrl(
-  embed: boolean = false
-) {
+export default async function getCheckoutUrl(embed: boolean = false) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -36,7 +34,7 @@ export default async function getCheckoutUrl(
         receiptButtonText: "Go to app",
         receiptThankYouNote: "Thank you for upgrading your Scoopika plan!",
       },
-    }
+    },
   );
 
   return {

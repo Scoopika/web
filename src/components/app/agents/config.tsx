@@ -9,7 +9,7 @@ interface Props {
 
 export default function AgentConfig({ agent }: Props) {
   const [instruction, setInstruction] = useState<string | undefined>(
-    agent.prompts[0]?.content
+    agent.prompts[0]?.content,
   );
 
   if (!agent.chained) {
@@ -26,7 +26,6 @@ export default function AgentConfig({ agent }: Props) {
             >
               {instruction || "Enter instructions...."}
             </div>
-            
           </div>
         ) : (
           <></>

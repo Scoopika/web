@@ -28,21 +28,20 @@ export default function DeleteDataStore({ data, deleteStore, close }: Props) {
     setLoading(true);
 
     try {
-        const res = await deleteDataStore(data[0], data[1]);
+      const res = await deleteDataStore(data[0], data[1]);
 
-        if (!res.success) {
-            throw new Error("deletion error");
-        }
+      if (!res.success) {
+        throw new Error("deletion error");
+      }
 
-        toast.success("Deleted data store", {id: t});
-        close();
-        deleteStore(data[0]);
+      toast.success("Deleted data store", { id: t });
+      close();
+      deleteStore(data[0]);
     } catch {
-        toast.error("Can't delete data store. try again later!", {id: t});
+      toast.error("Can't delete data store. try again later!", { id: t });
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-
   };
 
   return (

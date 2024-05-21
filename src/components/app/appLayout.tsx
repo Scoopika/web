@@ -37,7 +37,9 @@ export default function AppLayout({
           </Sidebar>
           <div className="flex items-center gap-1 pl-2">
             <div className="flex items-center gap-2 ml-4 min-w-max">
-              <div className="text-xs p-1 pl-3 pr-3 bg-accent/40 rounded-full font-bold">{title}</div>
+              <div className="text-xs p-1 pl-3 pr-3 bg-accent/40 rounded-full font-bold">
+                {title}
+              </div>
             </div>
           </div>
           <div className="w-full flex items-center justify-end gap-4">

@@ -44,8 +44,8 @@ export default function AgentTools({ agent, updateAgent }: Props) {
           </p>
           <p className="text-sm w-full opacity-80 mt-2">
             Soon {"you'll"} be able to connect your agents to custom tools with
-            no code, but for now you can follow the documentation, {"it's"} clear
-            and simple {";)"}
+            no code, but for now you can follow the documentation, {"it's"}{" "}
+            clear and simple {";)"}
           </p>
         </div>
       </div>

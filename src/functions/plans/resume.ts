@@ -31,7 +31,7 @@ export default async function resumeSub(id: string | number) {
             },
           },
         }),
-      }
+      },
     );
 
     const data = await res.json();

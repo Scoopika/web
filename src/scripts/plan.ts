@@ -17,4 +17,3 @@ export const features: string[] = [
   "Serverless database for persistent history",
   "Early access to new features",
 ];
-

@@ -59,7 +59,7 @@ const UserDropdown: FC<Props> = ({ session, type }) => {
         }}
       >
         <DropdownSection showDivider>
-        <DropdownItem
+          <DropdownItem
             as={NextLink}
             href="/app/"
             key="settings"
