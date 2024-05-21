@@ -26,7 +26,7 @@ export default async function Home() {
   return (
     <>
       <Navbar session={session} active="Home" />
-      <TestScoopika />
+      {/* <TestScoopika /> */}
 
       <div className="flex flex-col items-center gap-3 relative w-full">
         <GridSmallBackground className="flex flex-col items-center relative gap-3 pt-36">

@@ -5,6 +5,8 @@ import { AgentData } from "@scoopika/types";
 import AppLayout from "@/components/app/appLayout";
 import AgentsMainPage from "@/components/app/agents/main";
 
+export const maxDuration = 60;
+
 export default async function Page() {
   const session = await getServerSession(authOptions) as Session;
   const agents = await db.agent.findMany({

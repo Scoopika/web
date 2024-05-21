@@ -8,6 +8,8 @@ import { getServerSession, Session } from "next-auth";
 import Link from "next/link";
 import { FaDatabase } from "react-icons/fa6";
 
+export const maxDuration = 60;
+
 const databaseFeatures: string[] = [
   "Serverless. replicated to 4 locations",
   "Fast edge APIs ready to go",
