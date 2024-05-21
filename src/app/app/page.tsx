@@ -4,8 +4,13 @@ import { db } from "@/lib/db";
 import { AgentData } from "@scoopika/types";
 import AppLayout from "@/components/app/appLayout";
 import AgentsMainPage from "@/components/app/agents/main";
+import { Metadata } from "next";
 
 export const maxDuration = 60;
+
+export const metadata: Metadata = {
+  title: "AI Agents"
+}
 
 export default async function Page() {
   const session = (await getServerSession(authOptions)) as Session;

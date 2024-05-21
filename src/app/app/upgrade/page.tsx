@@ -9,9 +9,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CheckoutButton } from "@/components/app/billing/button";
+import { db } from "@/lib/db";
+import Link from "next/link";
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
+  const alreadyPro = await db.datastore.findMany();
+  const leftStores = 100 - (alreadyPro.length || 0);
 
   const freeFeatures: string[] = [
     "Create one AI agent",
@@ -60,12 +64,27 @@ export default async function Page() {
       <div className="w-full pt-16">
         <div className="w-full flex flex-col items-center p-12">
           <h1 className="text-3xl font-semibold mb-3">
-            Pricing designed to scale
+            Pricing designed for developers
           </h1>
 
           <p className="text-sm font-semibold opacity-80 mb-12">
             Unlock the full set of Scoopika features today
           </p>
+
+          {leftStores === 0 && (
+            <div className="text-sm text-orange-500 mb-6">
+              Due to high demand, We {"won't"} be able to provide you with a
+              managed database right now, please{" "}
+              <Link
+                className="underline text-foreground"
+                href="https://docs.scoopika.com/help/contact-us"
+                target="_blank"
+              >
+                contact us
+              </Link>{" "}
+              for more info
+            </div>
+          )}
 
           <div className="w-full flex flex-col justify-center lg:flex-row min-h-max gap-12 bg-accent/30 p-4 rounded-lg rounded-tr-3xl rounded-bl-3xl border-1 border-black/20 dark:border-white/20 max-w-max">
             <div className="h-full p-4">

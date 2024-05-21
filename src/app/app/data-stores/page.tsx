@@ -4,11 +4,16 @@ import CheckItem from "@/components/checkItem";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { Button } from "@nextui-org/react";
+import { Metadata } from "next";
 import { getServerSession, Session } from "next-auth";
 import Link from "next/link";
 import { FaDatabase } from "react-icons/fa6";
 
 export const maxDuration = 60;
+
+export const metadata: Metadata = {
+  title: "History Data Stores"
+}
 
 const databaseFeatures: string[] = [
   "Serverless with APIs served on the edge",

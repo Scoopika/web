@@ -38,8 +38,10 @@ export default async function Home() {
             startContent={<MdInfo size={20} />}
             endContent={<FiChevronRight size={20} />}
             className="font-semibold pl-3 pr-3 border-1 mb-4"
+            as={Link}
+            href="/pricing"
           >
-            v1.0 is out! {"Here's"} what you need to know
+            v1.0 is out! Start for free with a pro plan sale!
           </Button>
           <h1 className="text-5xl font-semibold text-center mb-3 flex items-center gap-3">
             <span className="">Integrate </span>

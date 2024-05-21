@@ -1,12 +1,17 @@
 import AppLayout from "@/components/app/appLayout";
 import SettingsMain from "@/components/app/settings/main";
 import { authOptions } from "@/lib/auth";
+import { Metadata } from "next";
 import { Session, getServerSession } from "next-auth";
 
 interface Props {
   searchParams: {
     tab?: string;
   };
+}
+
+export const metadata: Metadata = {
+  title: "Settings"
 }
 
 export default async function Page({ searchParams }: Props) {

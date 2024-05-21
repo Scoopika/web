@@ -4,8 +4,6 @@ import { RiRobot2Fill } from "react-icons/ri";
 import { HiMiniCubeTransparent } from "react-icons/hi2";
 import { TbTools } from "react-icons/tb";
 import { HiDatabase } from "react-icons/hi";
-import { LiaVectorSquareSolid } from "react-icons/lia";
-import { GoTasklist } from "react-icons/go";
 import { Button } from "@nextui-org/react";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
@@ -306,7 +304,7 @@ const TabPage = ({ tab }: { tab: Tab }) => {
     <>
       <h2 className="text-2xl font-semibold">{tab.title}</h2>
       <p className="text-sm mt-2 max-w-[50%] mb-8">{tab.description}</p>
-      <div className="flex flex-col gap-4 max-w-[50%] mb-10">
+      <div className="flex flex-col gap-4 max-w-[50%] mb-10 justify-end h-full">
         {tab.features.map((feature, index) => (
           <p
             key={`tabsubfeature-${tab.id}-${index}`}

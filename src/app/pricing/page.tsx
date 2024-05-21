@@ -61,7 +61,7 @@ export default async function Page() {
       <div className="w-full pt-16">
         <div className="w-full flex flex-col items-center p-12">
           <h1 className="text-3xl font-semibold mb-3">
-            Pricing designed to scale
+            Pricing designed for developers
           </h1>
 
           <p className="text-sm font-semibold opacity-80 mb-12">

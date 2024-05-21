@@ -1,22 +1,9 @@
 import { Session } from "next-auth";
 import { FC } from "react";
-import { ChevronRightIcon } from "@radix-ui/react-icons";
-import { HiMiniHome } from "react-icons/hi2";
 import { RiRobot2Fill, RiSettings4Fill } from "react-icons/ri";
 import { Tb3DCubeSphere } from "react-icons/tb";
-import { MdApi } from "react-icons/md";
 import { FaBook } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa6";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-import UserDropdown from "../userDropdown";
 import Link from "next/link";
 import Image from "next/image";
 import ThemeToggle from "../themeToggle";
@@ -30,6 +17,7 @@ interface Props {
 interface SideLink {
   type: "link";
   name: string;
+  target?: string;
   path: string;
   icon: React.ReactElement;
 }
@@ -49,7 +37,7 @@ const links: SideItem[] = [
   },
   {
     type: "link",
-    name: "Smart Boxes",
+    name: "Multi-Agent Boxes",
     path: "/app/boxes",
     icon: <Tb3DCubeSphere size={18} />,
   },
@@ -71,7 +59,8 @@ const links: SideItem[] = [
   {
     type: "link",
     name: "Documentation",
-    path: "/app",
+    path: "https://docs.scoopika.com",
+    target: "_blank",
     icon: <FaBook size={16} />,
   },
   {
@@ -118,6 +107,7 @@ const Sidebar: FC<Props> = ({ session, active, children }) => {
                   ? "bg-black/20 dark:bg-accent/50"
                   : "hover:bg-black/10 dark:hover:bg-foreground/5"
               }`}
+              target={link.target}
             >
               {link.icon}
               {link.name}

@@ -7,9 +7,14 @@ import { Session, getServerSession } from "next-auth";
 import { Suspense } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import Loading from "@/components/loading";
+import { Metadata } from "next";
 
 interface BoxesProps {
   session: Session;
+}
+
+export const metadata: Metadata = {
+  title: "Multi-Agent Boxes"
 }
 
 async function Boxes({ session }: BoxesProps) {

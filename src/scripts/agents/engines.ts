@@ -44,8 +44,14 @@ const engines: SpecificEngines = {
             max_tokens: { min: 50, max: 4096, default: 1024, step: 1 },
             temperature: { min: 0, max: 1, default: 0.5, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-            frequency_penalty: { min: 0, max: 1, default: 1, step: 0.01 },
-            presence_penalty: { min: 0, max: 1, default: 1, step: 0.01 },
+          },
+        },
+        {
+          id: "gpt-4o",
+          options: {
+            max_tokens: { min: 50, max: 4096, default: 500, step: 1 },
+            temperature: { min: 0, max: 1, default: 0.5, step: 0.01 },
+            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
           },
         },
         {
@@ -55,8 +61,6 @@ const engines: SpecificEngines = {
             max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
-            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
           },
         },
         {
@@ -66,8 +70,6 @@ const engines: SpecificEngines = {
             max_tokens: { min: 50, max: 4096, default: 500, step: 1 },
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
-            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
           },
         },
         {
@@ -76,8 +78,6 @@ const engines: SpecificEngines = {
             max_tokens: { min: 50, max: 8192, default: 500, step: 1 },
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
-            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
           },
         },
         {
@@ -86,8 +86,6 @@ const engines: SpecificEngines = {
             max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
-            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
           },
         },
         {
@@ -96,8 +94,6 @@ const engines: SpecificEngines = {
             max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
-            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
           },
         },
         {
@@ -106,8 +102,6 @@ const engines: SpecificEngines = {
             max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-            frequency_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
-            presence_penalty: { min: 0, max: 1, default: 0, step: 0.01 },
           },
         },
       ],

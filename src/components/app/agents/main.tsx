@@ -99,8 +99,7 @@ export default function AgentsMainPage({ session, agents }: Props) {
             </Badge>
           </h1>
           <NewAgent updateState={updateState} triggerFull={false}>
-            {isPro ||
-              (agentsState.length < 1 && (
+            {(isPro || agentsState.length < 1) && (
                 <Button
                   size="sm"
                   color="primary"
@@ -109,7 +108,7 @@ export default function AgentsMainPage({ session, agents }: Props) {
                 >
                   New agent
                 </Button>
-              ))}
+              )}
           </NewAgent>
         </div>
 
