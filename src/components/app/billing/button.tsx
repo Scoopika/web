@@ -15,7 +15,6 @@ export function CheckoutButton() {
 
   useEffect(() => {
     if (typeof (window as any)?.createLemonSqueezy === "function") {
-      alert("Available");
       (window as any)?.createLemonSqueezy();
     }
   }, []);
