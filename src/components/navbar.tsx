@@ -32,7 +32,7 @@ const initialItems: Props["items"] = [
   { name: "Home", href: "/", type: "link" },
   { name: "Dashboard", href: "/app", type: "link" },
   { name: "Pricing", href: "/pricing", type: "link" },
-  { name: "Docs", href: "/docs", type: "link" },
+  { name: "Docs", href: "https://docs.scoopika.com", type: "link", target: "_blank" },
 ];
 
 const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
@@ -80,17 +80,29 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
         <div className="hidden md:flex">
           <ThemeToggle />
         </div>
-        {!session && (
+        {!session ? (
           <Button
             color="primary"
             size="sm"
             endContent={<Icons.ChevronRIghtIcon size={18} />}
             className="font-semibold"
+            as={Link}
+            href="/login"
           >
             Log in
           </Button>
+        ) : (
+          <Button
+            color="primary"
+            size="sm"
+            endContent={<Icons.ChevronRIghtIcon size={18} />}
+            className="font-semibold"
+            as={Link}
+            href="/app"
+          >
+            App
+          </Button>
         )}
-        <UserDropdown type="avatar" session={session} />
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"

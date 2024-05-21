@@ -6,6 +6,7 @@ import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/footer";
 import { siteConfig } from "@/config/site";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -73,6 +74,7 @@ export default function RootLayout({
         <Providers>
           <Toaster position="bottom-right" />
           {children}
+          <GoogleAnalytics gaId="G-3KS7DQFER8" />
           <div className="fixed top-0 left-0 z-50 bg-background w-screen h-screen flex items-center justify-center text-center md:hidden">
             This website does not work on this device size at the moment. <br />
             Please use a larger screen.

@@ -2,14 +2,10 @@
 
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import { AgentData } from "@scoopika/types";
-import { useTheme } from "next-themes";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
-import { LuLayoutList } from "react-icons/lu";
-import { PiChatsFill } from "react-icons/pi";
 
 import { FaCamera } from "react-icons/fa6";
-import Link from "next/link";
 import { Button } from "@nextui-org/react";
 import { toast } from "sonner";
 import AgentAvatarEdit from "./avatar";
@@ -139,7 +135,7 @@ export default function NewAgent({
               }}
               defaultValue={data.name}
               placeholder="Agent name..."
-              className="p-1.5 border-b-1 outline-none pl-0 pr-3 text-sm bg-transparent"
+              className="p-1.5 border-b-1 outline-none pl-0 pr-3 text-sm bg-transparent border-black/20 dark:border-border"
             />
             <div className="text-sm opacity-70">
               {"@"}
@@ -158,7 +154,7 @@ export default function NewAgent({
             }}
             placeholder="Agent description (optional)..."
             defaultValue={data?.description}
-            className="w-full p-1.5 bg-accent/10 border-1 rounded-md outline-none pl-3 pr-3 text-sm h-16"
+            className="w-full p-1.5 bg-accent/10 border-1 rounded-md outline-none pl-3 pr-3 text-sm h-16 border-black/20 dark:border-border"
           />
         </div>
 

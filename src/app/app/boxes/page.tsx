@@ -6,6 +6,7 @@ import { RawBoxData } from "@/types/rawBox";
 import { Session, getServerSession } from "next-auth";
 import { Suspense } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
+import Loading from "@/components/loading";
 
 interface BoxesProps {
   session: Session;
@@ -42,9 +43,7 @@ export default async function Page() {
           title="Smart Boxes"
           sidebarActive="Smart Boxes"
         >
-          <div className="w-full flex flex-col items-center p-24">
-            <AiOutlineLoading className="animate-spin" />
-          </div>
+          <Loading />
         </AppLayout>
   )}
     >

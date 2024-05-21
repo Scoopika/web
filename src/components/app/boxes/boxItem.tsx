@@ -51,7 +51,7 @@ export default function BoxItem({ box, updateState, setEditBox }: Props) {
   };
 
   return (
-    <div className="w-full flex flex-col p-3 border-1 rounded-lg hover:shadow transition-all gap-3 group">
+    <div className="w-full flex flex-col p-3 border-1 rounded-lg hover:shadow transition-all gap-3 group mb-4">
       <div className="w-full flex items-center gap-3">
         <div className="min-w-9 min-h-9 max-w-9 max-h-9 bg-primary text-background flex items-center justify-center rounded-lg font-semibold cursor-default">
           {(box?.name || "").substring(0, 1)}

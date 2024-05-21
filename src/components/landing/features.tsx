@@ -30,13 +30,13 @@ const tabs: Tab[] = [
     id: "Agents",
     icon: <RiRobot2Fill size={16} />,
     title: "LLM-Powered Agents",
-    link: "",
+    link: "https://docs.scoopika.com/agents",
     description:
       "Create custom AI agents tailored to your application's needs allowing users to interact with their data in natural language.",
     features: [
       "Define the personality of your agents to match the tone and style of your application",
-      "Plug any custom knowledge data you want, allowing maximum flexibility out-of-the-box",
-      "Stream responses with +10 built-in hooks between server and client",
+      "Plug runs with custom knowledge data and equip agents with tools easily",
+      "Stream responses in real-time with +10 built-in hooks between server and client",
     ],
     comp: (
       <>
@@ -53,13 +53,13 @@ const tabs: Tab[] = [
           <div className="w-7 h-7 rounded-full flex items-center justify-center bg-foreground text-background">
             <RiRobot2Fill />
           </div>
-          <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
+          <div className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
             <p className="p-1 w-64 rounded-full text-xs flex items-center gap-1 mb-2 opacity-60">
               <FaCheck />
               called get_history
             </p>
             I see that {"you've"} searched about unicorns lately...
-          </p>
+          </div>
         </div>
       </>
     ),
@@ -68,13 +68,13 @@ const tabs: Tab[] = [
     id: "Multi-agent boxes",
     icon: <HiMiniCubeTransparent size={16} />,
     title: "Multi-agent Smart Boxes",
-    link: "",
+    link: "https://docs.scoopika.com/multi-agent-boxes",
     description:
-      "Foster collaboration between multiple agents by organizing them into smart boxes, allowing them to work together towards common goals.",
+      "Let your agents collaborate by organizing them into smart boxes, allowing them to work together towards common goals.",
     features: [
       "The best agent for the task is hand is used based on the context. all agents will share the session history",
       "Pass any agent as a tool to other agents, so your agents can collaborate and talk together",
-      "Add global tools that all agent in a box has access to, or assign specific tools to specific agents",
+      "Add global tools that all agents in a box have access to, or assign specific tools to specific agents",
     ],
     comp: (
       <>
@@ -94,14 +94,14 @@ const tabs: Tab[] = [
           Assigned task to <span className="text-violet-500">{"@deplo"}</span>
         </div>
         <div className="w-64 flex flex-col text-sm gap-2 transition-all hover:translate-x-2 duration-500">
-          <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
+          <div className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
             <p className="p-1 w-64 rounded-full text-xs flex items-center gap-1 mb-2 opacity-60">
               <FaCheck />
               {"@deplo"} called deployment_info
             </p>
             The recent error in your deployment was caused by a missing
             dependency...
-          </p>
+          </div>
         </div>
       </>
     ),
@@ -110,7 +110,7 @@ const tabs: Tab[] = [
     id: "Tools",
     icon: <TbTools size={16} />,
     title: "External Tools",
-    link: "",
+    link: "https://docs.scoopika.com/tools",
     description:
       "Effortlessly connect agents to your custom tools, APIs, and functions, enabling your agents to perform actions or retreive data",
     features: [
@@ -132,7 +132,7 @@ const tabs: Tab[] = [
           <div className="w-7 h-7 rounded-full flex items-center justify-center bg-foreground text-background">
             <RiRobot2Fill />
           </div>
-          <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
+          <div className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
             <p className="p-1 w-64 rounded-full text-xs flex items-center gap-1 mb-2 opacity-60">
               <FaCheck />
               called search_web
@@ -143,7 +143,7 @@ const tabs: Tab[] = [
             </p>
             Sorry, but I {"can't"} search using Bing, only Google is
             available...
-          </p>
+          </div>
         </div>
       </>
     ),
@@ -152,7 +152,7 @@ const tabs: Tab[] = [
     id: "History stores",
     icon: <HiDatabase size={16} />,
     title: "History Stores",
-    link: "",
+    link: "https://docs.scoopika.com/history-stores",
     description:
       "Deploy and connect a managed Serverless data store for chat history sessions with one click and zero setup",
     features: [
@@ -186,12 +186,12 @@ const tabs: Tab[] = [
     id: "Client-side actions",
     icon: <RiSendPlane2Fill size={16} />,
     title: "Client-Side Actions",
-    link: "",
+    link: "https://docs.scoopika.com/tools/client-side-actions",
     description:
       "Give your agents the power to perform actions on client-side by simply just passing functions from the client-side",
     features: [
       "Agents are able to call tools that are executed on the client-side in real time",
-      "Build better interactive AI-powered interfaces with focus on user experience",
+      "Give your agents the power to simulate user interaction or manipulate the DOM",
       "Full type-safety and data validation, so your tools never receive invalid inputs",
     ],
     comp: (
@@ -209,13 +209,13 @@ const tabs: Tab[] = [
           <div className="w-7 h-7 rounded-full flex items-center justify-center bg-foreground text-background">
             <RiRobot2Fill />
           </div>
-          <p className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
+          <div className="w-full p-2 border-1 rounded-lg bg-accent/20 text-xs">
             <p className="p-1 w-64 rounded-full text-xs flex items-center gap-1 mb-2 opacity-60">
               <FaCheck />
               called filter_deployments
             </p>
             I just filtered your deployments...
-          </p>
+          </div>
         </div>
       </>
     ),

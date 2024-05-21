@@ -1,17 +1,11 @@
 import { Button } from "@nextui-org/react";
 import { Session } from "next-auth";
 import Link from "next/link";
-import { BsStars, BsThreeDots } from "react-icons/bs";
-import { GoBellFill } from "react-icons/go";
+import { BsStars } from "react-icons/bs";
 import Sidebar from "./sidebar";
 import Starting from "./starting";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
-import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
-import { TbSlash } from "react-icons/tb";
-import { RxSlash } from "react-icons/rx";
-import { RiExpandUpDownLine } from "react-icons/ri";
+import { FaBookOpen } from "react-icons/fa";
 
 interface Props {
   session: Session;
@@ -30,7 +24,7 @@ export default function AppLayout({
     <div className="w-full min-h-screen max-h-screen flex">
       <Starting />
       <div className="w-full flex flex-col">
-        <div className="border-b-1 w-full p-6 h-14 flex items-center fixed bg-background/80 backdrop-blur left-0 top-0 z-40">
+        <div className="border-b-1 w-full p-6 pl-64 h-14 flex items-center fixed bg-background/80 backdrop-blur left-0 top-0 z-40">
           <Sidebar session={session} active={sidebarActive}>
             <Button
               isIconOnly
@@ -41,22 +35,23 @@ export default function AppLayout({
               <HiOutlineMenuAlt1 size={16} />
             </Button>
           </Sidebar>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 pl-2">
             <div className="flex items-center gap-2 ml-4 min-w-max">
-              <div className="flex items-center justify-center min-w-8 min-h-8 max-w-8 max-h-8 rounded-full bg-black dark:bg-white overflow-hidden pl-1 group">
-                <Image
-                  src="/logo.png"
-                  alt="Scoopika logo"
-                  width={35}
-                  height={35}
-                  className="rotate-[-10deg] mt-1.5 group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <RxSlash />
-              <div className="text-xs">{title}</div>
+              <div className="text-xs p-1 pl-3 pr-3 bg-accent/40 rounded-full font-bold">{title}</div>
             </div>
           </div>
-          <div className="w-full flex items-center justify-end gap-5">
+          <div className="w-full flex items-center justify-end gap-4">
+            <Button
+              size="sm"
+              variant="bordered"
+              className="border-1"
+              startContent={<FaBookOpen />}
+              as={Link}
+              href="https://docs.scoopika.com"
+              target="_blank"
+            >
+              Docs
+            </Button>
             {session?.user.plan === "none" && (
               <Button
                 startContent={<BsStars size={15} />}
@@ -72,7 +67,7 @@ export default function AppLayout({
           </div>
         </div>
 
-        <div className="pt-14 h-full">{children}</div>
+        <div className="pt-14 pl-64 h-full">{children}</div>
       </div>
     </div>
   );

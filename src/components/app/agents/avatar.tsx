@@ -77,7 +77,7 @@ export default function AgentAvatarEdit({
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger>
-        <div className="w-16 h-16 rounded-full border-1 border-dashed flex items-center justify-center cursor-pointer hover:border-black/30 dark:hover:border-white/30 transition-all outline-0">
+        <div className="w-16 h-16 rounded-full border-1 border-dashed flex items-center justify-center cursor-pointer hover:border-black/30 dark:hover:border-white/30 transition-all outline-0 border-black/30 dark:border-border">
           {loading ? (
             <AiOutlineLoading className="animate-spin" />
           ) : (

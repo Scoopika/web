@@ -81,6 +81,9 @@ export default function AgentsMainPage({ session, agents }: Props) {
 
   return (
     <div className="w-full flex min-h-full max-h-full">
+      {agentsState.length > 0 && (
+        <div>Pro plan limit</div>
+      )}
       <div
         className={`w-full p-6 flex flex-col overflow-auto ${
           openAgentFullScreen && "hidden"
@@ -92,7 +95,7 @@ export default function AgentsMainPage({ session, agents }: Props) {
             <Badge variant="secondary">
               {agentsState.length}
               {"/"}
-              {isPro ? "10" : "2"}
+              {isPro ? "10" : "1"}
             </Badge>
           </h1>
           <NewAgent updateState={updateState} triggerFull={false}>

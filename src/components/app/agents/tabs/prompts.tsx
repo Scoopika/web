@@ -103,10 +103,6 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
 
   return (
     <div className="flex flex-col items-center p-6 pt-0">
-      <div className="text-sm mb-1 w-full">Prompt</div>
-      <div className="text-xs opacity-80 w-full mb-4">
-        Give {agent.name} instructions on how to act and behave
-      </div>
       {openPrompt && !editOrder && (
         <PromptEditor
           agent={agent}
@@ -122,7 +118,7 @@ export default function AgentPrompts({ agent, updateAgent, openId }: Props) {
       )}
 
       {(agent.prompts.length < 1) && (
-        <div className="flex items-center gap-4 w-full mt-2">
+        <div className="flex items-center gap-4 w-full mt-6">
           <div className="w-full border-t-1 border-dashed"></div>
           <DropdownMenu
             open={newOpen}

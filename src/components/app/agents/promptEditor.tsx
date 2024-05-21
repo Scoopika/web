@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { FaHashtag, FaCheck } from "react-icons/fa6";
 import { MdEdit, MdDownloadDone } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
-import { BsStars } from "react-icons/bs";
 import PromptEngineSelection from "./engineSelection";
 import PromptContentEditor from "./contentEditor";
 import PromptVariables from "./variables";
@@ -237,32 +236,6 @@ export default function PromptEditor({
             </div>
 
             <div className="flex flex-col w-full h-full pt-6">
-              <div className="border-t-1 p-3 pr-0 pl-0 text-sm flex items-center gap-3 w-full">
-                <div className="flex items-center gap-3 w-full">
-                  {!updating && (
-                    <PromptVariables
-                      addVariable={addVariable}
-                      prompt={data}
-                      updatePrompt={updatePrompt}
-                      variables={[
-                        ...variables,
-                        {
-                          source: {
-                            name: "prompt-3",
-                            id: "promptprompt",
-                          },
-                          variable: {
-                            id: "documents",
-                            type: "number",
-                            description: "The number of documents",
-                          },
-                        },
-                      ]}
-                    />
-                  )}
-                </div>
-                <div className="flex items-center justify-end gap-3"></div>
-              </div>
               {!updating && (
                 <PromptContentEditor
                   prompt={data}

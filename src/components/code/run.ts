@@ -1,6 +1,6 @@
 const code = `agent.run({
     inputs: {
-        message: "Schedule a call..."
+        message: "Schedule a call...",
     },
     hooks: {
         onToken: (token) => {...},

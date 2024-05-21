@@ -84,13 +84,8 @@ const links: SideItem[] = [
 
 const Sidebar: FC<Props> = ({ session, active, children }) => {
   return (
-    <>
-      <Sheet>
-        <SheetTrigger asChild>
-          {children}
-        </SheetTrigger>
-        <SheetContent side="left" className="p-0 w-72 bg-background max-h-screen rounded-r-lg border-0">
-          <div className="flex items-center gap-2 h-14 p-4 pb-0">
+    <div className="fixed top-0 left-0 w-64 border-r-1 min-h-screen max-h-screen z-40 bg-background">
+      <div className="flex items-center gap-2 h-14 p-4 pb-0">
             <div className="flex items-center justify-center w-9 h-9 rounded-full bg-black dark:bg-white overflow-hidden pl-1 group">
               <Image
                 src="/logo.png"
@@ -133,9 +128,7 @@ const Sidebar: FC<Props> = ({ session, active, children }) => {
           <div className="p-6 absolute bottom-0 left-0">
             <ThemeToggle />
           </div>
-        </SheetContent>
-      </Sheet>
-    </>
+    </div>
   );
 };
 

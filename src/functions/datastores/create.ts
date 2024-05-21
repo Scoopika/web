@@ -2,7 +2,6 @@
 
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import cleanText from "@/scripts/cleanText";
 import { DataStore } from "@/types/dataStore";
 import { getServerSession } from "next-auth";
 

@@ -43,17 +43,17 @@ export default function AgentItem({
   return (
     <div
       key={`agent-${agent.id}`}
-      className="w-full flex flex-col gap-3 overflow-hidden group transition-all border-1 rounded-lg hover:shadow"
+      className="w-full flex flex-col gap-3 overflow-hidden group transition-all border-1 rounded-lg hover:shadow dark:hover:border-white/20"
     >
       <div className="w-full flex items-center gap-3 p-4 pb-0">
         <div className="relative rounded-xl transition-all duration-500">
           {itemValue(agent, "avatar") ? (
             <Avatar
               src={agent.avatar}
-              className="min-w-10 max-w-10 min-h-10 max-h-10 rounded-full border-1 border-black/50 dark:border-border"
+              className="min-w-10 max-w-10 min-h-10 max-h-10 rounded-xl border-3 border-accent/40"
             ></Avatar>
           ) : (
-            <div className="min-w-10 max-w-10 min-h-10 max-h-10 rounded-full flex items-center justify-center bg-accent/50">
+            <div className="min-w-10 max-w-10 min-h-10 max-h-10 rounded-xl flex items-center justify-center bg-accent/50">
               <RiRobot2Fill />
             </div>
           )}
@@ -131,7 +131,7 @@ export default function AgentItem({
             size="sm"
             color={theme === "dark" ? "default" : "primary"}
             variant={theme === "dark" ? "flat" : "solid"}
-            className="font-semibold"
+            className="font-semibold opacity-0 translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all"
             endContent={<FaChevronRight />}
             onPress={() => setOpenAgent(agent)}
           >

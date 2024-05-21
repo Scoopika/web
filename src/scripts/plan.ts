@@ -15,7 +15,6 @@ export const features: string[] = [
   "Up to 10 agents",
   "Up to 4 smart boxes",
   "Serverless database for persistent history",
-  "Unlimited agents prompts",
   "Early access to new features",
 ];
 
