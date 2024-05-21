@@ -9,6 +9,8 @@ import { AgentData } from "@scoopika/types";
 import { Button } from "@nextui-org/react";
 import { Badge } from "@/components/ui/badge";
 import { Session } from "next-auth";
+import Link from "next/link";
+import { FaChevronRight } from "react-icons/fa6";
 
 interface Props {
   session: Session;
@@ -16,7 +18,10 @@ interface Props {
 }
 
 export default function MainBoxes({ boxes, session }: Props) {
-  const isPro = (session.user.plan === "none" || !session.user.plan.includes(":::")) ? false : true;
+  const isPro =
+    session.user.plan === "none" || !session.user.plan.includes(":::")
+      ? false
+      : true;
   const [state, updateState] = useState<RawBoxData[]>(boxes);
   const [editOpen, setEditOpen] = useState<boolean>(false);
   const [editBox, setEditBox] = useState<RawBoxData>();
@@ -70,13 +75,15 @@ export default function MainBoxes({ boxes, session }: Props) {
             triggerFull
             triggerAsChild
           >
-            <Button
-              size="sm"
-              color="primary"
-              className="font-semibold max-w-max"
-            >
-              New box
-            </Button>
+            {(isPro || state.length < 1) && (
+              <Button
+                size="sm"
+                color="primary"
+                className="font-semibold max-w-max"
+              >
+                New box
+              </Button>
+            )}
           </NewBox>
         </div>
       </div>
@@ -90,6 +97,21 @@ export default function MainBoxes({ boxes, session }: Props) {
         >
           <div className="hidden"></div>
         </NewBox>
+      )}
+
+      {!isPro && state.length > 0 && (
+        <Link
+          href="/app/upgrade"
+          className="mt-2 mb-8 w-full p-4 border-1 rounded-lg relative cursor-pointer transition-all hover:bg-accent/10 hover:border/black/20 dark:hover:border-white/20"
+        >
+          <div className="font-semibold">Upgrade to Pro</div>
+          <div className="text-sm opacity-70">
+            Upgrade your plan to create more Multi-agent boxes
+          </div>
+          <div className="absolute h-full w-20 flex items-center justify-center top-0 right-0">
+            <FaChevronRight />
+          </div>
+        </Link>
       )}
 
       {state.map((box) => (

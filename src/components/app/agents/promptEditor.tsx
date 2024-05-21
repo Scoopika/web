@@ -127,7 +127,7 @@ export default function PromptEditor({
     setTimeout(() => {
       setData(p);
       setUpdating(false);
-    }, 60);
+    }, 20);
   };
 
   return (

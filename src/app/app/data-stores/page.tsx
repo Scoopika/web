@@ -11,11 +11,9 @@ import { FaDatabase } from "react-icons/fa6";
 export const maxDuration = 60;
 
 const databaseFeatures: string[] = [
-  "Serverless. replicated to 4 locations",
-  "Fast edge APIs ready to go",
+  "Serverless with APIs served on the edge",
   "Requires zero setup and one line of code to connect",
-  "Built-in users & sessions management easy APIs",
-  "Maintained data recovery",
+  "Built-in users & sessions management APIs",
 ];
 
 export default async function Page() {
@@ -41,8 +39,8 @@ export default async function Page() {
           <h2 className="font-semibold mb-2">Upgrade to Pro!</h2>
           <p className="text-sm opacity-70 text-center mb-4">
             Data stores are a Pro feature, upgrade your plan now to get a
-            serverless deployed <br />
-            database for persistent history sessions
+            managed serverless <br />
+            database for persistent chat sessions
           </p>
           <Button
             size="sm"
@@ -65,6 +63,13 @@ export default async function Page() {
                     title={feature}
                   />
                 ))}
+                <Link
+                  href="https://docs.scoopika.com/data-stores"
+                  target="_blank"
+                  className="underline text-sm mt-2"
+                >
+                  Learn more
+                </Link>
               </div>
             </div>
           </div>

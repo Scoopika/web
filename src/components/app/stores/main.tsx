@@ -33,7 +33,7 @@ export default function DataStoresMain({ datastores }: Props) {
             <h3 className="font-semibold">Create your first data store</h3>
             <p className="text-sm opacity-70 mt-2 text-center">
               Managed Data stores are a fast Serverless stores used for saving
-              chats sessions history.
+              chat sessions & history.
               <br />
               One click and {"you'll"} be setup and ready!
             </p>
@@ -67,7 +67,7 @@ export default function DataStoresMain({ datastores }: Props) {
                   <FaDatabase />
                 </div>
                 <p className="font-semibold min-w-max">{datastore.name}</p>
-                <div className="w-full flex items-center justify-end translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all">
+                {/* <div className="w-full flex items-center justify-end translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all">
                   <Button
                     isIconOnly
                     size="sm"
@@ -79,7 +79,7 @@ export default function DataStoresMain({ datastores }: Props) {
                   >
                     <MdDelete size={17} />
                   </Button>
-                </div>
+                </div> */}
               </div>
 
               <div className="flex items-center mt-4">

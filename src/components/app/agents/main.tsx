@@ -10,6 +10,8 @@ import AgentPreview from "./agentPreview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@nextui-org/react";
 import { FaPlus } from "react-icons/fa6";
+import { FaChevronRight } from "react-icons/fa6";
+import Link from "next/link";
 
 interface Props {
   session: Session;
@@ -71,7 +73,8 @@ export default function AgentsMainPage({ session, agents }: Props) {
             <BsPlusCircleDotted size={30} className="opacity-80 mb-4" />
             <h3 className="font-semibold">Create your first agent</h3>
             <p className="text-sm opacity-70 mt-2 text-center">
-              Agents are smart AI assistants with access to tools, functions, APIs, and real-time data.
+              Agents are smart AI assistants with access to tools, functions,
+              APIs, and real-time data.
             </p>
           </div>
         </NewAgent>
@@ -81,9 +84,6 @@ export default function AgentsMainPage({ session, agents }: Props) {
 
   return (
     <div className="w-full flex min-h-full max-h-full">
-      {agentsState.length > 0 && (
-        <div>Pro plan limit</div>
-      )}
       <div
         className={`w-full p-6 flex flex-col overflow-auto ${
           openAgentFullScreen && "hidden"
@@ -99,16 +99,34 @@ export default function AgentsMainPage({ session, agents }: Props) {
             </Badge>
           </h1>
           <NewAgent updateState={updateState} triggerFull={false}>
-            <Button
-              size="sm"
-              color="primary"
-              className="font-semibold min-w-max"
-              startContent={<FaPlus />}
-            >
-              New agent
-            </Button>
+            {isPro ||
+              (agentsState.length < 1 && (
+                <Button
+                  size="sm"
+                  color="primary"
+                  className="font-semibold min-w-max"
+                  startContent={<FaPlus />}
+                >
+                  New agent
+                </Button>
+              ))}
           </NewAgent>
         </div>
+
+        {!isPro && agentsState.length > 0 && (
+          <Link
+            href="/app/upgrade"
+            className="mt-8 w-full p-4 border-1 rounded-lg relative cursor-pointer transition-all hover:bg-accent/10 hover:border/black/20 dark:hover:border-white/20"
+          >
+            <div className="font-semibold">Upgrade to Pro</div>
+            <div className="text-sm opacity-70">
+              Upgrade your plan to create more AI agents
+            </div>
+            <div className="absolute h-full w-20 flex items-center justify-center top-0 right-0">
+              <FaChevronRight />
+            </div>
+          </Link>
+        )}
 
         <div
           className={`grid gap-4 mt-6 ${
