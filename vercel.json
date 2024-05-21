@@ -1,10 +1,1 @@
-{
-    "functions": {
-        "src/functions/agents/avatar/generate": {
-            "maxDuration": 50
-        },
-        "src/functions/datastores/create": {
-            "maxDuration": 50
-        }
-    }
-}
+{}
