@@ -3,6 +3,23 @@
 import Logo from "./logo";
 import Link from "next/link";
 import ThemeToggle from "./themeToggle";
+import { FaXTwitter, FaGithub } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+
+const links: {link: string; icon: React.ReactNode}[] = [
+  {
+    link: "https://twitter.com/scoopika_",
+    icon: <FaXTwitter />
+  },
+  {
+    link: "https://github.com/scoopika",
+    icon: <FaGithub />
+  },
+  {
+    link: "mailto:team@scoopika.com",
+    icon: <MdEmail />
+  }
+]
 
 export default function Footer() {
   return (
@@ -12,9 +29,16 @@ export default function Footer() {
           <Logo />
           <p className="font-bold text-inherit text-[1.05rem] ml-3">Scoopika</p>
         </div>
-        <p className="text-sm opacity-70 mt-4">
+        <p className="text-sm opacity-70 mt-4 mb-6">
           © {new Date().getFullYear()} Scoopika - Built by Kais Radwan
         </p>
+        <div className="flex items-center gap-3">
+          {links.map((link, index) => (
+            <Link href={link.link} target="_blank" key={`footerlink-${index}`} className="opacity-80 hover:opacity-100 transition-all">
+              {link.icon}
+            </Link>
+          ))}
+        </div>
       </div>
 
       <div className="flex flex-col w-full gap-4">
@@ -58,9 +82,6 @@ export default function Footer() {
 
       <div className="flex flex-col w-full gap-4">
         <p>Resources</p>
-        <Link href="/blog" className="text-sm opacity-70">
-          Blog
-        </Link>
         <Link
           href="https://docs.scoopika.com"
           target="_blank"
@@ -74,6 +95,13 @@ export default function Footer() {
           className="text-sm opacity-70"
         >
           Github
+        </Link>
+        <Link
+          href="/privacy_policy.pdf"
+          target="_blank"
+          className="text-sm opacity-70"
+        >
+          Privacy Policy
         </Link>
       </div>
 

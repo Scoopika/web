@@ -30,33 +30,21 @@ export default async function Home() {
 
       <div className="flex flex-col items-center gap-3 relative w-full">
         <GridSmallBackground className="flex flex-col items-center relative gap-3 pt-36">
-          <Button
-            size="sm"
-            variant="ghost"
-            radius="full"
-            color="primary"
-            startContent={<MdInfo size={20} />}
-            endContent={<FiChevronRight size={20} />}
-            className="font-semibold pl-3 pr-3 border-1 mb-4"
-            as={Link}
-            href="/pricing"
-          >
-            v1.0 is out! Start for free with a pro plan sale!
-          </Button>
-          <h1 className="text-5xl font-semibold text-center mb-3 flex items-center gap-3">
-            <span className="">Integrate </span>
+          
+          <h1 className="text-6xl font-semibold text-center mb-3 flex items-center gap-3">
             <span className="text-violet-500 flex items-center gap-1">
               <RiRobot2Fill />
               AI Agents
             </span>{" "}
+            For Your
           </h1>
           <h1 className="text-5xl font-semibold text-center mb-5">
-            Into Your Application in <span className="underline">Minutes</span>
+            Application In <span className="underline">Minutes</span>
           </h1>
-          <div className="mt-2 opacity-90 text-center text-base max-w-[50%] mb-9">
-            Effortlessly create personalized AI agents for your app with
-            external tools, data validation, auto healing, streaming hooks, and
-            managed long-term memory
+          <div className="mt-2 opacity-90 text-center text-base max-w-[50%] mb-16">
+            Easily integrate AI agents equipped with external tools
+            into your app.<br /> Data validation & type-safety, errors recovery, real-time
+            streaming, and managed long-term memory out-of-the-box
           </div>
           <Button
             size="lg"
@@ -213,7 +201,7 @@ export default async function Home() {
                       >
                         session_{i}
                       </div>
-                    ),
+                    )
                   )}
                 </div>
                 <div className="mt-2 flex items-center gap-2 overflow-hidden group-hover:-translate-x-36 transition-all">
@@ -225,7 +213,7 @@ export default async function Home() {
                       >
                         session_{i}
                       </div>
-                    ),
+                    )
                   )}
                 </div>
               </div>
