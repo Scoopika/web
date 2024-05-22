@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import SignInButtons from "@/components/signInButtons";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Page({
   searchParams,
@@ -47,6 +48,12 @@ export default async function Page({
             <div className="flex flex-col items-center justify-center gap-4 w-full">
               <SignInButtons callbackUrl={callbackurl} />
             </div>
+            <p className="text-sm mt-4">
+              By continue you agree to our{" "}
+              <Link href="/privacy_policy.pdf" target="_blank">
+                Privacy policy
+              </Link>
+            </p>
           </div>
         </div>
       </div>

@@ -30,11 +30,11 @@ const tabs: Tab[] = [
     title: "LLM-Powered Agents",
     link: "https://docs.scoopika.com/agents",
     description:
-      "Create custom AI agents tailored to your application's needs allowing users to interact with their data in natural language.",
+      "Craft intuitive AI companions for your applications. Leverage Scoopika's LLM-powered agents to enable users to interact with their data seamlessly using natural language.",
     features: [
-      "Define the personality of your agents to match the tone and style of your application",
-      "Plug runs with custom knowledge data and equip agents with tools easily",
-      "Stream responses in real-time with +10 built-in hooks between server and client",
+      "Natural language interaction & customizable personalities",
+      "Equip agents with tools & APIs",
+      "Real-Time streaming for next-level performance",
     ],
     comp: (
       <>
@@ -68,11 +68,11 @@ const tabs: Tab[] = [
     title: "Multi-agent Smart Boxes",
     link: "https://docs.scoopika.com/multi-agent-boxes",
     description:
-      "Let your agents collaborate by organizing them into smart boxes, allowing them to work together towards common goals.",
+      "Empower your AI agents to work together seamlessly. They'll break complex tasks into steps and each agent will perform the steps that better fits it.",
     features: [
-      "The best agent for the task is hand is used based on the context. all agents will share the session history",
-      "Pass any agent as a tool to other agents, so your agents can collaborate and talk together",
-      "Add global tools that all agents in a box have access to, or assign specific tools to specific agents",
+      "Context-aware processing with managed memory",
+      "Flexible tooling and collaboration",
+      "Parallel agent execution with real-time responses",
     ],
     comp: (
       <>
@@ -110,11 +110,11 @@ const tabs: Tab[] = [
     title: "External Tools",
     link: "https://docs.scoopika.com/tools",
     description:
-      "Effortlessly connect agents to your custom tools, APIs, and functions, enabling your agents to perform actions or retreive data",
+      "Connect your agents seamlessly to your custom tools, APIs, and functions, empowering them to execute actions, retrieve data, and automate tasks within your application ecosystem.",
     features: [
-      "Built-in tools inputs validation with full type-safety",
-      "Plug the tool and it'll just flow with the process. no additional work required by you.",
-      "Errors auto healing from any invalid or missing inputs with reports saved to the platform",
+      "Seamless tool integration. Any function can be a tool",
+      "Enhanced data validation & full type safety",
+      "Intelligent error handling & auto-healing",
     ],
     comp: (
       <>
@@ -149,14 +149,14 @@ const tabs: Tab[] = [
   {
     id: "History stores",
     icon: <HiDatabase size={16} />,
-    title: "History Stores",
+    title: "Long-term Memory",
     link: "https://docs.scoopika.com/history-stores",
     description:
-      "Deploy and connect a managed Serverless data store for chat history sessions with one click and zero setup",
+      "Say goodbye to complex history management. Scoopika provides a built-in, managed serverless data store for your chat history sessions. Deploy it with just a single click.",
     features: [
-      "Just connect your database URL and history will be persistent based on session IDs",
-      "No need to manage history yourself, We've done it for you already",
-      "List and retrieve sessions based on user ID just like that ;)",
+      "One-Click deployment & zero setup",
+      "Simplified session management",
+      "Fast with APIs served on the edge",
     ],
     comp: (
       <>
@@ -186,11 +186,11 @@ const tabs: Tab[] = [
     title: "Client-Side Actions",
     link: "https://docs.scoopika.com/tools/client-side-actions",
     description:
-      "Give your agents the power to perform actions on client-side by simply just passing functions from the client-side",
+      "Empower agents to execute functions directly within the user's browser, facilitating real-time interaction and dynamic experiences.",
     features: [
-      "Agents are able to call tools that are executed on the client-side in real time",
-      "Give your agents the power to simulate user interaction or manipulate the DOM",
-      "Full type-safety and data validation, so your tools never receive invalid inputs",
+      "Seamless Client-side execution (super easy)",
+      "Real-time user experience",
+      "Full type-safety and data validation",
     ],
     comp: (
       <>
@@ -301,10 +301,10 @@ const tabs: Tab[] = [
 
 const TabPage = ({ tab }: { tab: Tab }) => {
   return (
-    <>
+    <div className="flex flex-col justify-center">
       <h2 className="text-2xl font-semibold">{tab.title}</h2>
-      <p className="text-sm mt-2 max-w-[50%] mb-8">{tab.description}</p>
-      <div className="flex flex-col gap-4 max-w-[50%] mb-10 justify-end h-full">
+      <p className="text-sm mt-2 w-full lg:max-w-[50%] mb-8">{tab.description}</p>
+      <div className="flex flex-col gap-4 w-full lg:max-w-[50%] mb-10">
         {tab.features.map((feature, index) => (
           <p
             key={`tabsubfeature-${tab.id}-${index}`}
@@ -322,16 +322,16 @@ const TabPage = ({ tab }: { tab: Tab }) => {
         href={tab.link}
         target="_blank"
         variant="light"
-        className="font-semibold"
+        className="font-semibold max-w-max"
         endContent={<IoChevronForwardOutline />}
       >
         Learn more
       </Button>
 
-      <div className="absolute right-0 bottom-0 w-[70%] min-h-[80%] max-h-[80%] flex flex-col items-end justify-end overflow-hidden p-14 pr-16 z-10">
+      <div className="absolute right-0 bottom-0 w-[70%] min-h-[80%] max-h-[80%] flex flex-col items-end justify-end overflow-hidden p-14 pr-16 z-10 hidden lg:flex">
         {tab.comp}
       </div>
-    </>
+    </div>
   );
 };
 
@@ -361,8 +361,8 @@ export default function Features() {
 
   return (
     <div className="w-[80%] p-4 border-1 rounded-xl dark:border-white/20 bg-background min-h-[32rem] max-h-[32rem] shadow-lg relative">
-      <div className="flex items-center justify-center w-full absolute -top-6 left-0 z-30">
-        <div className="flex items-center p-2 pl-4 pr-4 bg-background border-r-1 border-l-1 border-t-1 rounded-t-lg gap-2">
+      <div className="flex items-center justify-center w-full absolute -top-8 left-0 z-30">
+        <div className="flex items-center p-2 pl-4 pr-4 bg-background border-r-1 border-l-1 border-t-1 rounded-t-lg gap-2 max-w-[80%] overflow-auto">
           {tabs.map((tab, index) => (
             <Button
               key={`featuretab-${tab.id}`}
@@ -378,7 +378,7 @@ export default function Features() {
         </div>
       </div>
       <div
-        className={`${hide && "opacity-0"} transition-all duration-500 p-20 w-full`}
+        className={`${hide && "opacity-0"} transition-all duration-500 p-20 w-full min-h-[30rem] max-h-[30rem] overflow-auto border-1 rounded-xl`}
       >
         <TabPage tab={tabs[activeTabIndex]} />
       </div>
