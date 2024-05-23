@@ -32,17 +32,16 @@ export default async function Home() {
         <GridSmallBackground className="flex flex-col items-center relative gap-3 pt-36 w-full">
 
           <h1 className="text-3xl md:text-4xl lg:text-6xl font-semibold text-center mb-3 flex items-center gap-3">
-            <span className="text-violet-500 flex items-center gap-1">
+            <span className="text-violet-600 dark:text-violet-500 flex items-center gap-1">
               <RiRobot2Fill />
-              AI Agents
+              AI Virtual Assistants
             </span>{" "}
-            For Your
           </h1>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-5">
-            Application In <span className="underline">Minutes</span>
+            For Your Application
           </h1>
           <div className="mt-2 opacity-90 text-center text-base max-w-[90%] lg:max-w-[50%] mb-16">
-            Easily integrate AI agents equipped with external tools
+            Easily integrate AI assistants equipped with external tools
             into your app.<br /> Data validation & type-safety, errors recovery, real-time
             streaming, and managed long-term memory out-of-the-box
           </div>
