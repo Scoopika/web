@@ -7,6 +7,7 @@ import AgentsMainPage from "@/components/app/agents/main";
 import { Metadata } from "next";
 
 export const maxDuration = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "AI Agents"

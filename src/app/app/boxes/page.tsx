@@ -5,7 +5,6 @@ import { db } from "@/lib/db";
 import { RawBoxData } from "@/types/rawBox";
 import { Session, getServerSession } from "next-auth";
 import { Suspense } from "react";
-import { AiOutlineLoading } from "react-icons/ai";
 import Loading from "@/components/loading";
 import { Metadata } from "next";
 
@@ -13,6 +12,7 @@ interface BoxesProps {
   session: Session;
 }
 
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Multi-Agent Boxes"
 }
