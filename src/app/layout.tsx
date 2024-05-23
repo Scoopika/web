@@ -71,14 +71,16 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Providers>
-          <Toaster position="bottom-right" />
-          {children}
-          <GoogleAnalytics gaId="G-3KS7DQFER8" />
-          <div className="fixed top-0 left-0 z-50 bg-background w-screen h-screen flex items-center justify-center text-center md:hidden">
+        <div className="fixed top-0 left-0 z-50 bg-background min-w-screen min-h-screen flex items-center justify-center text-center md:hidden">
             This website does not work on this device size at the moment. <br />
             Please use a larger screen.
           </div>
+        <Providers>
+          <Toaster position="bottom-right" />
+            <main>
+              {children}
+            </main>
+          <GoogleAnalytics gaId="G-3KS7DQFER8" />
           {/* <Footer /> */}
         </Providers>
       </body>

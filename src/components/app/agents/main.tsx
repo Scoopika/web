@@ -67,18 +67,31 @@ export default function AgentsMainPage({ session, agents }: Props) {
 
   if (agentsState.length < 1) {
     return (
-      <div className="p-6 w-full">
-        <NewAgent updateState={updateState} triggerFull>
-          <div className="w-full p-2 h-96 border-1 rounded-2xl border-dashed border-black/20 dark:border-white/20 hover:border-black/30 dark:hover:border-white/40 cursor-pointer flex flex-col items-center justify-center transition-all">
-            <BsPlusCircleDotted size={30} className="opacity-80 mb-4" />
-            <h3 className="font-semibold">Create your first agent</h3>
-            <p className="text-sm opacity-70 mt-2 text-center">
-              Agents are smart AI assistants with access to tools, functions,
-              APIs, and real-time data.
-            </p>
+      <>
+        <div className="p-6 w-full">
+          <div className="w-full p-3 rounded-lg bg-foreground text-background flex items-center mb-6">
+            <div className="min-w-max">
+              <h3 className="font-semibold">Welcome to Scoopika</h3>
+              <p className="text-sm opacity-80">
+                Follow this guide to get started easily in few minutes
+              </p>
+            </div>
+            <div className="w-full flex items-center justify-end">
+              <Button as={Link} href="https://docs.scoopika.com/quickstart" target="_blank" size="sm" className="font-semibold bg-background text-foreground">Follow guide</Button>
+            </div>
           </div>
-        </NewAgent>
-      </div>
+          <NewAgent updateState={updateState} triggerFull>
+            <div className="w-full p-2 h-96 border-1 rounded-2xl border-dashed border-black/20 dark:border-white/20 hover:border-black/30 dark:hover:border-white/40 cursor-pointer flex flex-col items-center justify-center transition-all">
+              <BsPlusCircleDotted size={30} className="opacity-80 mb-4" />
+              <h3 className="font-semibold">Create your first agent</h3>
+              <p className="text-sm opacity-70 mt-2 text-center">
+                Agents are smart AI assistants with access to tools, functions,
+                APIs, and real-time data.
+              </p>
+            </div>
+          </NewAgent>
+        </div>
+      </>
     );
   }
 
@@ -100,15 +113,15 @@ export default function AgentsMainPage({ session, agents }: Props) {
           </h1>
           <NewAgent updateState={updateState} triggerFull={false}>
             {(isPro || agentsState.length < 1) && (
-                <Button
-                  size="sm"
-                  color="primary"
-                  className="font-semibold min-w-max"
-                  startContent={<FaPlus />}
-                >
-                  New agent
-                </Button>
-              )}
+              <Button
+                size="sm"
+                color="primary"
+                className="font-semibold min-w-max"
+                startContent={<FaPlus />}
+              >
+                New agent
+              </Button>
+            )}
           </NewAgent>
         </div>
 
