@@ -378,7 +378,7 @@ export default function Features() {
         </div>
       </div>
       <div
-        className={`${hide && "opacity-0"} transition-all duration-500 p-20 w-full min-h-[30rem] max-h-[30rem] overflow-auto border-1 rounded-xl`}
+        className={`${hide && "opacity-0"} transition-all duration-500 p-4 pt-12 md:p-20 w-full min-h-[30rem] max-h-[30rem] overflow-auto border-1 rounded-xl`}
       >
         <TabPage tab={tabs[activeTabIndex]} />
       </div>
