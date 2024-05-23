@@ -69,14 +69,14 @@ export default function AgentsMainPage({ session, agents }: Props) {
     return (
       <>
         <div className="p-6 w-full">
-          <div className="w-full p-3 rounded-lg bg-foreground text-background flex items-center mb-6">
-            <div className="min-w-max">
+          <div className="w-full p-3 rounded-lg bg-foreground text-background flex items-center mb-6 gap-4">
+            <div className="w-full">
               <h3 className="font-semibold">Welcome to Scoopika</h3>
               <p className="text-sm opacity-80">
                 Follow this guide to get started easily in few minutes
               </p>
             </div>
-            <div className="w-full flex items-center justify-end">
+            <div className="flex items-center justify-end">
               <Button as={Link} href="https://docs.scoopika.com/quickstart" target="_blank" size="sm" className="font-semibold bg-background text-foreground">Follow guide</Button>
             </div>
           </div>
@@ -102,6 +102,17 @@ export default function AgentsMainPage({ session, agents }: Props) {
           openAgentFullScreen && "hidden"
         }`}
       >
+        <div className="w-full p-3 rounded-lg bg-foreground text-background flex items-center mb-6 gap-4">
+            <div className="w-full">
+              <h3 className="font-semibold">Feel lost?</h3>
+              <p className="text-sm opacity-80">
+                Follow this guide or can contact us on team@scoopika.com and {"we'll"} helo you {";)"}
+              </p>
+            </div>
+            <div className="flex items-center justify-end">
+              <Button as={Link} href="https://docs.scoopika.com/quickstart" target="_blank" size="sm" className="font-semibold bg-background text-foreground">Follow guide</Button>
+            </div>
+          </div>
         <div className="w-full flex items-center gap-4">
           <h1 className="w-full flex items-center gap-2">
             Your agents
