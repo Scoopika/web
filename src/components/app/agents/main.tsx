@@ -106,7 +106,7 @@ export default function AgentsMainPage({ session, agents }: Props) {
             <div className="w-full">
               <h3 className="font-semibold">Feel lost?</h3>
               <p className="text-sm opacity-80">
-                Follow this guide or can contact us on team@scoopika.com and {"we'll"} helo you {";)"}
+                Follow this guide or contact us on team@scoopika.com and {"we'll"} help you {";)"}
               </p>
             </div>
             <div className="flex items-center justify-end">

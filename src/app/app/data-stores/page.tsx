@@ -10,6 +10,7 @@ import Link from "next/link";
 import { FaDatabase } from "react-icons/fa6";
 
 export const maxDuration = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "History Data Stores"
