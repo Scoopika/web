@@ -31,17 +31,17 @@ export default async function Home() {
       <div className="flex flex-col items-center gap-3 w-full">
         <GridSmallBackground className="flex flex-col items-center relative gap-3 pt-36 w-full">
 
-          <h1 className="text-6xl font-semibold text-center mb-3 flex items-center gap-3">
+          <h1 className="text-3xl md:text-4xl lg:text-6xl font-semibold text-center mb-3 flex items-center gap-3">
             <span className="text-violet-500 flex items-center gap-1">
               <RiRobot2Fill />
               AI Agents
             </span>{" "}
             For Your
           </h1>
-          <h1 className="text-5xl font-semibold text-center mb-5">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-5">
             Application In <span className="underline">Minutes</span>
           </h1>
-          <div className="mt-2 opacity-90 text-center text-base max-w-[50%] mb-16">
+          <div className="mt-2 opacity-90 text-center text-base max-w-[90%] lg:max-w-[50%] mb-16">
             Easily integrate AI agents equipped with external tools
             into your app.<br /> Data validation & type-safety, errors recovery, real-time
             streaming, and managed long-term memory out-of-the-box
@@ -70,18 +70,18 @@ export default async function Home() {
 
       <div className="flex flex-col items-center mb-48">
         <div className="w-[80%] flex flex-col items-center">
-          <div className="mb-6 flex items-center gap-2 opacity-80">
-            <LuBrainCircuit />
+          <div className="mb-6 flex items-center gap-2 opacity-80 text-center">
+            <LuBrainCircuit className="hidden md:block" />
             Make your application AI-powered today!
           </div>
-          <div className="text-4xl font-semibold mb-3">
+          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
             Give your users a taste of the future
           </div>
-          <div className="opacity-70">
+          <div className="opacity-70 text-center">
             A platform you can rely on to bring AI features to your application
           </div>
 
-          <div className="w-full flex items-center justify-center mt-12 gap-3">
+          <div className="w-full flex flex-col md:flex-row items-center justify-center mt-12 gap-3">
             <div className="w-full group border-1 rounded-xl rounded-tl-3xl flex flex-col items-center hover:border-black/20 dark:hover:border-white/20 transition-all overflow-hidden h-72">
               <div className="h-full w-full relative flex items-center justify-center">
                 <div className="absolute top-4 left-10 h-full w-2 border-r-1 border-dashed"></div>
@@ -142,7 +142,7 @@ export default async function Home() {
               </div>
             </div>
           </div>
-          <div className="w-full flex items-center justify-center gap-3 mt-3">
+          <div className="w-full flex flex-col md:flex-row items-center justify-center gap-3 mt-3">
             <div className="w-full group border-1 rounded-xl rounded-bl-3xl flex flex-col items-center hover:border-black/20 dark:hover:border-white/20 transition-all overflow-hidden h-72">
               <div className="w-full h-full max-h-full overflow-hidden flex flex-col items-center p-3">
                 <div className="flex flex-col w-full group-hover:-translate-y-36 transition-all">
@@ -254,13 +254,13 @@ export default async function Home() {
 
       <div className="flex flex-col items-center mb-48">
         <div className="w-[80%] flex flex-col items-center">
-          <div className="mb-6 flex items-center gap-2 opacity-80">
+          <div className="mb-6 flex items-center gap-2 opacity-80 text-center">
             {"We're"} done talking
           </div>
-          <div className="text-4xl font-semibold mb-3">
+          <div className="text-3xl md:text-4xl text-center font-semibold mb-3">
             What you waiting for?
           </div>
-          <div className="opacity-70 mb-8">
+          <div className="opacity-70 mb-8 text-center">
             Hop in and try it for yourself. Start for free ({"It's"} free
             forever actually)
           </div>

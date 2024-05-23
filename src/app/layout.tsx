@@ -71,10 +71,6 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <div className="fixed top-0 left-0 z-50 bg-background min-w-screen min-h-screen flex items-center justify-center text-center md:hidden">
-            This website does not work on this device size at the moment. <br />
-            Please use a larger screen.
-          </div>
         <Providers>
           <Toaster position="bottom-right" />
             <main>

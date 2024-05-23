@@ -23,7 +23,7 @@ const links: {link: string; icon: React.ReactNode}[] = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-accent/10 border-t-1 p-12 border-black/20 dark:border-border flex gap-14">
+    <footer className="w-full bg-accent/10 border-t-1 p-12 border-black/20 dark:border-border flex flex-col md:flex-row gap-14">
       <div className="flex flex-col w-full">
         <div className="flex items-center">
           <Logo />

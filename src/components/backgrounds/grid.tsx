@@ -31,7 +31,7 @@ export default function GridSmallBackground({
     >
       {/* Radial gradient for the container to give a faded look */}
       {shadow && (
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_2%,black)]"></div>
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_2%,black)] hidden md:block"></div>
       )}
       {children && children}
     </div>
