@@ -28,9 +28,9 @@ export default async function Home() {
       <Navbar session={session} active="Home" />
       {/* <TestScoopika /> */}
 
-      <div className="flex flex-col items-center gap-3 relative w-full">
-        <GridSmallBackground className="flex flex-col items-center relative gap-3 pt-36">
-          
+      <div className="flex flex-col items-center gap-3 w-full">
+        <GridSmallBackground className="flex flex-col items-center relative gap-3 pt-36 w-full">
+
           <h1 className="text-6xl font-semibold text-center mb-3 flex items-center gap-3">
             <span className="text-violet-500 flex items-center gap-1">
               <RiRobot2Fill />
