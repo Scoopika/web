@@ -30,7 +30,7 @@ const tabs: Tab[] = [
     title: "LLM-Powered Agents",
     link: "https://docs.scoopika.com/agents",
     description:
-      "Craft intuitive AI companions for your applications. Leverage Scoopika's LLM-powered agents to enable users to interact with their data seamlessly using natural language.",
+      "Craft intuitive AI assistants for your applications. Leverage Scoopika's LLM-powered agents to enable users to interact with their data seamlessly using natural language.",
     features: [
       "Natural language interaction & customizable personalities",
       "Equip agents with tools & APIs",
