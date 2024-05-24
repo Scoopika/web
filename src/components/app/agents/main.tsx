@@ -212,7 +212,7 @@ function AgentsInnerPage({ session, agents, newAgent }: Props) {
           </NewAgent>
         </div>
 
-        {!isPro && agentsState.length > 0 && (
+        {!isPro && agentsState.length > 1 && (
           <Link
             href="/app/upgrade"
             className="mt-8 w-full p-4 border-1 rounded-lg relative cursor-pointer transition-all hover:bg-accent/10 hover:border/black/20 dark:hover:border-white/20"
