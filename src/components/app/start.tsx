@@ -50,6 +50,7 @@ export default function Start({ steps }: StartProps) {
             classNames={{
               svg: "w-5 h-5",
             }}
+            aria-label="Progress"
             color={score(steps) === 100 ? "success" : "primary"}
             value={score(steps)}
             showValueLabel={false}
