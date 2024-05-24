@@ -36,7 +36,7 @@ export default function AgentsMainPage({ session, agents, newAgent, tokens }: Pr
           },
           {
             items: tokens,
-            link: "/app/settngs?tab=tokens",
+            link: "/app/settings?tab=tokens",
             title: "Generate access token",
           },
           {
