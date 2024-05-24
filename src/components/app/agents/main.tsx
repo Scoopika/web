@@ -4,7 +4,7 @@ import { Session } from "next-auth";
 import { AgentData } from "@scoopika/types";
 import { BsPlusCircleDotted } from "react-icons/bs";
 import NewAgent from "./new";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AgentItem from "./agentItem";
 import AgentPreview from "./agentPreview";
 import { Badge } from "@/components/ui/badge";
@@ -12,13 +12,53 @@ import { Button } from "@nextui-org/react";
 import { FaPlus } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import Link from "next/link";
+import AppLayout from "@/components/app/appLayout";
 
 interface Props {
   session: Session;
   agents: AgentData[];
+  newAgent: boolean;
+  tokens: any[];
 }
 
-export default function AgentsMainPage({ session, agents }: Props) {
+export default function AgentsMainPage({ session, agents, newAgent, tokens }: Props) {
+  return (
+    <AppLayout
+      session={session}
+      title="Agents"
+      sidebarActive="Agents"
+      start={{
+        steps: [
+          {
+            items: agents,
+            link: "/app?new=y",
+            title: "Create new agent",
+          },
+          {
+            items: tokens,
+            link: "/app/settngs?tab=tokens",
+            title: "Generate access token",
+          },
+          {
+            items: [],
+            link: "https://docs.scoopika.com/essentials/agents",
+            title: "Integrate agents in your app",
+            target: "_blank"
+          }
+        ],
+      }}
+    >
+      <AgentsInnerPage
+        session={session}
+        agents={agents}
+        newAgent={newAgent}
+        tokens={tokens}
+      />
+    </AppLayout>
+  );
+}
+
+function AgentsInnerPage({ session, agents, newAgent }: Props) {
   const isPro =
     session.user.plan === "none" || !session.user.plan.includes(":::")
       ? false
@@ -26,15 +66,22 @@ export default function AgentsMainPage({ session, agents }: Props) {
   const [agentsState, setAgentsState] = useState<AgentData[]>(agents);
   const [openAgent, setOpenAgent] = useState<AgentData | undefined>(undefined);
   const [openAgentTab, setOpenAgentTab] = useState<string>();
+  const [defaultNew, setDefaultNew] = useState<boolean>(false);
   const [openAgentFullScreen, setOpenAgentFullScreen] =
     useState<boolean>(false);
+  
+  useEffect(() => {
+    setDefaultNew(newAgent);
+  }, [newAgent]);
 
   const updateState = (agent: AgentData) => {
     setAgentsState((prev) => [...prev, agent]);
     setOpenAgent(agent);
+    setDefaultNew(false);
   };
 
   const updateAgent = (agent: AgentData, tab?: string) => {
+    setDefaultNew(false);
     const wantedAgentState: number[] = agentsState
       .map((state, index) => {
         if (state.id === agent.id) {
@@ -77,10 +124,22 @@ export default function AgentsMainPage({ session, agents }: Props) {
               </p>
             </div>
             <div className="flex items-center justify-end">
-              <Button as={Link} href="https://docs.scoopika.com/quickstart" target="_blank" size="sm" className="font-semibold bg-background text-foreground">Follow guide</Button>
+              <Button
+                as={Link}
+                href="https://docs.scoopika.com/quickstart"
+                target="_blank"
+                size="sm"
+                className="font-semibold bg-background text-foreground"
+              >
+                Follow guide
+              </Button>
             </div>
           </div>
-          <NewAgent updateState={updateState} triggerFull>
+          <NewAgent
+            defaultOpen={defaultNew}
+            updateState={updateState}
+            triggerFull
+          >
             <div className="w-full p-2 h-96 border-1 rounded-2xl border-dashed border-black/20 dark:border-white/20 hover:border-black/30 dark:hover:border-white/40 cursor-pointer flex flex-col items-center justify-center transition-all">
               <BsPlusCircleDotted size={30} className="opacity-80 mb-4" />
               <h3 className="font-semibold">Create your first agent</h3>
@@ -103,16 +162,25 @@ export default function AgentsMainPage({ session, agents }: Props) {
         }`}
       >
         <div className="w-full p-3 rounded-lg bg-foreground text-background flex items-center mb-6 gap-4">
-            <div className="w-full">
-              <h3 className="font-semibold">Feel lost?</h3>
-              <p className="text-sm opacity-80">
-                Follow this guide or contact us on team@scoopika.com and {"we'll"} help you {";)"}
-              </p>
-            </div>
-            <div className="flex items-center justify-end">
-              <Button as={Link} href="https://docs.scoopika.com/quickstart" target="_blank" size="sm" className="font-semibold bg-background text-foreground">Follow guide</Button>
-            </div>
+          <div className="w-full">
+            <h3 className="font-semibold">Feel lost?</h3>
+            <p className="text-sm opacity-80">
+              Follow this guide or contact us on team@scoopika.com and {"we'll"}{" "}
+              help you {";)"}
+            </p>
           </div>
+          <div className="flex items-center justify-end">
+            <Button
+              as={Link}
+              href="https://docs.scoopika.com/quickstart"
+              target="_blank"
+              size="sm"
+              className="font-semibold bg-background text-foreground"
+            >
+              Follow guide
+            </Button>
+          </div>
+        </div>
         <div className="w-full flex items-center gap-4">
           <h1 className="w-full flex items-center gap-2">
             Your agents
@@ -122,7 +190,11 @@ export default function AgentsMainPage({ session, agents }: Props) {
               {isPro ? "10" : "1"}
             </Badge>
           </h1>
-          <NewAgent updateState={updateState} triggerFull={false}>
+          <NewAgent
+            defaultOpen={defaultNew}
+            updateState={updateState}
+            triggerFull={false}
+          >
             {(isPro || agentsState.length < 1) && (
               <Button
                 size="sm"

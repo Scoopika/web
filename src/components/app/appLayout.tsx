@@ -5,13 +5,14 @@ import { BsStars } from "react-icons/bs";
 import Sidebar from "./sidebar";
 import Starting from "./starting";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import { FaBookOpen } from "react-icons/fa";
+import Start, { StartProps } from "./start";
 
 interface Props {
   session: Session;
   title: string;
   sidebarActive: string;
   children: React.ReactNode;
+  start?: StartProps;
 }
 
 export default function AppLayout({
@@ -19,7 +20,9 @@ export default function AppLayout({
   title,
   sidebarActive,
   children,
+  start
 }: Props) {
+
   return (
     <div className="w-full min-h-screen max-h-screen flex">
       <Starting />
@@ -43,17 +46,7 @@ export default function AppLayout({
             </div>
           </div>
           <div className="w-full flex items-center justify-end gap-4">
-            <Button
-              size="sm"
-              variant="bordered"
-              className="border-1"
-              startContent={<FaBookOpen />}
-              as={Link}
-              href="https://docs.scoopika.com"
-              target="_blank"
-            >
-              Docs
-            </Button>
+            {start && <Start steps={start.steps} />}
             {session?.user.plan === "none" && (
               <Button
                 startContent={<BsStars size={15} />}
