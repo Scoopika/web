@@ -20,6 +20,7 @@ import startingItems from "@/config/startingItems";
 import GridSmallBackground from "../backgrounds/grid";
 import { Button } from "@nextui-org/react";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 const isNewUser = () =>
   frontend<boolean>(() => {

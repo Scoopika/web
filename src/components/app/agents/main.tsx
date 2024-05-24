@@ -125,10 +125,10 @@ function AgentsInnerPage({ session, agents, newAgent }: Props) {
             <div className="w-full">
               <h3 className="font-semibold">Welcome to Scoopika</h3>
               <p className="text-sm opacity-80">
-                Follow this guide to get started easily in few minutes
+                Follow this 2-minutes video to build and run your first agent!
               </p>
             </div>
-            <div className="flex items-center justify-end">
+            <div className="flex items-center justify-end gap-3">
               <Button
                 as={Link}
                 href="https://docs.scoopika.com/quickstart"
@@ -136,7 +136,7 @@ function AgentsInnerPage({ session, agents, newAgent }: Props) {
                 size="sm"
                 className="font-semibold bg-background text-foreground"
               >
-                Follow guide
+                Watch guide
               </Button>
             </div>
           </div>
@@ -170,15 +170,7 @@ function AgentsInnerPage({ session, agents, newAgent }: Props) {
           <div className="w-full">
             <h3 className="font-semibold">Feel lost?</h3>
             <p className="text-sm opacity-80">
-              Follow this guide or{" "}
-              <Link
-                href="https://docs.scoopika.com"
-                target="_blank"
-                className="underline"
-              >
-                contact us
-              </Link>{" "}
-              and {"we'll"} help you {";)"}
+              Follow this 2-minutes video to build and run your first agent!
             </p>
           </div>
           <div className="flex items-center justify-end">
@@ -189,7 +181,7 @@ function AgentsInnerPage({ session, agents, newAgent }: Props) {
               size="sm"
               className="font-semibold bg-background text-foreground"
             >
-              Follow guide
+              Watch guide
             </Button>
           </div>
         </div>

@@ -29,8 +29,8 @@ async function Boxes({ session }: BoxesProps) {
   return (
     <AppLayout
       session={session}
-      title="Smart Boxes"
-      sidebarActive="Smart Boxes"
+      title="Multi-Agent Boxes"
+      sidebarActive="Multi-Agent Boxes"
     >
       <MainBoxes boxes={boxesData} session={session} />
     </AppLayout>
