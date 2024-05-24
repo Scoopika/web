@@ -2,9 +2,7 @@
 
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import { AgentData } from "@scoopika/types";
-import { useState } from "react";
-import { FaCheck } from "react-icons/fa6";
-
+import { useEffect, useState } from "react";
 import { FaCamera } from "react-icons/fa6";
 import { Button } from "@nextui-org/react";
 import { toast } from "sonner";
@@ -12,61 +10,18 @@ import AgentAvatarEdit from "./avatar";
 import cleanText from "@/scripts/cleanText";
 import createAgent from "@/functions/agents/create";
 
-const TypeChoice = ({
-  title,
-  description,
-  icon,
-  onClick,
-  isActive,
-}: {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  isActive: boolean;
-  onClick: Function;
-}) => {
-  return (
-    <div
-      onClick={() => onClick()}
-      className={`p-4 border-1 rounded-xl flex flex-col gap-2 w-full cursor-pointer overflow-hidden transition-all relative ${
-        isActive && "border-black/50 dark:border-white/20"
-      }`}
-    >
-      <div
-        style={
-          isActive
-            ? {
-                boxShadow: "0px 0px 80px 0px rgba(255, 255, 255, .5)",
-              }
-            : {}
-        }
-        className="w-7 h-7 border-1 rounded-md flex items-center justify-center transition-all"
-      >
-        {icon}
-      </div>
-      <div className="text-sm">{title}</div>
-      <p className="text-xs opacity-80">{description}</p>
-      <div
-        className={`w-6 h-6 rounded-xl rounded-br-none rounded-tl-none bg-foreground text-background flex items-center justify-center absolute top-0 right-0 transition-all ${
-          isActive ? "scale-100" : "w-0 translate-x-[100%] scale-90"
-        }`}
-      >
-        <FaCheck size={13} />
-      </div>
-    </div>
-  );
-};
-
 interface Props {
   children: React.ReactNode;
   updateState: (agent: AgentData) => void;
   triggerFull?: boolean;
+  defaultOpen: boolean;
 }
 
 export default function NewAgent({
   children,
   updateState,
   triggerFull,
+  defaultOpen
 }: Props) {
   const sampleData = {
     id: "",
@@ -82,6 +37,10 @@ export default function NewAgent({
   const [open, setOpen] = useState<boolean>(false);
   const [data, setData] = useState<AgentData>(sampleData);
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setOpen(defaultOpen);
+  }, [defaultOpen]);
 
   const create = async () => {
     if (!name || name.length < 1) {
