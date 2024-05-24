@@ -26,7 +26,7 @@ export default async function createAgent(
   });
 
   if (
-    (!isPro && existAgents.length > 0) ||
+    (!isPro && existAgents.length > 1) ||
     (isPro && existAgents.length === 10)
   ) {
     return { success: false };

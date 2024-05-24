@@ -21,7 +21,12 @@ interface Props {
   tokens: any[];
 }
 
-export default function AgentsMainPage({ session, agents, newAgent, tokens }: Props) {
+export default function AgentsMainPage({
+  session,
+  agents,
+  newAgent,
+  tokens,
+}: Props) {
   return (
     <AppLayout
       session={session}
@@ -43,8 +48,8 @@ export default function AgentsMainPage({ session, agents, newAgent, tokens }: Pr
             items: [],
             link: "https://docs.scoopika.com/essentials/agents",
             title: "Integrate agents in your app",
-            target: "_blank"
-          }
+            target: "_blank",
+          },
         ],
       }}
     >
@@ -69,7 +74,7 @@ function AgentsInnerPage({ session, agents, newAgent }: Props) {
   const [defaultNew, setDefaultNew] = useState<boolean>(false);
   const [openAgentFullScreen, setOpenAgentFullScreen] =
     useState<boolean>(false);
-  
+
   useEffect(() => {
     setDefaultNew(newAgent);
   }, [newAgent]);
@@ -165,8 +170,15 @@ function AgentsInnerPage({ session, agents, newAgent }: Props) {
           <div className="w-full">
             <h3 className="font-semibold">Feel lost?</h3>
             <p className="text-sm opacity-80">
-              Follow this guide or contact us on team@scoopika.com and {"we'll"}{" "}
-              help you {";)"}
+              Follow this guide or{" "}
+              <Link
+                href="https://docs.scoopika.com"
+                target="_blank"
+                className="underline"
+              >
+                contact us
+              </Link>{" "}
+              and {"we'll"} help you {";)"}
             </p>
           </div>
           <div className="flex items-center justify-end">
@@ -187,7 +199,7 @@ function AgentsInnerPage({ session, agents, newAgent }: Props) {
             <Badge variant="secondary">
               {agentsState.length}
               {"/"}
-              {isPro ? "10" : "1"}
+              {isPro ? "10" : "2"}
             </Badge>
           </h1>
           <NewAgent
@@ -195,7 +207,7 @@ function AgentsInnerPage({ session, agents, newAgent }: Props) {
             updateState={updateState}
             triggerFull={false}
           >
-            {(isPro || agentsState.length < 1) && (
+            {(isPro || agentsState.length < 2) && (
               <Button
                 size="sm"
                 color="primary"
