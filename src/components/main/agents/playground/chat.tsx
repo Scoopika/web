@@ -54,8 +54,9 @@ const UserMessage = ({
       <div className="p-4 rounded-t-md rounded-b-2xl bg-accent/40 text-sm">
         {images.length > 0 && (
           <div className="flex items-center gap-4 mb-4">
-            {images.map((image) => (
+            {images.map((image, index) => (
               <img
+                key={`imgusermsg-${text}-${index}`}
                 src={image}
                 className="w-14 h-14 rounded-xl hover:opacity-80 transition-all cursor-pointer"
                 onClick={() => openImage(image)}
@@ -384,10 +385,11 @@ export default function PlaygroundChat({
         </div>
       </div>
       <div className="w-full flex-col flex items-center justify-end gap-4 lg:p-10 lg:pr-14 lg:pl-14">
-        {messages.map((message) => {
+        {messages.map((message, index) => {
           if (message.role === "agent") {
             return (
               <AgentMessage
+                key={`agentmessage-${index}`}
                 openTool={setOpenTool}
                 content={`${message.response.content}`}
                 avatar={agent.avatar}
@@ -398,6 +400,7 @@ export default function PlaygroundChat({
 
           return (
             <UserMessage
+            key={`usermessage-${index}`}
               openImage={setOpenImage}
               avatar={userAvatar}
               text={`${message?.request?.message}`}
@@ -464,9 +467,8 @@ export default function PlaygroundChat({
           {images.length > 0 && (
             <div className="flex items-center p-2 pb-0 gap-4">
               {images.map((image, index) => (
-                <div className="w-12 h-12 relative group">
+                <div key={`imagepreview-${index}`} className="w-12 h-12 relative group">
                   <img
-                    key={`imagepreview-${index}`}
                     src={image}
                     className="w-12 h-12 bg-accent rounded-xl object-cover border-1 relative"
                   />

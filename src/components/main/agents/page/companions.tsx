@@ -165,6 +165,7 @@ export default function AgentCompanions({ agent, agents, setAgents }: Props) {
               <div className="flex flex-col gap-3">
                 {awntedAgents().map((a, index) => (
                   <div
+                    key={`wantedagent-${a.id}-${index}`}
                     className={`flex items-center p-2 rounded-xl gap-2 ${
                       !(index & 1) && "bg-accent/40"
                     }`}
