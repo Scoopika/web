@@ -2,7 +2,6 @@
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { RawBoxData } from "@/types/rawBox";
-import { useTheme } from "next-themes";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import BoxEngineSelection from "./engineSelection";
 import { AgentData } from "@scoopika/types";

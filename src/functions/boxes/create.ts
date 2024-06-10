@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { RawBoxData } from "@/types/rawBox";
 import { randomUUID } from "crypto";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 
 export default async function createBox(
   payload: RawBoxData,
@@ -36,18 +37,16 @@ export default async function createBox(
   const id = randomUUID();
   payload.id = id;
 
-  try {
-    await db.box.create({
-      data: {
-        userId,
-        name: payload.name,
-        payload: JSON.stringify(payload),
-        id,
-      },
-    });
+  await db.box.create({
+    data: {
+      userId,
+      name: payload.name,
+      payload: JSON.stringify(payload),
+      id,
+    },
+  });
 
-    return { success: true, id };
-  } catch {
-    return { success: false };
-  }
+  await revalidatePath("/app/boxes");
+
+  return { success: true, id };
 }

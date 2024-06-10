@@ -1,3 +1,13 @@
 export { default } from "next-auth/middleware";
 
-export const config = { matcher: ["/app"] };
+export const config = {
+  matcher: [
+    "/app",
+    "/app/agents",
+    "/app/boxes",
+    "/app/new-box",
+    "/app/new-agent",
+    "/playground",
+    "/app/playground"
+  ],
+};

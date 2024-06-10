@@ -2,7 +2,7 @@
 
 import CheckItem from "@/components/checkItem";
 import getPlanData from "@/functions/plans/get";
-import { features, readPlan } from "@/scripts/plan";
+import { features, readPlan, readPlanType } from "@/scripts/plan";
 import { PlanData } from "@/types/planData";
 import { Button } from "@nextui-org/react";
 import { Session } from "next-auth";
@@ -24,41 +24,22 @@ import {
 } from "@/components/ui/alert-dialog";
 import cancelSub from "@/functions/plans/cancel";
 import resumeSub from "@/functions/plans/resume";
+import UpgradeDialog from "@/components/main/upgradeDialog";
 
 interface Props {
   session: Session;
-  planData: PlanData | undefined;
-  setPlanData: Dispatch<SetStateAction<PlanData | undefined>>;
+  planData: PlanData;
 }
 
-export default function BillingSettings({
-  session,
-  planData,
-  setPlanData,
-}: Props) {
+export default function BillingSettings({ session, planData }: Props) {
   const plan = session.user.plan;
   const isPro = plan === "none" || !plan.includes(":::") ? false : true;
+  const planType = readPlanType(plan);
   const [open, setOpen] = useState<boolean>(false);
   const [cancelOpen, setCancelOpen] = useState<boolean>(false);
   const [cancelLoading, setCancelLoading] = useState<boolean>(false);
   const [resumeOpen, setResumeOpen] = useState<boolean>(false);
   const [resumeLoading, setResumeLoading] = useState<boolean>(false);
-
-  const getPlan = async () => {
-    if (planData) return;
-
-    try {
-      const res = await getPlanData(readPlan(plan).id);
-
-      if (!res.success) {
-        throw new Error("plan error");
-      }
-
-      setPlanData(res.data);
-    } catch {
-      toast.error("Can't get plan data. try again later!");
-    }
-  };
 
   const cancel = async () => {
     if (!isPro || cancelLoading) return;
@@ -104,40 +85,19 @@ export default function BillingSettings({
     }
   };
 
-  useEffect(() => {
-    if (isPro) {
-      getPlan();
-    }
-  }, [session, planData]);
-
   return (
     <div className="w-full flex flex-col">
-      <p className="font-semibold">Billing</p>
-
       {!isPro && (
-        <div className="w-full p-4 border-1 rounded-lg mt-6">
+        <div className="w-full p-6 border-1 rounded-lg">
           <h2 className="font-semibold mb-2">Upgrade plan</h2>
-          <p className="text-sm opacity-80">
-            {"You're"} running on the free limited plan, upgrade your plan now
-            for more features like:
+          <p className="text-sm opacity-80 mb-2">
+            {"You're"} running on the free limited plan, upgrade to the basic or
+            scale plan for more features like higher audio characters, audio
+            inputs, custom agents knowledge, and much more! check the pricing
+            and pick your plan!
           </p>
 
-          <div className="w-full grid grid-cols-3 mt-6 flex gap-4 border-1 p-4 bg-accent/20 rounded-lg">
-            {features.map((feature, index) => (
-              <CheckItem key={`profeature-${index}`} title={feature} />
-            ))}
-          </div>
-
-          <Button
-            size="sm"
-            color="primary"
-            className="font-semibold mt-4"
-            as={Link}
-            href="/app/upgrade"
-            endContent={<FaChevronRight />}
-          >
-            Upgrade now
-          </Button>
+          <UpgradeDialog />
         </div>
       )}
 
@@ -146,11 +106,11 @@ export default function BillingSettings({
       )}
 
       {isPro && planData && (
-        <div className="w-full border-1 rounded-lg p-4 mt-6 flex items-center">
+        <div className="w-full border-1 rounded-lg p-6 flex items-center">
           <div className="flex flex-col gap-2 min-w-max w-full">
             <div className="w-full flex items-center">
               <div className="flex flex-col gap-2 min-w-max">
-                <h3 className="font-semibold">Current plan: Pro</h3>
+                <h3 className="font-semibold">Current plan: {planType}</h3>
                 <p className="text-sm opacity-70">
                   Plan ID: #{readPlan(plan).id}
                 </p>
@@ -206,7 +166,7 @@ export default function BillingSettings({
                 Next billing date:{" "}
                 {String(planData?.data?.attributes?.renews_at || "").substring(
                   0,
-                  10,
+                  10
                 )}
               </div>
               <div className="w-full flex items-center justify-end">
@@ -224,8 +184,9 @@ export default function BillingSettings({
             <AlertDialogContent>
               <AlertDialogTitle>Are you sure?</AlertDialogTitle>
               <AlertDialogDescription>
-                Your plan will stay be active but {"won't"} be renewed next
-                month. data might take few seconds to update!
+                Your plan will stay active until the next billing date and{" "}
+                {"won't"} be renewed next month. data might take few minutes to
+                update!
               </AlertDialogDescription>
               <div className="w-full flex items-center justify-end gap-3 mt-2">
                 <Button
@@ -243,11 +204,10 @@ export default function BillingSettings({
                 </Button>
                 <Button
                   size="sm"
-                  color="danger"
                   variant="flat"
                   isLoading={cancelLoading}
                   onPress={() => cancel()}
-                  className="font-semibold"
+                  className="font-semibold border border-red-500"
                 >
                   Cancel plan
                 </Button>

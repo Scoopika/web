@@ -21,9 +21,9 @@ export default function ThemeToggle() {
       <DropdownMenuTrigger asChild>
         <Button
           size="sm"
-          variant="bordered"
+          variant="light"
           isIconOnly
-          className="border-1 shadow"
+          className="shadow"
           onPress={() => setOpen(true)}
         >
           <Icons.SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

@@ -5,8 +5,9 @@ import { configureLemonSqueezy } from "@/lib/lemonsqueezy";
 import { createCheckout } from "@lemonsqueezy/lemonsqueezy.js";
 import { getServerSession } from "next-auth";
 
-export default async function getCheckoutUrl(embed: boolean = false) {
+export default async function getCheckoutUrl(type: "basic" | "scale", embed: boolean = false) {
   const session = await getServerSession(authOptions);
+  const variant = type === "basic" ? process.env.BASIC_VARIANT : process.env.SCALE_VARIANT;
 
   if (!session) {
     return { success: false };
@@ -16,7 +17,7 @@ export default async function getCheckoutUrl(embed: boolean = false) {
 
   const checkout = await createCheckout(
     process.env.LEMONSQUEEZY_STORE_ID as string,
-    process.env.LEMONSQUEEZY_VARIANT_ID as string,
+    variant as string,
     {
       checkoutOptions: {
         embed,

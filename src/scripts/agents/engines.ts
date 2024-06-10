@@ -22,6 +22,10 @@ interface SpecificEngines {
   [x: string]: Engine;
 }
 
+export const modelsShortname: Record<string, string> = {
+  "accounts/fireworks/models/firefunction-v1": "firefunction-v1",
+};
+
 const engines: SpecificEngines = {
   openai: {
     name: "OpenAI",
@@ -48,6 +52,7 @@ const engines: SpecificEngines = {
         },
         {
           id: "gpt-4o",
+          recommended: true,
           options: {
             max_tokens: { min: 50, max: 4096, default: 500, step: 1 },
             temperature: { min: 0, max: 1, default: 0.5, step: 0.01 },

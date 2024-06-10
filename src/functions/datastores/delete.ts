@@ -2,13 +2,14 @@
 
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import generateSecret from "@/scripts/secret";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 
 export default async function deleteDataStore(
   id: string,
-  deploymentId: string,
-) {
-  if (!id || !deploymentId) {
+): Promise<{success: boolean}> {
+  if (!id) {
     return { success: false };
   }
 
@@ -18,26 +19,34 @@ export default async function deleteDataStore(
     return { success: false };
   }
 
-  const res = await fetch(
-    `${process.env.DENO_URL}/deployments/${deploymentId}`,
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${process.env.DENO_TOKEN}`,
-      },
-    },
-  );
+  const secret = generateSecret();
+  const source = process.env.SOURCE;
 
-  if (res.status !== 200) {
-    return { sucecss: false };
+  const res = await fetch(`${source}/private/deldb`, {
+    method: "DELETE",
+    headers: {
+      authorization: secret
+    },
+    body: JSON.stringify({
+      userId: session.user.id,
+      id
+    })
+  });
+
+  const data = await res.json();
+
+  if (!data || !data.success) {
+    return {success: false};
   }
 
-  await db.datastore.delete({
+  await db.historystore.delete({
     where: {
       userId: session.user.id,
       id,
     },
   });
+
+  await revalidatePath("/app/data-stores");
 
   return { success: true };
 }

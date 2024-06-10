@@ -75,3 +75,16 @@ model Datastore {
   deployment_id String
   url           String
 }
+
+model Historystore {
+  id     String @id @default(cuid())
+  userId String
+  name   String
+}
+
+model Apikeys {
+  id     String @id @default(cuid())
+  userId String
+  name   String
+  value  String
+}

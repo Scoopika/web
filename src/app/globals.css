@@ -32,7 +32,7 @@
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
     --brandblue: #68c6f9;
     --brandpink: #feb0c0;
     --brandgreen: #8ce99a;
@@ -229,4 +229,40 @@ html {
 
 .public-DraftEditorPlaceholder-inner {
   @apply absolute top-3 left-0 text-sm;
+}
+
+.markdown h1 {
+  @apply text-3xl font-bold mb-4;
+}
+
+.markdown h2 {
+  @apply text-2xl font-semibold mb-3;
+}
+
+.markdown h3 {
+  @apply text-xl font-semibold mb-3;
+}
+
+.markdown h4 {
+  @apply text-base font-semibold mb-3;
+}
+
+.markdown h5 {
+  @apply text-sm font-semibold mb-3;
+}
+
+.markdown p {
+  @apply mb-4;
+}
+
+.markdown ul {
+  @apply list-disc list-inside mb-4;
+}
+
+.markdown li {
+  @apply mb-2;
+}
+
+.markdown pre {
+  @apply p-4 rounded mb-4 border-1 rounded-xl overflow-auto max-w-[30rem] lg:max-w-[50rem];
 }

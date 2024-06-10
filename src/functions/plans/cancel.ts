@@ -2,6 +2,7 @@
 
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 
 export default async function cancelSub(id: string | number) {
   if (!id) {
@@ -30,6 +31,8 @@ export default async function cancelSub(id: string | number) {
     if ((data.errors && data.errors?.length > 0) || data.erro) {
       throw new Error("cancel error");
     }
+
+    await revalidatePath("/app", "layout");
 
     return { success: true };
   } catch {

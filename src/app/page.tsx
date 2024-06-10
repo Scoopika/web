@@ -2,9 +2,7 @@ import Navbar from "@/components/navbar";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { Button } from "@nextui-org/react";
-import { FiChevronRight } from "react-icons/fi";
 import { IoMdArrowRoundForward } from "react-icons/io";
-import { MdInfo } from "react-icons/md";
 import { RiRobot2Fill } from "react-icons/ri";
 import GridSmallBackground from "@/components/backgrounds/grid";
 import Features from "@/components/landing/features";
@@ -18,7 +16,6 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import darkTheme from "@/lib/codeTheme";
 import runCode from "@/components/code/run";
 import Footer from "@/components/footer";
-import TestScoopika from "@/components/testscoopika";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
