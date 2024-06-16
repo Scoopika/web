@@ -9,35 +9,43 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
-import { FaVideo, FaBook } from "react-icons/fa6";
+import { FaVideo, FaBook, FaGithub } from "react-icons/fa6";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Greeting from "@/components/main/greeting";
-import ResourceLink from "@/components/main/resourceLink";
+import { TbWorldBolt } from "react-icons/tb";
+import { LuExternalLink } from "react-icons/lu";
+import Footer from "@/components/footer";
 
 interface Props {
   session: Session;
 }
 
-const resources: { name: string; link: string }[] = [
+const developerResources: {
+  name: string;
+  description: string;
+  link: string;
+  icon: React.ReactNode;
+}[] = [
   {
-    name: "Agents",
-    link: "agents",
-  },
-  {
-    name: "Multi-agent boxes",
-    link: "multi-agent-boxes",
-  },
-  {
-    name: "Chat stores (long-term memory)",
-    link: "history-stores",
-  },
-  {
-    name: "Tools",
-    link: "tools",
+    name: "Documentation",
+    description:
+      "Clear in-depth documentation for how to use Scoopika and integrate it in your application for both server-side and client-side use",
+    link: "https://docs.scoopika.com",
+    icon: <FaBook size={17} />,
   },
   {
     name: "Web integration",
-    link: "guides/scoopika-for-the-web",
+    description:
+      "Learn how to build AI-powered web applications with Scoopika and how to run agents on the client-side with real-time streaming and client-side actions",
+    link: "https://docs.scoopika.com/guides/scoopika-for-the-web",
+    icon: <TbWorldBolt size={19} />,
+  },
+  {
+    name: "Open-source",
+    description:
+      "99% of Scoopika is open-sourced. Check the repositories of Scoopika to report issues, help us improve Scoopika, or just check how the code works",
+    link: "https://github.com/scoopika",
+    icon: <FaGithub size={19} />,
   },
 ];
 
@@ -57,13 +65,20 @@ const Home = async ({ session }: Props) => {
           title={`Welcome, ${session.user.name}!`}
           description="Let's get you started in few moments"
         />
-        <div className="w-24 h-20 bg-foreground/30 dark:bg-foreground/10 blur-2xl absolute top-0 left-0"></div>
-        <div className="w-full bg-accent border-1 dark:border-0 dark:bg-accent/20 rounded-2xl p-5">
+        <div className="w-full rounded-2xl p-5">
+          <div className="flex items-center gap-3 mb-4 text-sm">
+            <div className="w-8 h-8 bg-accent/50 border-1 rounded-lg flex items-center justify-center font-semibold text-lg">
+              1
+            </div>
+            <div className="opacity-80">First step</div>
+          </div>
           <h3 className="text-xl font-semibold mb-2">
-            Create your first agent
+            Create your first AI agent
           </h3>
-          <div className="text-sm opacity-80 mb-8">
-            Create and run your first AI agent in a minute
+          <div className="text-sm opacity-80 mb-8 lg:max-w-[70%]">
+            Create your first personalized AI assistant that can see, talk,
+            listen, and take actions. Creating an agent, testing it in in the
+            playground, and integrating it into your app takes about 5 minutes
           </div>
           <div className="flex items-center gap-4">
             <Button
@@ -86,20 +101,8 @@ const Home = async ({ session }: Props) => {
               startContent={<FaVideo />}
               endContent={<FaExternalLinkAlt />}
             >
-              Watch 2-minutes video
+              Watch 2-minutes guide video
             </Button>
-          </div>
-        </div>
-        <div className="mt-4">
-          <h3 className="text-xl font-semibold mb-4">Resources</h3>
-          <div className="flex flex-col gap-2">
-            {resources.map((r, index) => (
-              <ResourceLink
-                key={`resource-link-${index}`}
-                name={r.name}
-                link={`https://docs.scoopika.com/${r.link}`}
-              />
-            ))}
           </div>
         </div>
       </>
@@ -112,7 +115,6 @@ const Home = async ({ session }: Props) => {
         title={<Greeting text={session.user.name} />}
         description="Welcome back to your AI portal"
       />
-      <div className="w-24 h-20 bg-foreground/30 dark:bg-foreground/10 blur-2xl absolute top-0 left-0"></div>
 
       <div className="w-full flex items-center overflow-auto gap-4">
         {agentsData.map((agent, index) => (
@@ -123,7 +125,7 @@ const Home = async ({ session }: Props) => {
             <AvatarFallback>{agent.name.substring(0, 1)}</AvatarFallback>
             <AvatarImage
               src={agent.avatar}
-              className="border-1 border-black/20 dark:border-white/20"
+              className="border-1 border-black/20 dark:border-white/20 object-cover"
             ></AvatarImage>
             <Link
               href={`/app/agents/${agent.id}`}
@@ -135,52 +137,63 @@ const Home = async ({ session }: Props) => {
         ))}
       </div>
 
-      <div className="w-full bg-accent border-1 dark:border-0 dark:bg-accent/20 rounded-2xl p-5">
-        <h3 className="text-xl font-semibold mb-2">Integrate in your app!</h3>
-        <div className="text-sm opacity-80 mb-8">
-          Integrate and use Scoopika in your application. open-source,
-          type-safe, and free
+      <div className="pt-8 border-t-1 dark:border-accent/60">
+        <h3 className="text-lg font-semibold mb-8">Developer resources</h3>
+        <div className="w-full bg-accent dark:bg-accent/20 rounded-2xl p-5 mb-4">
+          <h3 className=" font-semibold mb-2">Integrate in your app!</h3>
+          <div className="text-sm opacity-80 mb-8">
+            Integrate and use Scoopika agents in your application. open-source,
+            type-safe, free, and easy to start!
+          </div>
+          <div className="flex flex-col md:flex-row md:items-center gap-4">
+            <Button
+              size="sm"
+              color="primary"
+              as={Link}
+              href="https://docs.scoopika.com/quickstart"
+              target="_blank"
+              className="font-semibold"
+              startContent={<FaVideo />}
+              endContent={<FaExternalLinkAlt />}
+            >
+              Watch 2-minutes video
+            </Button>
+            <Button
+              size="sm"
+              variant="flat"
+              as={Link}
+              href="https://docs.scoopika.com"
+              target="_blank"
+              className="font-semibold"
+              startContent={<FaBook />}
+              endContent={<FaExternalLinkAlt />}
+            >
+              Check documentation
+            </Button>
+          </div>
         </div>
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
-          <Button
-            size="sm"
-            color="primary"
-            as={Link}
-            href="https://docs.scoopika.com/quickstart"
-            target="_blank"
-            className="font-semibold"
-            startContent={<FaVideo />}
-            endContent={<FaExternalLinkAlt />}
-          >
-            Watch 2-minutes video
-          </Button>
-          <Button
-            size="sm"
-            variant="flat"
-            as={Link}
-            href="https://docs.scoopika.com"
-            target="_blank"
-            className="font-semibold"
-            startContent={<FaBook />}
-            endContent={<FaExternalLinkAlt />}
-          >
-            Check documentation
-          </Button>
-        </div>
-      </div>
-
-      <div className="mt-4">
-        <h3 className="text-xl font-semibold mb-4">Resources</h3>
-        <div className="flex flex-col gap-2">
-          {resources.map((r, index) => (
-            <ResourceLink
-              key={`resource-link-${index}`}
-              name={r.name}
-              link={`https://docs.scoopika.com/${r.link}`}
-            />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex gap-4">
+          {developerResources.map((r, index) => (
+            <Link
+              key={`developerresourceitem-${index}`}
+              href={r.link}
+              target="_blank"
+              className="p-5 border-1 rounded-2xl bg-accent/20 hover:border-black/20 dark:hover:border-white/20 min-h-max transition-all relative group"
+            >
+              <div className="w-10 h-10 flex items-center justify-center border-1 rounded-2xl bg-accent/20 mb-5">
+                {r.icon}
+              </div>
+              <div className="h-full flex flex-col">
+                <div className="font-semibold mb-1">{r.name}</div>
+                <div className="text-sm opacity-80">{r.description}</div>
+              </div>
+              <LuExternalLink className="absolute top-4 right-4 scale-0 group-hover:scale-100 transition-all" />
+            </Link>
           ))}
         </div>
       </div>
+
+      <Footer />
     </>
   );
 };

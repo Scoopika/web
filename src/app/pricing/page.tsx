@@ -116,16 +116,16 @@ export default async function Page() {
     {
       title: "Created agents",
       description: "The number of agents you can create",
-      free: "2 agents",
-      basic: "10 agents",
-      scale: "10 agents",
+      free: "2",
+      basic: "10",
+      scale: "10",
     },
     {
       title: "Multi-agent boxes",
       description: "The number of boxes you can create",
-      free: "1 box",
-      basic: "4 boxes",
-      scale: "4 boxes",
+      free: "1",
+      basic: "4",
+      scale: "4",
     },
     {
       id: "tools",
@@ -267,9 +267,8 @@ export default async function Page() {
               Pricing designed for developers
             </h1>
 
-            <p className="text-sm lg:text-base opacity-80 mt-4">
-              Open, transparent, and afforable pricing that adds yet another
-              feature to {"Scoopika's"} bag!
+            <p className="text-sm lg:text-base opacity-80 mt-4 pr-10">
+              Use Scoopika forever-free. only upgrade for extra features that deserve paying for
             </p>
           </div>
           <div className="w-full p-6 border-1 bg-accent/20 rounded-2xl">

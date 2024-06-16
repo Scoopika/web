@@ -126,7 +126,7 @@ export default function ApiKeys({
         Add API keys for the LLMs providers {"you"} use. you can add them here
         or pass them safely from your code
       </div>
-      <div className="w-full flex items-center gap-2">
+      <div className="w-full flex flex-col lg:flex-row lg:items-center gap-2">
         <Select onValueChange={(v) => setNewKeyName(v)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue
@@ -157,7 +157,7 @@ export default function ApiKeys({
         />
         <Button
           size="sm"
-          color="primary"
+          color="default"
           className="font-semibold min-w-24"
           isLoading={newKeyLoading}
           onPress={() => saveKey()}

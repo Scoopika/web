@@ -14,13 +14,13 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import PlaygroundChat from "./chat";
 import AppHead from "../../head";
 import Empty from "../../empty";
-import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
-import { RiVoiceprintFill } from "react-icons/ri";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import VoiceChat from "./voice";
+import PlaygroundAgentItem from "./agentItem";
 
 interface Props {
   agent: AgentData;
@@ -30,6 +30,7 @@ interface Props {
   token: string;
   userId: string;
   userAvatar?: string | null;
+  voice: boolean;
 }
 
 export default function Playground({
@@ -40,6 +41,7 @@ export default function Playground({
   pro,
   token,
   userId,
+  voice,
 }: Props) {
   const [apiKey, setApiKey] = useState<string | undefined>(
     agent
@@ -117,7 +119,12 @@ export default function Playground({
           description="Test your agents and chat with them (supports both text & voice chat)"
         />
         {agents.length > 0 ? (
-          <div>Pick an agent to start talking with:</div>
+          <div className="flex flex-col gap-1">
+            <div className="font-semibold">Your agents</div>
+            <div className="text-sm opacity-60">
+              Pick an agent to start talking with
+            </div>
+          </div>
         ) : (
           <Empty
             icon={<RiRobot2Fill />}
@@ -125,36 +132,12 @@ export default function Playground({
             description="Create an agent and test it in the playground totally for free. navigate to the agents page, create an agent in few seconds, then come back here to talk with it"
           />
         )}
-        <div className="w-full flex flex-col items-center justify-center p-6 pt-0">
+        <div className="w-full flex flex-col items-center justify-center">
           {agents.map((agent) => (
-            <Link
-              href={`/app/playground?id=${agent.id}`}
-              key={`pick-agentitem-${agent.id}`}
-              className={`flex items-center gap-3 p-3 cursor-pointer rounded-xl hover:bg-accent/30 transition-all w-full mb-3`}
-            >
-              {agent.avatar ? (
-                <img
-                  src={agent.avatar}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-              ) : (
-                <div className="w-12 h-12 rounded-full flex items-center justify-center bg-accent">
-                  <RiRobot2Fill />
-                </div>
-              )}
-              <div className="flex flex-col w-full">
-                <div className="font-semibold flex items-center gap-2">
-                  {agent.name}
-                  <HiOutlineChatBubbleBottomCenterText className="opacity-80" />
-                  <RiVoiceprintFill className="opacity-80" />
-                </div>
-                <div className="flex items-center gap-1 text-xs opacity-70">
-                  {agent.description}
-                </div>
-              </div>
-              <FaChevronRight />
-              <div className=""></div>
-            </Link>
+            <PlaygroundAgentItem
+              key={`playground-agent-item-${agent.id}`}
+              agent={agent}
+            />
           ))}
         </div>
       </>
@@ -248,14 +231,22 @@ export default function Playground({
   }
 
   return (
-    <PlaygroundChat
-      userId={userId}
-      userAvatar={userAvatar}
-      agent={agent}
-      token={token}
-      engines={engines}
-      setEngines={setEngines}
-      pro={pro}
-    />
+    <>
+      {!voice ? (
+        <PlaygroundChat
+          userId={userId}
+          agent={agent}
+          token={token}
+          engines={engines}
+        />
+      ) : (
+        <VoiceChat
+          userId={userId}
+          agent={agent}
+          token={token}
+          engines={engines}
+        />
+      )}
+    </>
   );
 }

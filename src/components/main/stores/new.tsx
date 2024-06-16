@@ -52,8 +52,8 @@ export default function NewHistoryStore() {
       <DialogTrigger asChild>
         <Button
           size="sm"
-          color="primary"
-          className="font-semibold"
+          variant="bordered"
+          className=""
           startContent={<FaPlus />}
         >
           New history store

@@ -26,9 +26,14 @@ export const modelsShortname: Record<string, string> = {
   "accounts/fireworks/models/firefunction-v1": "firefunction-v1",
 };
 
+export const defaultOptions = {
+  max_tokens: { min: 50, max: 4096, default: 500, step: 1 },
+  temperature: { min: 0, max: 1, default: 0.3, step: 0.01 },
+};
+
 const engines: SpecificEngines = {
   openai: {
-    name: "OpenAI",
+    name: "Open AI",
     models: {
       text: [
         {
@@ -39,15 +44,6 @@ const engines: SpecificEngines = {
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
             frequency_penalty: { min: 0, max: 1, default: 1, step: 0.01 },
             presence_penalty: { min: 0, max: 1, default: 1, step: 0.01 },
-          },
-        },
-        {
-          id: "gpt-3.5-turbo-0125",
-          recommended: true,
-          options: {
-            max_tokens: { min: 50, max: 4096, default: 1024, step: 1 },
-            temperature: { min: 0, max: 1, default: 0.5, step: 0.01 },
-            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
           },
         },
         {
@@ -69,34 +65,9 @@ const engines: SpecificEngines = {
           },
         },
         {
-          id: "gpt-4-0125-preview",
-          recommended: true,
-          options: {
-            max_tokens: { min: 50, max: 4096, default: 500, step: 1 },
-            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
-            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-          },
-        },
-        {
           id: "gpt-4",
           options: {
             max_tokens: { min: 50, max: 8192, default: 500, step: 1 },
-            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
-            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-          },
-        },
-        {
-          id: "gpt-4-32k",
-          options: {
-            max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
-            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
-            top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-          },
-        },
-        {
-          id: "gpt-4-32k-0613",
-          options: {
-            max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
           },
@@ -115,7 +86,7 @@ const engines: SpecificEngines = {
     },
   },
   google: {
-    name: "Google Gemini",
+    name: "Google Gemini (beta)",
     models: {
       text: [
         {
@@ -133,7 +104,7 @@ const engines: SpecificEngines = {
     },
   },
   together: {
-    name: "Together AI",
+    name: "Together",
     models: {
       text: [
         {
@@ -162,7 +133,7 @@ const engines: SpecificEngines = {
     },
   },
   fireworks: {
-    name: "Fireworks AI",
+    name: "Fireworks",
     models: {
       text: [
         {
@@ -180,6 +151,8 @@ const engines: SpecificEngines = {
     },
   },
 };
+
+export const providers = Object.keys(engines).map((k) => k);
 
 export const getEngines = (type: Prompt["type"]) => {
   if (type === "json") {
@@ -213,7 +186,7 @@ export const getOptions = (prompt: Prompt): Model["options"] => {
   if (!engine) return {};
 
   const model = engine.models[prompt.type].filter(
-    (m) => m.id === prompt.model,
+    (m) => m.id === prompt.model
   )[0];
   if (!model) return {};
 
@@ -224,7 +197,7 @@ export const getDefaultOptions = (options: Model["options"]) => {
   const defaultValues: Record<string, any> = {};
 
   Object.keys(options).map(
-    (key) => (defaultValues[key] = options[key].default),
+    (key) => (defaultValues[key] = options[key].default)
   );
 
   return defaultValues;

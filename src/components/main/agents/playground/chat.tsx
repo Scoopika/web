@@ -2,21 +2,20 @@
 
 import { Button } from "@nextui-org/react";
 import { Agent, Client } from "@scoopika/client";
-import {
-  AgentData,
-  Inputs,
-  LLMToolCall,
-  RawEngines,
-  RunHistory,
-} from "@scoopika/types";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { AgentData, LLMToolCall, RawEngines } from "@scoopika/types";
+import { useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
 import { LuImagePlus } from "react-icons/lu";
 import { RiRobot2Fill, RiVoiceprintLine } from "react-icons/ri";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { FaCheck, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import {
+  FaCheck,
+  FaChevronLeft,
+  FaChevronRight,
+  FaRocket,
+} from "react-icons/fa6";
 import Code from "../../code";
-import { MdContentCopy } from "react-icons/md";
+import { MdContentCopy, MdInfo } from "react-icons/md";
 import { toast } from "sonner";
 import remarkHtml from "remark-html";
 import { remark } from "remark";
@@ -27,14 +26,12 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useChatState } from "./state";
 
 interface Props {
   userId: string;
-  userAvatar?: string | null;
   agent: AgentData;
   engines: RawEngines;
-  setEngines: Dispatch<SetStateAction<RawEngines>>;
-  pro: boolean;
   token: string;
 }
 
@@ -42,12 +39,10 @@ const UserMessage = ({
   text,
   images,
   openImage,
-  avatar,
 }: {
   text: string;
   images: string[];
   openImage: (i: string) => any;
-  avatar?: string | null;
 }) => {
   return (
     <div className="flex w-full justify-end gap-4 lg:p-4">
@@ -135,138 +130,66 @@ const AgentMessage = ({
 export default function PlaygroundChat({
   agent,
   engines,
-  setEngines,
-  pro,
   token,
   userId,
-  userAvatar,
 }: Props) {
-  const [client, setClient] = useState<Client>(
-    new Client(
-      `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${agent.id}`
-    )
+  const client = new Client(
+    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${agent.id}`
   );
-  const [agentInstance, setAgentInstance] = useState<Agent>(
-    new Agent(agent.id, client)
-  );
+  const agentInstance = new Agent(agent.id, client);
 
-  const [inputFocus, setInputFocus] = useState<boolean>(false);
-  const [message, setMessage] = useState<string | undefined>("");
-  const [images, setImages] = useState<string[]>([]);
-  const [openImage, setOpenImage] = useState<string | undefined>(undefined);
+  const {
+    changeSession,
+    messages,
+    status,
+    loading,
+    generating,
+    streamPlaceholder,
+    newRequest,
+  } = useChatState(client, agentInstance, {
+    agent_name: agent.name,
+    scroll: () => {
+      const elm = document.getElementById("bottom-div");
+      if (elm) elm.scrollIntoView();
+    },
+  });
+
   const [openTool, setOpenTool] = useState<
     { call: LLMToolCall; result: any } | undefined
-  >(undefined);
-  const [messages, setMessages] = useState<RunHistory[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [session, setSession] = useState<string>(crypto.randomUUID());
-  const [goingMessage, setGoingMessage] = useState<string>("");
-  const [goingTools, setGoingTools] = useState<
-    { call: LLMToolCall; result: any }[]
-  >([]);
-  const [status, setStatus] = useState<string | undefined>(undefined);
-  const [recordOpen, setRecordOpen] = useState<boolean>(false);
-  const [isRecording, setIsRecording] = useState<boolean>(false);
-  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const audioChunksRef = useRef<Blob[]>([]);
+  >();
+  const [inputFocus, setInputFocus] = useState<boolean>(false);
+  const [textInput, setTextInput] = useState<string>("");
+  const [images, setImages] = useState<string[]>([]);
+  const [openImage, setOpenImage] = useState<string | undefined>(undefined);
   const [back, setBack] = useState<boolean>(false);
 
-  const scroll = () => {
-    const elm = document.getElementById("bottom-div");
-
-    if (elm) elm.scrollIntoView();
-  };
-
   const run = async () => {
-    if (loading) return;
+    if (loading || generating || textInput.length < 1) return;
 
     const elm = document.getElementById("chat-input") as HTMLInputElement;
-
-    if (elm) {
-      elm.value = "";
-      elm.focus();
-    }
-
-    if (!message || message.length < 1) return;
-    const run = crypto.randomUUID();
-
-    const request: RunHistory = {
-      role: "user",
-      at: Date.now(),
-      run_id: "",
-      session_id: "",
-      request: {
-        message: message || "",
-        session_id: session,
-        run_id: run,
-        plug: {
-          images: images.length > 0 ? [...images] : undefined,
-        },
-      },
-    };
-
-    setLoading(true);
-    setMessages((prev) => [...prev, request]);
-    setImages([]);
-    scroll();
+    elm.value = "";
 
     await fetch(`https://scoopika-run-35.deno.dev/add-client/${userId}`, {
       method: "POST",
       body: JSON.stringify({ token, engines }),
     });
 
-    setStatus("Thinking");
-    try {
-      await agentInstance.run({
-        inputs: {
-          message,
-          session_id: session,
-          run_id: run,
-          plug: request.request.plug,
-        } as Inputs,
-        hooks: {
-          onStart: async () => {
-            setMessage("");
-            setImages([]);
-            const messages = await client.store.getSessionRuns(session);
-            await setMessages(messages);
-            scroll();
-          },
-          onToken: async (t) => {
-            setStatus(undefined);
-            await setGoingMessage((prev) => (prev += t));
-            scroll();
-          },
-          onToolCall: (call) => {
-            setStatus("Talking with " + call.function.name);
-          },
-          onToolResult: (res) => {
-            setGoingTools((prev) => [...prev, res]);
-            setStatus("Thinking");
-          },
-          onFinish: async () => {
-            setStatus(undefined);
-            const messages = await client.store.getSessionRuns(session);
-            setGoingMessage("");
-            setGoingTools([]);
-            setMessages(messages);
-            scroll();
-          },
+    setTextInput("");
+    setImages([]);
+    await newRequest({
+      inputs: {
+        message: textInput,
+        images,
+      },
+      hooks: {
+        onError: () => {
+          toast.error("We had an issue. sorry :(", {
+            description:
+              "Try refreshing the page. this can be due to the session expiring",
+          });
         },
-      });
-    } catch {
-      toast.error("Sorry. had an error running this time :(", {
-        description:
-          (request?.request?.plug?.images || []).length !== 0
-            ? "Make sure the LLM powering the agent supports vission"
-            : "There was a problem in the LLM or on our side refresh and try again",
-      });
-    } finally {
-      setGoingMessage("");
-      setLoading(false);
-      setStatus(undefined);
-    }
+      },
+    });
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -285,45 +208,6 @@ export default function PlaygroundChat({
     Promise.all(imageFiles)
       .then((imagePreviews) => setImages((prev) => [...prev, ...imagePreviews]))
       .catch((_error) => toast.error("Can't read uploaded image(s)"));
-  };
-
-  const startRecording = async (): Promise<void> => {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      alert("Your browser does not support audio recording.");
-      return;
-    }
-
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorderRef.current = mediaRecorder;
-
-      mediaRecorder.ondataavailable = (event: BlobEvent) => {
-        if (event.data.size > 0) {
-          audioChunksRef.current.push(event.data);
-        }
-      };
-
-      mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunksRef.current, {
-          type: "audio/webm",
-        });
-        setAudioBlob(audioBlob);
-        audioChunksRef.current = [];
-      };
-
-      mediaRecorder.start();
-      setIsRecording(true);
-    } catch (error) {
-      console.error("Error accessing audio devices:", error);
-    }
-  };
-
-  const stopRecording = (): void => {
-    if (mediaRecorderRef.current) {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-    }
   };
 
   return (
@@ -363,25 +247,34 @@ export default function PlaygroundChat({
           </Button>
         </DropdownMenuContent>
       </DropdownMenu>
-      <div className="w-full flex flex-col items-center justify-center gap-3 mt-10">
-        {agent.avatar ? (
-          <img
-            src={agent.avatar}
-            className="w-10 h-10 rounded-full object-cover"
-          />
-        ) : (
-          <div className="w-10 h-10 rounded-full flex items-center justify-center bg-accent">
-            <RiRobot2Fill />
-          </div>
-        )}
-        <div className="text-sm opacity-80">Chatting with {agent.name}</div>
+      <div className="text-xs text-center w-full mt-2 flex justify-center">
+        <Link href="https://docs.scoopika.com/guides/build-scoopika-playground" target="_blank" className="text-center p-1.5 pl-3 pr-3 border-1 rounded-lg md:rounded-full bg-accent/20 md:max-w-[80%] flex md:items-center gap-2 group hover:border-black/20 dark:hover:border-white/20 transition-all">
+          <FaRocket />
+          <div className="text-start md:text-center">This playground is built using Scoopika, learn how</div>
+        </Link>
       </div>
-      <div className="w-full flex items-center pr-6 pl-6">
-        <div className="text-xs opacity-80 text-center w-full mt-2 mb-8 flex justify-center">
-          <p className="text-center md:max-w-[80%]">
-            This playground <b className="underline">is built using Scoopika</b>
-            . Notice that the session is not saved and will reset after a while
-          </p>
+      <div className={`p-14 relative mt-10 ${messages.length > 0 && "hidden"}`}>
+        <div className="absolute w-full border-t-1 left-0 top-4"></div>
+        <div className="absolute w-full border-t-1 left-0 bottom-4"></div>
+        <div className="absolute h-full border-r-1 left-4 top-0"></div>
+        <div className="absolute h-full border-r-1 right-4 top-0"></div>
+        <div className="w-full flex flex-col items-center justify-center gap-3">
+          {agent.avatar ? (
+            <img
+              src={agent.avatar}
+              className="w-10 h-10 rounded-full object-cover"
+            />
+          ) : (
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-accent">
+              <RiRobot2Fill />
+            </div>
+          )}
+          <div className="text-sm opacity-80">Chatting with {agent.name}</div>
+        </div>
+        <div className="w-full flex items-center text-center text-xs opacity-80 mt-6 lg:pr-6 lg:pl-6">
+          You might face problems in long-going chats due to the fact that this
+          playground uses an in-memory store in a Serverless environment and
+          sessions are not persistent
         </div>
       </div>
       <div className="w-full flex-col flex items-center justify-end gap-4 lg:p-10 lg:pr-14 lg:pl-14">
@@ -400,28 +293,27 @@ export default function PlaygroundChat({
 
           return (
             <UserMessage
-            key={`usermessage-${index}`}
+              key={`usermessage-${index}`}
               openImage={setOpenImage}
-              avatar={userAvatar}
               text={`${message?.request?.message}`}
-              images={message?.request?.plug?.images || []}
+              images={message?.request?.images || []}
             />
           );
         })}
 
-        {goingMessage && goingMessage.length > 0 && (
+        {streamPlaceholder && streamPlaceholder.response.content.length > 0 && (
           <AgentMessage
             openTool={setOpenTool}
-            content={`${goingMessage}`}
+            content={`${streamPlaceholder.response.content}`}
             avatar={agent.avatar}
-            toolCalls={goingTools}
+            toolCalls={streamPlaceholder.response.tools_calls}
           />
         )}
 
         <div id="bottom-div"></div>
       </div>
 
-      <div className="flex justify-end flex-col md:flex-row md:items-center gap-4 fixed bottom-36 md:bottom-20 right-8 border-black/20 dark:border-white/20">
+      <div className="flex justify-end flex-col md:flex-row md:items-center gap-4 fixed bottom-20 right-8 border-black/20 dark:border-white/20">
         {typeof status === "string" && (
           <Button
             size="sm"
@@ -437,26 +329,25 @@ export default function PlaygroundChat({
           variant="bordered"
           className="font-semibold text-red-500 border-1 backdrop-blur"
           startContent={<IoMdTrash />}
-          onPress={() => {
-            setSession(crypto.randomUUID());
-            setMessages([]);
-          }}
+          onPress={() => changeSession()}
         >
           Clear session
         </Button>
         <Button
           size="sm"
           variant="bordered"
-          className="font-semibold border-1 backdrop-blur"
+          className="font-semibold border-1 backdrop-blur hidden lg:flex"
           startContent={<RiVoiceprintLine size={16} />}
           endContent={<FaChevronRight />}
+          as={Link}
+          href={`/app/playground?id=${agent.id}&voice=y`}
         >
           Switch to voice chat
         </Button>
       </div>
 
       {/** Message bar */}
-      <div className="fixed bottom-0 left-0 flex flex-col items-center justify-center w-full p-4 md:pl-80 md:pr-6 pb-20 md:pb-4 min-h-max gap-4">
+      <div className="fixed bottom-0 left-0 flex flex-col items-center justify-center w-full p-4 md:pl-80 md:pr-6 md:pb-4 min-h-max gap-4">
         <div
           onFocus={() => setInputFocus(true)}
           onBlur={() => setInputFocus(false)}
@@ -467,7 +358,10 @@ export default function PlaygroundChat({
           {images.length > 0 && (
             <div className="flex items-center p-2 pb-0 gap-4">
               {images.map((image, index) => (
-                <div key={`imagepreview-${index}`} className="w-12 h-12 relative group">
+                <div
+                  key={`imagepreview-${index}`}
+                  className="w-12 h-12 relative group"
+                >
                   <img
                     src={image}
                     className="w-12 h-12 bg-accent rounded-xl object-cover border-1 relative"
@@ -514,25 +408,12 @@ export default function PlaygroundChat({
               id="chat-input"
               onInput={(e) => {
                 const value = e?.currentTarget?.value;
-                setMessage(value);
+                setTextInput(value);
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") run();
               }}
             />
-            {/* {!loading && (
-              <Button
-                size="sm"
-                variant="light"
-                isIconOnly
-                startContent={<FaMicrophone size={14} />}
-                onPress={() => {
-                  setRecordOpen(true);
-                  setIsRecording(true);
-                  startRecording();
-                }}
-              />
-            )} */}
             <Button
               size="sm"
               variant="flat"
@@ -544,32 +425,6 @@ export default function PlaygroundChat({
           </div>
         </div>
       </div>
-
-      <Dialog open={recordOpen} onOpenChange={setRecordOpen}>
-        <DialogContent>
-          <div className="font-semibold">Record voice</div>
-          {isRecording ? (
-            <div className="w-full flex flex-col gap-4 items-center justify-center">
-              <div>Recording...</div>
-              <Button size="sm" color="primary">
-                Submit recording
-              </Button>
-              <Button
-                size="sm"
-                variant="flat"
-                onPress={() => {
-                  stopRecording();
-                  setRecordOpen(false);
-                }}
-              >
-                Cancel recording
-              </Button>
-            </div>
-          ) : (
-            <></>
-          )}
-        </DialogContent>
-      </Dialog>
 
       {openImage && (
         <Dialog

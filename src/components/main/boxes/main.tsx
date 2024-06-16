@@ -52,9 +52,8 @@ export default function BoxesMain({ boxes }: Props) {
           >
             <Button
               size="sm"
-              color="primary"
+              variant="bordered"
               startContent={<FaPlus />}
-              className="font-semibold"
               onPress={() => setEditBox(undefined)}
             >
               Create new box
@@ -62,8 +61,6 @@ export default function BoxesMain({ boxes }: Props) {
           </NewBox>
         }
       />
-
-      <div className="w-24 h-20 bg-foreground/40 dark:bg-foreground/10 blur-2xl absolute top-0 left-0"></div>
 
       {boxes.length < 1 && (
         <Empty

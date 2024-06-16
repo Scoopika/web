@@ -13,11 +13,16 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import AgentLLM from "./llm";
 import LLMOptions from "./llmOptions";
 import { Button } from "@nextui-org/react";
-import { FaChevronRight } from "react-icons/fa6";
+import { FaCheck, FaChevronRight } from "react-icons/fa6";
 import itemValue from "@/scripts/itemValue";
 import { toast } from "sonner";
 import tryRequest from "@/scripts/tryRequest";
 import createAgent from "@/functions/agents/create";
+
+const voices = [
+  { id: "aura-orpheus-en", name: "Orpheus", type: "American male" },
+  { id: "aura-luna-en", name: "Luna", type: "American female" },
+];
 
 export default function NewAgent() {
   const [noAvatar, setNoAvatar] = useState<boolean>(false);
@@ -27,6 +32,7 @@ export default function NewAgent() {
     id: crypto.randomUUID(),
     name: "",
     description: "",
+    voice: voices[0].id,
     chained: false,
     prompts: [
       {
@@ -113,7 +119,7 @@ export default function NewAgent() {
       </SettingsRow>
       <SettingsRow
         title="LLM"
-        description={`Select the large language model powering this agent`}
+        description="Select the large language model powering this agent. you can extend the supported providers or input custom LLMs (a fine-tuned GPT for example). learn more in the providers docs"
       >
         <AgentLLM agent={agent} updateAgent={setAgent} />
         <LLMOptions agent={agent} updateAgent={setAgent} />
@@ -135,12 +141,32 @@ export default function NewAgent() {
           }}
         />
       </SettingsRow>
+      <SettingsRow
+        title="Change voice"
+        description="Change the voice that this agent will use when speaking"
+      >
+        <div className="flex flex-wrap gap-4">
+          {voices.map((v, index) => (
+            <Button
+              key={`voiceselect-${index}`}
+              className="font-semibold"
+              size="sm"
+              variant={agent.voice === v.id ? "solid" : "bordered"}
+              color="default"
+              onPress={() => setAgent(prev => ({...prev, voice: v.id}))}
+              startContent={agent.voice === v.id && <FaCheck />}
+            >
+              {v.name}: {v.type}
+            </Button>
+          ))}
+        </div>
+      </SettingsRow>
       <p className="text-xs opacity-70 mt-3">
-        Custom voice, knowledge, tools, and companions can be set later
+        Knowledge, tools, and companions can be set later
       </p>
       <div className="w-full flex items-center justify-end p-4">
         <Button
-          size="md"
+          size="sm"
           color="primary"
           className="font-semibold w-full lg:max-w-max"
           endContent={<FaChevronRight />}

@@ -9,6 +9,8 @@ import { getServerSession, Session } from "next-auth";
 import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 
+export const maxDuration = 60;
+
 export default async function NewAgentPage() {
   const session = (await getServerSession(authOptions)) as Session;
   const agents = await db.agent.findMany({

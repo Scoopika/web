@@ -88,3 +88,12 @@ model Apikeys {
   name   String
   value  String
 }
+
+model Knowledge {
+  id      String @id @default(cuid())
+  userId  String
+  agentId String
+  fileId  String
+  name    String
+  vectors String
+}

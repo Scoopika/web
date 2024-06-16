@@ -25,10 +25,14 @@ export default async function generateAvatar(
       method: "POST",
       body: JSON.stringify({
         inputs: prompt,
+        options: {
+          wait_for_model: true
+        }
       }),
     }
   );
 
+  console.log(response.status);
   if (!response.ok) {
     return { success: false };
   }

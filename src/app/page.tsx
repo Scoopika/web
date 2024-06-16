@@ -16,6 +16,10 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import darkTheme from "@/lib/codeTheme";
 import runCode from "@/components/code/run";
 import Footer from "@/components/footer";
+import { SparklesCore } from "@/components/ui/sparkles";
+import { FlipWords } from "@/components/ui/flip-words";
+
+const words: string[] = ["see", "talk", "listen", "take actions"];
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -25,44 +29,29 @@ export default async function Home() {
       <Navbar session={session} active="Home" />
       {/* <TestScoopika /> */}
 
-      <div className="flex flex-col items-center gap-3 w-full">
-        <GridSmallBackground className="flex flex-col items-center relative gap-3 pt-36 w-full">
-
-          <h1 className="text-3xl md:text-4xl lg:text-6xl font-semibold text-center mb-3 flex items-center gap-3">
-            <span className="text-violet-600 dark:text-violet-500 flex items-center gap-1">
-              <RiRobot2Fill />
-              AI Virtual Assistants
-            </span>{" "}
-          </h1>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-5">
-            For Your Application
-          </h1>
-          <div className="mt-2 opacity-90 text-center text-base max-w-[90%] lg:max-w-[50%] mb-16">
-            Easily integrate AI assistants equipped with external tools
-            into your app.<br /> Data validation & type-safety, errors recovery, real-time
-            streaming, and managed long-term memory out-of-the-box
-          </div>
-          <Button
-            size="lg"
-            color="primary"
-            variant="bordered"
-            radius="sm"
-            className="font-bold border-1 border-black/30 border-t-black/60 dark:border-white/30 dark:border-t-white/60 hover:bg-accent/40 backdrop-blur"
-            endContent={<IoMdArrowRoundForward />}
-            as={Link}
-            href="/app"
-          >
-            Start for free
-          </Button>
-          <p className="text-sm opacity-80 pb-16">
-            Connect your LLMs - Pay only for extra features
-          </p>
-        </GridSmallBackground>
+      <div className="h-screen relative w-full flex flex-col items-center pt-48 overflow-hidden rounded-md">
+        <div className="w-full absolute inset-0 h-screen">
+          {/* <SparklesCore
+            id="tsparticlesfullpage"
+            background="transparent"
+            minSize={0.6}
+            maxSize={1.4}
+            particleDensity={100}
+            className="w-full h-full"
+            particleColor="#919191"
+          /> */}
+        </div>
+        <h1 className="text-3xl md:text-4xl font-semibold relative text-center z-20 min-w-96">
+          AI Agents for your web app
+          <br /> that can see, talk, listen, and take actions
+        </h1>
+        <p className="opacity-70 text-center lg:max-w-[50%] mt-6">
+          Meet the modern standard for creating personalized AI agents for your
+          web applications. Fast and reliable out of the box
+        </p>
       </div>
 
-      <div className="flex flex-col items-center mb-48">
-        <Features />
-      </div>
+      <div className="w-full"></div>
 
       <div className="flex flex-col items-center mb-48">
         <div className="w-[80%] flex flex-col items-center">

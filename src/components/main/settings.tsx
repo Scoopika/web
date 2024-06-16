@@ -14,9 +14,9 @@ import { Button, User } from "@nextui-org/react";
 import { Input } from "../ui/input";
 import tryRequest from "@/scripts/tryRequest";
 import newToken from "@/functions/tokens/new";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { FaCopy } from "react-icons/fa6";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdSettings } from "react-icons/md";
 import deleteTokenForever from "@/functions/tokens/delete";
 import ApiKeys from "./apikeys";
 import { CiLogout } from "react-icons/ci";
@@ -116,21 +116,13 @@ export default function Settings({ session }: Props) {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Avatar className="relative group cursor-pointer w-8 h-8">
-          <AvatarFallback>
-            {(session?.user?.name || "").substring(0, 1)}
-          </AvatarFallback>
-          {session?.user?.image && (
-            <AvatarImage
-              src={session?.user?.image}
-              className="border-1 border-black/20 dark:border-white/20 object-cover"
-            ></AvatarImage>
-          )}
-        </Avatar>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-background/90 border-black/20 dark:border-white/20 backdrop-blur-xl p-5 min-w-96 max-w-96 mr-5 max-h-[80vh] overflow-auto flex flex-col gap-6">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button size="sm" variant="light" isIconOnly className="group">
+          <MdSettings size={16} className="opacity-60 group-hover:opacity-100 transition-all" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-screen">
         <div className="w-full">
           <div className="mb-3 text-sm">Profile</div>
           <div className="w-full flex items-center">
@@ -160,12 +152,13 @@ export default function Settings({ session }: Props) {
           </div>
         </div>
 
+        <div className="w-full border-t-1 mt-3"></div>
         <div className="w-full flex flex-col">
           <div className="mb-2 text-sm">Tokens</div>
           <div className="text-xs opacity-70 mb-4">
             Access tokens used to run Scoopika in your app
           </div>
-          <div className="w-full flex items-center gap-2">
+          <div className="w-full flex flex-col md:flex-row md:items-center gap-2">
             <Input
               defaultValue={newTokenName}
               placeholder="New token name (eg. dev)"
@@ -182,7 +175,7 @@ export default function Settings({ session }: Props) {
             />
             <Button
               size="sm"
-              color="primary"
+              color="default"
               className="font-semibold min-w-24"
               isLoading={newTokenLoading}
               onPress={() => generateToken()}
@@ -291,7 +284,7 @@ export default function Settings({ session }: Props) {
             </DialogContent>
           </Dialog>
         )}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </DialogContent>
+    </Dialog>
   );
 }

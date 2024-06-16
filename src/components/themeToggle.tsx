@@ -57,3 +57,39 @@ export default function ThemeToggle() {
     </DropdownMenu>
   );
 }
+
+export function ThemeToggleRow() {
+  const { systemTheme, theme, setTheme } = useTheme();
+
+  return (
+    <div className="flex items-center gap-2 w-full">
+      <Button
+        isIconOnly
+        size="sm"
+        variant="light"
+        className="opacity-70"
+        onPress={() => setTheme("system")}
+      >
+        <Icons.LaptopIcon />
+      </Button>
+      <Button
+        isIconOnly
+        size="sm"
+        className={`${theme === "light" ? "opacity-100" : "opacity-70"}`}
+        variant={theme === "light" ? "flat" : "light"}
+        onPress={() => setTheme("light")}
+      >
+        <Icons.SunIcon />
+      </Button>
+      <Button
+        isIconOnly
+        size="sm"
+        className={`${theme === "dark" ? "opacity-100" : "opacity-70"}`}
+        variant={theme === "dark" ? "flat" : "light"}
+        onPress={() => setTheme("dark")}
+      >
+        <Icons.MoonIcon />
+      </Button>
+    </div>
+  );
+}

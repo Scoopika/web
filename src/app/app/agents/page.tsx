@@ -12,6 +12,7 @@ import Link from "next/link";
 import ResourceLink from "@/components/main/resourceLink";
 import AgentItem from "@/components/main/agents/item";
 import Empty from "@/components/main/empty";
+import Footer from "@/components/footer";
 
 interface Props {
   session: Session;
@@ -34,8 +35,7 @@ const Agents = async ({ session }: Props) => {
         action={
           <Button
             size="sm"
-            color="primary"
-            className="font-semibold"
+            variant="bordered"
             startContent={<FaPlus />}
             as={Link}
             href="/app/new-agent"
@@ -44,8 +44,6 @@ const Agents = async ({ session }: Props) => {
           </Button>
         }
       />
-
-      <div className="w-24 h-20 bg-foreground/40 dark:bg-foreground/10 blur-2xl absolute top-0 left-0"></div>
 
       {agentsData.length < 1 && (
         <Empty
@@ -67,19 +65,30 @@ const Agents = async ({ session }: Props) => {
       )}
 
       {agentsData.length > 0 && (
-        <div className="w-full flex flex-wrap gap-4 justify-center lg:justify-start mt-4">
-          {agentsData.map((agent, index) => (
-            <AgentItem key={`agent-item-${index}`} agent={agent} />
-          ))}
+        <div className="w-full flex flex-col">
+          <div className="w-full p-3 pl-6 pr-6 rounded-lg bg-accent dark:bg-accent/30 text-sm flex items-center">
+            <div className="w-full">
+              Agent
+            </div>
+            <div className="w-full hidden lg:block">
+              Links
+            </div>
+          </div>
+          <div className="w-full flex flex-col">
+            {agentsData.map((agent, index) => (
+              <AgentItem key={`agent-item-${index}`} agent={agent} />
+            ))}
+          </div>
         </div>
       )}
 
-      <div className="mt-3 border-t-1 pt-6">
+      <div className="mt-3 pt-6">
         <ResourceLink
           name="Learn more about agents"
           link={`https://docs.scoopika.com/agents`}
         />
       </div>
+
     </>
   );
 };

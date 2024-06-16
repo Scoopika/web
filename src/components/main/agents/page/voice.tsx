@@ -38,7 +38,7 @@ await agent.run({
 
 const voices = [
   { id: "aura-orpheus-en", name: "Orpheus", type: "American male" },
-  { id: "luna-orpheus-en", name: "Luna", type: "American female" },
+  { id: "aura-luna-en", name: "Luna", type: "American female" },
 ];
 
 export default function AgentVoice({ agent, pro }: Props) {
@@ -97,10 +97,10 @@ export default function AgentVoice({ agent, pro }: Props) {
               key={`voiceselect-${index}`}
               className="font-semibold"
               size="sm"
-              variant={data.voice === v.name ? "solid" : "bordered"}
-              color={data.voice === v.name ? "primary" : "default"}
-              onPress={() => setData(prev => ({...prev, voice: v.name}))}
-              startContent={data.voice === v.name && <FaCheck />}
+              variant={data.voice === v.id ? "solid" : "bordered"}
+              color="default"
+              onPress={() => setData(prev => ({...prev, voice: v.id}))}
+              startContent={data.voice === v.id && <FaCheck />}
             >
               {v.name}: {v.type}
             </Button>

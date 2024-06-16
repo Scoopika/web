@@ -12,8 +12,11 @@ interface Props {
   };
   searchParams?: {
     new?: string;
+    tab?: string;
   };
 }
+
+export const maxDuration = 60;
 
 export default async function Page({ params, searchParams }: Props) {
   const session = (await getServerSession(authOptions)) as Session;
@@ -50,6 +53,7 @@ export default async function Page({ params, searchParams }: Props) {
       apiKeys={apiKeys}
       isNew={isNew}
       planType={planType}
+      tab={searchParams?.tab}
     />
   );
 }

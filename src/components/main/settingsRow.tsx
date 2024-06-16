@@ -6,7 +6,7 @@ interface Props {
 
 export default function SettingsRow({ title, description, children }: Props) {
   return (
-    <div className="w-full flex flex-col lg:flex-row p-3 pt-5 pb-5 border-b-1 gap-4 lg:gap-6 max-w-full overflow-auto">
+    <div className="w-full flex flex-col lg:flex-row p-3 pt-5 pb-5 border-b-1 dark:border-accent/60 gap-4 lg:gap-6 max-w-full overflow-auto">
       <div className="w-full">
         <h3 className="font-semibold">{title}</h3>
         <p className="text-xs opacity-70">{description}</p>

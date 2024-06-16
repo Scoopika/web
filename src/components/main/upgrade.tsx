@@ -29,7 +29,7 @@ export default function UpgradePlan({ back, description }: Props) {
             Upgrade your plan!
           </div>
           <div className="text-sm opacity-80 text-center">{description}</div>
-          <UpgradeDialog />
+          <UpgradeDialog className="mt-4" />
         </div>
       </div>
     </>

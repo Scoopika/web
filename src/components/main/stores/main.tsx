@@ -21,8 +21,6 @@ export default function StoresMain({ dataStores }: Props) {
         action={<NewHistoryStore />}
       />
 
-      <div className="w-24 h-20 bg-foreground/40 dark:bg-foreground/10 blur-2xl absolute top-0 left-0"></div>
-
       {dataStores.length < 1 && (
         <Empty
           icon={<FaDatabase />}
