@@ -6,6 +6,8 @@ import { isPro } from "@/scripts/plan";
 import { AgentData } from "@scoopika/types";
 import { Session, getServerSession } from "next-auth";
 
+export const fetchCache = "force-no-store";
+
 interface Props {
   searchParams: {
     id?: string;

@@ -11,6 +11,7 @@ import { useState } from "react";
 import SettingsRow from "../../settingsRow";
 import { Input } from "@/components/ui/input";
 import ToolInputs from "../toolInputs";
+import AppHead from "../../head";
 import {
   Select,
   SelectContent,
@@ -155,18 +156,19 @@ export default function AgentTools({ agent, pro }: Props) {
   if (newToolOpen) {
     return (
       <>
-        <div className="mt-3 text-sm flex items-center gap-2">
-          <Button
-            size="sm"
-            variant="flat"
-            isIconOnly
-            startContent={<FaChevronLeft />}
-            onPress={() => setNewToolOpen(undefined)}
-          />
-          {newToolOpen === "new"
-            ? `Add new API tool to ${agent.name}`
-            : "Edit API tool"}
-        </div>
+        <AppHead
+          title="New API Tool"
+          description="Give this agent access to a new API it can call based on context"
+          back={
+            <Button
+              size="sm"
+              variant="flat"
+              isIconOnly
+              startContent={<FaChevronLeft />}
+              onPress={() => setNewToolOpen(undefined)}
+            />
+          }
+        />
         <SettingsRow
           title="Tool name"
           description="Give this tool a clear name (e.g search_web)"
@@ -287,58 +289,90 @@ export default function AgentTools({ agent, pro }: Props) {
 
   return (
     <>
-      <div className="text-sm mt-3">
-        <p className="opacity-80 w-full truncate mb-4">
-          Give your agent access to external APIs and functions
-        </p>
-        <div className="flex items-center gap-4">
-          <Dialog open={selectTool} onOpenChange={setSelectTool}>
-            <DialogTrigger asChild>
-              <Button size="sm" color="primary" className="font-semibold">
-                Add tool
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <div className="font-semibold">Add tool</div>
-              <div className="text-sm opacity-80">
-                API tools are added from the platform with no code, while custom
-                function tools are added from your code
-              </div>
-              <div className="w-full flex items-center gap-4">
-                <div
-                  className="p-3 border-1 rounded-xl cursor-pointer w-full hover:border-black/20 dark:hover:border-white/20 transition-all"
-                  onClick={() => {
-                    setSelectTool(false);
-                    setNewTool({ ...sampleTool });
-                    setNewToolOpen("new");
-                  }}
+      <AppHead
+        title="Tools"
+        description="Give your agent access to external APIs and functions"
+        action={
+          <div className="flex items-center gap-3">
+            <Button
+              size="sm"
+              variant="light"
+              as={Link}
+              href="https://docs.scoopika.com/agents/features/tools"
+              target="_blank"
+            >
+              Learn more
+            </Button>
+            <Dialog open={selectTool} onOpenChange={setSelectTool}>
+              <DialogTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="bordered"
+                  className="font-semibold border"
+                  endContent={<FaChevronRight />}
                 >
-                  <MdApi className="mb-2" />
-                  <div className="text-sm font-semibold">External API</div>
-                  <div className="text-xs opacity-80">
-                    Add APIs with no-code that the agent can send requets to
+                  Add tool
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <div className="font-semibold">Add tool</div>
+                <div className="text-sm opacity-80">
+                  API tools are added from the platform with no code, while
+                  custom function tools are added from your code
+                </div>
+                <div className="w-full flex items-center gap-4">
+                  <div
+                    className="p-3 border-1 rounded-xl cursor-pointer w-full hover:border-black/20 dark:hover:border-white/20 transition-all relative"
+                    onClick={() => {
+                      setSelectTool(false);
+                      setNewTool({ ...sampleTool });
+                      setNewToolOpen("new");
+                    }}
+                  >
+                    <MdApi className="mb-2" />
+                    <div className="absolute top-0 right-0 p-1 pl-2 pr-2 rounded-bl-md rounded-tr-lg bg-foreground text-background text-xs">
+                      No code
+                    </div>
+                    <div className="text-sm font-semibold">External API</div>
+                    <div className="text-xs opacity-80">
+                      Add APIs that the agent can call when needed
+                    </div>
                   </div>
+                  <Link
+                    href="https://docs.scoopika.com/tools/get-started"
+                    target="_blank"
+                    className="p-3 border-1 rounded-xl w-full hover:border-black/20 dark:hover:border-white/20 transition-all relative"
+                  >
+                    <FaCode className="mb-2" />
+                    <div className="absolute top-0 right-0 p-1 pl-2 pr-2 rounded-bl-md rounded-tr-lg bg-accent text-xs">
+                      Code
+                    </div>
+                    <div className="text-sm font-semibold">Custom function</div>
+                    <div className="text-xs opacity-80">
+                      Add custom functions from your code.
+                    </div>
+                  </Link>
                 </div>
                 <Link
                   href="https://docs.scoopika.com/tools/get-started"
                   target="_blank"
-                  className="p-3 border-1 rounded-xl w-full hover:border-black/20 dark:hover:border-white/20 transition-all"
+                  className="p-3 border-1 rounded-xl w-full hover:border-black/20 dark:hover:border-white/20 transition-all relative"
                 >
                   <FaCode className="mb-2" />
-                  <div className="text-sm font-semibold">Custom function</div>
+                  <div className="absolute top-0 right-0 p-1 pl-2 pr-2 rounded-bl-md rounded-tr-lg bg-accent text-xs">
+                      Code
+                    </div>
+                  <div className="text-sm font-semibold">Client-side actions</div>
                   <div className="text-xs opacity-80">
-                    Add custom functions from your code. check docs
+                    Add custom functions the agent can execute in the users browser
                   </div>
                 </Link>
-              </div>
-            </DialogContent>
-          </Dialog>
-          <ResourceLink
-            name="Check quick guide"
-            link="https://docs.scoopika.com/guides/tools"
-          />
-        </div>
-        <div className="w-[15%] border-t-4 rounded-full mt-4"></div>{" "}
+              </DialogContent>
+            </Dialog>
+          </div>
+        }
+      />
+      <div className="text-sm">
         <div className="flex w-full flex-col gap-3 mt-6">
           {(
             (agent.in_tools || []).filter(

@@ -122,7 +122,7 @@ export default function Settings({ session }: Props) {
           <MdSettings size={16} className="opacity-60 group-hover:opacity-100 transition-all" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-screen">
+      <DialogContent>
         <div className="w-full">
           <div className="mb-3 text-sm">Profile</div>
           <div className="w-full flex items-center">

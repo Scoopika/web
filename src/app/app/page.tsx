@@ -138,9 +138,8 @@ const Home = async ({ session }: Props) => {
       </div>
 
       <div className="pt-8 border-t-1 dark:border-accent/60">
-        <h3 className="text-lg font-semibold mb-8">Developer resources</h3>
-        <div className="w-full bg-accent dark:bg-accent/20 rounded-2xl p-5 mb-4">
-          <h3 className=" font-semibold mb-2">Integrate in your app!</h3>
+        <div className="w-full rounded-2xl pb-5 mb-4">
+          <h3 className="text-lg font-semibold mb-2">Integrate in your app!</h3>
           <div className="text-sm opacity-80 mb-8">
             Integrate and use Scoopika agents in your application. open-source,
             type-safe, free, and easy to start!

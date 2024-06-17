@@ -1,6 +1,10 @@
 import { AgentData } from "@scoopika/types";
 import ResourceLink from "../../resourceLink";
 import Code from "../../code";
+import AppHead from "../../head";
+import { Button } from "@nextui-org/react";
+import { FaChevronRight } from "react-icons/fa6";
+import Link from "next/link";
 
 interface Props {
   agent: AgentData;
@@ -54,7 +58,9 @@ const runCode = (id: string) => `const agent = new Agent(
     })
 })();`;
 
-const clientCode = (id: string) => `import { Client, Agent, AudioPlayer } from "@scoopika/client"
+const clientCode = (
+  id: string
+) => `import { Client, Agent, AudioPlayer } from "@scoopika/client"
 
 const client = new Client("ENDPOINT_URL"); // replace with your endpoint url
 const agent = new Agent("${id}", client);
@@ -80,19 +86,28 @@ const agent = new Agent("${id}", client);
     }
   })
 })();
-`
+`;
 
 export default function AgentCode({ agent }: Props) {
   return (
     <>
-      <p className="mt-3 text-sm opacity-80 flex items-center gap-2">
-        Integrate {agent.name} into your application.{" "}
-        <ResourceLink
-          name="Check Quickstart"
-          link="https://docs.scoopika.com/quickstart"
-        />
-      </p>
-
+      <AppHead
+        title="Code"
+        description={`Integrate ${agent.name} into your application`}
+        action={
+          <Button
+            size="sm"
+            variant="bordered"
+            className="font-semibold border"
+            endContent={<FaChevronRight />}
+            as={Link}
+            href="https://docs.scoopika.com/agents"
+            target="_blank"
+          >
+            Check docs
+          </Button>
+        }
+      />
       <div className="text-sm mt-6 mb-3">
         1. Set the <b>SCOOPIKA_TOKEN</b> environment variable. click on your
         profile pic in top-right corner and generate a new token if you{" "}
@@ -126,7 +141,8 @@ export default function AgentCode({ agent }: Props) {
       <Code code={runCode(agent.id)} language="typescript" />
 
       <div className="text-sm mt-6 mb-3 flex flex-col gap-2">
-        5. Learn more about how to use agents, and setup a Scoopika endpoint for web integration and to run agents on client-side:
+        5. Learn more about how to use agents, and setup a Scoopika endpoint for
+        web integration and to run agents on client-side:
         <ResourceLink
           name="Check guides"
           link="https://docs.scoopika.com/guides"
@@ -134,7 +150,8 @@ export default function AgentCode({ agent }: Props) {
       </div>
 
       <div className="text-sm mt-6 mb-3 flex flex-col gap-2">
-        6. After setting up a Scoopika endpoint (see guides). you can run the agent on the client-side
+        6. After setting up a Scoopika endpoint (see guides). you can run the
+        agent on the client-side
         <Code language="bash" code="npm i @scoopika/client" />
         <Code language="typescript" code={clientCode(agent.id)} />
         <ResourceLink

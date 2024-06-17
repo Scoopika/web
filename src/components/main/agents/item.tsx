@@ -92,7 +92,7 @@ export default function AgentItem({ agent }: Props) {
                     variant="light"
                     as={Link}
                     aria-label="Code"
-                    href={`/app/agents/${agent.id}?tab=Code`}
+                    href={`/app/agents/${agent.id}?tab=code`}
                     startContent={<MdCode size={16} />}
                     isIconOnly
                   />

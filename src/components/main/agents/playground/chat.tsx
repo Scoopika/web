@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@nextui-org/react";
-import { Agent, Client } from "@scoopika/client";
+import { Agent, Client, FromSchema, JSONSchema, createActionSchema } from "@scoopika/client";
 import { AgentData, LLMToolCall, RawEngines } from "@scoopika/types";
 import { useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
@@ -27,6 +27,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useChatState } from "./state";
+import { sleep } from "openai/core.mjs";
 
 interface Props {
   userId: string;
@@ -127,17 +128,22 @@ const AgentMessage = ({
   );
 };
 
+const getAgent = (userId: string, id: string) => {
+  const client = new Client(
+    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${id}`
+  );
+  const agentInstance = new Agent(id, client);
+
+  return {client, agentInstance}
+}
+
 export default function PlaygroundChat({
   agent,
   engines,
   token,
   userId,
 }: Props) {
-  const client = new Client(
-    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${agent.id}`
-  );
-  const agentInstance = new Agent(agent.id, client);
-
+  const { client, agentInstance } = getAgent(userId, agent.id);
   const {
     changeSession,
     messages,
@@ -172,6 +178,10 @@ export default function PlaygroundChat({
     await fetch(`https://scoopika-run-35.deno.dev/add-client/${userId}`, {
       method: "POST",
       body: JSON.stringify({ token, engines }),
+    });
+    await fetch(`https://scoopika-run-35.deno.dev/add-agent/${agent.id}`, {
+      method: "POST",
+      body: JSON.stringify({ agent }),
     });
 
     setTextInput("");
@@ -336,6 +346,7 @@ export default function PlaygroundChat({
         <Button
           size="sm"
           variant="bordered"
+          id="voice-switch"
           className="font-semibold border-1 backdrop-blur hidden lg:flex"
           startContent={<RiVoiceprintLine size={16} />}
           endContent={<FaChevronRight />}

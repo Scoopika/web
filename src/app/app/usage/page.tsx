@@ -9,9 +9,8 @@ import { readPlan } from "@/scripts/plan";
 import { Progress } from "@nextui-org/react";
 import { getServerSession, Session } from "next-auth";
 import { redirect } from "next/navigation";
-import { features } from "process";
 
-export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 const maxes = {
   load: [5000, 200000, 1000000],

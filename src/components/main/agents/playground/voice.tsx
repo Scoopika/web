@@ -69,6 +69,10 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
       method: "POST",
       body: JSON.stringify({ token, engines }),
     });
+    await fetch(`https://scoopika-run-35.deno.dev/add-agent/${agent.id}`, {
+      method: "POST",
+      body: JSON.stringify({ agent }),
+    });
 
     try {
       await newRequest({

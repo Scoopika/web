@@ -2,14 +2,7 @@
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Input } from "../ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@nextui-org/react";
+import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
 import listKeys from "@/functions/apikeys/list";
 import { toast } from "sonner";
 import { MdDelete } from "react-icons/md";
@@ -18,6 +11,7 @@ import newApiKey from "@/functions/apikeys/new";
 import { FaLock } from "react-icons/fa6";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import deleteApiKey from "@/functions/apikeys/delete";
+import { providers } from "@/scripts/agents/engines";
 
 interface Props {
   keys: { id: string; name: string }[];
@@ -127,20 +121,28 @@ export default function ApiKeys({
         or pass them safely from your code
       </div>
       <div className="w-full flex flex-col lg:flex-row lg:items-center gap-2">
-        <Select onValueChange={(v) => setNewKeyName(v)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue
-              placeholder="Provider"
-              className="text-xs"
-              defaultValue={newKeyName}
-            />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="openai">OpenAI</SelectItem>
-            <SelectItem value="fireworks">Fireworks</SelectItem>
-            <SelectItem value="together">Together AI</SelectItem>
-          </SelectContent>
-        </Select>
+        <Autocomplete
+          placeholder="Provider"
+          defaultInputValue={newKeyName}
+          allowsCustomValue
+          onInputChange={(value) => setNewKeyName(value)}
+          onSelectionChange={(value) => {
+            if (!value) return;
+            setNewKeyName(value.toString());
+          }}
+          variant="bordered"
+          color="secondary"
+        >
+          {providers.map((provider) => (
+            <AutocompleteItem
+              key={`engine-audiocomplete-${provider}`}
+              value={provider}
+              textValue={provider}
+            >
+              {provider}
+            </AutocompleteItem>
+          ))}
+        </Autocomplete>
         <Input
           defaultValue={newKeyValue}
           placeholder="Key value"

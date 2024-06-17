@@ -24,6 +24,9 @@ import { MdDelete } from "react-icons/md";
 import deleteKnowledge from "@/functions/agents/knowledge/delete";
 import SettingsRow from "../../settingsRow";
 import Code from "../../code";
+import AppHead from "../../head";
+import { FaChevronRight } from "react-icons/fa6";
+import Link from "next/link";
 
 interface Props {
   pro: boolean;
@@ -156,65 +159,82 @@ export default function AgentKnowledge({
 
   return (
     <>
-      <div className="w-full flex items-center mb-4">
-        <p className="text-sm opacity-80 mt-3">
-          Add custom knowledge to your agent (files)
-        </p>
-      </div>
-
-      <Dialog open={newOpen} onOpenChange={!loading ? setNewOpen : () => {}}>
-        <DialogTrigger asChild>
-          <Button
-            size="sm"
-            color="primary"
-            className="font-semibold w-full lg:max-w-max"
-          >
-            Add knowledge file
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          {!loading ? (
-            <>
-              <div className="font-semibold">Upload knowledge file</div>
-              <div className="text-sm opacity-70">
-                You can upload PDF, Markdown, or any type of text files. There
-                is a size limit of 5Mb/file. Notice that we will generate
-                embeddings for the file you upload so it might a minute to
-                finish uploading your file
-              </div>
-              <input
-                id="file-upload"
-                className="hidden"
-                type="file"
-                onChange={handleFileChange}
-              />
-              <label
-                htmlFor="file-upload"
-                className="w-full p-6 border-1 border-dashed rounded-lg flex items-center justify-center text-sm hover:border-black/20 dark:hover:border-white/20 bg-accent/20 transition-all cursor-pointer"
-              >
-                {fileName || "Upload file"}
-              </label>
-              <Button
-                size="sm"
-                className="w-full font-semibold"
-                startContent={<HiOutlineUpload size={18} />}
-                isLoading={loading}
-                onPress={() => addNew()}
-              >
-                Upload file
-              </Button>
-            </>
-          ) : (
-            <div className="w-full flex flex-col items-center justify-center">
-              <div className="font-semibold mb-2">Uploading your file</div>
-              <div className="text-sm opacity-70 text-center max-w-[80%]">
-                This could take up to a minute
-              </div>
-              <Loading />
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      <AppHead
+        title="Knowledge (beta)"
+        description="Add custom knowledge sources to your agent"
+        action={
+          <div className="flex items-center gap-3">
+            <Button
+              size="sm"
+              variant="light"
+              as={Link}
+              href="https://docs.scoopika.com/agents/features/knowledge"
+              target="_blank"
+            >
+              Learn more
+            </Button>
+            <Dialog
+              open={newOpen}
+              onOpenChange={!loading ? setNewOpen : () => {}}
+            >
+              <DialogTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="bordered"
+                  className="font-semibold w-full border lg:max-w-max"
+                  endContent={<FaChevronRight />}
+                >
+                  Add knowledge file
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                {!loading ? (
+                  <>
+                    <div className="font-semibold">Upload knowledge file</div>
+                    <div className="text-sm opacity-70">
+                      You can upload PDF, Markdown, or any type of text files.
+                      There is a size limit of 5Mb/file. Notice that we will
+                      generate embeddings for the file you upload so it might a
+                      minute to finish uploading your file
+                    </div>
+                    <input
+                      id="file-upload"
+                      className="hidden"
+                      type="file"
+                      onChange={handleFileChange}
+                    />
+                    <label
+                      htmlFor="file-upload"
+                      className="w-full p-6 border-1 border-dashed rounded-lg flex items-center justify-center text-sm hover:border-black/20 dark:hover:border-white/20 bg-accent/20 transition-all cursor-pointer"
+                    >
+                      {fileName || "Upload file"}
+                    </label>
+                    <Button
+                      size="sm"
+                      className="w-full font-semibold"
+                      startContent={<HiOutlineUpload size={18} />}
+                      isLoading={loading}
+                      onPress={() => addNew()}
+                    >
+                      Upload file
+                    </Button>
+                  </>
+                ) : (
+                  <div className="w-full flex flex-col items-center justify-center">
+                    <div className="font-semibold mb-2">
+                      Uploading your file
+                    </div>
+                    <div className="text-sm opacity-70 text-center max-w-[80%]">
+                      This could take up to a minute
+                    </div>
+                    <Loading />
+                  </div>
+                )}
+              </DialogContent>
+            </Dialog>
+          </div>
+        }
+      />
 
       {!knowledge && <Loading />}
 

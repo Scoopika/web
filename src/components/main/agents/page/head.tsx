@@ -36,33 +36,38 @@ interface Props {
 }
 
 export default function AgentHead({ agent, pro, apiKeys, isNew, tab }: Props) {
-  const [activeTab, setActiveTab] = useState<string>(tab || "General");
+  const [activeTab, setActiveTab] = useState<string>(tab || "general");
   const [agents, setAgents] = useState<AgentData[]>([]);
   const [knowledge, setKnowledge] = useState<Knowledge[] | null>(null);
   const [newOpen, setNewOpen] = useState<boolean>(false);
   const tabs: Record<
     string,
-    { comp: React.ReactNode; icon?: React.ReactNode }
+    { name: string; comp: React.ReactNode; icon?: React.ReactNode }
   > = {
-    General: {
+    general: {
+      name: "General",
       comp: <AgentGeneral agent={agent} apiKeys={apiKeys} />,
       icon: <FaBrain size={16} />,
     },
-    Tools: {
+    tools: {
+      name: "Tools",
       comp: <AgentTools agent={agent} pro={pro} />,
       icon: <AiFillApi size={16} />,
     },
-    Companions: {
+    companions: {
+      name: "Companions",
       comp: (
         <AgentCompanions agent={agent} agents={agents} setAgents={setAgents} />
       ),
       icon: <TbMessageChatbot size={16} />,
     },
-    Voice: {
+    voice: {
+      name: "Voice",
       comp: <AgentVoice agent={agent} pro={pro} />,
       icon: <RiVoiceprintLine size={16} />,
     },
-    "Knowledge (Beta)": {
+    knowledge: {
+      name: "Knowledge (Beta)",
       comp: (
         <AgentKnowledge
           agent={agent}
@@ -73,11 +78,13 @@ export default function AgentHead({ agent, pro, apiKeys, isNew, tab }: Props) {
       ),
       icon: <ImBooks size={16} />,
     },
-    Code: {
+    code: {
+      name: "Code",
       comp: <AgentCode agent={agent} />,
       icon: <FaCode size={16} />,
     },
-    Settings: {
+    settings: {
+      name: "Settings",
       comp: <AgentSettings agent={agent} />,
       icon: <IoSettingsSharp size={16} />,
     },
@@ -139,20 +146,19 @@ export default function AgentHead({ agent, pro, apiKeys, isNew, tab }: Props) {
             size="sm"
             variant="light"
             radius="none"
+            as={Link}
+            href={`/app/agents/${agent.id}?tab=${k}`}
             className={`min-w-max p-4 pt-5 pb-5 ${
               k === activeTab ? "border-b-1 border-purple-400" : "opacity-70"
             }`}
             startContent={tabs[k].icon}
             onPress={() => setActiveTab(k)}
           >
-            {k}
+            {tabs[k].name}
           </Button>
         ))}
       </div>
       <div className="w-full flex flex-col">
-        <div className="w-full flex items-center">
-          <h2 className="text-xl font-semibold min-w-max">{activeTab}</h2>
-        </div>
         {tabs[activeTab] && tabs[activeTab].comp}
       </div>
 

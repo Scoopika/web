@@ -9,6 +9,7 @@ import { Button } from "@nextui-org/react";
 import { FaChevronRight, FaCircleInfo } from "react-icons/fa6";
 import tryRequest from "@/scripts/tryRequest";
 import updateAgentData from "@/functions/agents/update";
+import AppHead from "../../head";
 
 interface Props {
   agent: AgentData;
@@ -43,7 +44,10 @@ export default function AgentGeneral({ agent, apiKeys }: Props) {
 
   return (
     <div>
-      <div className="w-[15%] border-t-4 rounded-full mt-4"></div>
+      <AppHead
+        title="General"
+        description="Manage the agent's prompt and LLM"
+      />
       <SettingsRow
         title="System prompt"
         description={`Give your agent instructions on how to act and communicate with users`}

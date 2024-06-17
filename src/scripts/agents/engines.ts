@@ -17,7 +17,6 @@ interface Engine {
 
 interface SpecificEngines {
   openai: Engine;
-  google: Engine;
   together: Engine;
   [x: string]: Engine;
 }
@@ -78,24 +77,6 @@ const engines: SpecificEngines = {
             max_tokens: { min: 50, max: 8192, default: 1024, step: 1 },
             temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
             top_p: { min: 0, max: 1, default: 1, step: 0.01 },
-          },
-        },
-      ],
-      image: [],
-      json: [],
-    },
-  },
-  google: {
-    name: "Google Gemini (beta)",
-    models: {
-      text: [
-        {
-          id: "gemini-1.5-pro",
-          options: {
-            max_tokens: { min: 50, max: 1000000, default: 900000, step: 1 },
-            temperature: { min: 0, max: 1, default: 0.7, step: 0.01 },
-            top_p: { min: 0, max: 1, default: 0.4, step: 0.01 },
-            top_k: { min: 0, max: 64, default: 32, step: 1 },
           },
         },
       ],

@@ -57,7 +57,7 @@ export default async function newApiKey(name: string, value: string): Promise<
     },
   });
 
-  await revalidatePath("/app/agents/[id]", "page");
+  await revalidatePath("/app", "layout");
 
   return { success: true, id };
 }

@@ -4,7 +4,7 @@ import listAgents from "@/functions/agents/list";
 import { Button } from "@nextui-org/react";
 import { AgentData, InAgentTool } from "@scoopika/types";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { FaChevronDown } from "react-icons/fa6";
+import { FaChevronDown, FaChevronRight } from "react-icons/fa6";
 import { toast } from "sonner";
 import {
   Popover,
@@ -21,6 +21,8 @@ import Empty from "../../empty";
 import { TbMessageChatbot } from "react-icons/tb";
 import Loading from "../../loading";
 import ResourceLink from "../../resourceLink";
+import AppHead from "../../head";
+import Link from "next/link";
 
 interface Props {
   agent: AgentData;
@@ -135,77 +137,85 @@ export default function AgentCompanions({ agent, agents, setAgents }: Props) {
 
   return (
     <>
-      <div className="w-full flex items-center">
-        <p className="text-sm opacity-80 mt-3">
-          Add other agents to help {agent.name} when it needs them
-        </p>
-      </div>
-      <div className="flex items-center gap-4 mt-4">
-        <Popover open={!loading ? compOpen : false} onOpenChange={setCompOpen}>
-          <PopoverTrigger asChild>
+      <AppHead
+        title="Companions"
+        description={`Add other agents that ${agent.name} can talk with if it needs help`}
+        action={
+          <div className="flex items-center gap-3">
             <Button
+              as={Link}
+              href="https://docs.scoopika.com/agents/features/companions"
+              target="_blank"
               size="sm"
-              color="primary"
-              className="font-semibold w-full lg:max-w-max"
-              endContent={<FaChevronDown />}
-              onPress={() => listAll()}
-              isLoading={loading}
+              variant="light"
             >
-              Add companion
+              Learn more
             </Button>
-          </PopoverTrigger>
-          <PopoverContent className="max-w-64 overflow-auto">
-            {agents.length < 1 ? (
-              <div className="text-xs opacity-80">Loading agents...</div>
-            ) : awntedAgents().length === 0 ? (
-              <div className="text-xs opacity-80">
-                No other agents available to add
-              </div>
-            ) : (
-              <div className="flex flex-col gap-3">
-                {awntedAgents().map((a, index) => (
-                  <div
-                    key={`wantedagent-${a.id}-${index}`}
-                    className={`flex items-center p-2 rounded-xl gap-2 ${
-                      !(index & 1) && "bg-accent/40"
-                    }`}
-                  >
-                    {a.avatar ? (
-                      <img
-                        src={a.avatar}
-                        className="w-9 h-9 rounded-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-9 h-9 rounded-full flex items-center justify-center bg-accent">
-                        <RiRobot2Fill />
-                      </div>
-                    )}
-                    <div className="font-semibold text-sm min-w-max truncate">
-                      {a.name}
-                    </div>
-                    <div className="w-full flex min-w-max items-center justify-end">
-                      <Button
-                        size="sm"
-                        onPress={() => {
-                          setCompOpen(false);
-                          addComp(a.id);
-                        }}
-                        isIconOnly
-                        startContent={<CgMathPlus />}
-                      />
-                    </div>
+            <Popover
+              open={!loading ? compOpen : false}
+              onOpenChange={setCompOpen}
+            >
+              <PopoverTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="bordered"
+                  className="font-semibold border w-full lg:max-w-max"
+                  endContent={<FaChevronDown />}
+                  onPress={() => listAll()}
+                  isLoading={loading}
+                >
+                  Add companion
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="max-w-64 overflow-auto">
+                {agents.length < 1 ? (
+                  <div className="text-xs opacity-80">Loading agents...</div>
+                ) : awntedAgents().length === 0 ? (
+                  <div className="text-xs opacity-80">
+                    No other agents available to add
                   </div>
-                ))}
-              </div>
-            )}
-          </PopoverContent>
-        </Popover>
-        <ResourceLink
-          name="Check quick guide"
-          link="https://docs.scoopika.com/guides/companions"
-        />
-      </div>
-      <div className="w-[15%] border-t-4 rounded-full mt-4"></div>{" "}
+                ) : (
+                  <div className="flex flex-col gap-3">
+                    {awntedAgents().map((a, index) => (
+                      <div
+                        key={`wantedagent-${a.id}-${index}`}
+                        className={`flex items-center p-2 rounded-xl gap-2 ${
+                          !(index & 1) && "bg-accent/40"
+                        }`}
+                      >
+                        {a.avatar ? (
+                          <img
+                            src={a.avatar}
+                            className="w-9 h-9 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-9 h-9 rounded-full flex items-center justify-center bg-accent">
+                            <RiRobot2Fill />
+                          </div>
+                        )}
+                        <div className="font-semibold text-sm min-w-max truncate">
+                          {a.name}
+                        </div>
+                        <div className="w-full flex min-w-max items-center justify-end">
+                          <Button
+                            size="sm"
+                            onPress={() => {
+                              setCompOpen(false);
+                              addComp(a.id);
+                            }}
+                            isIconOnly
+                            startContent={<CgMathPlus />}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </PopoverContent>
+            </Popover>
+          </div>
+        }
+      />
       <div className="w-full mt-4">
         {agents.length > 0 && getComps().length < 1 && (
           <Empty

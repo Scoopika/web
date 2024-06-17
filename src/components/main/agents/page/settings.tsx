@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import AgentAvatar from "../avatar";
 import deleteAgent from "@/functions/agents/delete";
+import AppHead from "../../head";
 
 interface Props {
   agent: AgentData;
@@ -65,7 +66,10 @@ export default function AgentSettings({ agent }: Props) {
 
   return (
     <div>
-      <div className="w-[15%] border-t-4 rounded-full mt-4"></div>
+      <AppHead
+        title="Settings"
+        description="Manage your agent settings"
+      />
 
       <AgentAvatar
         agent={data}

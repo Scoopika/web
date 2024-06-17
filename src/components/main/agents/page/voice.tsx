@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import tryRequest from "@/scripts/tryRequest";
 import updateAgentData from "@/functions/agents/update";
 import ResourceLink from "../../resourceLink";
+import AppHead from "../../head";
+import Link from "next/link";
 
 interface Props {
   agent: AgentData;
@@ -73,19 +75,23 @@ export default function AgentVoice({ agent, pro }: Props) {
 
   return (
     <>
-      <div className="text-sm opacity-80 mt-3">
-        Customize {agent.name}
-        {"'s"} voice
-      </div>
-
-      <div className="mt-4 flex items-center gap-4">
-        <ResourceLink
-          name="Check quick guide"
-          link="https://docs.scoopika.com/guides/agents-voice"
-        />
-      </div>
-
-      <div className="w-[15%] border-t-4 rounded-full mt-4"></div>
+      <AppHead
+        title="Voice"
+        description="Customize the voice your agent will talk in"
+        action={
+          <Button
+            as={Link}
+            href="https://docs.scoopika.com/agents/features/talk"
+            target="_blank"
+            size="sm"
+            variant="bordered"
+            className="font-semibold border"
+            endContent={<FaChevronRight />}
+          >
+            Learn more
+          </Button>
+        }
+      />
 
       <SettingsRow
         title="Change voice"
@@ -99,7 +105,7 @@ export default function AgentVoice({ agent, pro }: Props) {
               size="sm"
               variant={data.voice === v.id ? "solid" : "bordered"}
               color="default"
-              onPress={() => setData(prev => ({...prev, voice: v.id}))}
+              onPress={() => setData((prev) => ({ ...prev, voice: v.id }))}
               startContent={data.voice === v.id && <FaCheck />}
             >
               {v.name}: {v.type}
@@ -110,8 +116,8 @@ export default function AgentVoice({ agent, pro }: Props) {
 
       <SettingsRow title="About this feature">
         <div className="text-xs opacity-80 flex flex-col gap-2">
-          You can give your agent a voice that it will use to speak. you can
-          use the agent audio in both server-side and client-side with real-time
+          You can give your agent a voice that it will use to speak. you can use
+          the agent audio in both server-side and client-side with real-time
           streaming. first response is received in ~600ms.
           <ResourceLink
             name="Use in your app"

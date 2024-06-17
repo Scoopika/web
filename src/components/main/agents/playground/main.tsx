@@ -43,32 +43,29 @@ export default function Playground({
   userId,
   voice,
 }: Props) {
-  const [apiKey, setApiKey] = useState<string | undefined>(
-    agent
-      ? apiKeys.filter((k) => k === agent.prompts[0]?.llm_client)[0]
-      : undefined
-  );
+  const [apiKey, setApiKey] = useState<string | undefined>();
   const [apiKeyInput, setApiKeyInput] = useState<string | undefined>(undefined);
   const [newKeyLoading, setNewKeyLoading] = useState<boolean>(false);
   const [engines, setEngines] = useState<RawEngines>({});
   const [back, setBack] = useState<boolean>(false);
 
+  const update = async (engines: RawEngines) => {
+    await fetch(`https://scoopika-run-35.deno.dev/add-client/${userId}`, {
+      method: "POST",
+      body: JSON.stringify({ token, engines }),
+    });
+    await fetch(`https://scoopika-run-35.deno.dev/add-agent/${agent.id}`, {
+      method: "POST",
+      body: JSON.stringify({ agent }),
+    });
+  };
+
   useEffect(() => {
-    const update = async () => {
-      await fetch(`https://scoopika-run-35.deno.dev/add-client/${userId}`, {
-        method: "POST",
-        body: JSON.stringify({ token, engines }),
-      });
-      await fetch(`https://scoopika-run-35.deno.dev/add-agent/${agent.id}`, {
-        method: "POST",
-        body: JSON.stringify({ agent }),
-      });
-    };
     if (agent) {
-      update();
+      update(engines);
       setApiKey(apiKeys.filter((k) => k === agent.prompts[0]?.llm_client)[0]);
     }
-  }, [engines, agent]);
+  }, [agent]);
 
   const addThisTime = () => {
     if (newKeyLoading) return;
@@ -77,8 +74,9 @@ export default function Playground({
       return toast.error("Enter API key to add");
     }
 
-    setEngines({ [agent.prompts[0].llm_client]: apiKeyInput });
     setApiKey(apiKeyInput);
+    setEngines({ [agent.prompts[0].llm_client]: apiKeyInput });
+    update({ [agent.prompts[0].llm_client]: apiKeyInput });
   };
 
   const saveKey = async () => {
@@ -94,7 +92,7 @@ export default function Playground({
       success: "Saved key successfully",
       error: "Can't save API key",
       func: async () => {
-        const res = await newApiKey(apiKeyInput, agent.prompts[0].llm_client);
+        const res = await newApiKey(agent.prompts[0].llm_client, apiKeyInput);
         if (!res || !res.success) {
           throw new Error("Error adding API key!");
         }
@@ -104,6 +102,7 @@ export default function Playground({
       end: (s) => {
         if (s?.success) {
           setApiKey(apiKeyInput);
+          update({ [agent.prompts[0].llm_client]: apiKeyInput });
         }
 
         setNewKeyLoading(false);
@@ -140,6 +139,13 @@ export default function Playground({
             />
           ))}
         </div>
+        <div className="w-full p-4 border-1 rounded-xl">
+          <div className="font-semibold text-sm">Hands up</div>
+          <div className="text-sm opacity-80">
+            Using your agents in the playground counts to your monthly usage the
+            same as using them from your application
+          </div>
+        </div>
       </>
     );
   }
@@ -148,6 +154,10 @@ export default function Playground({
     return (
       <Dialog open={true}>
         <DialogContent>
+          <div className="mt-4 text-sm flex items-center gap-1 opacity-70">
+            <FaLock />
+            API keys are encrypted
+          </div>
           <h3 className="">Add API key for {agent.prompts[0].llm_client}</h3>
           <div className="text-xs opacity-80">
             You need to add your API key for the provider this agent is using,
@@ -185,10 +195,6 @@ export default function Playground({
             >
               Add to my account
             </Button>
-          </div>
-          <div className="mt-4 text-sm flex items-center gap-1 opacity-70">
-            <FaLock />
-            API keys are encrypted
           </div>
           <DropdownMenu open={back} onOpenChange={setBack}>
             <DropdownMenuTrigger asChild>
