@@ -1,7 +1,13 @@
 "use client";
 
 import { Button } from "@nextui-org/react";
-import { Agent, Client, FromSchema, JSONSchema, createActionSchema } from "@scoopika/client";
+import {
+  Agent,
+  Client,
+  FromSchema,
+  JSONSchema,
+  createActionSchema,
+} from "@scoopika/client";
 import { AgentData, LLMToolCall, RawEngines } from "@scoopika/types";
 import { useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
@@ -27,7 +33,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useChatState } from "./state";
-import { sleep } from "openai/core.mjs";
 
 interface Props {
   userId: string;
@@ -128,14 +133,19 @@ const AgentMessage = ({
   );
 };
 
-const getAgent = (userId: string, id: string) => {
+const getAgent = (
+  userId: string,
+  token: string,
+  engine: string,
+  id: string
+) => {
   const client = new Client(
-    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${id}`
+    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${token}/${engine}/${id}`
   );
   const agentInstance = new Agent(id, client);
 
-  return {client, agentInstance}
-}
+  return { client, agentInstance };
+};
 
 export default function PlaygroundChat({
   agent,
@@ -143,7 +153,14 @@ export default function PlaygroundChat({
   token,
   userId,
 }: Props) {
-  const { client, agentInstance } = getAgent(userId, agent.id);
+  const llmClient = Object.keys(engines)[0];
+  const llmClientKey: string | undefined =
+    typeof llmClient === "string" ? (engines as any)[llmClient] : undefined;
+  const engineReq = llmClientKey
+    ? `${llmClient}--KEY--${llmClientKey}`
+    : "NO-KEY";
+
+  const { client, agentInstance } = getAgent(userId, token, engineReq, agent.id);
   const {
     changeSession,
     messages,
@@ -175,10 +192,6 @@ export default function PlaygroundChat({
     const elm = document.getElementById("chat-input") as HTMLInputElement;
     elm.value = "";
 
-    await fetch(`https://scoopika-run-35.deno.dev/add-client/${userId}`, {
-      method: "POST",
-      body: JSON.stringify({ token, engines }),
-    });
     await fetch(`https://scoopika-run-35.deno.dev/add-agent/${agent.id}`, {
       method: "POST",
       body: JSON.stringify({ agent }),
@@ -257,10 +270,16 @@ export default function PlaygroundChat({
           </Button>
         </DropdownMenuContent>
       </DropdownMenu>
-      <div className="text-xs text-center w-full mt-2 flex justify-center">
-        <Link href="https://docs.scoopika.com/guides/build-scoopika-playground" target="_blank" className="text-center p-1.5 pl-3 pr-3 border-1 rounded-lg md:rounded-full bg-accent/20 md:max-w-[80%] flex md:items-center gap-2 group hover:border-black/20 dark:hover:border-white/20 transition-all">
+      <div className="text-xs text-center w-full mt-2 flex justify-center mb-3">
+        <Link
+          href="https://docs.scoopika.com/guides/build-scoopika-playground"
+          target="_blank"
+          className="text-center p-1.5 pl-3 pr-3 border-1 rounded-lg md:rounded-full bg-accent/20 md:max-w-[80%] flex md:items-center gap-2 group hover:border-black/20 dark:hover:border-white/20 transition-all"
+        >
           <FaRocket />
-          <div className="text-start md:text-center">This playground is built using Scoopika, learn how</div>
+          <div className="text-start md:text-center">
+            This playground is built using Scoopika, learn how
+          </div>
         </Link>
       </div>
       <div className={`p-14 relative mt-10 ${messages.length > 0 && "hidden"}`}>

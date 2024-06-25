@@ -37,7 +37,7 @@ const Row = ({
   return (
     <div className="w-full flex flex-col">
       <div className="text-sm opacity-90 mb-2 flex items-center gap-3">
-        {name} ({current} / {max})
+        {name} ({Math.round(current)} / {max})
         <AboutFeatureDialog name={name} info={info} />
       </div>
       <div className="w-full flex flex-col gap-2">

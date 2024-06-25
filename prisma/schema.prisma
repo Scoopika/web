@@ -97,3 +97,8 @@ model Knowledge {
   name    String
   vectors String
 }
+
+model Waitlistv1 {
+  id    String  @id @default(cuid())
+  email String  @unique
+}

@@ -96,7 +96,7 @@ export default function AgentHead({ agent, pro, apiKeys, isNew, tab }: Props) {
 
   return (
     <>
-      <div className="w-full flex flex-col md:flex-row">
+      <div className="w-full flex flex-col md:flex-row gap-4">
         <div className="w-full flex items-center gap-3">
           {agent.avatar ? (
             <img

@@ -69,8 +69,10 @@ export default function AgentGeneral({ agent, apiKeys }: Props) {
         title="LLM"
         description="Select the LLM that will power this agent"
       >
-        <AgentLLM agent={data} updateAgent={setData} />
-        <LLMOptions agent={data} updateAgent={setData} />
+        <div className="flex flex-col md:flex-row gap-4 w-full md:items-center">
+          <AgentLLM agent={data} updateAgent={setData} />
+          <LLMOptions agent={data} updateAgent={setData} />
+        </div>
       </SettingsRow>
       {apiKeys.indexOf(agent.prompts[0].llm_client) === -1 && (
         <div className="w-full p-4 flex flex-col gap-2 text-xs border-1 rounded-xl bg-accent/20 mt-4">

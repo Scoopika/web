@@ -7,7 +7,7 @@ export const config = {
     "/app/boxes",
     "/app/new-box",
     "/app/new-agent",
-    "/playground",
+    "/app/usage",
     "/app/playground"
   ],
 };

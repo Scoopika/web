@@ -52,7 +52,7 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
     <NextNavbar
       position="sticky"
       onMenuOpenChange={setIsMenuOpen}
-      className="fixed backdrop-blur-xl border-b-0 z-50"
+      className="fixed bg-transparent border-b-0 z-40 dark"
       classNames={{
         wrapper: "min-w-full justify-between",
         content: "",

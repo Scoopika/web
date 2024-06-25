@@ -97,7 +97,7 @@ export default function ToolInputs({ tool, updateTool }: Props) {
       ...prev,
       inputs: {
         ...prev.inputs,
-        properties: { ...prev.inputs.properties, [newInputKey]: input },
+        properties: { ...prev.inputs.properties, [newInputKey]: input } as any,
       },
     }));
     startNewInput();
@@ -152,11 +152,11 @@ export default function ToolInputs({ tool, updateTool }: Props) {
           </Button>
         </PopoverTrigger>
         <PopoverContent className="max-h-64 overflow-auto">
-          {Object.keys(tool.inputs.properties).length < 1 && (
+          {Object.keys(tool?.inputs?.properties || []).length < 1 && (
             <p className="text-xs opacity-80">No inputs yet!</p>
           )}
           <div className="w-full flex flex-col gap-2">
-            {Object.keys(tool.inputs.properties).map((k, i) => (
+            {Object.keys(tool?.inputs?.properties || []).map((k, i) => (
               <div
                 key={`toolinputitem-${i}-${k}`}
                 className={`flex items-center w-full text-xs gap-1 rounded-xl p-1 pl-2 pr-2 group ${
@@ -166,9 +166,14 @@ export default function ToolInputs({ tool, updateTool }: Props) {
                 <div className="flex items-center gap-1 truncate w-full">
                   {k}:{" "}
                   <span
-                    className={`${textColors[tool.inputs.properties[k].type]}`}
+                    className={`${
+                      (textColors as any)[
+                        (tool?.inputs?.properties?.[k] || ({} as any))?.type ||
+                          "string"
+                      ]
+                    }`}
                   >
-                    {tool.inputs.properties[k].type}
+                    {(tool?.inputs?.properties?.[k] || ({} as any))?.type}
                   </span>
                 </div>
                 <div className="w-full min-w-max flex items-center justify-end transition-all opacity-0 group-hover:opacity-100 gap-2">
@@ -178,7 +183,7 @@ export default function ToolInputs({ tool, updateTool }: Props) {
                     isIconOnly
                     startContent={<MdEdit />}
                     onPress={() => {
-                      editInput(k, tool.inputs.properties[k]);
+                      editInput(k, tool?.inputs?.properties?.[k] as any);
                       setNewInputOpen(true);
                     }}
                   />

@@ -27,7 +27,6 @@ import updateAgentData from "@/functions/agents/update";
 import Empty from "../../empty";
 import { AiFillApi } from "react-icons/ai";
 import ProMessage from "../../proMessage";
-import ResourceLink from "../../resourceLink";
 
 interface Props {
   agent: AgentData;
@@ -60,6 +59,7 @@ export default function AgentTools({ agent, pro }: Props) {
   const [newToolLoading, setNewToolLoading] = useState<boolean>(false);
   const [deleteTool, setDeleteTool] = useState<string | undefined>(undefined);
   const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
+  const [startNew, setStartNew] = useState<boolean>(false);
 
   const checkValue = (value?: string) => {
     return typeof value === "string" && value.length > 0;
@@ -316,13 +316,12 @@ export default function AgentTools({ agent, pro }: Props) {
               </DialogTrigger>
               <DialogContent>
                 <div className="font-semibold">Add tool</div>
-                <div className="text-sm opacity-80">
-                  API tools are added from the platform with no code, while
-                  custom function tools are added from your code
+                <div className="text-sm opacity-80 mb-6">
+                  Select the type of tool you want to add to this agent
                 </div>
                 <div className="w-full flex items-center gap-4">
                   <div
-                    className="p-3 border-1 rounded-xl cursor-pointer w-full hover:border-black/20 dark:hover:border-white/20 transition-all relative"
+                    className="p-4 border-1 rounded-xl cursor-pointer w-full hover:border-black/20 dark:hover:border-white/20 transition-all relative"
                     onClick={() => {
                       setSelectTool(false);
                       setNewTool({ ...sampleTool });
@@ -335,13 +334,13 @@ export default function AgentTools({ agent, pro }: Props) {
                     </div>
                     <div className="text-sm font-semibold">External API</div>
                     <div className="text-xs opacity-80">
-                      Add APIs that the agent can call when needed
+                      Add APIs that the agent can send HTTP requests to
                     </div>
                   </div>
                   <Link
                     href="https://docs.scoopika.com/tools/get-started"
                     target="_blank"
-                    className="p-3 border-1 rounded-xl w-full hover:border-black/20 dark:hover:border-white/20 transition-all relative"
+                    className="p-4 border-1 rounded-xl w-full hover:border-black/20 dark:hover:border-white/20 transition-all relative"
                   >
                     <FaCode className="mb-2" />
                     <div className="absolute top-0 right-0 p-1 pl-2 pr-2 rounded-bl-md rounded-tr-lg bg-accent text-xs">
@@ -356,15 +355,18 @@ export default function AgentTools({ agent, pro }: Props) {
                 <Link
                   href="https://docs.scoopika.com/tools/get-started"
                   target="_blank"
-                  className="p-3 border-1 rounded-xl w-full hover:border-black/20 dark:hover:border-white/20 transition-all relative"
+                  className="p-4 border-1 rounded-xl w-full hover:border-black/20 dark:hover:border-white/20 transition-all relative"
                 >
                   <FaCode className="mb-2" />
                   <div className="absolute top-0 right-0 p-1 pl-2 pr-2 rounded-bl-md rounded-tr-lg bg-accent text-xs">
-                      Code
-                    </div>
-                  <div className="text-sm font-semibold">Client-side actions</div>
+                    Code
+                  </div>
+                  <div className="text-sm font-semibold">
+                    Client-side actions
+                  </div>
                   <div className="text-xs opacity-80">
-                    Add custom functions the agent can execute in the users browser
+                    Add custom functions the agent can execute in the users
+                    browser
                   </div>
                 </Link>
               </DialogContent>

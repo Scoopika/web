@@ -51,7 +51,7 @@ export default function NavItem({
         disabled={item.disabled ? true : false}
         radius="full"
         className={`
-                dark:bg-transparent hover:bg-black/20 dark:hover:bg-accent/30 hover:opacity-100 dark:text-white
+                bg-transparent hover:bg-accent/30 hover:opacity-100 text-white
                 ${
                   active === item.name
                     ? "bg-black dark:bg-accent/50"
