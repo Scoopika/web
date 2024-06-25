@@ -4,6 +4,8 @@ import { authOptions } from "@/lib/auth";
 import { AgentData } from "@scoopika/types";
 import { getServerSession } from "next-auth";
 import { db } from "@/lib/db";
+import { revalidatePath } from "next/cache";
+import { isPro } from "@/scripts/plan";
 
 export default async function updateAgentData(
   id: string,
@@ -13,6 +15,15 @@ export default async function updateAgentData(
 
   if (!session) {
     return { success: false };
+  }
+
+  const pro = isPro(session.user.plan);
+  const apiTools = (payload.in_tools || []).filter(t => t.type === "api");
+
+  if (apiTools.length > 3 && !pro) {
+    return {
+      success: false
+    }
   }
 
   try {
@@ -26,6 +37,8 @@ export default async function updateAgentData(
       },
     });
 
+    await revalidatePath(`/app/agents/${id}`);
+    await revalidatePath(`/playground`, "layout");
     return { success: true };
   } catch {
     return { success: false };

@@ -18,6 +18,7 @@ import Icons from "@/components/icons";
 import UserDropdown from "@/components/userDropdown";
 import NavItem, { type Item } from "@/components/navItem";
 import NextLink from "next/link";
+import SvgLogo from "./main/logo";
 
 interface Props {
   active?: string;
@@ -51,7 +52,7 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
     <NextNavbar
       position="sticky"
       onMenuOpenChange={setIsMenuOpen}
-      className="fixed backdrop-blur-xl border-b-1 z-50"
+      className="fixed bg-transparent border-b-0 z-40 dark"
       classNames={{
         wrapper: "min-w-full justify-between",
         content: "",
@@ -64,9 +65,12 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
             as={NextLink}
             href={path ? `/${path}` : "/"}
           >
-            <Logo />
-            <p className="font-semibold text-inherit text-sm ml-2">Scoopika</p>
-            {path && <p className="text-xs opacity-60 mb-2">{path}</p>}
+            <div className="flex items-center text-sm">
+              <div className="w-9 h-9 overflow-hidden rounded-xl bg-white flex items-center justify-center pt-1">
+                <SvgLogo />
+              </div>
+              <div className="font-semibold ml-3">Scoopika</div>
+            </div>
           </NavbarBrand>
         </div>
       </NavbarContent>

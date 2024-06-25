@@ -7,7 +7,7 @@ export default function generateSecret() {
     throw new Error("Secret password not found in env");
   }
 
-  const token = sign({}, secretPasswd, { algorithm: "HS512" });
+  const token = sign({}, secretPasswd, { algorithm: "HS512", expiresIn: "1h" });
 
   return token;
 }

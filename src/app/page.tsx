@@ -2,86 +2,113 @@ import Navbar from "@/components/navbar";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { Button } from "@nextui-org/react";
-import { FiChevronRight } from "react-icons/fi";
-import { IoMdArrowRoundForward } from "react-icons/io";
-import { MdInfo } from "react-icons/md";
-import { RiRobot2Fill } from "react-icons/ri";
-import GridSmallBackground from "@/components/backgrounds/grid";
-import Features from "@/components/landing/features";
 import Link from "next/link";
-import { LuBrainCircuit } from "react-icons/lu";
 import { CiLock } from "react-icons/ci";
 import { TbWorldBolt } from "react-icons/tb";
-import { FaCheck } from "react-icons/fa6";
-import { FiDatabase } from "react-icons/fi";
+import { FaChevronRight, FaGithub, FaImage, FaXTwitter } from "react-icons/fa6";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import darkTheme from "@/lib/codeTheme";
 import runCode from "@/components/code/run";
 import Footer from "@/components/footer";
-import TestScoopika from "@/components/testscoopika";
+import { SparklesCore } from "@/components/ui/sparkles";
+import "@/styles/landing.css";
+import Features from "@/components/landing/features";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
   return (
-    <>
+    <div className="bg-foreground text-background dark:bg-background dark:text-foreground">
+      <div className="fixed top-0 left-0 w-screen h-screen bg-black text-white z-50 flex flex-col items-center p-16">
+        <div className=""></div>
+        <h3 className="text-2xl font-semibold">Scoopika is leveling up</h3>
+        <p className="text-sm opacity-70 mt-2">
+          Scoopika v1 is loading... stay tuned for our next big move in few days
+        </p>
+        <img className="w-[70%] rounded-lg p-2" src="/images/agents.png" />
+      </div>
+
+      <div className="soptheader">
+        <div className="spotlight">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
       <Navbar session={session} active="Home" />
       {/* <TestScoopika /> */}
 
-      <div className="flex flex-col items-center gap-3 w-full">
-        <GridSmallBackground className="flex flex-col items-center relative gap-3 pt-36 w-full">
-
-          <h1 className="text-3xl md:text-4xl lg:text-6xl font-semibold text-center mb-3 flex items-center gap-3">
-            <span className="text-violet-600 dark:text-violet-500 flex items-center gap-1">
-              <RiRobot2Fill />
-              AI Virtual Assistants
-            </span>{" "}
-          </h1>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-5">
-            For Your Application
-          </h1>
-          <div className="mt-2 opacity-90 text-center text-base max-w-[90%] lg:max-w-[50%] mb-16">
-            Easily integrate AI assistants equipped with external tools
-            into your app.<br /> Data validation & type-safety, errors recovery, real-time
-            streaming, and managed long-term memory out-of-the-box
+      <div className="relative w-full flex flex-col items-center p-8 pt-20 md:p-12 md:pt-36 overflow-hidden rounded-md dark">
+        <div className="w-full absolute inset-0 h-screen">
+          <SparklesCore
+            id="tsparticlesfullpage"
+            background="transparent"
+            minSize={0.6}
+            maxSize={1.4}
+            particleDensity={100}
+            className="w-full h-full"
+            particleColor="#919191"
+          />
+        </div>
+        <div className="p-1 pl-3 pr-3 text-xs border border-dashed rounded-lg mb-6 border-white/20 backdrop-blur">
+          v1 is officially out!
+        </div>
+        <div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl opacity-0">
+            AI Agents for your application
+          </h2>
+        </div>
+        <div className="heroT">
+          <div className="font-semibold text-center text-3xl md:text-4xl lg:text-5xl heroT_1">
+            AI Agents for your application
           </div>
+          <div className="text-3xl md:text-4xl lg:text-5xl heroT_2">
+            AI Agents for your application
+          </div>
+        </div>
+        <p className="opacity-80 text-xs md:text-sm lg:text-base text-center lg:max-w-[60%] mt-4">
+          Meet the modern open-source standard built to help developers create
+          personalized AI agents for their web apps that can{" "}
+          <b>see, talk, listen, learn, and take actions</b>
+        </p>
+        <div className="flex flex-col md:flex-row md:items-center gap-6 mt-10">
           <Button
-            size="lg"
-            color="primary"
-            variant="bordered"
-            radius="sm"
-            className="font-bold border-1 border-black/30 border-t-black/60 dark:border-white/30 dark:border-t-white/60 hover:bg-accent/40 backdrop-blur"
-            endContent={<IoMdArrowRoundForward />}
+            variant="flat"
+            size="md"
             as={Link}
-            href="/app"
+            href="/login"
+            className="border backdrop-blur-xl border-white/20"
+            endContent={<FaChevronRight size={14} />}
           >
             Start for free
           </Button>
-          <p className="text-sm opacity-80 pb-16">
-            Connect your LLMs - Pay only for extra features
-          </p>
-        </GridSmallBackground>
-      </div>
-
-      <div className="flex flex-col items-center mb-48">
+          <Button
+            variant="light"
+            size="md"
+            as={Link}
+            href="https://docs.scoopika.com"
+            target="_blank"
+            endContent={<FaChevronRight size={14} />}
+          >
+            Documentation
+          </Button>
+        </div>
         <Features />
       </div>
 
-      <div className="flex flex-col items-center mb-48">
+      <div className="w-full"></div>
+
+      <div className="flex flex-col items-center mb-48 mt-12 sm:mt-36 dark">
         <div className="w-[80%] flex flex-col items-center">
-          <div className="mb-6 flex items-center gap-2 opacity-80 text-center">
-            <LuBrainCircuit className="hidden md:block" />
-            Make your application AI-powered today!
-          </div>
           <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
-            Give your users a taste of the future
+            Made for modern web development
           </div>
           <div className="opacity-70 text-center">
-            A platform you can rely on to bring AI features to your application
+            A platform you can rely on to take your application to the future
           </div>
 
-          <div className="w-full flex flex-col md:flex-row items-center justify-center mt-12 gap-3">
-            <div className="w-full group border-1 rounded-xl rounded-tl-3xl flex flex-col items-center hover:border-black/20 dark:hover:border-white/20 transition-all overflow-hidden h-72">
+          <div className="w-full flex flex-col md:flex-row items-center justify-center mt-12 sm:pl-8 sm:pr-8 gap-4">
+            <div className="w-full group border-1 rounded-xl rounded-tl-3xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72 hover:-translate-x-4 hover:-translate-y-4">
               <div className="h-full w-full relative flex items-center justify-center">
                 <div className="absolute top-4 left-10 h-full w-2 border-r-1 border-dashed"></div>
                 <div className="absolute top-4 right-10 h-full w-2 border-r-1 border-dashed"></div>
@@ -95,7 +122,7 @@ export default async function Home() {
                     <div className="w-12 border-t-1 mr-3"></div>
                   </div>
                   <CiLock
-                    className="rotate-[-15deg] opacity-50 group-hover:-translate-x-7 transition-all group-hover:rotate-0"
+                    className="rotate-[-15deg] group-hover:-translate-x-7 transition-all group-hover:rotate-0"
                     size={100}
                   />
                 </div>
@@ -105,13 +132,13 @@ export default async function Home() {
                   Safe out of the box
                 </div>
                 <div className="text-xs opacity-80 w-full text-center">
-                  LLM output is always validated with full type-safety and
-                  errors auto healing
+                  Encryption, LLM output validation with full type-safety, and
+                  errors recovery
                 </div>
               </div>
             </div>
 
-            <div className="w-full group border-1 rounded-xl rounded-tr-3xl flex flex-col items-center hover:border-black/20 dark:hover:border-white/20 transition-all overflow-hidden h-72">
+            <div className="w-full group border-1 rounded-xl rounded-tr-3xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72 hover:translate-x-4 hover:-translate-y-4">
               <div className="h-full w-full relative flex items-center justify-center">
                 <div className="absolute top-4 left-10 h-full w-2 border-r-1 border-dashed"></div>
                 <div className="absolute top-4 right-10 h-full w-2 border-r-1 border-dashed"></div>
@@ -120,7 +147,7 @@ export default async function Home() {
                 <div className="absolute -bottom-6 left-0 w-full h-2 border-t-1 border-dashed"></div>
                 <div className="top-0 left-0 w-full h-full flex items-center justify-center">
                   <TbWorldBolt
-                    className="rotate-[15deg] opacity-50 group-hover:translate-x-7 transition-all group-hover:rotate-0"
+                    className="rotate-[15deg] group-hover:translate-x-7 transition-all group-hover:rotate-0"
                     size={100}
                   />
                   <div className="flex flex-col gap-5 w-14 pt-6 h-full items-center justify-center group-hover:opacity-0 group-hover:translate-x-2 transition-all">
@@ -135,100 +162,53 @@ export default async function Home() {
                   Built for the web
                 </div>
                 <div className="text-xs opacity-80 w-full text-center">
-                  Real-time responses streaming with seamless interaction &
-                  client-side actions
+                  Full edge compatibility with real-time streaming
                 </div>
               </div>
             </div>
           </div>
-          <div className="w-full flex flex-col md:flex-row items-center justify-center gap-3 mt-3">
-            <div className="w-full group border-1 rounded-xl rounded-bl-3xl flex flex-col items-center hover:border-black/20 dark:hover:border-white/20 transition-all overflow-hidden h-72">
-              <div className="w-full h-full max-h-full overflow-hidden flex flex-col items-center p-3">
-                <div className="flex flex-col w-full group-hover:-translate-y-36 transition-all">
-                  <div className="text-xs p-2 border-1 rounded-lg">
-                    <div className="opacity-60 mb-1">user</div>
-                    Check my website analytics, write a report about it, and
-                    publish it to my blog
-                  </div>
-                  <div className="text-xs p-2 border-1 rounded-lg mt-3">
-                    <div className="opacity-60 mb-1">writer (agent)</div>
-                    <div className="opacity-60 mb-2 flex items-center gap-1">
-                      <FaCheck />
-                      called get_web_traffic
-                    </div>
-                    Your report is ready!
-                  </div>
-                  <div className="text-xs p-2 border-1 rounded-lg mt-3">
-                    <div className="opacity-60 mb-1">publisher (agent)</div>
-                    <div className="opacity-60 mb-2 flex items-center gap-1">
-                      <FaCheck />
-                      called publish_blog_post
-                    </div>
-                    The report is published to your main blog!
-                  </div>
-                  <div className="text-xs opacity-50 w-full text-center mt-4">
-                    Multi-agent box example
-                  </div>
+          <div className="w-full flex flex-col md:flex-row items-center justify-center sm:pr-8 sm:pl-8 gap-4 mt-4">
+            <div className="w-full group border-1 rounded-xl rounded-bl-3xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72 hover:-translate-x-4 hover:translate-y-4">
+              <div className="w-full h-full flex items-center justify-center p-3 gap-3">
+                <div className="w-20 h-20 bg-accent/30 rounded-2xl flex items-center justify-center group-hover:bg-white transition-all group-hover:w-14 group-hover:h-14">
+                  <FaImage size={20} className="group-hover:text-black" />
+                </div>
+                <div className="w-14 h-14 bg-accent/30 rounded-2xl flex items-center justify-center group-hover:bg-white transition-all group-hover:w-10 group-hover:h-10">
+                  <FaImage size={20} className="group-hover:text-black" />
+                </div>
+                <div className="w-10 h-10 bg-accent/30 rounded-2xl flex items-center justify-center group-hover:bg-white transition-all group-hover:w-20 group-hover:h-20">
+                  <FaImage size={20} className="group-hover:text-black" />
                 </div>
               </div>
               <div className="p-4 pt-6 pb-6 flex flex-col w-full">
-                <div className="w-full text-center text-sm mb-2">
-                  Next-level AI agents
-                </div>
+                <div className="w-full text-center text-sm mb-2">Vission</div>
                 <div className="text-xs opacity-80 w-full text-center">
-                  Equip AI agents with custom tools; and let them collaborate
-                  together
+                  Built-in support for vission and images based on the LLM{" "}
+                  {"you're"} using
                 </div>
               </div>
             </div>
 
-            <div className="w-full group border-1 rounded-xl flex flex-col items-center hover:border-black/20 dark:hover:border-white/20 transition-all overflow-hidden h-72">
-              <div className="w-full h-full flex flex-col items-center justify-center relative p-2">
-                <FiDatabase size={50} className="opacity-70" />
-                <div className="w-full flex items-center justify-center mt-2">
-                  <div className="h-4 border-r-1"></div>
-                </div>
-                <div className="w-full flex items-center justify-center">
-                  <div className="w-8 border-t-1"></div>
-                </div>
-                <div className="mt-3 flex items-center gap-2 overflow-hidden group-hover:translate-x-36 transition-all">
-                  {Array.from({ length: 10 }, (_, n) => n + 1).map(
-                    (i, index) => (
-                      <div
-                        key={`session-${index}`}
-                        className="text-xs p-1 pl-3 pr-3 border-1 rounded-full bg-accent/10"
-                      >
-                        session_{i}
-                      </div>
-                    )
-                  )}
-                </div>
-                <div className="mt-2 flex items-center gap-2 overflow-hidden group-hover:-translate-x-36 transition-all">
-                  {Array.from({ length: 10 }, (_, n) => n + 10).map(
-                    (i, index) => (
-                      <div
-                        key={`session-2-${index}`}
-                        className="text-xs p-1 pl-3 pr-3 border-1 rounded-full bg-accent/10"
-                      >
-                        session_{i}
-                      </div>
-                    )
-                  )}
-                </div>
+            <div className="w-full group border-1 rounded-xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72">
+              <div className="w-full h-full flex items-center justify-center gap-1 relative p-2">
+                <div className="w-6 h-20 bg-white rounded-xl transition-all group-hover:h-14"></div>
+                <div className="w-6 h-10 bg-white rounded-xl transition-all group-hover:h-20"></div>
+                <div className="w-6 h-16 bg-white rounded-xl transition-all group-hover:h-10"></div>
+                <div className="w-6 h-14 bg-white rounded-xl transition-all group-hover:h-16"></div>
               </div>
               <div className="p-4 pt-6 pb-6 flex flex-col w-full">
                 <div className="w-full text-center text-sm mb-2">
-                  Managed memory sessions
+                  Voice chat
                 </div>
                 <div className="text-xs opacity-80 w-full text-center">
-                  Deploy a Serverless data store for persistent chat sessions
-                  with no setup
+                  Agents can speak in real-time powering interactive voice chat
+                  with users
                 </div>
               </div>
             </div>
 
-            <div className="w-full group border-1 rounded-xl rounded-br-3xl flex flex-col items-center hover:border-black/20 dark:hover:border-white/20 transition-all overflow-hidden h-72">
-              <div className="w-full h-full flex flex-col items-center justify-center relative max-h-full overflow-hidden bg-foreground dark:bg-background">
+            <div className="w-full group border-1 rounded-xl rounded-br-3xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72 hover:translate-x-4 hover:translate-y-4">
+              <div className="w-full h-full flex flex-col items-center justify-center relative max-h-full overflow-hidden bg-black">
                 <SyntaxHighlighter
                   language="typescript"
                   className="w-full h-full text-xs bg-transparent"
@@ -251,30 +231,188 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center mb-48">
+      <div className="flex flex-col items-center mb-48 dark">
         <div className="w-[80%] flex flex-col items-center">
-          <div className="mb-6 flex items-center gap-2 opacity-80 text-center">
-            {"We're"} done talking
+          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
+            Smart AI assistants that impress users
           </div>
-          <div className="text-3xl md:text-4xl text-center font-semibold mb-3">
-            What you waiting for?
+          <div className="opacity-70 text-center">
+            Make your application AI-accessible today and join the AI revolution
           </div>
-          <div className="opacity-70 mb-8 text-center">
-            Hop in and try it for yourself. Start for free ({"It's"} free
-            forever actually)
+          <div className="w-full flex flex-col lg:flex-row items-center justify-center mt-12 sm:pl-8 sm:pr-8 gap-4">
+            <div className="w-full flex flex-col p-8 bg-black rounded-3xl h-72 sm:h-64">
+              <div className="font-semibold text-xl mb-2">
+                Powerful & Efficient
+              </div>
+              <div className="text-sm sm:text-base opacity-70 mb-8">
+                Scoopika works on your servers and with your LLMs, providing all
+                its features without adding any extra latency or costs.
+              </div>
+              <div className="h-full"></div>
+              <div className="w-full flex gap-3 items-center justify-between pb-4">
+                <div className="w-2 h-2 bg-green-400"></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-400"></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-400"></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-400"></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-400"></div>
+                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
+              </div>
+            </div>
+            <div className="w-full flex flex-col p-8 bg-black rounded-3xl h-72 sm:h-64">
+              <div className="font-semibold text-xl mb-2">
+                Reactive interactions
+              </div>
+              <div className="text-sm sm:text-base opacity-70 mb-4">
+                Build interactive real-time AI features and let agents perform
+                actions based on contextual clues with both text and voice
+                interactions.
+              </div>
+              <div className="h-full"></div>
+              <div className="flex items-center gap-3">
+                <div className="p-4 rounded-2xl bg-accent/40">
+                  <div className="text-sm mb-1 opacity-70">
+                    TTFB with knowledge & voice
+                  </div>
+                  <div className="font-semibold">LLM TTFT + ~300ms</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <Button
-            color="primary"
-            className="mt-4 font-semibold"
-            as={Link}
-            href="/login"
-          >
-            {"Let's goooo"}
-          </Button>
         </div>
       </div>
 
-      <Footer />
-    </>
+      <div className="flex flex-col items-center mb-48 dark">
+        <div className="w-[80%] flex flex-col items-center">
+          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
+            Playground
+          </div>
+          <div className="opacity-70 text-sm sm:text-base text-center mb-8">
+            Create an agent and try it in the platform playground in under a
+            minute
+            <br />
+            with support for text, images, and voice.
+          </div>
+          <img
+            src="/images/playground.png"
+            className="w-full sm:w-[80%] object-cover border rounded-2xl p-2 bg-accent/30"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center mb-48 dark">
+        <div className="w-[80%] flex flex-col items-center">
+          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
+            Open Source
+          </div>
+          <div className="opacity-70 text-center mb-8">
+            Tools and integrations to simplify your development process
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex gap-4">
+            <Link
+              href="https://docs.scoopika.com/packages/ts/scoopika"
+              target="_blank"
+              className="p-6 bg-accent/30 rounded-3xl w-full transition-all hover:bg-accent/40 hover:scale-105 h-48"
+            >
+              <div className="mb-2 text-lg">@scoopika/scoopika</div>
+              <div className="text-sm opacity-70 mb-4">
+                Run agents on the server-side & deploy a HTTP based Scoopika API
+                endpoint with streaming support
+              </div>
+              <div className="p-1 pl-2 pr-2 text-xs bg-blue-400/10 text-blue-400 max-w-max rounded-full font-semibold flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                Typescript
+              </div>
+            </Link>
+            <Link
+              href="https://docs.scoopika.com/packages/ts/client"
+              target="_blank"
+              className="p-6 bg-accent/30 rounded-3xl w-full transition-all hover:bg-accent/40 hover:scale-105 h-48"
+            >
+              <div className="mb-2 text-lg">@scoopika/client</div>
+              <div className="text-sm opacity-70 mb-4">
+                Run agents on the client-side with built-in support for
+                real-time streaming and client-side actions
+              </div>
+              <div className="p-1 pl-2 pr-2 text-xs bg-blue-400/10 text-blue-400 max-w-max rounded-full font-semibold flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                Typescript
+              </div>
+            </Link>
+            <Link
+              href="https://docs.scoopika.com/packages/ts/react"
+              target="_blank"
+              className="p-6 bg-accent/30 rounded-3xl w-full transition-all hover:bg-accent/40 hover:scale-105 h-48"
+            >
+              <div className="mb-2 text-lg">@scoopika/react</div>
+              <div className="text-sm opacity-70 mb-4">
+                Building blocks to use Scoopika in React projects with built-in
+                state management. Scoopika playground was built using this
+              </div>
+              <div className="p-1 pl-2 pr-2 text-xs bg-blue-400/10 text-blue-400 max-w-max rounded-full font-semibold flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                Typescript
+              </div>
+            </Link>
+            <div className="p-6 border-1 rounded-3xl opacity-80 h-48"></div>
+            <div className="p-6 border-1 rounded-3xl opacity-80 h-48 hidden md:flex"></div>
+            <div className="p-6 border-1 rounded-3xl opacity-80 h-48 hidden md:flex"></div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center mb-48 dark">
+        <div className="w-[80%] flex flex-col items-center">
+          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
+            Community
+          </div>
+          <div className="opacity-70 text-center mb-8">
+            A growing community of developers just like you
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 flex gap-3 items-center justify-center">
+            <Link
+              href="https://github.com/scoopika"
+              target="_blank"
+              className="h-72 p-6 bg-accent/30 rounded-3xl flex flex-col items-center transition-all hover:bg-accent/40 relative"
+            >
+              <FaGithub size={50} className="mt-10" />
+              <FaGithub
+                size={150}
+                className="absolute opacity-5 w-full h-full p-10"
+              />
+              <div className="mb-2 mt-4">Github</div>
+              <div className="text-sm opacity-80 text-center">
+                You can see all parts of Scoopika that have been developed as
+                open source (90% of Scoopika)
+              </div>
+            </Link>
+            <Link
+              href="https://x.com/scoopika_"
+              target="_blank"
+              className="h-72 p-6 bg-accent/30 rounded-3xl flex flex-col items-center transition-all hover:bg-accent/40 relative"
+            >
+              <FaXTwitter size={50} className="mt-10" />
+              <FaXTwitter
+                size={150}
+                className="absolute opacity-5 w-full h-full p-10"
+              />
+              <div className="mb-2 mt-4">X (Twitter)</div>
+              <div className="text-sm opacity-80 text-center">
+                Follow us to stay up to date with our latest news and updates
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <Footer className="dark" />
+    </div>
   );
 }

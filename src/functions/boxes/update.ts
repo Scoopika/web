@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { db } from "@/lib/db";
 import { RawBoxData } from "@/types/rawBox";
+import { revalidatePath } from "next/cache";
 
 export default async function updateBoxData(
   id: string,
@@ -15,19 +16,17 @@ export default async function updateBoxData(
     return { success: false };
   }
 
-  try {
-    await db.box.update({
-      where: {
-        id,
-        userId: session.user.id,
-      },
-      data: {
-        payload: JSON.stringify(payload),
-      },
-    });
+  await db.box.update({
+    where: {
+      id,
+      userId: session.user.id,
+    },
+    data: {
+      payload: JSON.stringify(payload),
+    },
+  });
 
-    return { success: true };
-  } catch {
-    return { success: false };
-  }
+  await revalidatePath("/app/boxes");
+
+  return { success: true };
 }

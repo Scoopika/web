@@ -21,9 +21,9 @@ export default function ThemeToggle() {
       <DropdownMenuTrigger asChild>
         <Button
           size="sm"
-          variant="bordered"
+          variant="light"
           isIconOnly
-          className="border-1 shadow"
+          className="shadow"
           onPress={() => setOpen(true)}
         >
           <Icons.SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -55,5 +55,41 @@ export default function ThemeToggle() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+}
+
+export function ThemeToggleRow() {
+  const { systemTheme, theme, setTheme } = useTheme();
+
+  return (
+    <div className="flex items-center gap-2 w-full">
+      <Button
+        isIconOnly
+        size="sm"
+        variant="light"
+        className="opacity-70"
+        onPress={() => setTheme("system")}
+      >
+        <Icons.LaptopIcon />
+      </Button>
+      <Button
+        isIconOnly
+        size="sm"
+        className={`${theme === "light" ? "opacity-100" : "opacity-70"}`}
+        variant={theme === "light" ? "flat" : "light"}
+        onPress={() => setTheme("light")}
+      >
+        <Icons.SunIcon />
+      </Button>
+      <Button
+        isIconOnly
+        size="sm"
+        className={`${theme === "dark" ? "opacity-100" : "opacity-70"}`}
+        variant={theme === "dark" ? "flat" : "light"}
+        onPress={() => setTheme("dark")}
+      >
+        <Icons.MoonIcon />
+      </Button>
+    </div>
   );
 }

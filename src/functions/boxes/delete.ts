@@ -3,6 +3,7 @@
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 
 export default async function deleteBox(
   id: string,
@@ -13,16 +14,14 @@ export default async function deleteBox(
     return { success: false };
   }
 
-  try {
-    await db.box.delete({
-      where: {
-        id,
-        userId: session.user.id,
-      },
-    });
+  await db.box.delete({
+    where: {
+      id,
+      userId: session.user.id,
+    },
+  });
 
-    return { success: true };
-  } catch {
-    return { success: false };
-  }
+  await revalidatePath("/app/boxes");
+
+  return { success: true };
 }

@@ -1,102 +1,24 @@
-import AppLayout from "@/components/app/appLayout";
-import DataStoresMain from "@/components/app/stores/main";
-import CheckItem from "@/components/checkItem";
+import StoresMain from "@/components/main/stores/main";
+import UpgradePlan from "@/components/main/upgrade";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { Button } from "@nextui-org/react";
-import { Metadata } from "next";
-import { getServerSession, Session } from "next-auth";
-import Link from "next/link";
-import { FaDatabase } from "react-icons/fa6";
-
-export const maxDuration = 60;
-export const dynamic = "force-dynamic";
-
-export const metadata: Metadata = {
-  title: "History Data Stores"
-}
-
-const databaseFeatures: string[] = [
-  "Serverless with APIs served on the edge",
-  "Requires zero setup and one line of code to connect",
-  "Built-in users & sessions management APIs",
-];
+import { isPro } from "@/scripts/plan";
+import { Session, getServerSession } from "next-auth";
 
 export default async function Page() {
   const session = (await getServerSession(authOptions)) as Session;
-  const plan = session.user.plan;
+  const pro = isPro(session.user.plan);
+  const stores = await db.historystore.findMany({
+    where: {
+        userId: session.user.id
+    }
+  })
 
-  if (plan === "none" || plan === "free" || !plan.includes("::")) {
+  if (!pro) {
     return (
-      <AppLayout
-        session={session}
-        sidebarActive="Data Stores"
-        title="Data Stores"
-      >
-        <div className="w-full flex flex-col items-center p-12">
-          <div
-            style={{
-              boxShadow: "0px 0px 50px 1px rgba(255, 255, 255, .1)",
-            }}
-            className="w-10 h-10 rounded-lg border-1 flex items-center justify-center mb-4"
-          >
-            <FaDatabase />
-          </div>
-          <h2 className="font-semibold mb-2">Upgrade to Pro!</h2>
-          <p className="text-sm opacity-70 text-center mb-4">
-            Data stores are a Pro feature, upgrade your plan now to get a
-            managed serverless <br />
-            database for persistent chat sessions
-          </p>
-          <Button
-            size="sm"
-            color="primary"
-            className="font-semibold"
-            as={Link}
-            href="/app/upgrade"
-          >
-            Upgrade plan
-          </Button>
-
-          <div className="w-full flex items-center justify-center mt-8">
-            <div className="p-6 border-1 rounded-lg min-w-96">
-              <p className="mb-4 font-semibold">Features</p>
-
-              <div className="w-full flex flex-col gap-4">
-                {databaseFeatures.map((feature, index) => (
-                  <CheckItem
-                    key={`databasefeatureitem-${index}`}
-                    title={feature}
-                  />
-                ))}
-                <Link
-                  href="https://docs.scoopika.com/data-stores"
-                  target="_blank"
-                  className="underline text-sm mt-2"
-                >
-                  Learn more
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </AppLayout>
+      <UpgradePlan description="Connect your app to serverless data stores to save chat sessions and give your agents long-term memory with no additional setup" />
     );
   }
 
-  const datastores = await db.datastore.findMany({
-    where: {
-      userId: session.user.id,
-    },
-  });
-
-  return (
-    <AppLayout
-      session={session}
-      sidebarActive="Data Stores"
-      title="Data Stores"
-    >
-      <DataStoresMain datastores={datastores} />
-    </AppLayout>
-  );
+  return <StoresMain dataStores={stores} />
 }

@@ -75,3 +75,30 @@ model Datastore {
   deployment_id String
   url           String
 }
+
+model Historystore {
+  id     String @id @default(cuid())
+  userId String
+  name   String
+}
+
+model Apikeys {
+  id     String @id @default(cuid())
+  userId String
+  name   String
+  value  String
+}
+
+model Knowledge {
+  id      String @id @default(cuid())
+  userId  String
+  agentId String
+  fileId  String
+  name    String
+  vectors String
+}
+
+model Waitlistv1 {
+  id    String  @id @default(cuid())
+  email String  @unique
+}

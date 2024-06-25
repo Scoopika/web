@@ -22,17 +22,17 @@
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
 
-    --accent: 0 0% 96.5%;
+    --accent: 0 0% 95.5%;
     --accent-foreground: 0 0% 9%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 83.8%;
+    --border: 0 0% 80.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
     --brandblue: #68c6f9;
     --brandpink: #feb0c0;
     --brandgreen: #8ce99a;
@@ -78,9 +78,11 @@
   * {
     @apply border-border outline-none;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   .primaryInput {
     @apply w-full h-10 pl-3 pr-3 outline-none text-sm border-1 border-black/20 rounded-lg bg-accent/20 text-black dark:text-default-500 hover:border-default-300 dark:border-white/10 dark:text-white/90 dark:placeholder-white/50 dark:focus:border-white/20 disabled:cursor-not-allowed;
   }
@@ -95,13 +97,10 @@
 
   .primaryTitle {
     --bg-size: 400%;
-    background: linear-gradient(
-        90deg,
+    background: linear-gradient(90deg,
         var(--brandpurple),
         var(--brandpink),
-        var(--brandpurple)
-      )
-      0 0 / var(--bg-size) 100%;
+        var(--brandpurple)) 0 0 / var(--bg-size) 100%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -112,6 +111,7 @@
     .primaryTitle {
       animation: move-bg 8s linear infinite;
     }
+
     @keyframes move-bg {
       to {
         background-position: var(--bg-size) 0;
@@ -121,19 +121,17 @@
 
   .lineGradient {
     --bg-size: 400%;
-    background: linear-gradient(
-        90deg,
+    background: linear-gradient(90deg,
         var(--brandpurple),
         var(--brandpink),
-        var(--brandpurple)
-      )
-      0 0 / var(--bg-size) 100%;
+        var(--brandpurple)) 0 0 / var(--bg-size) 100%;
   }
 
   @media (prefers-reduced-motion: no-preference) {
     .lineGradient {
       animation: move-bg 8s linear infinite;
     }
+
     @keyframes move-bg {
       to {
         background-position: var(--bg-size) 0;
@@ -142,31 +140,40 @@
   }
 
   .code-container {
-    scrollbar-width: thin; /* Set the width of the scrollbar */
-    scrollbar-color: #999 transparent; /* Set the color of the scrollbar (track and thumb) */
+    scrollbar-width: thin;
+    /* Set the width of the scrollbar */
+    scrollbar-color: #999 transparent;
+    /* Set the color of the scrollbar (track and thumb) */
   }
 
   /* Customize scrollbar */
   .code-container::-webkit-scrollbar {
-    width: 10px; /* Set the width of the scrollbar */
+    width: 10px;
+    /* Set the width of the scrollbar */
   }
 
   .code-container::-webkit-scrollbar-thumb {
-    background-color: #999; /* Set the color of the scrollbar thumb */
-    border-radius: 5px; /* Round the corners of the thumb */
+    background-color: #999;
+    /* Set the color of the scrollbar thumb */
+    border-radius: 5px;
+    /* Round the corners of the thumb */
   }
 
   .code-container::-webkit-scrollbar-track {
-    background-color: transparent; /* Set the color of the scrollbar track */
+    background-color: transparent;
+    /* Set the color of the scrollbar track */
   }
 
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 
   .prompt-editor-wrapper {
@@ -175,6 +182,19 @@
 }
 
 /* scrollbar */
+
+/* Firefox */
+html {
+  scrollbar-color: #f1f1f1 #888;
+}
+
+.dark {
+  scrollbar-color: #81818181 #51515151;
+}
+
+html {
+  scrollbar-width: thin;
+}
 
 /* WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
@@ -205,23 +225,11 @@
   background: #71717171;
 }
 
-/* Firefox */
-html {
-  scrollbar-color: #f1f1f1 #888;
-}
-
-.dark html {
-  scrollbar-color: transparent #51515151;
-}
-
-html {
-  scrollbar-width: thin;
-}
-
 /* Draft editor */
 .DraftEditor-editorContainer {
   @apply min-h-full text-sm;
 }
+
 /* 
 .public-DraftEditor-content {
   @apply min-h-full bg-red-500;
@@ -229,4 +237,40 @@ html {
 
 .public-DraftEditorPlaceholder-inner {
   @apply absolute top-3 left-0 text-sm;
+}
+
+.markdown h1 {
+  @apply text-3xl font-bold mb-4;
+}
+
+.markdown h2 {
+  @apply text-2xl font-semibold mb-3;
+}
+
+.markdown h3 {
+  @apply text-xl font-semibold mb-3;
+}
+
+.markdown h4 {
+  @apply text-base font-semibold mb-3;
+}
+
+.markdown h5 {
+  @apply text-sm font-semibold mb-3;
+}
+
+.markdown p {
+  @apply mb-4;
+}
+
+.markdown ul {
+  @apply list-disc list-inside mb-4;
+}
+
+.markdown li {
+  @apply mb-2;
+}
+
+.markdown pre {
+  @apply p-4 rounded mb-4 border-1 rounded-xl overflow-auto max-w-[30rem] lg:max-w-[50rem];
 }
