@@ -193,7 +193,7 @@ export default function ToolPage({
       />
 
       <div className="mt-6 flex items-center gap-6">
-        {item.links.map((link) => (
+        {item.links.map((link, index) => (
           <ResourceLink
 	key={`link-${link}-${index}`}
             name={link.name}
