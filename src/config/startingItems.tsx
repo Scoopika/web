@@ -1,5 +1,5 @@
 import { RiRobot2Fill } from "react-icons/ri";
-import { Tb3DCubeSphere } from "react-icons/tb";
+import { TbCube3dSphere } from "react-icons/tb";
 import { BiSolidBookContent } from "react-icons/bi";
 import { AiFillApi } from "react-icons/ai";
 import { Badge } from "@/components/ui/badge";
@@ -22,7 +22,7 @@ const startingItems: {
     title: "Smart Boxes",
     description:
       "Connect multiple agents in one box and let them collaborate based on the context",
-    icon: <Tb3DCubeSphere size={20} />,
+    icon: <TbCube3dSphere size={20} />,
   },
   // {
   //   title: "AI-gen Content",
