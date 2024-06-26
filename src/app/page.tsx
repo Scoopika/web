@@ -19,14 +19,6 @@ export default async function Home() {
 
   return (
     <div className="bg-foreground text-background dark:bg-background dark:text-foreground">
-      <div className="fixed top-0 left-0 w-screen h-screen bg-black text-white z-50 flex flex-col items-center p-16">
-        <div className=""></div>
-        <h3 className="text-2xl font-semibold">Scoopika is leveling up</h3>
-        <p className="text-sm opacity-70 mt-2">
-          Scoopika v1 is loading... stay tuned for our next big move in few days
-        </p>
-        <img className="w-[70%] rounded-lg p-2" src="/images/agents.png" />
-      </div>
 
       <div className="soptheader">
         <div className="spotlight">
@@ -36,7 +28,6 @@ export default async function Home() {
         </div>
       </div>
       <Navbar session={session} active="Home" />
-      {/* <TestScoopika /> */}
 
       <div className="relative w-full flex flex-col items-center p-8 pt-20 md:p-12 md:pt-36 overflow-hidden rounded-md dark">
         <div className="w-full absolute inset-0 h-screen">

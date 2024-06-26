@@ -79,8 +79,7 @@ export default function AgentGeneral({ agent, apiKeys }: Props) {
           <FaCircleInfo size={16} className="opacity-70" />
           This agent uses {agent.prompts[0].llm_client} and you {"don't"} have
           an API key added to your account. make sure to pass it safely from your code
-          or add it to your account by clicking on your avatar in top-right
-          corner.
+          or add it to your account by clicking on the settings icon.
         </div>
       )}
       <div className="w-full flex items-center justify-end p-4">

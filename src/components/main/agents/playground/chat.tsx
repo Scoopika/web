@@ -4,9 +4,6 @@ import { Button } from "@nextui-org/react";
 import {
   Agent,
   Client,
-  FromSchema,
-  JSONSchema,
-  createActionSchema,
 } from "@scoopika/client";
 import { AgentData, LLMToolCall, RawEngines } from "@scoopika/types";
 import { useState } from "react";
@@ -32,7 +29,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useChatState } from "./state";
+import { useChatState } from "@scoopika/react";
 
 interface Props {
   userId: string;

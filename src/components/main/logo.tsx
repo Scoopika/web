@@ -1,10 +1,13 @@
-export default function SvgLogo() {
+export default function SvgLogo({ width, height }: {
+  width?: string;
+  height?: string;
+}) {
   return (
     <svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
-      width="25.000000pt"
-      height="25.000000pt"
+      width={width || "25.000000pt"}
+      height={height || "25.000000pt"}
       viewBox="0 0 500.000000 500.000000"
       preserveAspectRatio="xMidYMid meet"
     >

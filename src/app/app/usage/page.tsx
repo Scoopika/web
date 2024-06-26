@@ -54,7 +54,7 @@ export default async function Page() {
   const usage = await getUsage();
   const usageIndex = indexes.indexOf(plan.type);
 
-  if (!planData.success) {
+  if (plan.type !== "free" && !planData.success) {
     return redirect("/app");
   }
 
@@ -68,38 +68,38 @@ export default async function Page() {
       name: "Agents loads",
       current: usage.data?.[0].value || 0,
       max: maxes.load[usageIndex],
-      info: aboutFeatures.loads
+      info: aboutFeatures.loads,
     },
     {
       name: "Speech characters",
       current: usage.data?.[1].value || 0,
       max: maxes.speech[usageIndex],
-      info: aboutFeatures.speech
+      info: aboutFeatures.speech,
     },
     {
       name: "Chats store read operations",
       current: usage.data?.[2].value || 0,
       max: maxes.store_read[usageIndex],
-      info: aboutFeatures.store_read
+      info: aboutFeatures.store_read,
     },
     {
       name: "Chats store write operations",
       current: usage.data?.[3].value || 0,
       max: maxes.store_write[usageIndex],
-      info: aboutFeatures.store_write
+      info: aboutFeatures.store_write,
     },
     {
       name: "Knowledge requests",
       current: usage.data?.[4].value || 0,
       max: maxes.knowledge[usageIndex],
-      info: aboutFeatures.knowledge
+      info: aboutFeatures.knowledge,
     },
     {
       name: "Fast audio inputs processes",
       current: usage.data?.[5].value || 0,
       max: maxes.listen[usageIndex],
-      info: aboutFeatures.listen
-    }
+      info: aboutFeatures.listen,
+    },
   ];
 
   return (
@@ -108,7 +108,10 @@ export default async function Page() {
         title="Plan & Usage"
         description="Managed your plan and keep track of your monthly usage"
       />
-      <Billing session={session} planData={planData.data} />
+      <Billing
+        session={session}
+        planData={planData.success === true ? planData.data : undefined}
+      />
       <div className="text-xl font-semibold">Your monthly usage</div>
       {usageData.map((usage, index) => (
         <Row

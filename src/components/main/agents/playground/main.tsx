@@ -7,7 +7,7 @@ import { Button } from "@nextui-org/react";
 import { AgentData, RawEngines } from "@scoopika/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaLock } from "react-icons/fa6";
+import { FaChevronLeft, FaLock } from "react-icons/fa6";
 import { RiRobot2Fill } from "react-icons/ri";
 import { toast } from "sonner";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -129,7 +129,11 @@ export default function Playground({
             icon={<RiRobot2Fill />}
             title="Create your first agent"
             description="Create an agent and test it in the playground totally for free. navigate to the agents page, create an agent in few seconds, then come back here to talk with it"
-          />
+          >
+            <Button size="sm" variant="flat" as={Link} href="/app/new-agent">
+              Create agent
+            </Button>
+          </Empty>
         )}
         <div className="w-full flex flex-col items-center justify-center">
           {agents.map((agent) => (

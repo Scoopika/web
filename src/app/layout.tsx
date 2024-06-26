@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     "AI agents",
     "AI tools",
     "Developers tools",
+    "AI development"
   ],
   authors: [
     {
@@ -45,12 +46,6 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/scoopika_og.jpg`],
   },
   verification: {
     google: "iZELF-QTTz2xWE3U2-FPllqMtRpVw-1Ok4GZEO2_--A",

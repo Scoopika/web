@@ -19,7 +19,7 @@ import { HiChatAlt2 } from "react-icons/hi";
 import { RiChatVoiceFill } from "react-icons/ri";
 import { Sheet, SheetTrigger, SheetContent } from "../ui/sheet";
 import { RiMenu3Fill } from "react-icons/ri";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
@@ -142,7 +142,7 @@ export default function MainLayout({ children, session }: Props) {
               />
             </SheetTrigger>
             <SheetContent>
-              <div className="pb-6 mb-4 w-full flex flex-col gap-2 border-b-1">
+              <div className="pb-6 mb-4 w-full flex flex-col gap-2 border-b-1 mt-4">
                 {links.map((link, index) => (
                   <Link
                     href={link.path}
@@ -169,6 +169,9 @@ export default function MainLayout({ children, session }: Props) {
                     </div>
                   </Link>
                 ))}
+                {plan.type === "free" && (
+                  <UpgradeDialog title="Upgrade plan" price={false} />
+                )}
               </div>
               <ThemeToggleRow />
             </SheetContent>

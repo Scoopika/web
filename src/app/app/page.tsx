@@ -80,7 +80,7 @@ const Home = async ({ session }: Props) => {
             listen, and take actions. Creating an agent, testing it in in the
             playground, and integrating it into your app takes about 5 minutes
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row md:items-center gap-4">
             <Button
               size="sm"
               color="primary"
