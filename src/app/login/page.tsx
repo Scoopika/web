@@ -31,7 +31,6 @@ export default async function Page({
         <div className="w-full lg:p-12 lg:max-w-[50%] min-h-[70svh] lg:bg-background/50 backdrop-blur-xl rounded-2xl lg:border-1 flex flex-col items-center justify-center lg:drop-shadow-md border-black/10 dark:border-white/10">
           <div className="w-full flex flex-col items-center justify-center">
             <div className="flex flex-col items-center justify-center gap-2 mb-10">
-              <SvgLogo width="40.000000pt" height="40.000000pt" />
               <h2 className="text-2xl font-semibold">Welcome!</h2>
               <p className="text-sm opacity-80 text-center">
                 Connect your account to continue
