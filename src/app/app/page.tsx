@@ -85,7 +85,7 @@ const Home = async ({ session }: Props) => {
               size="sm"
               color="primary"
               as={Link}
-              href="/new-agent"
+              href="/app/new-agent"
               className="font-semibold"
               endContent={<FaChevronRight />}
             >
