@@ -26,22 +26,20 @@ interface Props {
   agent: AgentData;
   agents: AgentData[];
   apiKeys: string[];
-  pro: boolean;
   token: string;
   userId: string;
-  userAvatar?: string | null;
   voice: boolean;
+  plan: string;
 }
 
 export default function Playground({
   agent,
   agents,
   apiKeys,
-  userAvatar,
-  pro,
   token,
   userId,
   voice,
+  plan
 }: Props) {
   const [apiKey, setApiKey] = useState<string | undefined>();
   const [apiKeyInput, setApiKeyInput] = useState<string | undefined>(undefined);
@@ -255,6 +253,7 @@ export default function Playground({
           agent={agent}
           token={token}
           engines={engines}
+          plan={plan}
         />
       )}
     </>

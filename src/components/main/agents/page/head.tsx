@@ -3,7 +3,7 @@
 import { Button } from "@nextui-org/react";
 import { AgentData } from "@scoopika/types";
 import { useEffect, useState } from "react";
-import { RiRobot2Fill } from "react-icons/ri";
+import { RiRobot2Fill, RiVoiceprintFill } from "react-icons/ri";
 import { FaBrain } from "react-icons/fa";
 import { AiFillApi } from "react-icons/ai";
 import { RiVoiceprintLine } from "react-icons/ri";
@@ -20,11 +20,12 @@ import AgentTools from "./tools";
 import AgentVoice from "./voice";
 import AgentKnowledge from "./knowledge";
 import { CgPlayButtonR } from "react-icons/cg";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Link from "next/link";
 import ResourceLink from "../../resourceLink";
 import { RiChatVoiceFill } from "react-icons/ri";
 import { Knowledge } from "@prisma/client";
+import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
 
 interface Props {
   agent: AgentData;
@@ -126,17 +127,47 @@ export default function AgentHead({ agent, pro, apiKeys, isNew, tab }: Props) {
           </div>
         </div>
         <div className="w-full flex items-center md:justify-end min-w-max">
-          <Button
-            size="sm"
-            variant="bordered"
-            className="w-full md:max-w-max font-semibold"
-            startContent={<RiChatVoiceFill size={17} />}
-            endContent={<FaChevronRight size={12} />}
-            as={Link}
-            href={`/app/playground?id=${agent.id}`}
-          >
-            Playground
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                size="sm"
+                variant="bordered"
+                className="w-full md:max-w-max font-semibold"
+                startContent={<RiChatVoiceFill size={17} />}
+                endContent={<FaChevronRight size={12} />}
+              >
+                Playground
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <div className="font-semibold">Go to agents playground</div>
+              <div className="text-sm opacity-70 mb-6">
+                Choose the type of the playground to open
+              </div>
+              <div className="w-full flex flex-col md:flex-row md:items-center md:justify-end gap-3">
+                <Button
+                  size="sm"
+                  variant="flat"
+                  startContent={<RiVoiceprintFill size={16} />}
+                  as={Link}
+                  href={`/app/playground?id=${agent.id}&voice=y`}
+                >
+                  Voice playground
+                </Button>
+                <Button
+                  size="sm"
+                  variant="flat"
+                  startContent={
+                    <HiOutlineChatBubbleBottomCenterText size={16} />
+                  }
+                  as={Link}
+                  href={`/app/playground?id=${agent.id}`}
+                >
+                  Text playground
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <div className="w-full flex items-center overflow-auto mt-4 lg:mt-0 lg:border-b-1">

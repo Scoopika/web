@@ -18,12 +18,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { RiRobot2Fill } from "react-icons/ri";
 import { MdDelete } from "react-icons/md";
+import getVoiceUsage from "@/functions/voiceUsage";
 
 interface Props {
   userId: string;
   agent: AgentData;
   engines: RawEngines;
   token: string;
+  plan: string;
 }
 
 const getAgent = (
@@ -40,7 +42,13 @@ const getAgent = (
   return { client, agentInstance };
 };
 
-export default function VoiceChat({ userId, agent, engines, token }: Props) {
+const voiceMax: Record<string, number> = {
+  free: 50,
+  base: 100000,
+  scale: 1000000
+}
+
+export default function VoiceChat({ userId, agent, engines, token, plan }: Props) {
   const llmClient = Object.keys(engines)[0];
   const llmClientKey: string | undefined =
     typeof llmClient === "string" ? (engines as any)[llmClient] : undefined;
@@ -54,6 +62,7 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
     agent.id
   );
   const [back, setBack] = useState<boolean>(false);
+  const [speechLimit, setSpeechLimit] = useState<boolean>(false);
   const { theme } = useTheme();
   const {
     changeSession,
@@ -80,6 +89,21 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
     },
   });
 
+  const updateVoiceUsage = async () => {
+    const usage = await getVoiceUsage();
+    const max = voiceMax[plan] || 0;
+
+    if (!usage.success) return;
+
+    if (usage.value >= max) {
+      setSpeechLimit(true);
+    }
+  }
+
+  useEffect(() => {
+    updateVoiceUsage();
+  }, []);
+
   const send = async () => {
     if (loading || generating) return;
 
@@ -100,6 +124,8 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
       await newRequest();
     } catch {
       toast.error("Faced unexpected error. please try again later!");
+    } finally {
+      await updateVoiceUsage();
     }
   };
 
@@ -120,37 +146,6 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
       voiceRecorder.resume();
     }
   };
-
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.code === "Enter") {
-        e.preventDefault();
-        return send();
-      }
-
-      if (e.code === "Space") {
-        e.preventDefault();
-        return toggleRecorder();
-      }
-
-      if (e.key === "r" && e.ctrlKey) {
-        e.preventDefault();
-        if (!voiceRecorder) return;
-        if (recorderState === "paused") {
-          voiceRecorder.resume();
-          return;
-        }
-
-        if (recorderState === "stopped") {
-          voiceRecorder.start();
-          return;
-        }
-      }
-    };
-
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, []);
 
   return (
     <>
@@ -226,6 +221,13 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
             ? "Your browser doesn't support voice recognition. you should expect extra latency in responses"
             : recognizedText}
         </div>
+        {speechLimit && (
+          <div className="mt-5">
+            <div className="text-red-500 text-center text-sm">
+              Your limit for voice response is reached for the month. upgrade your plan to unlock higher limits!
+            </div>
+          </div>
+        )}
       </div>
       <div className="fixed w-full bottom-0 left-0 lg:pl-64 z-40 pb-5 flex flex-col items-center justify-center">
         <div className="w-full flex items-center justify-center pl-6 pr-6">
