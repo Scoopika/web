@@ -28,7 +28,7 @@ export default function Greeting({ text }: Props) {
 
   return (
     <div>
-      {greeting || "Hey"}, {text}
+      Hey, {text}
     </div>
   );
 }
