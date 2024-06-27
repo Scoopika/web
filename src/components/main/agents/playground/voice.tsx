@@ -304,9 +304,7 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
                 onPress={() => send()}
                 startContent={<BsFillSendFill size={14} />}
                 isDisabled={
-                  recorderState === "stopped" ||
-                  (!recognizedText || recognizedText.length < 1) ||
-                  working
+                  recorderState === "stopped" || working
                 }
               />
             </Tooltip>
