@@ -88,7 +88,7 @@ function useVoiceChatState(
     inputs?: RunInputs;
     options?: RunOptions;
     hooks?: Hooks;
-  }) => {
+  } = {}) => {
     try {
       if (agentVoicePlayer?.started) {
         agentVoicePlayer.pause();

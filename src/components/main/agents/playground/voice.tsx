@@ -1,7 +1,6 @@
 "use client";
 
 import { AgentData, RawEngines } from "@scoopika/types";
-import useVoiceChatState from "./voice_state";
 import { Agent, Client } from "@scoopika/client";
 import { TiMicrophone } from "react-icons/ti";
 import { toast } from "sonner";
@@ -11,6 +10,7 @@ import { useTheme } from "next-themes";
 import { FaChevronLeft, FaPause, FaPlay } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { useEffect, useState } from "react";
+import { useVoiceChatState } from "@scoopika/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,11 +26,33 @@ interface Props {
   token: string;
 }
 
-export default function VoiceChat({ userId, agent, engines, token }: Props) {
+const getAgent = (
+  userId: string,
+  token: string,
+  engine: string,
+  id: string
+) => {
   const client = new Client(
-    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${agent.id}`
+    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${token}/${engine}/${id}`
   );
-  const agentInstance = new Agent(agent.id, client);
+  const agentInstance = new Agent(id, client);
+
+  return { client, agentInstance };
+};
+
+export default function VoiceChat({ userId, agent, engines, token }: Props) {
+  const llmClient = Object.keys(engines)[0];
+  const llmClientKey: string | undefined =
+    typeof llmClient === "string" ? (engines as any)[llmClient] : undefined;
+  const engineReq = llmClientKey
+    ? `${llmClient}--KEY--${llmClientKey}`
+    : "NO-KEY";
+  const { client, agentInstance } = getAgent(
+    userId,
+    token,
+    engineReq,
+    agent.id
+  );
   const [back, setBack] = useState<boolean>(false);
   const { theme } = useTheme();
   const {
@@ -45,10 +67,10 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
     recognizedText,
     supportRecognition,
     working,
-    pauseAgent,
-    playing,
-    resumeAgent,
-    playerPaused,
+    pauseAgentVoice,
+    voicePlaying,
+    resumeAgentVoice,
+    agentVoicePaused,
   } = useVoiceChatState(client, agentInstance, {
     agent_name: agent.name,
     agent_voice: {
@@ -75,11 +97,7 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
     });
 
     try {
-      await newRequest({
-        hooks: {
-          onToken: (t) => console.log(t),
-        },
-      });
+      await newRequest();
     } catch {
       toast.error("Faced unexpected error. please try again later!");
     }
@@ -173,21 +191,21 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
       </DropdownMenu>
 
       <div className="fixed top-24 lg:top-4 right-4 flex items-center gap-4">
-        {playing && !playerPaused && (
+        {voicePlaying && !agentVoicePaused && (
           <Button
             size="sm"
             variant="flat"
-            onPress={() => pauseAgent()}
+            onPress={() => pauseAgentVoice()}
             startContent={<FaPause />}
           >
             Pause agent
           </Button>
         )}
-        {playing && playerPaused && (
+        {voicePlaying && agentVoicePaused && (
           <Button
             size="sm"
             variant="flat"
-            onPress={() => resumeAgent()}
+            onPress={() => resumeAgentVoice()}
             startContent={<FaPlay />}
           >
             Resume agent
@@ -198,9 +216,9 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
       <div className="w-full p-16 flex flex-col items-center justify-center">
         <canvas id="wave-canvas" />
         <audio id="agent-voice-player" />
-        {messages.length < 1 && recognizedText.length < 1 && (
+        {messages.length < 1 && (!recognizedText || recognizedText.length < 1) && (
           <div className="text-sm mb-2 text-center">
-            Start talking by pressing the mic on the bottom
+            Start talking by pressing the mic button
           </div>
         )}
         <div className="text-xs opacity-80 text-center">
@@ -219,7 +237,7 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
                 variant="flat"
                 onPress={() => {
                   changeSession();
-                  pauseAgent();
+                  pauseAgentVoice();
                 }}
                 startContent={<MdDelete size={16} />}
               />
@@ -287,7 +305,7 @@ export default function VoiceChat({ userId, agent, engines, token }: Props) {
                 startContent={<BsFillSendFill size={14} />}
                 isDisabled={
                   recorderState === "stopped" ||
-                  recognizedText.length < 1 ||
+                  (!recognizedText || recognizedText.length < 1) ||
                   working
                 }
               />

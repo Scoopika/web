@@ -35,9 +35,11 @@ export type Item = LinkItem | OptionItem;
 export default function NavItem({
   item,
   active,
+  className
 }: {
   item: Item;
   active?: string;
+  className?: string
 }) {
   if (item.type === "link") {
     return (
@@ -51,7 +53,7 @@ export default function NavItem({
         disabled={item.disabled ? true : false}
         radius="full"
         className={`
-                bg-transparent hover:bg-accent/30 hover:opacity-100 text-white
+                bg-transparent hover:bg-accent/30 hover:opacity-100 ${className}
                 ${
                   active === item.name
                     ? "bg-black dark:bg-accent/50"

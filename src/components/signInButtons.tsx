@@ -32,7 +32,7 @@ export default function SignInButtons({
   return (
     <>
       <Button
-        className="w-[60%]"
+        className="w-[90%] lg:w-[60%]"
         size="md"
         variant="solid"
         color="primary"
@@ -43,7 +43,7 @@ export default function SignInButtons({
         Continue with Google
       </Button>
       <Button
-        className="w-[60%]"
+        className="w-[90%] lg:w-[60%] border"
         size="md"
         variant="bordered"
         color="primary"

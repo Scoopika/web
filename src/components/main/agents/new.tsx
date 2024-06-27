@@ -72,9 +72,9 @@ export default function NewAgent() {
   };
 
   const checkData = () => {
-    if (!itemValue(agent, "name") || !itemValue(agent, "description")) {
+    if (!itemValue(agent, "name")) {
       return toast.error("Enter agent info", {
-        description: "Agent name & description are required",
+        description: "Agent name is required",
       });
     }
 
@@ -121,8 +121,10 @@ export default function NewAgent() {
         title="LLM"
         description="Select the large language model powering this agent. you can extend the supported providers or input custom LLMs (a fine-tuned GPT for example). learn more in the providers docs"
       >
+        <div className="flex flex-col md:flex-row md:items-center gap-3">
         <AgentLLM agent={agent} updateAgent={setAgent} />
         <LLMOptions agent={agent} updateAgent={setAgent} />
+        </div>
       </SettingsRow>
       <SettingsRow
         title="System prompt"

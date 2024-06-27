@@ -5,7 +5,7 @@ import AppHead from "../head";
 import { Button } from "@nextui-org/react";
 import { FaPlus } from "react-icons/fa6";
 import Empty from "../empty";
-import { Tb3DCubeSphere } from "react-icons/tb";
+import { TbCube3dSphere } from "react-icons/tb";
 import { useState } from "react";
 import BoxItem from "./item";
 import NewBox from "./new";
@@ -64,7 +64,7 @@ export default function BoxesMain({ boxes }: Props) {
 
       {boxes.length < 1 && (
         <Empty
-          icon={<Tb3DCubeSphere />}
+          icon={<TbCube3dSphere />}
           title="Create your first multi-agent box"
           description="You can add your created agents to a box so they collaborate together on complex tasks"
         />

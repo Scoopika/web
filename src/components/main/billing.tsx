@@ -26,7 +26,7 @@ import UpgradeDialog from "@/components/main/upgradeDialog";
 
 interface Props {
   session: Session;
-  planData: PlanData;
+  planData: PlanData | undefined;
 }
 
 export default function BillingSettings({ session, planData }: Props) {
@@ -86,7 +86,7 @@ export default function BillingSettings({ session, planData }: Props) {
   return (
     <div className="w-full flex flex-col">
       {!isPro && (
-        <div className="w-full p-6 border-1 rounded-lg">
+        <div className="w-full p-2">
           <h2 className="font-semibold mb-2">Upgrade plan</h2>
           <p className="text-sm opacity-80 mb-2">
             {"You're"} running on the free limited plan, upgrade to the basic or
@@ -95,7 +95,7 @@ export default function BillingSettings({ session, planData }: Props) {
             and pick your plan!
           </p>
 
-          <UpgradeDialog />
+          <UpgradeDialog className="mt-3" />
         </div>
       )}
 

@@ -48,8 +48,7 @@ const Agents = async ({ session }: Props) => {
       {agentsData.length < 1 && (
         <Empty
           title="Create your first agent"
-          description="Agents are AI assistant that can collaborate, use external tools,
-          speak, and learn"
+          description="Agents are AI assistant see, talk, listen, learn, perform actions, and collaborate together"
           icon={<RiRobot2Fill />}
         >
           <Button

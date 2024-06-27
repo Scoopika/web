@@ -18,10 +18,10 @@ export default function PlaygroundAgentItem({ agent }: Props) {
           {agent.avatar && agent.avatar.length > 0 ? (
             <img
               src={agent.avatar}
-              className="w-8 h-8 object-cover rounded-2xl"
+              className="min-w-8 max-w-8 min-h-8 max-h-8 object-cover rounded-2xl"
             />
           ) : (
-            <div className="w-8 h-8 bg-gradient-to-r from-violet-400/30 to-pink-400/30 transition-all rounded-2xl"></div>
+            <div className="min-w-8 max-w-8 min-h-8 max-h-8 bg-gradient-to-r from-violet-400/30 to-pink-400/30 transition-all rounded-2xl"></div>
           )}
           <div className="w-full flex flex-col gap-0.5 ml-2 truncate">
             <div className="text-sm truncate w-24">{agent.name}</div>

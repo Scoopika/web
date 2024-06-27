@@ -101,10 +101,10 @@ export default function AgentHead({ agent, pro, apiKeys, isNew, tab }: Props) {
           {agent.avatar ? (
             <img
               src={agent.avatar}
-              className="w-12 h-12 rounded-full object-cover"
+              className="min-w-12 max-w-12 min-h-12 max-h-12 rounded-full object-cover"
             />
           ) : (
-            <div className="w-12 h-12 rounded-full flex items-center justify-center bg-accent">
+            <div className="min-w-12 max-w-12 min-h-12 max-h-12 rounded-full flex items-center justify-center bg-accent">
               <RiRobot2Fill />
             </div>
           )}
@@ -171,7 +171,7 @@ export default function AgentHead({ agent, pro, apiKeys, isNew, tab }: Props) {
             you can chat with it using the playground and integrate it into your
             application by checking the {"`code`"} tab... Good luck {";)"}
           </div>
-          <div className="w-full flex flex-col items-center lg:flex-row lg:justify-end gap-3">
+          <div className="w-full flex flex-col lg:items-center lg:flex-row lg:justify-end gap-3">
             <ResourceLink
               name="Check guide"
               link="https://docs.scoopika.com/agents"

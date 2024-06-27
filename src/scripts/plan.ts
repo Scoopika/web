@@ -11,7 +11,11 @@ export function readPlan(plan: string): { status: string; id: string; type: "fre
   const parts = plan.split(":::");
 
   if (parts.length !== 2) {
-    throw new Error("Invalid plan data");
+    return {
+      id: "",
+      status: "active",
+      type: "free"
+    }
   }
 
   const type = readPlanType(plan);

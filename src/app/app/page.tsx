@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
-import { FaVideo, FaBook, FaGithub } from "react-icons/fa6";
+import { FaBook, FaGithub } from "react-icons/fa6";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Greeting from "@/components/main/greeting";
 import { TbWorldBolt } from "react-icons/tb";
@@ -80,7 +80,7 @@ const Home = async ({ session }: Props) => {
             listen, and take actions. Creating an agent, testing it in in the
             playground, and integrating it into your app takes about 5 minutes
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row md:items-center gap-4">
             <Button
               size="sm"
               color="primary"
@@ -98,10 +98,9 @@ const Home = async ({ session }: Props) => {
               href="https://docs.scoopika.com/quickstart"
               target="_blank"
               className="font-semibold"
-              startContent={<FaVideo />}
               endContent={<FaExternalLinkAlt />}
             >
-              Watch 2-minutes guide video
+              Follow 2-minutes guide
             </Button>
           </div>
         </div>
@@ -152,10 +151,9 @@ const Home = async ({ session }: Props) => {
               href="https://docs.scoopika.com/quickstart"
               target="_blank"
               className="font-semibold"
-              startContent={<FaVideo />}
               endContent={<FaExternalLinkAlt />}
             >
-              Watch 2-minutes video
+              Follow 2-minutes guide
             </Button>
             <Button
               size="sm"
