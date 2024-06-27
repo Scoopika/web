@@ -2,7 +2,7 @@ import Playground from "@/components/main/agents/playground/main";
 import generateToken from "@/functions/tokens/generate";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { isPro } from "@/scripts/plan";
+import { isPro, readPlan } from "@/scripts/plan";
 import { AgentData } from "@scoopika/types";
 import { Session, getServerSession } from "next-auth";
 
@@ -19,7 +19,7 @@ export default async function Page({ searchParams }: Props) {
   const { id } = searchParams;
 
   const session = (await getServerSession(authOptions)) as Session;
-  const pro = isPro(session.user.plan);
+  const plan = readPlan(session.user.plan);
 
   const token = await generateToken();
 
@@ -51,13 +51,12 @@ export default async function Page({ searchParams }: Props) {
     <>
       <Playground
         userId={session.user.id}
-        userAvatar={session.user.image}
         agent={wantedAgent}
         agents={agents}
         apiKeys={apiKeys}
-        pro={pro}
         token={token.token?.token}
         voice={searchParams?.voice === "y"}
+        plan={plan.type}
       />
     </>
   );
