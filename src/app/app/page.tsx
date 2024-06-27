@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
-import { FaVideo, FaBook, FaGithub } from "react-icons/fa6";
+import { FaBook, FaGithub } from "react-icons/fa6";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Greeting from "@/components/main/greeting";
 import { TbWorldBolt } from "react-icons/tb";
@@ -98,10 +98,9 @@ const Home = async ({ session }: Props) => {
               href="https://docs.scoopika.com/quickstart"
               target="_blank"
               className="font-semibold"
-              startContent={<FaVideo />}
               endContent={<FaExternalLinkAlt />}
             >
-              Watch 2-minutes guide video
+              Follow 2-minutes guide
             </Button>
           </div>
         </div>
@@ -152,10 +151,9 @@ const Home = async ({ session }: Props) => {
               href="https://docs.scoopika.com/quickstart"
               target="_blank"
               className="font-semibold"
-              startContent={<FaVideo />}
               endContent={<FaExternalLinkAlt />}
             >
-              Watch 2-minutes video
+              Follow 2-minutes guide
             </Button>
             <Button
               size="sm"

@@ -27,7 +27,7 @@ export default async function Home() {
           <div></div>
         </div>
       </div>
-      <Navbar session={session} active="Home" />
+      <Navbar session={session} active="Home" className="dark" />
 
       <div className="relative w-full flex flex-col items-center p-8 pt-20 md:p-12 md:pt-36 overflow-hidden rounded-md dark">
         <div className="w-full absolute inset-0 h-screen">

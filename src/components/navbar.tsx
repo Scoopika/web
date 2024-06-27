@@ -12,10 +12,8 @@ import {
   NavbarMenu,
 } from "@nextui-org/react";
 import ThemeToggle from "./themeToggle";
-import Logo from "./logo";
 import { Session } from "next-auth";
 import Icons from "@/components/icons";
-import UserDropdown from "@/components/userDropdown";
 import NavItem, { type Item } from "@/components/navItem";
 import NextLink from "next/link";
 import SvgLogo from "./main/logo";
@@ -27,6 +25,7 @@ interface Props {
   children?: React.ReactNode;
   path?: string;
   disabled?: boolean;
+  className?: string;
 }
 
 const initialItems: Props["items"] = [
@@ -41,7 +40,14 @@ const initialItems: Props["items"] = [
   },
 ];
 
-const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
+const Navbar: FC<Props> = ({
+  items,
+  active,
+  session,
+  children,
+  path,
+  className,
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   if (!items) {
@@ -52,7 +58,7 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
     <NextNavbar
       position="sticky"
       onMenuOpenChange={setIsMenuOpen}
-      className="fixed bg-transparent border-b-0 z-40 dark"
+      className={`fixed bg-transparent border-b-0 z-40 ${className || ""}`}
       classNames={{
         wrapper: "min-w-full justify-between",
         content: "",
@@ -79,7 +85,11 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
           {items?.length &&
             items.map((item) => (
               <NavbarItem key={`nav-item-${item.name}`}>
-                <NavItem item={item} active={active} />
+                <NavItem
+                  item={item}
+                  active={active}
+                  className={className === "dark" ? "text-white" : "dark:text-white"}
+                />
               </NavbarItem>
             ))}
         </div>
@@ -87,7 +97,7 @@ const Navbar: FC<Props> = ({ items, active, session, children, path }) => {
       </NavbarContent>
       <NavbarContent justify="end">
         <div className="hidden md:flex">
-          <ThemeToggle />
+          {!className && <ThemeToggle />}
         </div>
         {!session ? (
           <Button
