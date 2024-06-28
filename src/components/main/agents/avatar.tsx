@@ -126,7 +126,7 @@ export default function AgentAvatar({
                 }}
               />
             </div>
-            <div className="w-full flex items-center gap-3">
+            {/*<div className="w-full flex items-center gap-3">
               <div className="w-full border-t-1 border-dashed"></div>
               <div className="text-xs opacity-80 min-w-max">
                 or generate one
@@ -152,7 +152,7 @@ export default function AgentAvatar({
               >
                 Generate avatar
               </Button>
-            </div>
+            </div>*/}
             <div className="w-full border-t-1"></div>
             <Button
               size="sm"
