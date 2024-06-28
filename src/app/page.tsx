@@ -186,9 +186,9 @@ export default async function Home() {
                 </div>
               </div>
               <div className="p-4 pt-6 pb-6 flex flex-col w-full">
-                <div className="w-full text-center text-sm mb-2">Vission</div>
+                <div className="w-full text-center text-sm mb-2">Vision</div>
                 <div className="text-xs opacity-80 w-full text-center">
-                  Built-in support for vission and images based on the LLM{" "}
+                  Built-in support for vision and images based on the LLM{" "}
                   {"you're"} using
                 </div>
               </div>
