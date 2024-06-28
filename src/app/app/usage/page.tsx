@@ -14,7 +14,7 @@ export const fetchCache = "force-no-store";
 
 const maxes = {
   load: [5000, 200000, 1000000],
-  speech: [50, 100000, 1000000],
+  speech: [150, 100000, 1000000],
   store_read: [0, 1000000, 4000000],
   store_write: [0, 500000, 2000000],
   knowledge: [0, 300000, 1500000],

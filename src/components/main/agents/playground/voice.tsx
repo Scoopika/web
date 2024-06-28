@@ -43,7 +43,7 @@ const getAgent = (
 };
 
 const voiceMax: Record<string, number> = {
-  free: 50,
+  free: 150,
   base: 100000,
   scale: 1000000
 }
