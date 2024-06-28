@@ -19,7 +19,6 @@ export default async function Home() {
 
   return (
     <div className="bg-foreground text-background dark:bg-background dark:text-foreground">
-
       <div className="soptheader">
         <div className="spotlight">
           <div></div>
@@ -57,10 +56,9 @@ export default async function Home() {
             AI Agents for your application
           </div>
         </div>
-        <p className="opacity-80 text-xs md:text-sm lg:text-base text-center lg:max-w-[60%] mt-4">
-          Meet the modern open-source standard built to help developers create
-          personalized AI agents for their web apps that can{" "}
-          <b>see, talk, listen, learn, and take actions</b>
+        <p className="opacity-80 text-xs md:text-sm lg:text-base text-center lg:max-w-[50%] mt-4">
+          The open-source developer platform to build personalzied AI agents
+          that can <b>see, talk, listen, learn, and take actions</b>
         </p>
         <div className="flex flex-col md:flex-row md:items-center gap-6 mt-10">
           <Button
@@ -92,7 +90,7 @@ export default async function Home() {
       <div className="flex flex-col items-center mb-48 mt-12 sm:mt-36 dark">
         <div className="w-[80%] flex flex-col items-center">
           <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
-            Made for modern web development
+            Made for the AI era
           </div>
           <div className="opacity-70 text-center">
             A platform you can rely on to take your application to the future
@@ -401,6 +399,31 @@ export default async function Home() {
             </Link>
           </div>
         </div>
+      </div>
+
+      <div className="flex flex-col items-center mb-48 dark">
+        <div className="w-[80%] flex flex-col items-center">
+          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
+            Start now for free
+          </div>
+          <div className="opacity-70 text-center mb-8">
+            Enjoy our free-forever plan and only upgrade for extra features, start now!
+          </div>
+          <Button
+            variant="flat"
+            size="md"
+            as={Link}
+            href="/login"
+            className="border backdrop-blur-xl border-white/20"
+            endContent={<FaChevronRight size={14} />}
+          >
+            Start for free
+          </Button>
+        </div>
+      </div>
+
+      <div className="hidden sm:block w-full text-center pl-10 pr-10 text-9xl font-semibold opacity-30">
+        Scoopika
       </div>
 
       <Footer className="dark" />
