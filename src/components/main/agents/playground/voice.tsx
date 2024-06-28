@@ -121,11 +121,13 @@ export default function VoiceChat({ userId, agent, engines, token, plan }: Props
     });
 
     try {
-      await newRequest();
+      await newRequest({
+        hooks: {
+          onAgentResponse: async () => await updateVoiceUsage()
+        }
+      });
     } catch {
       toast.error("Faced unexpected error. please try again later!");
-    } finally {
-      await updateVoiceUsage();
     }
   };
 
