@@ -82,6 +82,22 @@ export default async function Home() {
             Documentation
           </Button>
         </div>
+<a
+          href="https://www.producthunt.com/posts/scoopika-platform-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-scoopika&#0045;platform&#0045;2"
+          target="_blank"
+          className="mt-6 fixed z-50 bottom-4 right-4"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=466529&theme=neutral"
+            alt="Scoopika&#0032;Platform - Build&#0032;gpt&#0045;4o&#0032;level&#0032;AI&#0032;agents&#0032;for&#0032;your&#0032;app | Product Hunt"
+            style={{
+              width: "250px",
+              height: "54px",
+            }}
+            width="250"
+            height="45"
+          />
+        </a>
         <Features />
       </div>
 
@@ -170,9 +186,9 @@ export default async function Home() {
                 </div>
               </div>
               <div className="p-4 pt-6 pb-6 flex flex-col w-full">
-                <div className="w-full text-center text-sm mb-2">Vission</div>
+                <div className="w-full text-center text-sm mb-2">Vision</div>
                 <div className="text-xs opacity-80 w-full text-center">
-                  Built-in support for vission and images based on the LLM{" "}
+                  Built-in support for vision and images based on the LLM{" "}
                   {"you're"} using
                 </div>
               </div>
