@@ -60,10 +60,10 @@ export default function AgentCompanions({ agent, agents, setAgents }: Props) {
   const awntedAgents = () => {
     const otherAgents = agents.filter((a) => a.id !== agent.id);
     const alreadyCompanions = (agent.in_tools || []).filter(
-      (t) => t.type === "agent"
+      (t) => t.type === "agent",
     ) as InAgentTool[];
     const newAgents = otherAgents.filter(
-      (a) => alreadyCompanions.filter((c) => c.id === a.id).length === 0
+      (a) => alreadyCompanions.filter((c) => c.id === a.id).length === 0,
     );
 
     return newAgents;
@@ -71,7 +71,7 @@ export default function AgentCompanions({ agent, agents, setAgents }: Props) {
 
   const getComps = () => {
     const comps = (agent.in_tools || []).filter(
-      (t) => t.type === "agent"
+      (t) => t.type === "agent",
     ) as InAgentTool[];
     const companions = comps.map((c) => agents.filter((a) => a.id === c.id)[0]);
 
@@ -100,7 +100,7 @@ export default function AgentCompanions({ agent, agents, setAgents }: Props) {
 
         if (!res || !res.success) {
           throw new Error(
-            "Can't save agent data. try again or contact support"
+            "Can't save agent data. try again or contact support",
           );
         }
       },
@@ -123,7 +123,7 @@ export default function AgentCompanions({ agent, agents, setAgents }: Props) {
           ...agent,
           in_tools: [
             ...(agent.in_tools || []).filter(
-              (a) => a.type !== "agent" || a.id !== id
+              (a) => a.type !== "agent" || a.id !== id,
             ),
           ],
         });

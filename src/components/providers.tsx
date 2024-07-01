@@ -10,7 +10,7 @@ const Providers: FC<ThemeProviderProps> = ({ children }) => {
   return (
     <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
       <SessionProvider>
-        <NextUIProvider >{children}</NextUIProvider>
+        <NextUIProvider>{children}</NextUIProvider>
       </SessionProvider>
     </NextThemesProvider>
   );

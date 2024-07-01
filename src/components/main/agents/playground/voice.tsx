@@ -32,10 +32,10 @@ const getAgent = (
   userId: string,
   token: string,
   engine: string,
-  id: string
+  id: string,
 ) => {
   const client = new Client(
-    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${token}/${engine}/${id}`
+    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${token}/${engine}/${id}`,
   );
   const agentInstance = new Agent(id, client);
 
@@ -45,10 +45,16 @@ const getAgent = (
 const voiceMax: Record<string, number> = {
   free: 150,
   base: 100000,
-  scale: 1000000
-}
+  scale: 1000000,
+};
 
-export default function VoiceChat({ userId, agent, engines, token, plan }: Props) {
+export default function VoiceChat({
+  userId,
+  agent,
+  engines,
+  token,
+  plan,
+}: Props) {
   const llmClient = Object.keys(engines)[0];
   const llmClientKey: string | undefined =
     typeof llmClient === "string" ? (engines as any)[llmClient] : undefined;
@@ -59,7 +65,7 @@ export default function VoiceChat({ userId, agent, engines, token, plan }: Props
     userId,
     token,
     engineReq,
-    agent.id
+    agent.id,
   );
   const [back, setBack] = useState<boolean>(false);
   const [speechLimit, setSpeechLimit] = useState<boolean>(false);
@@ -98,7 +104,7 @@ export default function VoiceChat({ userId, agent, engines, token, plan }: Props
     if (usage.value >= max) {
       setSpeechLimit(true);
     }
-  }
+  };
 
   useEffect(() => {
     updateVoiceUsage();
@@ -123,8 +129,8 @@ export default function VoiceChat({ userId, agent, engines, token, plan }: Props
     try {
       await newRequest({
         hooks: {
-          onAgentResponse: async () => await updateVoiceUsage()
-        }
+          onAgentResponse: async () => await updateVoiceUsage(),
+        },
       });
     } catch {
       toast.error("Faced unexpected error. please try again later!");
@@ -213,11 +219,12 @@ export default function VoiceChat({ userId, agent, engines, token, plan }: Props
       <div className="w-full p-16 flex flex-col items-center justify-center">
         <canvas id="wave-canvas" />
         <audio id="agent-voice-player" />
-        {messages.length < 1 && (!recognizedText || recognizedText.length < 1) && (
-          <div className="text-sm mb-2 text-center">
-            Start talking by pressing the mic button
-          </div>
-        )}
+        {messages.length < 1 &&
+          (!recognizedText || recognizedText.length < 1) && (
+            <div className="text-sm mb-2 text-center">
+              Start talking by pressing the mic button
+            </div>
+          )}
         <div className="text-xs opacity-80 text-center">
           {supportRecognition === false
             ? "Your browser doesn't support voice recognition. you should expect extra latency in responses"
@@ -226,7 +233,8 @@ export default function VoiceChat({ userId, agent, engines, token, plan }: Props
         {speechLimit && (
           <div className="mt-5">
             <div className="text-red-500 text-center text-sm">
-              Your limit for voice response is reached for the month. upgrade your plan to unlock higher limits!
+              Your limit for voice response is reached for the month. upgrade
+              your plan to unlock higher limits!
             </div>
           </div>
         )}
@@ -307,9 +315,7 @@ export default function VoiceChat({ userId, agent, engines, token, plan }: Props
                 variant="flat"
                 onPress={() => send()}
                 startContent={<BsFillSendFill size={14} />}
-                isDisabled={
-                  recorderState === "stopped" || working
-                }
+                isDisabled={recorderState === "stopped" || working}
               />
             </Tooltip>
           </div>

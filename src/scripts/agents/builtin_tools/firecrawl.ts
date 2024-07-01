@@ -3,8 +3,7 @@ import { AgenticToolItem } from "@scoopika/types";
 const firecrawlClient: AgenticToolItem = {
   id: "firecrawl_client",
   name: "Firecrawl",
-  description:
-    "Crawl and convert any website into markdown or structured data",
+  description: "Crawl and convert any website into markdown or structured data",
   img: "https://bookface-images.s3.amazonaws.com/logos/4ab40184581e8791028ab734d2290f35ebd290cc.png",
   links: [
     {

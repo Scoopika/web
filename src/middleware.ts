@@ -8,6 +8,6 @@ export const config = {
     "/app/new-box",
     "/app/new-agent",
     "/app/usage",
-    "/app/playground"
+    "/app/playground",
   ],
 };

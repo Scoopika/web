@@ -142,7 +142,7 @@ export default function AgentToolsBase({ agent, newApiTool, closeNew }: Props) {
           .filter(
             (t) =>
               t.name.toLowerCase().includes(search) ||
-              t.description.toLowerCase().includes(search)
+              t.description.toLowerCase().includes(search),
           )
           .map((tool) => (
             <div
@@ -150,7 +150,7 @@ export default function AgentToolsBase({ agent, newApiTool, closeNew }: Props) {
               className="flex flex-col p-5 border-1 rounded-xl cursor-pointer w-full shadow hover:border-black/20 dark:hover:border-white/20 transition-all relative hover:bg-accent/10"
               onClick={() => {
                 const exist = (agent.agentic_tools || []).filter(
-                  (t) => t.id === tool.id
+                  (t) => t.id === tool.id,
                 )[0];
                 if (exist) {
                   setOpenTool({
@@ -173,7 +173,7 @@ export default function AgentToolsBase({ agent, newApiTool, closeNew }: Props) {
                 className="min-w-8 max-w-8 min-h-8 max-h-8 mb-6 object-cover rounded-full bg-white p-0.5"
               />
               {(agent.agentic_tools || []).filter(
-                (t) => t.id === tool.id
+                (t) => t.id === tool.id,
               )[0] && (
                 <div className="absolute top-1 right-1 p-1 pl-2 pr-2 rounded-bl-md rounded-tr-lg bg-accent text-xs flex items-center gap-2">
                   <FaCheck />

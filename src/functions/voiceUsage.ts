@@ -33,7 +33,7 @@ export default async function getVoiceUsage(): Promise<
         headers: {
           authorization: secret,
         },
-      }
+      },
     );
 
     const data = await res.json();

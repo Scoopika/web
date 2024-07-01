@@ -45,7 +45,9 @@ export default function UpgradeDialog({ title, price, className }: Props) {
           href="/pricing#pricing"
         >
           {title || "Pick your plan"}{" "}
-          {price !== false && <span className="text-xs">(starts at $16/month)</span>}
+          {price !== false && (
+            <span className="text-xs">(starts at $16/month)</span>
+          )}
         </Button>
       </DialogTrigger>
       <DialogContent className="min-w-[70%]">

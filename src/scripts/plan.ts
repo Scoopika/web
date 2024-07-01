@@ -7,22 +7,26 @@ export function readPlanType(plan: string): "free" | "basic" | "scale" {
   return type;
 }
 
-export function readPlan(plan: string): { status: string; id: string; type: "free" | "basic" | "scale" } {
+export function readPlan(plan: string): {
+  status: string;
+  id: string;
+  type: "free" | "basic" | "scale";
+} {
   const parts = plan.split(":::");
 
   if (parts.length !== 2) {
     return {
       id: "",
       status: "active",
-      type: "free"
-    }
+      type: "free",
+    };
   }
 
   const type = readPlanType(plan);
   return {
     id: parts[0],
     status: parts[1],
-    type
+    type,
   };
 }
 

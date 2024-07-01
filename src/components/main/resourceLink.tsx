@@ -8,7 +8,12 @@ interface Props {
   showIcon?: boolean;
 }
 
-export default function ResourceLink({ name, link, underline, showIcon }: Props) {
+export default function ResourceLink({
+  name,
+  link,
+  underline,
+  showIcon,
+}: Props) {
   return (
     <Link
       href={link}
@@ -18,7 +23,9 @@ export default function ResourceLink({ name, link, underline, showIcon }: Props)
       }`}
     >
       {name}
-      <FaExternalLinkAlt className={`${showIcon !== true && "opacity-0"} group-hover:opacity-100 transition-all`} />
+      <FaExternalLinkAlt
+        className={`${showIcon !== true && "opacity-0"} group-hover:opacity-100 transition-all`}
+      />
     </Link>
   );
 }

@@ -12,7 +12,7 @@ import pdf from "pdf-parse";
 export default async function addKnowledge(
   id: string,
   name: string,
-  content: string
+  content: string,
 ): Promise<
   | {
       success: false;
@@ -81,7 +81,7 @@ export default async function addKnowledge(
     name,
     userId: session.user.id,
     vectors: JSON.stringify(data.ids),
-  }
+  };
 
   await db.knowledge.create({
     data: knowledge,

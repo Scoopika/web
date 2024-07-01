@@ -16,7 +16,9 @@ export default function Empty({ icon, title, description, children }: Props) {
         </div>
       </div>
       <div className="font-semibold mb-1">{title}</div>
-      <div className="text-sm opacity-80 lg:w-[80%] mb-6 text-center">{description}</div>
+      <div className="text-sm opacity-80 lg:w-[80%] mb-6 text-center">
+        {description}
+      </div>
       {children}
     </div>
   );

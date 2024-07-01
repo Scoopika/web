@@ -7,9 +7,10 @@ import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export default async function newApiKey(name: string, value: string): Promise<
-  {success: false} | {success: true, id: string}
-> {
+export default async function newApiKey(
+  name: string,
+  value: string,
+): Promise<{ success: false } | { success: true; id: string }> {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -53,7 +54,7 @@ export default async function newApiKey(name: string, value: string): Promise<
       id,
       name,
       value: encrypted,
-      userId: session.user.id
+      userId: session.user.id,
     },
   });
 

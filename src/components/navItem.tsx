@@ -35,11 +35,11 @@ export type Item = LinkItem | OptionItem;
 export default function NavItem({
   item,
   active,
-  className
+  className,
 }: {
   item: Item;
   active?: string;
-  className?: string
+  className?: string;
 }) {
   if (item.type === "link") {
     return (

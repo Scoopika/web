@@ -407,7 +407,8 @@ export default async function Home() {
             Start now for free
           </div>
           <div className="opacity-70 text-center mb-8">
-            Enjoy our free-forever plan and only upgrade for extra features, start now!
+            Enjoy our free-forever plan and only upgrade for extra features,
+            start now!
           </div>
           <Button
             variant="flat"

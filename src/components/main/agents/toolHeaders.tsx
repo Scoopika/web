@@ -37,7 +37,7 @@ export default function ToolHeaders({ tool, updateTool }: Props) {
   const [newHeaderOpen, setNewHeaderOpen] = useState<boolean>(false);
   const [encryptingHeader, setEncryptingHeader] = useState<boolean>(false);
   const [decryptedValue, setDecryptedValue] = useState<string | undefined>(
-    undefined
+    undefined,
   );
   const [decryptingHeader, setDecryptingHeader] = useState<boolean>(false);
 
@@ -66,7 +66,7 @@ export default function ToolHeaders({ tool, updateTool }: Props) {
         newHeader,
       ],
     }));
-    setNewHeader({key: "", value: "", encrypted: false});
+    setNewHeader({ key: "", value: "", encrypted: false });
     setDecryptedValue(undefined);
     setNewHeaderOpen(false);
     toast.success("Saved header!");

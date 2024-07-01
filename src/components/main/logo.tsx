@@ -1,4 +1,8 @@
-export default function SvgLogo({ width, height, color }: {
+export default function SvgLogo({
+  width,
+  height,
+  color,
+}: {
   width?: string;
   height?: string;
   color?: string;

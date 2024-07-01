@@ -32,7 +32,7 @@ export default function Settings({ session }: Props) {
   const [newTokenName, setNewTokenName] = useState<string>();
   const [newTokenLoading, setNewTokenLoading] = useState<boolean>(false);
   const [generatedToken, setGeneratedToken] = useState<string | undefined>(
-    undefined
+    undefined,
   );
   const [deleteToken, setDeleteToken] = useState<string | undefined>();
   const [deleteTokenLoading, setDeleteTokenLoading] = useState<boolean>(false);
@@ -119,7 +119,10 @@ export default function Settings({ session }: Props) {
     <Dialog>
       <DialogTrigger asChild>
         <Button size="sm" variant="light" isIconOnly className="group">
-          <MdSettings size={16} className="opacity-60 group-hover:opacity-100 transition-all" />
+          <MdSettings
+            size={16}
+            className="opacity-60 group-hover:opacity-100 transition-all"
+          />
         </Button>
       </DialogTrigger>
       <DialogContent>

@@ -97,10 +97,13 @@
 
   .primaryTitle {
     --bg-size: 400%;
-    background: linear-gradient(90deg,
+    background: linear-gradient(
+        90deg,
         var(--brandpurple),
         var(--brandpink),
-        var(--brandpurple)) 0 0 / var(--bg-size) 100%;
+        var(--brandpurple)
+      )
+      0 0 / var(--bg-size) 100%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -121,10 +124,13 @@
 
   .lineGradient {
     --bg-size: 400%;
-    background: linear-gradient(90deg,
+    background: linear-gradient(
+        90deg,
         var(--brandpurple),
         var(--brandpink),
-        var(--brandpurple)) 0 0 / var(--bg-size) 100%;
+        var(--brandpurple)
+      )
+      0 0 / var(--bg-size) 100%;
   }
 
   @media (prefers-reduced-motion: no-preference) {

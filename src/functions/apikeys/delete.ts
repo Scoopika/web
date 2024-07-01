@@ -6,7 +6,7 @@ import generateSecret from "@/scripts/secret";
 import { getServerSession } from "next-auth";
 
 export default async function deleteApiKey(
-  id: string
+  id: string,
 ): Promise<{ success: boolean }> {
   if (!id) {
     throw new Error("API Key ID is required to be deleted");

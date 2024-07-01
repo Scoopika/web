@@ -28,7 +28,9 @@ interface Props {
 
 export default function Footer({ className }: Props) {
   return (
-    <footer className={`w-full border-t-1 p-10 border-black/20 dark:border-border flex flex-col md:flex-row gap-14 ${className}`}>
+    <footer
+      className={`w-full border-t-1 p-10 border-black/20 dark:border-border flex flex-col md:flex-row gap-14 ${className}`}
+    >
       <div className="flex flex-col w-full">
         <div className="w-full flex items-center text-sm">
           <div className="w-9 h-9 overflow-hidden rounded-xl bg-white flex items-center justify-center pt-1">

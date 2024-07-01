@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export default async function createAgent(
-  payload: AgentData
+  payload: AgentData,
 ): Promise<{ success: false } | { success: true; id: string }> {
   const session = await getServerSession(authOptions);
 

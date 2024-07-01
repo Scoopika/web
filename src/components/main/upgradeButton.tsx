@@ -10,10 +10,10 @@ import Link from "next/link";
 import { FaRocket } from "react-icons/fa6";
 
 interface Props {
-    className?: string;
-    size?: "sm" | "md";
-    type?: "basic" | "scale";
-    title?: string;
+  className?: string;
+  size?: "sm" | "md";
+  type?: "basic" | "scale";
+  title?: string;
 }
 
 export function UpgradeButton({ type, className, size, title }: Props) {

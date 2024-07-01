@@ -137,7 +137,7 @@ export default function ToolPage({
 
   const updateOptionValue = (
     itemOption: AgenticToolItemOptions,
-    value: string | undefined
+    value: string | undefined,
   ) => {
     setData((prev) => ({
       ...prev,

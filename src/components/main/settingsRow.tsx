@@ -11,9 +11,7 @@ export default function SettingsRow({ title, description, children }: Props) {
         <h3 className="font-semibold">{title}</h3>
         <p className="text-xs opacity-70">{description}</p>
       </div>
-      <div className="w-full flex items-center gap-4">
-        {children}
-      </div>
+      <div className="w-full flex items-center gap-4">{children}</div>
     </div>
   );
 }

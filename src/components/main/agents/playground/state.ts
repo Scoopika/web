@@ -33,7 +33,7 @@ const setupRequest = (
   session_id: string,
   inputs: RunInputs,
   run_id?: string,
-  user_id?: string
+  user_id?: string,
 ) => {
   const req: UserRunHistory = {
     role: "user",
@@ -91,14 +91,14 @@ const sortedMessages = (messages: RunHistory[]) =>
 export function useChatState(
   client: Client,
   agent: Agent,
-  state_options?: UseChatStateOptions
+  state_options?: UseChatStateOptions,
 ) {
   const [clientInstance] = useState(client);
   const [agentInstance] = useState(agent);
 
   // state
   const [session, setSession] = useState<string>(
-    state_options?.session_id ?? "session_" + crypto.randomUUID()
+    state_options?.session_id ?? "session_" + crypto.randomUUID(),
   );
   const [status, setStatus] = useState<string | undefined>();
   const [generating, setGenerating] = useState<boolean>(false);
@@ -113,7 +113,7 @@ export function useChatState(
     const runs = await clientInstance.store.getSessionRuns(id);
     setSession(id);
     setMessages(runs);
-  }
+  };
 
   const newRequest = async ({
     inputs,
@@ -130,7 +130,7 @@ export function useChatState(
       }
 
       setLoading(true);
-      options = {...(options || {})};
+      options = { ...(options || {}) };
       options.session_id = session;
       const request = setupRequest(session, inputs, options?.run_id);
       let run_id = request.run_id;
@@ -143,7 +143,7 @@ export function useChatState(
           audio: [],
           content: "",
           tools_calls: [],
-        })
+        }),
       );
       setMessages((prev) => [...sortedMessages(prev), request]);
       setStatus("Thinking...");
@@ -214,7 +214,7 @@ export function useChatState(
           healed: false,
           error: typeof err.message ?? "Unexpected error",
         });
-        console.error(err);
+      console.error(err);
     } finally {
       setStatus(undefined);
       setLoading(false);
@@ -236,6 +236,6 @@ export function useChatState(
     agent,
 
     session,
-    changeSession
+    changeSession,
   };
 }

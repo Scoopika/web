@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 
 export default async function deleteDataStore(
   id: string,
-): Promise<{success: boolean}> {
+): Promise<{ success: boolean }> {
   if (!id) {
     return { success: false };
   }
@@ -25,18 +25,18 @@ export default async function deleteDataStore(
   const res = await fetch(`${source}/private/deldb`, {
     method: "DELETE",
     headers: {
-      authorization: secret
+      authorization: secret,
     },
     body: JSON.stringify({
       userId: session.user.id,
-      id
-    })
+      id,
+    }),
   });
 
   const data = await res.json();
 
   if (!data || !data.success) {
-    return {success: false};
+    return { success: false };
   }
 
   await db.historystore.delete({

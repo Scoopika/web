@@ -45,7 +45,7 @@ export function makeSample(tool: AgenticToolItem): AgenticToolSchema {
 
 export function getOptionValue(
   itemOption: AgenticToolItemOptions,
-  toolOption: AgenticToolSchemaOptions
+  toolOption: AgenticToolSchemaOptions,
 ): string | undefined {
   const defaultValue =
     itemOption.default && `${itemOption.default}`.length > 0

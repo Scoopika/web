@@ -1,13 +1,13 @@
 "use server";
 
-import { decode } from 'base64-arraybuffer'
+import { decode } from "base64-arraybuffer";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import supabase from '@/lib/supabase';
+import supabase from "@/lib/supabase";
 
 export default async function generateAvatar(
   agentName: string,
-  agentDescription: string
+  agentDescription: string,
 ): Promise<{ success: false } | { success: true; data: string | undefined }> {
   const session = await getServerSession(authOptions);
 
@@ -21,15 +21,18 @@ export default async function generateAvatar(
   const response = await fetch(
     "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
     {
-      headers: { Authorization: `Bearer ${token}`, "User-Agent": "scoopika (https://scoopika.com)" },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "User-Agent": "scoopika (https://scoopika.com)",
+      },
       method: "POST",
       body: JSON.stringify({
         inputs: prompt,
         options: {
-          wait_for_model: true
-        }
+          wait_for_model: true,
+        },
       }),
-    }
+    },
   );
 
   console.log(response.status);
@@ -39,9 +42,9 @@ export default async function generateAvatar(
 
   const result = await response.blob();
 
-  const { data, error } = await supabase.storage.from("avatars").upload(
-    crypto.randomUUID(), result
-  )
+  const { data, error } = await supabase.storage
+    .from("avatars")
+    .upload(crypto.randomUUID(), result);
 
   if (typeof data?.path !== "string" || error) {
     return { success: false };
@@ -49,6 +52,8 @@ export default async function generateAvatar(
 
   return {
     success: true,
-    data: "https://gwsxxjxhbvifhzqsbpfp.supabase.co/storage/v1/object/public/avatars/" + data.path,
+    data:
+      "https://gwsxxjxhbvifhzqsbpfp.supabase.co/storage/v1/object/public/avatars/" +
+      data.path,
   };
 }

@@ -1,10 +1,7 @@
 "use client";
 
 import { Button } from "@nextui-org/react";
-import {
-  Agent,
-  Client,
-} from "@scoopika/client";
+import { Agent, Client } from "@scoopika/client";
 import { AgentData, LLMToolCall, RawEngines } from "@scoopika/types";
 import { useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
@@ -134,10 +131,10 @@ const getAgent = (
   userId: string,
   token: string,
   engine: string,
-  id: string
+  id: string,
 ) => {
   const client = new Client(
-    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${token}/${engine}/${id}`
+    `https://scoopika-run-35.deno.dev/scoopika-agent/${userId}/${token}/${engine}/${id}`,
   );
   const agentInstance = new Agent(id, client);
 
@@ -157,7 +154,12 @@ export default function PlaygroundChat({
     ? `${llmClient}--KEY--${llmClientKey}`
     : "NO-KEY";
 
-  const { client, agentInstance } = getAgent(userId, token, engineReq, agent.id);
+  const { client, agentInstance } = getAgent(
+    userId,
+    token,
+    engineReq,
+    agent.id,
+  );
   const {
     changeSession,
     messages,

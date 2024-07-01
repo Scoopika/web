@@ -1,11 +1,13 @@
-import Navbar from "@/components/navbar";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import SignInButtons from "@/components/signInButtons";
-import Image from "next/image";
 import Link from "next/link";
-import SvgLogo from "@/components/main/logo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Welcome"
+}
 
 export default async function Page({
   searchParams,
@@ -41,7 +43,11 @@ export default async function Page({
             </div>
             <p className="text-sm mt-4">
               By continue you agree to our{" "}
-              <Link href="/privacy_policy.pdf" target="_blank" className="underline">
+              <Link
+                href="/privacy_policy.pdf"
+                target="_blank"
+                className="underline"
+              >
                 Privacy policy
               </Link>
             </p>

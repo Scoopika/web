@@ -12,7 +12,11 @@ import Link from "next/link";
 import ResourceLink from "@/components/main/resourceLink";
 import AgentItem from "@/components/main/agents/item";
 import Empty from "@/components/main/empty";
-import Footer from "@/components/footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AI Agents"
+}
 
 interface Props {
   session: Session;
@@ -66,12 +70,8 @@ const Agents = async ({ session }: Props) => {
       {agentsData.length > 0 && (
         <div className="w-full flex flex-col">
           <div className="w-full p-3 pl-6 pr-6 rounded-lg bg-accent dark:bg-accent/30 text-sm flex items-center">
-            <div className="w-full">
-              Agent
-            </div>
-            <div className="w-full hidden lg:block">
-              Links
-            </div>
+            <div className="w-full">Agent</div>
+            <div className="w-full hidden lg:block">Links</div>
           </div>
           <div className="w-full flex flex-col">
             {agentsData.map((agent, index) => (
@@ -87,7 +87,6 @@ const Agents = async ({ session }: Props) => {
           link={`https://docs.scoopika.com/agents`}
         />
       </div>
-
     </>
   );
 };

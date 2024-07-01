@@ -7,10 +7,15 @@ import { authOptions } from "@/lib/auth";
 import aboutFeatures from "@/scripts/aboutFeatures";
 import { readPlan } from "@/scripts/plan";
 import { Progress } from "@nextui-org/react";
+import { Metadata } from "next";
 import { getServerSession, Session } from "next-auth";
 import { redirect } from "next/navigation";
 
 export const fetchCache = "force-no-store";
+
+export const metadata: Metadata = {
+  title: "Usage"
+}
 
 const maxes = {
   load: [5000, 200000, 1000000],

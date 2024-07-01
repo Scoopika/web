@@ -55,7 +55,7 @@ export default function AgentKnowledge({
   const [newOpen, setNewOpen] = useState<boolean>(false);
   const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
   const [deleteOpen, setDeleteOpen] = useState<Knowledge | undefined>(
-    undefined
+    undefined,
   );
 
   const loadKnowledge = async () => {
@@ -131,7 +131,7 @@ export default function AgentKnowledge({
         const res = await deleteKnowledge(
           agent.id,
           deleteOpen.id,
-          JSON.parse(deleteOpen.vectors)
+          JSON.parse(deleteOpen.vectors),
         );
         if (!res.success) {
           throw new Error("Please contact support!");
@@ -144,7 +144,7 @@ export default function AgentKnowledge({
         if (!s) return;
 
         setKnowledge((prev) =>
-          (prev || []).filter((m) => m.id !== deleteOpen.id)
+          (prev || []).filter((m) => m.id !== deleteOpen.id),
         );
         setDeleteOpen(undefined);
       },

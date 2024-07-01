@@ -23,5 +23,9 @@ export default function TestScoopika() {
     runAgent();
   }, []);
 
-  return <div className="mt-64" onClick={() => runAgent()}>test</div>;
+  return (
+    <div className="mt-64" onClick={() => runAgent()}>
+      test
+    </div>
+  );
 }

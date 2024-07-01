@@ -21,7 +21,7 @@ export interface UseVoiceChatStateOptions extends UseChatStateOptions {
 function useVoiceChatState(
   client: Client,
   agent: Agent,
-  state_options?: UseVoiceChatStateOptions
+  state_options?: UseVoiceChatStateOptions,
 ) {
   const [chatState] = useState(useChatState(client, agent, state_options));
   const [agentVoicePlayer, setAgentVoicePlayer] = useState<RunAudioPlayer>();
@@ -35,7 +35,7 @@ function useVoiceChatState(
   const [working, setWorking] = useState<boolean>(false);
   const [recognizedText, setRecognizedText] = useState<string>("");
   const [supportRecognition, setSupportRecognition] = useState<boolean | null>(
-    null
+    null,
   );
 
   const pauseAgent = () => {
@@ -62,7 +62,7 @@ function useVoiceChatState(
       new VoiceRecorder({
         onStateChange: (state) => setRecorderState(state),
         onText: (text) => setRecognizedText(text),
-      })
+      }),
     );
 
     if (voiceRecorder) {
@@ -74,8 +74,8 @@ function useVoiceChatState(
         new VoiceVisualizer(
           visualize.audio,
           visualize.canvas,
-          visualize.wave_color
-        )
+          visualize.wave_color,
+        ),
       );
     }
   }, []);

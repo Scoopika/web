@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 export default async function deleteKnowledge(
   id: string,
   knowledgeId: string,
-  vectors: string[]
+  vectors: string[],
 ) {
   const session = await getServerSession(authOptions);
   if (!session) return { success: false };

@@ -1,12 +1,8 @@
 "use server";
 
 interface Props {
-    to: string;
-    text: string;
+  to: string;
+  text: string;
 }
 
-export default async function sendEmail({ to, text }: Props) {
-
-    
-
-}
+export default async function sendEmail({ to, text }: Props) {}

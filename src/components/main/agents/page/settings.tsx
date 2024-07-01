@@ -66,10 +66,7 @@ export default function AgentSettings({ agent }: Props) {
 
   return (
     <div>
-      <AppHead
-        title="Settings"
-        description="Manage your agent settings"
-      />
+      <AppHead title="Settings" description="Manage your agent settings" />
 
       <AgentAvatar
         agent={data}

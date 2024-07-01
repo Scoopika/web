@@ -52,10 +52,10 @@ export default function NewBox({
   const [engineOpen, setEngineOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [allAgents, setAllAgents] = useState<AgentData[] | undefined>(
-    undefined
+    undefined,
   );
   const [data, setData] = useState<RawBoxData>(
-    newBox.new === true ? sampleData : newBox.box
+    newBox.new === true ? sampleData : newBox.box,
   );
 
   const loadAgents = async () => {
@@ -92,11 +92,11 @@ export default function NewBox({
 
   const saveNew = async () => {
     if (!data.name || data.name.length < 1) {
-        return toast.error("Enter a box name");
+      return toast.error("Enter a box name");
     }
 
     if (data.agents.length < 2) {
-        return toast.error("A box should have at least 2 agents");
+      return toast.error("A box should have at least 2 agents");
     }
 
     const t = toast.loading("Creating new box...");
@@ -118,11 +118,11 @@ export default function NewBox({
     if (newBox.new) return;
 
     if (!data.name || data.name.length < 1) {
-        return toast.error("Enter a box name");
+      return toast.error("Enter a box name");
     }
 
     if (data.agents.length < 2) {
-        return toast.error("A box should have at least 2 agents");
+      return toast.error("A box should have at least 2 agents");
     }
 
     const t = toast.loading("Saving box changes...");
@@ -276,7 +276,7 @@ export default function NewBox({
                         </Button>
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </>
             )}

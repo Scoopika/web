@@ -20,7 +20,7 @@ export default function BoxesMain({ boxes }: Props) {
   const [editOpen, setEditOpen] = useState<boolean>(false);
   const [editBox, setEditBox] = useState<RawBoxData | undefined>();
   const [agentsList, setAgentsList] = useState<AgentData[] | undefined>(
-    undefined
+    undefined,
   );
 
   const newEdit = (box: RawBoxData) => {

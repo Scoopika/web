@@ -3,7 +3,7 @@
 import { db } from "@/lib/db";
 
 export default async function addToWaitlist(
-  email: string
+  email: string,
 ): Promise<{ success: false; error: string } | { success: true }> {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

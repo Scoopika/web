@@ -88,7 +88,9 @@ const Navbar: FC<Props> = ({
                 <NavItem
                   item={item}
                   active={active}
-                  className={className === "dark" ? "text-white" : "dark:text-white"}
+                  className={
+                    className === "dark" ? "text-white" : "dark:text-white"
+                  }
                 />
               </NavbarItem>
             ))}
@@ -96,9 +98,7 @@ const Navbar: FC<Props> = ({
         {children && children}
       </NavbarContent>
       <NavbarContent justify="end">
-        <div className="hidden md:flex">
-          {!className && <ThemeToggle />}
-        </div>
+        <div className="hidden md:flex">{!className && <ThemeToggle />}</div>
         {!session ? (
           <Button
             color="primary"

@@ -53,7 +53,7 @@ export default function AgentTools({ agent, pro }: Props) {
 
   const [selectTool, setSelectTool] = useState<boolean>(false);
   const [newToolOpen, setNewToolOpen] = useState<"new" | "edit" | undefined>(
-    undefined
+    undefined,
   );
   const [newTool, setNewTool] = useState<InApiTool>({ ...sampleTool });
   const [newToolLoading, setNewToolLoading] = useState<boolean>(false);
@@ -83,7 +83,7 @@ export default function AgentTools({ agent, pro }: Props) {
       error: "Can't save tool",
       func: async () => {
         const tools = (agent.in_tools || []).filter(
-          (t) => t.type !== "api" || t.id !== newTool.id
+          (t) => t.type !== "api" || t.id !== newTool.id,
         );
         const payload: AgentData = {
           ...agent,
@@ -101,7 +101,7 @@ export default function AgentTools({ agent, pro }: Props) {
           !pro
         ) {
           throw new Error(
-            "Upgrade your plan to add more than 3 API tools to your app"
+            "Upgrade your plan to add more than 3 API tools to your app",
           );
         }
 
@@ -130,7 +130,7 @@ export default function AgentTools({ agent, pro }: Props) {
       func: async () => {
         const tools = [
           ...(agent.in_tools || []).filter(
-            (t) => t.type !== "api" || t.id !== deleteTool
+            (t) => t.type !== "api" || t.id !== deleteTool,
           ),
         ];
         const res = await updateAgentData(agent.id, {
@@ -378,7 +378,7 @@ export default function AgentTools({ agent, pro }: Props) {
         <div className="flex w-full flex-col gap-3 mt-6">
           {(
             (agent.in_tools || []).filter(
-              (t) => t.type === "api"
+              (t) => t.type === "api",
             ) as InApiTool[]
           ).length < 1 && (
             <Empty
@@ -389,7 +389,7 @@ export default function AgentTools({ agent, pro }: Props) {
           )}
           {(
             (agent.in_tools || []).filter(
-              (t) => t.type === "api"
+              (t) => t.type === "api",
             ) as InApiTool[]
           ).map((t, i) => (
             <div

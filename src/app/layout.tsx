@@ -4,7 +4,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
-import Footer from "@/components/footer";
 import { siteConfig } from "@/config/site";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
@@ -16,7 +15,7 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
-    template: `%s | ${siteConfig.name}`,
+    template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: [
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
     "AI agents",
     "AI tools",
     "Developers tools",
-    "AI development"
+    "AI development",
   ],
   authors: [
     {
@@ -44,12 +43,16 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteConfig.url,
     title: siteConfig.name,
-    description: siteConfig.description,
+    description: "Integrate personalized multimodal AI agents in your application in minutes",
     siteName: siteConfig.name,
+    images: [
+      "/images/developer-platform.png"
+    ]
   },
   verification: {
     google: "iZELF-QTTz2xWE3U2-FPllqMtRpVw-1Ok4GZEO2_--A",
   },
+  metadataBase: new URL("https://scoopika.com")
 };
 
 export default function RootLayout({
@@ -63,14 +66,12 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
         <Providers>
           <Toaster position="bottom-right" />
-            <main>
-              {children}
-            </main>
+          <main>{children}</main>
           <GoogleAnalytics gaId="G-3KS7DQFER8" />
           {/* <Footer /> */}
         </Providers>

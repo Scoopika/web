@@ -26,9 +26,5 @@ export default function Greeting({ text }: Props) {
     setGreeting(getGreeting(new Date()));
   }, []);
 
-  return (
-    <div>
-      Hey, {text}
-    </div>
-  );
+  return <div>Hey, {text}</div>;
 }

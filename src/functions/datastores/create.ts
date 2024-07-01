@@ -20,14 +20,11 @@ function sleep(ms?: number) {
 
 export default async function createDatastore(
   name: string,
-): Promise<
-  { success: false; error?: string } | { success: true }
-> {
-
+): Promise<{ success: false; error?: string } | { success: true }> {
   const session = await getServerSession(authOptions);
 
   if (!session || !name) {
-    return {success: false};
+    return { success: false };
   }
 
   const pro = isPro(session.user.plan);
@@ -36,7 +33,7 @@ export default async function createDatastore(
   const id = crypto.randomUUID();
 
   if (!pro) {
-    return {success: false};
+    return { success: false };
   }
 
   const res = await fetch(`${source}/private/newdb`, {
@@ -46,28 +43,28 @@ export default async function createDatastore(
     },
     body: JSON.stringify({
       userId: session.user.id,
-      id
-    })
+      id,
+    }),
   });
 
   const data = await res.json();
 
   if (!data || !data.success) {
     console.error(data.error || "Error with newdb");
-    return {success: false};
+    return { success: false };
   }
 
   await db.historystore.create({
     data: {
       id,
       name,
-      userId: session.user.id
-    }
-  })
+      userId: session.user.id,
+    },
+  });
 
   await revalidatePath("/app/data-stores");
 
   return {
     success: true,
-  }
+  };
 }

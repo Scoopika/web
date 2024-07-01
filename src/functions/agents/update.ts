@@ -18,12 +18,12 @@ export default async function updateAgentData(
   }
 
   const pro = isPro(session.user.plan);
-  const apiTools = (payload.in_tools || []).filter(t => t.type === "api");
+  const apiTools = (payload.in_tools || []).filter((t) => t.type === "api");
 
   if (apiTools.length > 3 && !pro) {
     return {
-      success: false
-    }
+      success: false,
+    };
   }
 
   try {

@@ -7,7 +7,12 @@ import { FaBrain, FaDatabase } from "react-icons/fa6";
 import { RiRobot2Fill, RiVoiceprintFill } from "react-icons/ri";
 import { TbMessageChatbot } from "react-icons/tb";
 
-const tabs: { name: string; icon: React.ReactNode; image: string; index: number }[] = [
+const tabs: {
+  name: string;
+  icon: React.ReactNode;
+  image: string;
+  index: number;
+}[] = [
   {
     index: 0,
     name: "Agents",
@@ -46,21 +51,23 @@ export default function Features() {
   return (
     <>
       <div className="hidden w-fit relative mt-16 sm:flex border border-secondary-light/[0.35] rounded-full bg-secondary/[0.2] mx-auto px-3 py-1 space-x-4 sm:space-x-1 backdrop-blur">
-        {tabs.sort((a, b) => a.index - b.index).map((tab, index) => (
-          <Button
-            key={`features-tab-${index}`}
-            size="sm"
-            radius="lg"
-            variant={activeTab === tab.index ? "flat" : "light"}
-            startContent={tab.icon}
-            className={`${index === 0 && "rounded-r-sm"} ${
-              index === tabs.length - 1 && "rounded-l-sm"
-            }`}
-            onPress={() => setActiveTab(tab.index)}
-          >
-            {tab.name}
-          </Button>
-        ))}
+        {tabs
+          .sort((a, b) => a.index - b.index)
+          .map((tab, index) => (
+            <Button
+              key={`features-tab-${index}`}
+              size="sm"
+              radius="lg"
+              variant={activeTab === tab.index ? "flat" : "light"}
+              startContent={tab.icon}
+              className={`${index === 0 && "rounded-r-sm"} ${
+                index === tabs.length - 1 && "rounded-l-sm"
+              }`}
+              onPress={() => setActiveTab(tab.index)}
+            >
+              {tab.name}
+            </Button>
+          ))}
       </div>
       <img
         src={tabs.find((tab) => tab.index === activeTab)?.image}

@@ -15,9 +15,14 @@ import Greeting from "@/components/main/greeting";
 import { TbWorldBolt } from "react-icons/tb";
 import { LuExternalLink } from "react-icons/lu";
 import Footer from "@/components/footer";
+import { Metadata } from "next";
 
 interface Props {
   session: Session;
+}
+
+export const metadata: Metadata = {
+  title: "Overview"
 }
 
 const developerResources: {

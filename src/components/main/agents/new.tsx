@@ -1,9 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import engines, {
-  getDefaultOptions,
-} from "@/scripts/agents/engines";
+import engines, { getDefaultOptions } from "@/scripts/agents/engines";
 import { AgentData } from "@scoopika/types";
 import { useState } from "react";
 import AgentAvatar from "./avatar";
@@ -67,8 +65,8 @@ export default function NewAgent() {
       },
       end: () => {
         setLoading(false);
-      }
-    })
+      },
+    });
   };
 
   const checkData = () => {
@@ -122,8 +120,8 @@ export default function NewAgent() {
         description="Select the large language model powering this agent. you can extend the supported providers or input custom LLMs (a fine-tuned GPT for example). learn more in the providers docs"
       >
         <div className="flex flex-col md:flex-row md:items-center gap-3">
-        <AgentLLM agent={agent} updateAgent={setAgent} />
-        <LLMOptions agent={agent} updateAgent={setAgent} />
+          <AgentLLM agent={agent} updateAgent={setAgent} />
+          <LLMOptions agent={agent} updateAgent={setAgent} />
         </div>
       </SettingsRow>
       <SettingsRow
@@ -155,7 +153,7 @@ export default function NewAgent() {
               size="sm"
               variant={agent.voice === v.id ? "solid" : "bordered"}
               color="default"
-              onPress={() => setAgent(prev => ({...prev, voice: v.id}))}
+              onPress={() => setAgent((prev) => ({ ...prev, voice: v.id }))}
               startContent={agent.voice === v.id && <FaCheck />}
             >
               {v.name}: {v.type}

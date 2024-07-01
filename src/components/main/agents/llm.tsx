@@ -44,7 +44,7 @@ export default function AgentLLM({ agent, updateAgent }: Props) {
               getEngines("text")?.[prev.prompts[0].llm_client]?.models[
                 "text"
               ] || []
-            ).filter((m) => m?.id === value)[0]?.options || defaultOptions
+            ).filter((m) => m?.id === value)[0]?.options || defaultOptions,
           ),
         },
       ],

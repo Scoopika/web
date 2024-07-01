@@ -75,7 +75,12 @@ export default function BoxItem({ box, setEditBox }: Props) {
             onOpenChange={!loading ? setDeleteOpen : () => {}}
           >
             <AlertDialogTrigger asChild>
-              <Button isIconOnly size="sm" variant="light" className="text-red-500">
+              <Button
+                isIconOnly
+                size="sm"
+                variant="light"
+                className="text-red-500"
+              >
                 <MdDelete size={17} />
               </Button>
             </AlertDialogTrigger>

@@ -53,12 +53,12 @@ export default function AgentAvatar({
       func: async () => {
         const res = await generateAvatar(
           agent.name,
-          agent.description + ` ${avatarProps}`
+          agent.description + ` ${avatarProps}`,
         );
 
         if (!res || !res.success || !res.data) {
           throw new Error(
-            "This could be due to high traffic, try again later!"
+            "This could be due to high traffic, try again later!",
           );
         }
 

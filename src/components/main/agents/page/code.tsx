@@ -24,7 +24,7 @@ function getEngines(agent: AgentData): string {
 }
 
 const setupCode = (
-  engines: string
+  engines: string,
 ) => `import { Scoopika, Agent } from "@scoopika/scoopika";
 
 const scoopika = new Scoopika({
@@ -59,7 +59,7 @@ const runCode = (id: string) => `const agent = new Agent(
 })();`;
 
 const clientCode = (
-  id: string
+  id: string,
 ) => `import { Client, Agent, AudioPlayer } from "@scoopika/client"
 
 const client = new Client("ENDPOINT_URL"); // replace with your endpoint url

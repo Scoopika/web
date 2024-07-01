@@ -2,9 +2,9 @@ import { SiteConfig } from "types";
 
 export const siteConfig: SiteConfig = {
   name: "Scoopika",
-  title: "Scoopika: AI agents for your application in minutes",
+  title: "Scoopika: Multimodal AI agents for your application in minutes",
   description:
-    "AI agents for your application that can see, talk, listen, learn, take actions, and collaborate together!",
+    "Open source developer platform to create and intagrate AI agents into web applications in minutes",
   url: "https://scoopika.com",
   ogImage: "https://scoopika.com/scoopika_og.jpg",
   links: {

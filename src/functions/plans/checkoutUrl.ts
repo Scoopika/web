@@ -5,9 +5,13 @@ import { configureLemonSqueezy } from "@/lib/lemonsqueezy";
 import { createCheckout } from "@lemonsqueezy/lemonsqueezy.js";
 import { getServerSession } from "next-auth";
 
-export default async function getCheckoutUrl(type: "basic" | "scale", embed: boolean = false) {
+export default async function getCheckoutUrl(
+  type: "basic" | "scale",
+  embed: boolean = false,
+) {
   const session = await getServerSession(authOptions);
-  const variant = type === "basic" ? process.env.BASIC_VARIANT : process.env.SCALE_VARIANT;
+  const variant =
+    type === "basic" ? process.env.BASIC_VARIANT : process.env.SCALE_VARIANT;
 
   if (!session) {
     return { success: false };

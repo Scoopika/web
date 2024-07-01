@@ -4,9 +4,14 @@ import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { isPro, readPlan } from "@/scripts/plan";
 import { AgentData } from "@scoopika/types";
+import { Metadata } from "next";
 import { Session, getServerSession } from "next-auth";
 
 export const fetchCache = "force-no-store";
+
+export const metadata: Metadata = {
+  title: "Playground"
+}
 
 interface Props {
   searchParams: {

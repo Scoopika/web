@@ -39,7 +39,7 @@ export default function Playground({
   token,
   userId,
   voice,
-  plan
+  plan,
 }: Props) {
   const [apiKey, setApiKey] = useState<string | undefined>();
   const [apiKeyInput, setApiKeyInput] = useState<string | undefined>(undefined);

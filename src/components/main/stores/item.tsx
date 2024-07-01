@@ -17,7 +17,7 @@ interface Props {
 }
 
 const code = (
-  id: string
+  id: string,
 ) => `import { Scoopika, Agent } from "@scoopika/scoopika";
 
 const scoopika = new Scoopika({

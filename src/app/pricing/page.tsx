@@ -21,6 +21,7 @@ import { AiOutlineGlobal } from "react-icons/ai";
 import { UpgradeButton } from "@/components/main/upgradeButton";
 import AboutFeatureDialog from "@/components/main/aboutFeature";
 import aboutFeatures from "@/scripts/aboutFeatures";
+import { Metadata } from "next";
 
 interface Feature {
   id?: string;
@@ -30,6 +31,11 @@ interface Feature {
   basic: string;
   scale: string;
   icon?: React.ReactNode;
+}
+
+export const metadata: Metadata = {
+  title: "Pricing",
+  description: "Our pricing adds another feature to Scoopika"
 }
 
 const Cell = ({ feature }: { feature: Feature }) => {
@@ -268,7 +274,8 @@ export default async function Page() {
             </h1>
 
             <p className="text-sm lg:text-base opacity-80 mt-4 pr-10">
-              Use Scoopika forever-free. only upgrade for extra features that deserve paying for
+              Use Scoopika forever-free. only upgrade for extra features that
+              deserve paying for
             </p>
           </div>
           <div className="w-full p-6 border-1 bg-accent/20 rounded-2xl">

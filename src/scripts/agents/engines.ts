@@ -167,7 +167,7 @@ export const getOptions = (prompt: Prompt): Model["options"] => {
   if (!engine) return {};
 
   const model = engine.models[prompt.type].filter(
-    (m) => m.id === prompt.model
+    (m) => m.id === prompt.model,
   )[0];
   if (!model) return {};
 
@@ -178,7 +178,7 @@ export const getDefaultOptions = (options: Model["options"]) => {
   const defaultValues: Record<string, any> = {};
 
   Object.keys(options).map(
-    (key) => (defaultValues[key] = options[key].default)
+    (key) => (defaultValues[key] = options[key].default),
   );
 
   return defaultValues;

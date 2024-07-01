@@ -46,7 +46,7 @@ export default function ToolInputs({ tool, updateTool }: Props) {
   const [newInputType, setNewInputType] = useState<Parameter["type"]>("string");
   const [newInputEnum, setNewInputEnum] = useState<string>("");
   const [itemsType, setItemsType] = useState<"string" | "number" | "boolean">(
-    "string"
+    "string",
   );
 
   const isValid = (value?: string) => {
@@ -112,7 +112,7 @@ export default function ToolInputs({ tool, updateTool }: Props) {
     setItemsType(
       input?.type === "array"
         ? input?.items?.type || ("string" as any)
-        : "string"
+        : "string",
     );
   };
 
@@ -320,7 +320,7 @@ export default function ToolInputs({ tool, updateTool }: Props) {
               <Switch
                 defaultChecked={newInput.required ? true : false}
                 onCheckedChange={(v) =>
-                  setNewInput((prev) => ({ ...prev, required: v } as any))
+                  setNewInput((prev) => ({ ...prev, required: v }) as any)
                 }
               />
             </div>
