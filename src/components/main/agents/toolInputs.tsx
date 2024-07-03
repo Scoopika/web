@@ -315,7 +315,8 @@ export default function ToolInputs({ tool, updateTool }: Props) {
                 </Select>
               </SettingsRow>
             )}
-            <SettingsRow
+            {newInputType !== "array" && (
+              <SettingsRow
               title="Default value"
               description="The default value to fallback to (optional)"
             >
@@ -324,11 +325,16 @@ export default function ToolInputs({ tool, updateTool }: Props) {
                 className="max-w-full"
                 defaultValue={newInput.default}
                 onInput={(e) => {
-                  const value = e?.currentTarget?.value;
-                  setNewInput((prev) => ({ ...prev, default: value }));
+                  let value = e?.currentTarget?.value as any;
+                  setNewInput((prev) => {
+                    if (newInputType === "number") value = Number(value);
+                    if (newInputType === "boolean") value = Boolean(value);
+                    return { ...prev, default: value }
+                  });
                 }}
               />
             </SettingsRow>
+            )}
             <SettingsRow
               title="Enum (optional)"
               description="List of accepted values separated by comma (without space)"
