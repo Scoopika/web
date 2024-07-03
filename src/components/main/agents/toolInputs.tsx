@@ -40,7 +40,6 @@ export default function ToolInputs({ tool, updateTool }: Props) {
   const [newInputOpen, setNewInputOpen] = useState<boolean>(false);
   const [newInput, setNewInput] = useState<Parameter>({
     type: "string",
-    required: true,
   });
   const [newInputKey, setNewInputKey] = useState<string>("");
   const [newInputType, setNewInputType] = useState<Parameter["type"]>("string");
@@ -48,12 +47,18 @@ export default function ToolInputs({ tool, updateTool }: Props) {
   const [itemsType, setItemsType] = useState<"string" | "number" | "boolean">(
     "string",
   );
+  const [required, setRequired] = useState<boolean>(false);
+  const [edit, setEdit] = useState<string | undefined>(undefined);
+
+  console.log(tool);
 
   const isValid = (value?: string) => {
     return typeof value === "string" && value.length > 0;
   };
 
   const resolveEnums = () => {
+    if (newInputEnum.length < 1) return [];
+
     const type = newInputType === "array" ? itemsType : newInputType;
     const enums = newInputEnum.split(",").map((e) => {
       if (type === "string" || type === "object") return e;
@@ -71,6 +76,8 @@ export default function ToolInputs({ tool, updateTool }: Props) {
     setNewInputType("string");
     setNewInputEnum("");
     setItemsType("string");
+    setEdit(undefined);
+    setRequired(false);
   };
 
   const addInput = () => {
@@ -84,7 +91,7 @@ export default function ToolInputs({ tool, updateTool }: Props) {
     }
 
     const enums = resolveEnums();
-    if (enums.length) {
+    if (enums.length > 0) {
       input.enum = enums;
     }
 
@@ -93,13 +100,32 @@ export default function ToolInputs({ tool, updateTool }: Props) {
     }
 
     setNewInputOpen(false);
-    updateTool((prev) => ({
-      ...prev,
-      inputs: {
-        ...prev.inputs,
-        properties: { ...prev.inputs.properties, [newInputKey]: input } as any,
-      },
-    }));
+    updateTool((prev) => {
+      if (edit) {
+        delete prev.inputs.properties?.[edit];
+      }
+
+      let requiredKeys: string[] = prev.inputs.required || [];
+
+      if (edit && requiredKeys.indexOf(edit) !== -1) {
+        requiredKeys = [...requiredKeys.filter(r => r !== edit)]
+      }
+
+      if (required) {
+        requiredKeys.push(newInputKey);
+      }
+
+      const newTool: InApiTool = {
+        ...prev,
+        inputs: {
+          ...prev.inputs,
+          properties: { ...prev.inputs.properties, [newInputKey]: input } as any,
+          required: requiredKeys
+        },
+      }
+
+      return newTool;
+    });
     startNewInput();
     toast.success("Saved input!");
   };
@@ -107,13 +133,15 @@ export default function ToolInputs({ tool, updateTool }: Props) {
   const editInput = (key: string, input: Parameter) => {
     setNewInput(input);
     setNewInputKey(key);
-    setNewInputEnum((input.enum || []).join(","));
+    setEdit(key);
+    if (input.enum) setNewInputEnum(input.enum.join(","));
     setNewInputType(input.type);
     setItemsType(
       input?.type === "array"
         ? input?.items?.type || ("string" as any)
         : "string",
     );
+    setRequired((tool.inputs.required || []).indexOf(key) !== -1)
   };
 
   const deleteInput = (key: string) => {
@@ -322,37 +350,8 @@ export default function ToolInputs({ tool, updateTool }: Props) {
                 Is this input value required or not
               </div>
               <Switch
-                defaultChecked={(tool.inputs.required || []).indexOf(newInputKey) !== -1}
-                disabled={!newInputKey || newInputKey.length < 1}
-                onCheckedChange={(v) => {
-                  if (v) {
-                    updateTool(prev => {
-                      if (!newInputKey || newInputKey.length < 1) {
-                        return prev;
-                      }
-
-                      if (v) {
-                        return {
-                          ...prev,
-                          inputs: {
-                            ...prev.inputs,
-                            required: [...(prev.inputs.required || []), newInputKey]
-                          }
-                        }
-                      }
-
-                      return {
-                        ...prev,
-                        inputs: {
-                          ...prev.inputs,
-                          required: (prev.inputs.required || []).filter(
-                            r => r !== newInputKey
-                          )
-                        }
-                      }
-                    })
-                  }
-                }}
+                defaultChecked={required}
+                onCheckedChange={(v) => setRequired(v)}
               />
             </div>
             <Button
