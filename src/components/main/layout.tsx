@@ -7,7 +7,7 @@ import { RiRobot2Fill } from "react-icons/ri";
 import { AiFillHome } from "react-icons/ai";
 import Link from "next/link";
 import SvgLogo from "./logo";
-import ThemeToggle, { ThemeToggleRow } from "../themeToggle";
+import { ThemeToggleRow } from "../themeToggle";
 import { FaBook } from "react-icons/fa6";
 import { FaChartSimple } from "react-icons/fa6";
 import { Session } from "next-auth";
@@ -20,6 +20,7 @@ import { RiChatVoiceFill } from "react-icons/ri";
 import { Sheet, SheetTrigger, SheetContent } from "../ui/sheet";
 import { RiMenu3Fill } from "react-icons/ri";
 import { usePathname } from "next/navigation";
+import { MdWidgets } from "react-icons/md";
 
 interface Props {
   children: React.ReactNode;
@@ -32,6 +33,7 @@ interface SideLink {
   target?: string;
   path: string;
   icon: React.ReactElement;
+  tag?: string;
 }
 
 type SideItem = SideLink;
@@ -61,6 +63,13 @@ const links: SideItem[] = [
     path: "/app/data-stores",
     icon: <FaDatabase size={15} />,
   },
+  // {
+  //   type: "link",
+  //   name: "Widgets",
+  //   path: "/app/widgets",
+  //   icon: <MdWidgets size={15} />,
+  //   tag: "new",
+  // },
   {
     type: "link",
     name: "Playground",
@@ -165,7 +174,12 @@ export default function MainLayout({ children, session }: Props) {
                           : "opacity-70"
                       } group-hover:opacity-100`}
                     >
-                      {link.icon} {link.name}
+                      {link.icon} {link.name}{" "}
+                      {link.tag && (
+                        <span className="text-xs pl-2 pr-2 rounded-full border border-violet-400 text-violet-400">
+                          {link.tag}
+                        </span>
+                      )}
                     </div>
                   </Link>
                 ))}
@@ -216,7 +230,12 @@ export default function MainLayout({ children, session }: Props) {
                     : "opacity-70"
                 } group-hover:opacity-100`}
               >
-                {link.icon} {link.name}
+                {link.icon} {link.name}{" "}
+                {link.tag && (
+                  <span className="text-xs pl-2 pr-2 rounded-full border border-violet-400 text-violet-400">
+                    {link.tag}
+                  </span>
+                )}
               </div>
             </Link>
           ))}
@@ -231,7 +250,7 @@ export default function MainLayout({ children, session }: Props) {
                 <div
                   className={`flex items-center gap-2 opacity-70 group-hover:opacity-100`}
                 >
-                  {link.icon} {link.name}
+                  {link.icon} {link.name}{" "}
                 </div>
               </Link>
             ))}

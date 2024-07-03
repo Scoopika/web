@@ -99,6 +99,30 @@ model Knowledge {
 }
 
 model Waitlistv1 {
-  id    String  @id @default(cuid())
-  email String  @unique
+  id    String @id @default(cuid())
+  email String @unique
+}
+
+model Widget {
+  id               String @id @default(cuid())
+  name             String
+  userId           String
+  agentId          String
+  store            String
+  audio            String
+  vision           String
+  pdf              String
+  type             String
+  styleType        String
+  theme            String
+  welcomeMsg       String
+  radius           String
+  primaryColor     String
+  bgColor          String
+  primaryTextColor String
+  textColor        String
+  waveColor        String
+  cssContainer     String
+  cssInput         String
+  allowedSources   String
 }

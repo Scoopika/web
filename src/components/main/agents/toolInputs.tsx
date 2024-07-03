@@ -66,7 +66,7 @@ export default function ToolInputs({ tool, updateTool }: Props) {
   };
 
   const startNewInput = () => {
-    setNewInput({ type: "string", required: true });
+    setNewInput({ type: "string" });
     setNewInputKey("");
     setNewInputType("string");
     setNewInputEnum("");
@@ -121,7 +121,11 @@ export default function ToolInputs({ tool, updateTool }: Props) {
     delete inputs[key];
     updateTool((prev) => ({
       ...prev,
-      inputs: { ...prev.inputs, properties: inputs },
+      inputs: {
+        ...prev.inputs,
+        properties: inputs ,
+        required: (prev.inputs.required || []).filter(r => r !== key)
+      },
     }));
   };
 
@@ -318,10 +322,37 @@ export default function ToolInputs({ tool, updateTool }: Props) {
                 Is this input value required or not
               </div>
               <Switch
-                defaultChecked={newInput.required ? true : false}
-                onCheckedChange={(v) =>
-                  setNewInput((prev) => ({ ...prev, required: v }) as any)
-                }
+                defaultChecked={(tool.inputs.required || []).indexOf(newInputKey) !== -1}
+                disabled={!newInputKey || newInputKey.length < 1}
+                onCheckedChange={(v) => {
+                  if (v) {
+                    updateTool(prev => {
+                      if (!newInputKey || newInputKey.length < 1) {
+                        return prev;
+                      }
+
+                      if (v) {
+                        return {
+                          ...prev,
+                          inputs: {
+                            ...prev.inputs,
+                            required: [...(prev.inputs.required || []), newInputKey]
+                          }
+                        }
+                      }
+
+                      return {
+                        ...prev,
+                        inputs: {
+                          ...prev.inputs,
+                          required: (prev.inputs.required || []).filter(
+                            r => r !== newInputKey
+                          )
+                        }
+                      }
+                    })
+                  }
+                }}
               />
             </div>
             <Button
