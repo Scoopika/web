@@ -50,8 +50,6 @@ export default function ToolInputs({ tool, updateTool }: Props) {
   const [required, setRequired] = useState<boolean>(false);
   const [edit, setEdit] = useState<string | undefined>(undefined);
 
-  console.log(tool);
-
   const isValid = (value?: string) => {
     return typeof value === "string" && value.length > 0;
   };
