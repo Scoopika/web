@@ -67,7 +67,7 @@ export default function AgentLLM({ agent, updateAgent }: Props) {
       >
         {providers.map((provider) => (
           <AutocompleteItem
-            key={`engine-audiocomplete-${provider}`}
+            key={provider}
             value={provider}
             textValue={provider}
           >
@@ -90,7 +90,7 @@ export default function AgentLLM({ agent, updateAgent }: Props) {
       >
         {(engines?.[provider]?.models?.["text"] || []).map((model) => (
           <AutocompleteItem
-            key={`model-select-${model.id}`}
+            key={model.id}
             value={model.id}
             textValue={model.id}
           >
