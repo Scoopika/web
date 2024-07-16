@@ -38,6 +38,12 @@ const initialItems: Props["items"] = [
     type: "link",
     target: "_blank",
   },
+  {
+    name: "Blog",
+    href: "https://blog.scoopika.com",
+    type: "link",
+    target: "_blank",
+  },
 ];
 
 const Navbar: FC<Props> = ({
@@ -150,14 +156,6 @@ const Navbar: FC<Props> = ({
     </NextNavbar>
   );
 };
-
-function GetIcon({ name }: { name: keyof typeof Icons }) {
-  const Icon = Icons[name];
-  if (!Icon) {
-    return null;
-  }
-  return <Icon size={17} />;
-}
 
 export { type Props };
 export default Navbar;

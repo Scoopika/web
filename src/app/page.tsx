@@ -13,6 +13,7 @@ import Footer from "@/components/footer";
 import { SparklesCore } from "@/components/ui/sparkles";
 import "@/styles/landing.css";
 import Features from "@/components/landing/features";
+import { HiExternalLink } from "react-icons/hi";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -30,7 +31,7 @@ export default async function Home() {
 
       <div className="relative w-full flex flex-col items-center p-8 pt-20 md:p-12 md:pt-36 overflow-hidden rounded-md dark">
         <div className="w-full absolute inset-0 h-screen">
-          <SparklesCore
+          {/* <SparklesCore
             id="tsparticlesfullpage"
             background="transparent"
             minSize={0.6}
@@ -38,26 +39,26 @@ export default async function Home() {
             particleDensity={100}
             className="w-full h-full"
             particleColor="#919191"
-          />
+          /> */}
         </div>
         <div className="p-1 pl-3 pr-3 text-xs border border-dashed rounded-lg mb-6 border-white/20 backdrop-blur">
           v1 is officially out!
         </div>
         <div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl opacity-0">
-            AI Agents for your application
+            Build LLM-powered apps in minutes
           </h2>
         </div>
         <div className="heroT">
           <div className="font-semibold text-center text-3xl md:text-4xl lg:text-5xl heroT_1">
-            AI Agents for your application
+            Build LLM-powered apps in minutes
           </div>
           <div className="text-3xl md:text-4xl lg:text-5xl heroT_2">
-            AI Agents for your application
+            Build LLM-powered apps in minutes
           </div>
         </div>
         <p className="opacity-80 text-xs md:text-sm lg:text-base text-center lg:max-w-[50%] mt-4">
-          The open-source developer platform to build personalzied AI agents
+          The open-source developer platform to build multimodal AI apps around LLMs and AI agents
           that can <b>see, talk, listen, learn, and take actions</b>
         </p>
         <div className="flex flex-col md:flex-row md:items-center gap-6 mt-10">
@@ -82,10 +83,24 @@ export default async function Home() {
             Documentation
           </Button>
         </div>
+
+        <div className="w-full flex items-center justify-center mt-8">
+          <Link target="_blank" href="https://blog.scoopika.com/blog/lost-in-the-galaxy-v0" className="w-[90%] md:w-[70%] lg:w-[50%] p-6 bg-accent/20 border-1 border-dashed rounded-2xl border-violet-400 backdrop-blur relative">
+            <HiExternalLink className="absolute top-3 right-3" />
+            <div className="text-xs p-0.5 pl-2 pr-2 bg-accent/20 border rounded-full max-w-max mb-4">
+              Starting soon
+            </div>
+            <div className="font-semibold text-sm mb-2">
+              Launch event 0.0
+            </div>
+            <div className="text-xs opacity-70">
+              Scoopika is part of the 0.0 launch event, where a lot of open source projects & tools are being released by Kais Radwan. New tools, features, and offers to help developers building LLM-powered applications and take Scoopika to the next level
+            </div>
+          </Link>
+        </div>
+
         <Features />
       </div>
-
-      <div className="w-full"></div>
 
       <div className="flex flex-col items-center mb-48 mt-12 sm:mt-36 dark">
         <div className="w-[80%] flex flex-col items-center">

@@ -50,7 +50,7 @@ export default function Features() {
 
   return (
     <>
-      <div className="hidden w-fit relative mt-16 sm:flex border border-secondary-light/[0.35] rounded-full bg-secondary/[0.2] mx-auto px-3 py-1 space-x-4 sm:space-x-1 backdrop-blur">
+      <div className="hidden w-fit relative mt-10 sm:flex border border-secondary-light/[0.35] rounded-full bg-secondary/[0.2] mx-auto px-3 py-1 space-x-4 sm:space-x-1 backdrop-blur">
         {tabs
           .sort((a, b) => a.index - b.index)
           .map((tab, index) => (

@@ -16,6 +16,7 @@ import { TbWorldBolt } from "react-icons/tb";
 import { LuExternalLink } from "react-icons/lu";
 import Footer from "@/components/footer";
 import { Metadata } from "next";
+import { FaInfoCircle } from "react-icons/fa";
 
 interface Props {
   session: Session;
@@ -31,28 +32,28 @@ const developerResources: {
   link: string;
   icon: React.ReactNode;
 }[] = [
-  {
-    name: "Documentation",
-    description:
-      "Clear in-depth documentation for how to use Scoopika and integrate it in your application for both server-side and client-side use",
-    link: "https://docs.scoopika.com",
-    icon: <FaBook size={17} />,
-  },
-  {
-    name: "Web integration",
-    description:
-      "Learn how to build AI-powered web applications with Scoopika and how to run agents on the client-side with real-time streaming and client-side actions",
-    link: "https://docs.scoopika.com/guides/scoopika-for-the-web",
-    icon: <TbWorldBolt size={19} />,
-  },
-  {
-    name: "Open-source",
-    description:
-      "99% of Scoopika is open-sourced. Check the repositories of Scoopika to report issues, help us improve Scoopika, or just check how the code works",
-    link: "https://github.com/scoopika",
-    icon: <FaGithub size={19} />,
-  },
-];
+    {
+      name: "Documentation",
+      description:
+        "Clear in-depth documentation for how to use Scoopika and integrate it in your application for both server-side and client-side use",
+      link: "https://docs.scoopika.com",
+      icon: <FaBook size={17} />,
+    },
+    {
+      name: "Web integration",
+      description:
+        "Learn how to build AI-powered web applications with Scoopika and how to run agents on the client-side with real-time streaming and client-side actions",
+      link: "https://docs.scoopika.com/guides/scoopika-for-the-web",
+      icon: <TbWorldBolt size={19} />,
+    },
+    {
+      name: "Open-source",
+      description:
+        "99% of Scoopika is open-sourced. Check the repositories of Scoopika to report issues, help us improve Scoopika, or just check how the code works",
+      link: "https://github.com/scoopika",
+      icon: <FaGithub size={19} />,
+    },
+  ];
 
 const Home = async ({ session }: Props) => {
   const agents = await db.agent.findMany({
@@ -119,6 +120,13 @@ const Home = async ({ session }: Props) => {
         title={<Greeting text={session.user.name} />}
         description="Welcome back to your AI portal"
       />
+
+      <div className="pt-4 pb-4 w-full">
+        <div className="w-full p-4 bg-accent/30 border rounded-2xl text-sm flex flex-col gap-2">
+        <FaInfoCircle size={18} />
+          {"We're"} working on big updates for Scoopika, so you might face some issues while working until we release the full version (only few days)
+        </div>
+      </div>
 
       <div className="w-full flex items-center overflow-auto gap-4">
         {agentsData.map((agent, index) => (
