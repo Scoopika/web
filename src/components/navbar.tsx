@@ -120,7 +120,7 @@ const Navbar: FC<Props> = ({
             color="primary"
             size="sm"
             endContent={<Icons.ChevronRIghtIcon size={18} />}
-            className="font-semibold hidden sm:block"
+            className="font-semibold hidden sm:flex"
             as={Link}
             href="https://app.scoopika.com/login"
           >
