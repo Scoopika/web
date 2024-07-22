@@ -1,179 +1,431 @@
 import Navbar from "@/components/navbar";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
-import { CiLock } from "react-icons/ci";
-import { TbWorldBolt } from "react-icons/tb";
-import { FaChevronRight, FaGithub, FaImage, FaXTwitter } from "react-icons/fa6";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import darkTheme from "@/lib/codeTheme";
+import Globe from "@/components/ui/globe";
+import {
+  FaCheck,
+  FaChevronDown,
+  FaChevronRight,
+  FaDatabase,
+  FaFilePdf,
+  FaGithub,
+  FaGoogle,
+  FaImage,
+  FaLink,
+  FaMicrophone,
+  FaXTwitter,
+} from "react-icons/fa6";
 import runCode from "@/components/code/run";
 import Footer from "@/components/footer";
-import { SparklesCore } from "@/components/ui/sparkles";
 import "@/styles/landing.css";
-import Features from "@/components/landing/features";
-import { HiExternalLink } from "react-icons/hi";
+import { FlipWords } from "@/components/ui/flip-words";
+import { SparklesCore } from "@/components/ui/sparkles";
+import CheckItem from "@/components/checkItem";
+import { RiRobot2Fill } from "react-icons/ri";
+import { IoLibrary } from "react-icons/io5";
+import { MdCode, MdDataObject } from "react-icons/md";
+import { AiFillApi } from "react-icons/ai";
+import { IoMdClose } from "react-icons/io";
+import { TextGenerateEffect } from "@/components/ui/text-generate";
+
+const words = ["multimodal", "reliable", "unique", "interactive"];
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
-
   return (
     <div className="bg-foreground text-background dark:bg-background dark:text-foreground">
-      <div className="soptheader">
+      {/* <div className="soptheader">
         <div className="spotlight">
           <div></div>
           <div></div>
           <div></div>
         </div>
-      </div>
-      <Navbar session={session} active="Home" className="dark" />
+      </div> */}
+      <Navbar session={null} active="Home" className="dark" />
 
-      <div className="relative w-full flex flex-col items-center p-8 pt-20 md:p-12 md:pt-36 overflow-hidden rounded-md dark">
+      <div className="relative w-full flex flex-col p-8 pt-20 md:p-12 md:pt-36 overflow-hidden rounded-md dark min-h-screen">
         <div className="w-full absolute inset-0 h-screen">
-          {/* <SparklesCore
+          <SparklesCore
             id="tsparticlesfullpage"
             background="transparent"
             minSize={0.6}
-            maxSize={1.4}
-            particleDensity={100}
-            className="w-full h-full"
+            maxSize={1}
+            particleDensity={50}
+            className="w-full h-full opacity-80"
             particleColor="#919191"
-          /> */}
+          />
         </div>
-        <div className="p-1 pl-3 pr-3 text-xs border border-dashed rounded-lg mb-6 border-white/20 backdrop-blur">
-          v1 is officially out!
-        </div>
-        <div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl opacity-0">
-            Build LLM-powered apps in minutes
-          </h2>
-        </div>
-        <div className="heroT">
-          <div className="font-semibold text-center text-3xl md:text-4xl lg:text-5xl heroT_1">
-            Build LLM-powered apps in minutes
+        <div className="w-full flex flex-col lg:flex-row lg:items-center gap-12 lg:pl-20 lg:pr-20">
+          <div className="w-full">
+            <div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold w-full text-start">
+                Build{" "}
+                <span className="bg-white">
+                  <FlipWords
+                    duration={2000}
+                    words={words}
+                    className="text-black dark:text-black"
+                  />
+                </span>{" "}
+              </h1>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold w-full text-start mt-3">
+                LLM-powered apps
+              </h1>
+              <h1
+                style={{
+                  textShadow: "3px 3px 0px rgba(255, 255, 255, .2)",
+                }}
+                className="text-3xl md:text-4xl lg:text-5xl font-semibold w-full text-start mt-3 opacity-70"
+              >
+                10x faster
+              </h1>
+            </div>
+            <p className="opacity-80 text-xs md:text-sm lg:text-base mt-8">
+              Open-source platform providing all the tools needed to build
+              multimodal AI-powered applications utilizing LLMs and AI agents,
+              perfect for creating AI chat interfaces and data extraction.
+            </p>
+            <div className="flex flex-col md:flex-row md:items-center gap-6 mt-8">
+              <Button
+                color="primary"
+                size="md"
+                as={Link}
+                href="https://app.scoopika.com/login"
+                className="font-semibold"
+                style={{
+                  boxShadow: "0px 5px 15px 5px rgba(255, 255, 255, .1)",
+                }}
+                endContent={<FaChevronRight size={14} />}
+              >
+                Start for free
+              </Button>
+            </div>
+            <div className="mt-8 flex flex-col gap-2 text-xs opacity-70">
+              <CheckItem title="Connect your LLMs providers" />
+            </div>
           </div>
-          <div className="text-3xl md:text-4xl lg:text-5xl heroT_2">
-            Build LLM-powered apps in minutes
+          <div className="w-full flex flex-col items-center gap-4">
+            <div className="p-3 flex gap-3 border rounded-xl w-full backdrop-blur bg-accent/20 hover:border-white/20 hover:scale-105 transition-all">
+              <div className="w-10 h-10 p-2">
+                <RiRobot2Fill />
+              </div>
+              <div>
+                <div className="text-sm font-semibold">AI agents</div>
+                <div className="text-xs opacity-70">
+                  Create multimodal AI agents that can interact with your data &
+                  APIs and generate voice responses in real-time
+                </div>
+              </div>
+            </div>
+            <div className="w-2 h-2 bg-white rounded-full"></div>
+            <div className="p-3 flex gap-3 border rounded-xl w-full backdrop-blur bg-accent/20 hover:border-white/20 hover:scale-105 transition-all">
+              <div className="w-10 h-10 p-2">
+                <MdDataObject />
+              </div>
+              <div>
+                <div className="text-sm font-semibold">
+                  Structured data generation
+                </div>
+                <div className="text-xs opacity-70">
+                  Generate validated JSON based on any schema from multiple data
+                  sources including text, images, audio, and URLs.
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <div className="w-2 h-4 bg-white rounded-full"></div>
+            </div>
+            <div className="p-3 flex gap-3 border rounded-xl w-full backdrop-blur bg-accent/20 hover:border-white/20 hover:scale-105 transition-all">
+              <div className="w-10 h-10 p-2">
+                <FaDatabase />
+              </div>
+              <div>
+                <div className="text-sm font-semibold">Long-term memory</div>
+                <div className="text-xs opacity-70">
+                  No more need to manage conversations history, we did it for
+                  you with managed Serverless encrypted memory stores
+                </div>
+              </div>
+            </div>
+            <div className="p-3 flex gap-3 border rounded-xl w-full backdrop-blur bg-accent/20 hover:border-white/20 hover:scale-105 transition-all">
+              <div className="w-10 h-10 p-2">
+                <IoLibrary />
+              </div>
+              <div>
+                <div className="text-sm font-semibold">Knowledge stores</div>
+                <div className="text-xs opacity-70">
+                  Expand your AI agents knowledge by uploading files or websites
+                  to Serverless knowledge stores served edge-close to users
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <p className="opacity-80 text-xs md:text-sm lg:text-base text-center lg:max-w-[50%] mt-4">
-          The open-source developer platform to build multimodal AI apps around LLMs and AI agents
-          that can <b>see, talk, listen, learn, and take actions</b>
-        </p>
-        <div className="flex flex-col md:flex-row md:items-center gap-6 mt-10">
-          <Button
-            variant="flat"
-            size="md"
-            as={Link}
-            href="/login"
-            className="border backdrop-blur-xl border-white/20"
-            endContent={<FaChevronRight size={14} />}
-          >
-            Start for free
-          </Button>
-          <Button
-            variant="light"
-            size="md"
-            as={Link}
-            href="https://docs.scoopika.com"
-            target="_blank"
-            endContent={<FaChevronRight size={14} />}
-          >
-            Documentation
-          </Button>
-        </div>
+      </div>
 
-        <div className="w-full flex items-center justify-center mt-8">
-          <Link target="_blank" href="https://blog.scoopika.com/blog/lost-in-the-galaxy-v0" className="w-[90%] md:w-[70%] lg:w-[50%] p-6 bg-accent/20 border-1 border-dashed rounded-2xl border-violet-400 backdrop-blur relative">
-            <HiExternalLink className="absolute top-3 right-3" />
-            <div className="text-xs p-0.5 pl-2 pr-2 bg-accent/20 border rounded-full max-w-max mb-4">
-              Starting soon
+      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
+        <div className="w-full flex flex-col gap-12 lg:pl-20 lg:pr-20 min-h-max">
+          <Link href="/lost-in-the-galaxy" className="border rounded-xl bg-accent/20 p-6">
+            <div className="text-xs max-w-max border border-violet-400 bg-violet-400/5 p-0.5 pl-2 pr-2 rounded-full mb-4">
+              Live now
             </div>
-            <div className="font-semibold text-sm mb-2">
-              Launch event 0.0
+            <div>Lost in the galaxy</div>
+            <div className="text-sm opacity-70">
+              40-days event building open source AI products in public using
+              Scoopika
             </div>
-            <div className="text-xs opacity-70">
-              Scoopika is part of the 0.0 launch event, where a lot of open source projects & tools are being released by Kais Radwan. New tools, features, and offers to help developers building LLM-powered applications and take Scoopika to the next level
+            <div className="text-sm mt-4 flex items-center gap-2">
+              Join us
+              <FaChevronRight />
             </div>
           </Link>
         </div>
-
-        <Features />
       </div>
 
-      <div className="flex flex-col items-center mb-48 mt-12 sm:mt-36 dark">
-        <div className="w-[80%] flex flex-col items-center">
-          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
-            Made for the AI era
+      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
+        <div className="w-full flex flex-col gap-12 lg:pl-20 lg:pr-20 min-h-max">
+          <div className="w-full">
+            <div className="w-full flex items-center">
+              <h2
+                style={{
+                  textShadow: "10px 5px 35px rgba(255, 255, 255, .2)",
+                }}
+                className="text-3xl md:text-4xl lg:text-5xl w-full text-start w-full"
+              >
+                Simple Process
+              </h2>
+              <div
+                className="w-5 h-5 rounded-full blur-2xl"
+                style={{
+                  boxShadow: "0px 5px 200px 120px rgba(255, 255, 255, .05)",
+                }}
+              ></div>
+            </div>
           </div>
-          <div className="opacity-70 text-center">
-            A platform you can rely on to take your application to the future
-          </div>
-
-          <div className="w-full flex flex-col md:flex-row items-center justify-center mt-12 sm:pl-8 sm:pr-8 gap-4">
-            <div className="w-full group border-1 rounded-xl rounded-tl-3xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72 hover:-translate-x-4 hover:-translate-y-4">
-              <div className="h-full w-full relative flex items-center justify-center">
-                <div className="absolute top-4 left-10 h-full w-2 border-r-1 border-dashed"></div>
-                <div className="absolute top-4 right-10 h-full w-2 border-r-1 border-dashed"></div>
-                <div className="absolute top-4 left-0 w-full h-2 border-t-1 border-dashed"></div>
-                <div className="absolute bottom-0 left-0 w-full h-2 border-t-1 border-dashed"></div>
-                <div className="absolute -bottom-6 left-0 w-full h-2 border-t-1 border-dashed"></div>
-                <div className="top-0 left-0 w-full h-full flex items-center justify-center">
-                  <div className="flex flex-col gap-5 w-14 pt-6 h-full items-center justify-center group-hover:opacity-0 group-hover:-translate-x-2 transition-all">
-                    <div className="w-12 border-t-1"></div>
-                    <div className="w-12 border-t-1 mr-6"></div>
-                    <div className="w-12 border-t-1 mr-3"></div>
-                  </div>
-                  <CiLock
-                    className="rotate-[-15deg] group-hover:-translate-x-7 transition-all group-hover:rotate-0"
-                    size={100}
-                  />
-                </div>
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex gap-10">
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 flex items-center justify-center gap-2 overflow-hidden group">
+                <img
+                  src="https://fireworks.ai/images/fireworks-logos/apple-touch-icon.png"
+                  className="w-12 h-12 p-2 border rounded-xl bg-accent/20 group-hover:border-purple-600 transitiona-all duration-500"
+                />
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/022/227/364/original/openai-chatgpt-logo-icon-free-png.png"
+                  className="w-16 h-16 p-3 border rounded-xl bg-accent/20 group-hover:border-green-400 transitiona-all duration-300"
+                />
+                <img
+                  src="https://cdn-1.webcatalog.io/catalog/together-ai/together-ai-social-preview.png?v=1714781863270"
+                  className="w-12 h-12 p-2 border rounded-xl bg-accent/20 object-cover group-hover:border-white transitiona-all duration-500"
+                />
               </div>
-              <div className="p-4 pt-8 pb-6 flex flex-col w-full">
-                <div className="w-full text-center text-sm mb-2">
-                  Safe out of the box
-                </div>
-                <div className="text-xs opacity-80 w-full text-center">
-                  Encryption, LLM output validation with full type-safety, and
-                  errors recovery
+              <div className="mt-8">
+                <div className="text-lg mb-3">00. Connect your provider</div>
+                <div className="text-sm opacity-70">
+                  Safely connect your LLM provider that will power your app from
+                  the platform or your code in seconds
                 </div>
               </div>
             </div>
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 flex items-center justify-center gap-2 overflow-hidden">
+                <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400" />
+                <div className="flex flex-col gap-2 items-center justify-center">
+                  <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400 max-w-max" />
 
-            <div className="w-full group border-1 rounded-xl rounded-tr-3xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72 hover:translate-x-4 hover:-translate-y-4">
-              <div className="h-full w-full relative flex items-center justify-center">
-                <div className="absolute top-4 left-10 h-full w-2 border-r-1 border-dashed"></div>
-                <div className="absolute top-4 right-10 h-full w-2 border-r-1 border-dashed"></div>
-                <div className="absolute top-4 left-0 w-full h-2 border-t-1 border-dashed"></div>
-                <div className="absolute bottom-0 left-0 w-full h-2 border-t-1 border-dashed"></div>
-                <div className="absolute -bottom-6 left-0 w-full h-2 border-t-1 border-dashed"></div>
-                <div className="top-0 left-0 w-full h-full flex items-center justify-center">
-                  <TbWorldBolt
-                    className="rotate-[15deg] group-hover:translate-x-7 transition-all group-hover:rotate-0"
-                    size={100}
-                  />
-                  <div className="flex flex-col gap-5 w-14 pt-6 h-full items-center justify-center group-hover:opacity-0 group-hover:translate-x-2 transition-all">
-                    <div className="w-12 border-t-1"></div>
-                    <div className="w-12 border-t-1 ml-6"></div>
-                    <div className="w-12 border-t-1 ml-3"></div>
+                  <div
+                    className="p-2 pl-4 pr-4 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400"
+                    style={{
+                      boxShadow: "0px 0px 100px 0px #8b5cf6",
+                    }}
+                  >
+                    Create AI agent
                   </div>
+                  <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400 max-w-max" />
+                </div>
+
+                <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400" />
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">01. Create AI bot/agent</div>
+                <div className="text-sm opacity-70">
+                  AI agents can be used to build automation apps, AI
+                  conversational bots (text & voice), or for data extraction
+                  tasks.
                 </div>
               </div>
-              <div className="p-4 pt-8 pb-6 flex flex-col w-full">
-                <div className="w-full text-center text-sm mb-2">
-                  Built for the web
+            </div>
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 overflow-hidden p-4 group">
+                <div className="relative text-xs opacity-70 transition-all group-hover:-translate-y-24">
+                  <pre>{runCode}</pre>
                 </div>
-                <div className="text-xs opacity-80 w-full text-center">
-                  Full edge compatibility with real-time streaming
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">02. Build</div>
+                <div className="text-sm opacity-70">
+                  Use the agent in your app or deploy a Scoopika endpoint in
+                  seconds with your favorite cloud hosting service.
                 </div>
               </div>
             </div>
           </div>
-          <div className="w-full flex flex-col md:flex-row items-center justify-center sm:pr-8 sm:pl-8 gap-4 mt-4">
-            <div className="w-full group border-1 rounded-xl rounded-bl-3xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72 hover:-translate-x-4 hover:translate-y-4">
-              <div className="w-full h-full flex items-center justify-center p-3 gap-3">
+        </div>
+      </div>
+
+      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
+        <div className="w-full flex flex-col gap-12 lg:pl-20 lg:pr-20 min-h-max">
+          <div className="w-full">
+            <div className="w-full flex items-center">
+              <h2
+                style={{
+                  textShadow: "10px 5px 35px rgba(255, 255, 255, .2)",
+                }}
+                className="text-3xl md:text-4xl lg:text-5xl w-full text-start w-full"
+              >
+                Features that matter
+              </h2>
+              <div
+                className="w-5 h-5 rounded-full blur-2xl opacity-20"
+                style={{
+                  boxShadow: "0px 5px 200px 120px #8b5cf6",
+                }}
+              ></div>
+            </div>
+          </div>
+          <div className="w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 flex gap-10">
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 flex flex-col items-center justify-center gap-2 overflow-hidden group p-4">
+                <div className="w-full p-2 flex items-center gap-3 border rounded-xl hover:bg-violet-400/5 transition-all cursor-pointer">
+                  <div className="w-8 h-8 flex items-center justify-center border border-violet-400 bg-violet-400/5 rounded-lg">
+                    <MdCode />
+                  </div>
+                  <div className="truncate">
+                    <div className="text-xs">Functions</div>
+                    <div className="text-xs opacity-70 truncate">
+                      Custom function from your code
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full p-2 flex items-center gap-3 border rounded-xl hover:bg-violet-400/5 transition-all cursor-pointer">
+                  <div className="w-8 h-8 flex items-center justify-center border border-violet-400 bg-violet-400/5 rounded-lg">
+                    <FaGoogle />
+                  </div>
+                  <div>
+                    <div className="text-xs">Google</div>
+                    <div className="text-xs opacity-70 truncate">
+                      Search google for resutls
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full p-2 flex items-center gap-3 border rounded-xl hover:bg-violet-400/5 transition-all cursor-pointer">
+                  <div className="w-8 h-8 flex items-center justify-center border border-violet-400 bg-violet-400/5 rounded-lg">
+                    <AiFillApi />
+                  </div>
+                  <div>
+                    <div className="text-xs">Your API</div>
+                    <div className="text-xs opacity-70 truncate">
+                      Connect any API you want
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">APIs & Tools</div>
+                <div className="text-sm opacity-70">
+                  Equip your AI agents with APIs and tools they can use to fetch
+                  data or perform actions based on context
+                </div>
+              </div>
+            </div>
+            <div className="h-full border rounded-xl backdrop-blur p-6 group">
+              <div className="w-full h-48 border rounded-xl overflow-hidden relative">
+                <div className="w-full h-full flex items-center justify-center gap-1 relative p-2">
+                  <div className="w-6 h-20 bg-white rounded-xl transition-all group-hover:h-14"></div>
+                  <div className="w-6 h-10 bg-white rounded-xl transition-all group-hover:h-20"></div>
+                  <div className="w-6 h-16 bg-white rounded-xl transition-all group-hover:h-10"></div>
+                  <div className="w-6 h-14 bg-white rounded-xl transition-all group-hover:h-16"></div>
+                </div>
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">Voice interaction</div>
+                <div className="text-sm opacity-70">
+                  Accept voice inputs, process multiple audio files in parallel,
+                  and stream voice responses in under 300ms
+                </div>
+              </div>
+            </div>
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6 group">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 overflow-hidden p-4 flex flex-col items-center justify-center gap-2">
+                <div className="p-3 border rounded-xl flex items-center gap-3 transition-all">
+                  <FaFilePdf />
+                  <FaLink />
+                </div>
+                <FaChevronDown size={11} className="transition-all" />
+                <div className="p-2 pl-3 pr-3 border rounded-xl flex items-center text-xs transition-all">
+                  Clean data & store embeddings
+                </div>
+                <FaChevronDown
+                  size={11}
+                  className="h-0 opacity-0 scale-0 group-hover:h-max group-hover:opacity-100 group-hover:scale-100 transition-all"
+                />
+                <div className="h-0 p-2 pl-3 pr-3 border rounded-xl flex items-center text-xs opacity-0 scale-0 group-hover:h-max group-hover:opacity-100 group-hover:scale-100 transition-all">
+                  Served on the edge to your agents
+                </div>
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">Knowledge Stores</div>
+                <div className="text-sm opacity-70">
+                  Upload files, PDFs, or websites to knowledge stores to expand
+                  your AI agents knowledge
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full flex flex-col md:flex-row md:items-center md:h-[25rem] gap-10">
+            <div className="w-full h-full border rounded-xl bg-accent/20 backdrop-blur p-6 flex flex-col group">
+              <div className="flex flex-col gap-5 w-full">
+                <div>
+                  <div className="text-xs mb-2 opacity-80">Speed</div>
+                  <div className="w-full border border-violet-300/50 rounded-full p-1 flex items-center justify-end pr-36 group-hover:pr-2 transition-all duration-1000">
+                    <div className="p-2 rounded-r-full rounded-l-lg bg-gradient-to-r from-transparent to-violet-500 w-12 group-hover:w-24 transition-all duration-1000"></div>
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs mb-2 opacity-80">Security</div>
+                  <div className="w-full border border-violet-300/50 rounded-full p-1 flex items-center justify-end pr-24 group-hover:pr-2 transition-all duration-1000">
+                    <div className="p-2 rounded-r-full rounded-l-lg bg-gradient-to-r from-transparent to-violet-500 w-12 group-hover:w-24 transition-all duration-1000"></div>
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs mb-2 opacity-80">Accuracy</div>
+                  <div className="w-full border border-violet-300/50 rounded-full p-1 flex items-center justify-end pr-48 group-hover:pr-4 transition-all duration-1000">
+                    <div className="p-2 rounded-r-full rounded-l-lg bg-gradient-to-r from-transparent to-violet-500 w-12 group-hover:w-24 transition-all duration-1000"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="h-full"></div>
+              <div className="text-2xl mt-8">Fast & Reliable</div>
+              <div className="opacity-70 text-sm mt-3">
+                Scoopika is optimized for performance and real-time interactive
+                applications, with built-in streaming, memory encryption, LLM
+                output validation, and smart errors recovery
+              </div>
+            </div>
+            <div className="w-full h-[20rem] md:h-full border rounded-xl bg-accent/20 backdrop-blur p-6 relative overflow-hidden group">
+              <Globe className="absolute -right-8 -bottom-72 opacity-35" />
+              <div className="w-full h-full absolute z-10 p-10 transition-all group-hover:bg-background/60 top-0 left-0">
+                <div className="text-3xl">Scale globally</div>
+                <div className="max-w-[90%] mt-6">
+                  Built to effortlessly scale on your own rules. Both knowledge
+                  & memory stores are scalable and served edge-close to your
+                  users from 26 regions across the globe
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 flex gap-10">
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6 group">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 flex items-center justify-center gap-2 overflow-hidden p-4">
                 <div className="w-20 h-20 bg-accent/30 rounded-2xl flex items-center justify-center group-hover:bg-white transition-all group-hover:w-14 group-hover:h-14">
                   <FaImage size={20} className="group-hover:text-black" />
                 </div>
@@ -184,108 +436,80 @@ export default async function Home() {
                   <FaImage size={20} className="group-hover:text-black" />
                 </div>
               </div>
-              <div className="p-4 pt-6 pb-6 flex flex-col w-full">
-                <div className="w-full text-center text-sm mb-2">Vision</div>
-                <div className="text-xs opacity-80 w-full text-center">
-                  Built-in support for vision and images based on the LLM{" "}
-                  {"you're"} using
+              <div className="mt-8">
+                <div className="text-lg mb-3">Vision</div>
+                <div className="text-sm opacity-70">
+                  Just simply use a LLM that supports vision and send your
+                  images as inputs without any additional setup
                 </div>
               </div>
             </div>
-
-            <div className="w-full group border-1 rounded-xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72">
-              <div className="w-full h-full flex items-center justify-center gap-1 relative p-2">
-                <div className="w-6 h-20 bg-white rounded-xl transition-all group-hover:h-14"></div>
-                <div className="w-6 h-10 bg-white rounded-xl transition-all group-hover:h-20"></div>
-                <div className="w-6 h-16 bg-white rounded-xl transition-all group-hover:h-10"></div>
-                <div className="w-6 h-14 bg-white rounded-xl transition-all group-hover:h-16"></div>
-              </div>
-              <div className="p-4 pt-6 pb-6 flex flex-col w-full">
-                <div className="w-full text-center text-sm mb-2">
-                  Voice chat
-                </div>
-                <div className="text-xs opacity-80 w-full text-center">
-                  Agents can speak in real-time powering interactive voice chat
-                  with users
-                </div>
-              </div>
-            </div>
-
-            <div className="w-full group border-1 rounded-xl rounded-br-3xl flex flex-col items-center bg-black hover:border-white/20 transition-all overflow-hidden h-72 hover:translate-x-4 hover:translate-y-4">
-              <div className="w-full h-full flex flex-col items-center justify-center relative max-h-full overflow-hidden bg-black">
-                <SyntaxHighlighter
-                  language="typescript"
-                  className="w-full h-full text-xs bg-transparent"
-                  style={{ ...darkTheme } as any}
-                >
-                  {runCode}
-                </SyntaxHighlighter>
-              </div>
-              <div className="p-4 pt-6 pb-6 flex flex-col w-full">
-                <div className="w-full text-center text-sm mb-2">
-                  Scoopika is yours
-                </div>
-                <div className="text-xs opacity-80 w-full text-center">
-                  Scoopika is flexible, open-source, and built to give you full
-                  control to build anything
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center mb-48 dark">
-        <div className="w-[80%] flex flex-col items-center">
-          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
-            Smart AI assistants that impress users
-          </div>
-          <div className="opacity-70 text-center">
-            Make your application AI-accessible today and join the AI revolution
-          </div>
-          <div className="w-full flex flex-col lg:flex-row items-center justify-center mt-12 sm:pl-8 sm:pr-8 gap-4">
-            <div className="w-full flex flex-col p-8 bg-black rounded-3xl h-72 sm:h-64">
-              <div className="font-semibold text-xl mb-2">
-                Powerful & Efficient
-              </div>
-              <div className="text-sm sm:text-base opacity-70 mb-8">
-                Scoopika works on your servers and with your LLMs, providing all
-                its features without adding any extra latency or costs.
-              </div>
-              <div className="h-full"></div>
-              <div className="w-full flex gap-3 items-center justify-between pb-4">
-                <div className="w-2 h-2 bg-green-400"></div>
-                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
-                <div className="w-2 h-2 bg-green-400"></div>
-                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
-                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
-                <div className="w-2 h-2 bg-green-400"></div>
-                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
-                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
-                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
-                <div className="w-2 h-2 bg-green-400"></div>
-                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
-                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
-                <div className="w-2 h-2 bg-green-400"></div>
-                <div className="w-2 h-2 bg-accent/60 rounded-full"></div>
-              </div>
-            </div>
-            <div className="w-full flex flex-col p-8 bg-black rounded-3xl h-72 sm:h-64">
-              <div className="font-semibold text-xl mb-2">
-                Reactive interactions
-              </div>
-              <div className="text-sm sm:text-base opacity-70 mb-4">
-                Build interactive real-time AI features and let agents perform
-                actions based on contextual clues with both text and voice
-                interactions.
-              </div>
-              <div className="h-full"></div>
-              <div className="flex items-center gap-3">
-                <div className="p-4 rounded-2xl bg-accent/40">
-                  <div className="text-sm mb-1 opacity-70">
-                    TTFB with knowledge & voice
+            <div className="h-full border rounded-xl backdrop-blur p-6">
+              <div className="w-full h-48 border rounded-xl overflow-hidden group relative">
+                <div className="absolute bottom-0 left-0 w-full bg-background p-2 z-20">
+                  <div className="flex items-center gap-3 border rounded-lg p-2 bg-background pl-3 pr-3">
+                    <FaLink className="opacity-50 min-w-max" size={13} />
+                    <FaImage className="opacity-50 min-w-max" size={13} />
+                    <div className="w-full text-xs opacity-50">
+                      Your message...
+                    </div>
+                    <FaMicrophone className="opacity-50" size={13} />
                   </div>
-                  <div className="font-semibold">LLM TTFT + ~300ms</div>
+                </div>
+                <div className="flex flex-col gap-10 items-center justify-center p-4 group-hover:-translate-y-20 transition-all">
+                  <div className="flex items-center w-full justify-end">
+                    <div>
+                      <div className="text-xs text-violet-300">You</div>
+                      <div className="text-xs opacity-80">
+                        Is Scoopika a paid platform?
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center w-full">
+                    <div>
+                      <div className="text-xs text-violet-300">
+                        AI Assistant
+                      </div>
+                      <div className="text-xs opacity-80">
+                        Based on the knowledge I have
+                        <br />
+                        <br />
+                        Scoopika has a free-forever plan so you can use its core
+                        features on your servers totally for free, but it
+                        provides paid options with more features like long-term
+                        memory and knowledge stores
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">Playground</div>
+                <div className="text-sm opacity-70">
+                  AI agents can be used to build automation apps, AI
+                  conversational bots (text & voice), or for data extraction
+                  tasks.
+                </div>
+              </div>
+            </div>
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 overflow-hidden p-4 group flex flex-col items-center justify-center gap-2">
+                <div className="p-3 border rounded-xl flex items-center gap-3 transition-all">
+                  <FaMicrophone />
+                  <FaImage />
+                  <FaFilePdf />
+                  <FaLink />
+                </div>
+                <FaChevronDown size={11} className="transition-all" />
+                <div className="p-2 pl-3 pr-3 border rounded-xl flex items-center text-xs transition-all">
+                  Validated JSON data
+                </div>
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">Data Extraction</div>
+                <div className="text-sm opacity-70">
+                  Extract data from multiple data sources and generate a
+                  validated JSON object based on any data schema
                 </div>
               </div>
             </div>
@@ -293,37 +517,66 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center mb-48 dark">
-        <div className="w-[80%] flex flex-col items-center">
-          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
-            Playground
+      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
+        <div className="w-full flex flex-col lg:flex-row lg:items-center gap-5 lg:pl-20 lg:pr-20 min-h-max">
+          <div className="w-full">
+            <div
+              className="flex items-center gap-3 text-3xl md:text-4xl mb-3 text-red-500"
+              style={{
+                textShadow: "0px 0px 5px #ef4444",
+              }}
+            >
+              <IoMdClose className="" /> No code
+            </div>
+            <div
+              className="flex items-center gap-3 text-3xl md:text-4xl text-green-500"
+              style={{
+                textShadow: "0px 0px 5px #22c55e",
+              }}
+            >
+              <FaCheck className="" /> Clean code
+            </div>
+            <div className="text-sm lg:text-base opacity-70 mt-6">
+              Built from the ground to be easily integrated in web applications,
+              with simple APIs, full type-safety, and easy error handling
+            </div>
+            <div className="mt-10 flex flex-col gap-2">
+              <CheckItem title="Works with any web framework, React, and NextJS" />
+              <CheckItem title="Streaming made easy with hooks" />
+              <CheckItem title="Deploy a Scoopika endpoint with 3 lines of code" />
+            </div>
           </div>
-          <div className="opacity-70 text-sm sm:text-base text-center mb-8">
-            Create an agent and try it in the platform playground in under a
-            minute
-            <br />
-            with support for text, images, and voice.
+          <div className="w-full flex items-center justify-end">
+            <img src="/images/scoopika-ts-img3.png" width="440px" />
           </div>
-          <img
-            src="/images/playground.png"
-            className="w-full sm:w-[80%] object-cover border rounded-2xl p-2 bg-accent/30"
-          />
         </div>
       </div>
 
-      <div className="flex flex-col items-center mb-48 dark">
-        <div className="w-[80%] flex flex-col items-center">
-          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
-            Open Source
+      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
+        <div className="w-full flex flex-col gap-5 lg:pl-20 lg:pr-20 min-h-max">
+          <div className="w-full">
+            <div className="w-full flex items-center">
+              <h2
+                style={{
+                  textShadow: "10px 5px 35px rgba(255, 255, 255, .2)",
+                }}
+                className="text-3xl md:text-4xl lg:text-5xl w-full text-start w-full"
+              >
+                SDKs & Community
+              </h2>
+              <div
+                className="w-5 h-5 rounded-full blur-2xl opacity-20"
+                style={{
+                  boxShadow: "0px 5px 200px 120px #8b5cf6",
+                }}
+              ></div>
+            </div>
           </div>
-          <div className="opacity-70 text-center mb-8">
-            Tools and integrations to simplify your development process
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex gap-4 mt-8">
             <Link
               href="https://docs.scoopika.com/packages/ts/scoopika"
               target="_blank"
-              className="p-6 bg-accent/30 rounded-3xl w-full transition-all hover:bg-accent/40 hover:scale-105 h-48"
+              className="p-6 bg-accent/30 rounded-3xl w-full transition-all hover:bg-accent/40 hover:scale-105 h-48 border"
             >
               <div className="mb-2 text-lg">@scoopika/scoopika</div>
               <div className="text-sm opacity-70 mb-4">
@@ -338,7 +591,7 @@ export default async function Home() {
             <Link
               href="https://docs.scoopika.com/packages/ts/client"
               target="_blank"
-              className="p-6 bg-accent/30 rounded-3xl w-full transition-all hover:bg-accent/40 hover:scale-105 h-48"
+              className="p-6 bg-accent/30 rounded-3xl w-full transition-all hover:bg-accent/40 hover:scale-105 h-48 border"
             >
               <div className="mb-2 text-lg">@scoopika/client</div>
               <div className="text-sm opacity-70 mb-4">
@@ -353,7 +606,7 @@ export default async function Home() {
             <Link
               href="https://docs.scoopika.com/packages/ts/react"
               target="_blank"
-              className="p-6 bg-accent/30 rounded-3xl w-full transition-all hover:bg-accent/40 hover:scale-105 h-48"
+              className="p-6 bg-accent/30 rounded-3xl w-full transition-all hover:bg-accent/40 border hover:scale-105 h-48"
             >
               <div className="mb-2 text-lg">@scoopika/react</div>
               <div className="text-sm opacity-70 mb-4">
@@ -369,22 +622,11 @@ export default async function Home() {
             <div className="p-6 border-1 rounded-3xl opacity-80 h-48 hidden md:flex"></div>
             <div className="p-6 border-1 rounded-3xl opacity-80 h-48 hidden md:flex"></div>
           </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center mb-48 dark">
-        <div className="w-[80%] flex flex-col items-center">
-          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
-            Community
-          </div>
-          <div className="opacity-70 text-center mb-8">
-            A growing community of developers just like you
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 flex gap-3 items-center justify-center">
+          <div className="w-full flex flex-col md:flex-row md:items-center gap-4">
             <Link
               href="https://github.com/scoopika"
               target="_blank"
-              className="h-72 p-6 bg-accent/30 rounded-3xl flex flex-col items-center transition-all hover:bg-accent/40 relative"
+              className="h-72 p-6 bg-accent/30 rounded-3xl flex flex-col items-center transition-all hover:bg-accent/40 relative w-full border"
             >
               <FaGithub size={50} className="mt-10" />
               <FaGithub
@@ -400,7 +642,7 @@ export default async function Home() {
             <Link
               href="https://x.com/scoopika_"
               target="_blank"
-              className="h-72 p-6 bg-accent/30 rounded-3xl flex flex-col items-center transition-all hover:bg-accent/40 relative"
+              className="h-72 p-6 bg-accent/30 rounded-3xl flex flex-col items-center transition-all hover:bg-accent/40 relative w-full border"
             >
               <FaXTwitter size={50} className="mt-10" />
               <FaXTwitter
@@ -416,30 +658,23 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center mb-48 dark">
-        <div className="w-[80%] flex flex-col items-center">
-          <div className="text-3xl md:text-4xl font-semibold mb-3 text-center">
-            Start now for free
-          </div>
-          <div className="opacity-70 text-center mb-8">
-            Enjoy our free-forever plan and only upgrade for extra features,
-            start now!
-          </div>
+      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
+        <div className="w-full flex flex-col gap-5 lg:pl-20 lg:pr-20 min-h-max mb-24">
+          <TextGenerateEffect words="Let's start building right now! Scoopika introduces $0 extra costs to your LLM provider's costs. Only pay for optional features that deserve paying for" />
           <Button
-            variant="flat"
-            size="md"
+            color="primary"
+            size="lg"
             as={Link}
-            href="/login"
-            className="border backdrop-blur-xl border-white/20"
+            href="https://app.scoopika.com/login"
+            className="font-semibold max-w-max"
+            style={{
+              boxShadow: "0px 5px 15px 5px rgba(255, 255, 255, .1)",
+            }}
             endContent={<FaChevronRight size={14} />}
           >
-            Start for free
+            Start building
           </Button>
         </div>
-      </div>
-
-      <div className="hidden sm:block w-full text-center pl-10 pr-10 text-9xl font-semibold opacity-30">
-        Scoopika
       </div>
 
       <Footer className="dark" />

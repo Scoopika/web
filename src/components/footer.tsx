@@ -59,14 +59,7 @@ export default function Footer({ className }: Props) {
           target="_blank"
           className="text-sm opacity-70 hover:opacity-100"
         >
-          Agents
-        </Link>
-        <Link
-          href="https://docs.scoopika.com/mutli-agent-boxes"
-          target="_blank"
-          className="text-sm opacity-70 hover:opacity-100"
-        >
-          Multi-agent boxes
+          AI Agents
         </Link>
         <Link
           href="https://docs.scoopika.com/tools"
@@ -80,7 +73,7 @@ export default function Footer({ className }: Props) {
           target="_blank"
           className="text-sm opacity-70 hover:opacity-100"
         >
-          History stores
+          Memory stores
         </Link>
         <Link
           href="https://docs.scoopika.com/tools/client-side-actions"
@@ -114,10 +107,6 @@ export default function Footer({ className }: Props) {
         >
           Privacy Policy
         </Link>
-      </div>
-
-      <div className="flex flex-col gap-4">
-        <ThemeToggle />
       </div>
     </footer>
   );

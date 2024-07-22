@@ -10,8 +10,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { FaBrain, FaChevronRight, FaDatabase } from "react-icons/fa6";
-import { GoRocket } from "react-icons/go";
+import {
+  FaBrain,
+  FaDatabase,
+} from "react-icons/fa6";
 import { RiRobot2Fill, RiVoiceprintLine } from "react-icons/ri";
 import { FaCirclePlay } from "react-icons/fa6";
 import { MdOutlineStream } from "react-icons/md";
@@ -22,6 +24,9 @@ import { UpgradeButton } from "@/components/main/upgradeButton";
 import AboutFeatureDialog from "@/components/main/aboutFeature";
 import aboutFeatures from "@/scripts/aboutFeatures";
 import { Metadata } from "next";
+import GridSmallBackground from "@/components/backgrounds/grid";
+import ScrollArrow from "@/components/landing/scrollArrow";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 
 interface Feature {
   id?: string;
@@ -35,8 +40,8 @@ interface Feature {
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Our pricing adds another feature to Scoopika"
-}
+  description: "Start for free with Scoopika ",
+};
 
 const Cell = ({ feature }: { feature: Feature }) => {
   return (
@@ -262,87 +267,156 @@ export default async function Page() {
   return (
     <>
       <Navbar session={session} active="Pricing" />
-      <div className="w-full pt-16">
-        <div className="w-full flex flex-col lg:flex-row lg:items-center p-6 lg:p-16 gap-10">
-          <div className="w-full flex flex-col w-full">
-            <div className="flex items-center gap-2 text-sm mb-4">
-              <GoRocket />
-              Proudly Open-Source
-            </div>
-            <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold mb-4">
-              Pricing designed for developers
-            </h1>
-
-            <p className="text-sm lg:text-base opacity-80 mt-4 pr-10">
-              Use Scoopika forever-free. only upgrade for extra features that
-              deserve paying for
-            </p>
-          </div>
-          <div className="w-full p-6 border-1 bg-accent/20 rounded-2xl">
-            <div className="text-xl mb-6 font-semibold">
-              Features out of the box (free forever)
-            </div>
-            <div className="w-full flex flex-wrap mb-6">
-              <CheckItem
-                title="Unlimited agent runs"
-                className="w-full md:w-1/2 mb-4"
-              />
-              <CheckItem
-                title="Connect your own LLMs"
-                className="w-full md:w-1/2 mb-4"
-              />
-              <CheckItem
-                title="Add tools to agents"
-                className="w-full md:w-1/2 mb-4"
-              />
-              <CheckItem
-                title="Connect agents together"
-                className="w-full md:w-1/2 mb-4"
-              />
-              <CheckItem
-                title="Pay only for extra features"
-                className="w-full md:w-1/2 mb-4"
-              />
-              <CheckItem
-                title="Real-time streaming"
-                className="w-full md:w-1/2 mb-4"
-              />
-              <CheckItem
-                title="LLM output validation"
-                className="w-full md:w-1/2 mb-4"
-              />
-              <CheckItem
-                title="Full type-safety"
-                className="w-full md:w-1/2 mb-4"
-              />
-              <CheckItem
-                title="Smart error recovery"
-                className="w-full md:w-1/2 mb-4"
-              />
-              <CheckItem
-                title="Seamless web integration"
-                className="w-full md:w-1/2 mb-4"
-              />
-            </div>
-            <div className="flex flex-col lg:flex-row lg:items-center gap-2">
-              <Button
-                size="sm"
-                color="primary"
-                className="font-semibold"
-                endContent={<FaChevronRight />}
-                as={Link}
-                href="/login"
+      <div className="w-full">
+        <div className="w-full flex flex-col justify-center">
+          <AuroraBackground>
+            <GridSmallBackground className="w-full flex flex-col items-center pt-24 md:pt-36 lg:pt-56 min-h-screen">
+              <div
+                style={{
+                  textShadow: "0px 2px 15px rgba(255, 255, 255, .5)",
+                }}
+                className="flex items-center gap-2 text-sm mb-4 font-semibold"
               >
-                Get started now
-              </Button>
-              <div className="text-xs opacity-80">No credit card required</div>
+                Pricing
+              </div>
+              <h1 className="text-2xl md:text-3xl lg:text-5xl mb-4 text-center">
+                Start building AI apps today
+                <br />
+                scale effortlessly
+              </h1>
+
+              <p className="text-sm lg:text-base opacity-80 mt-4 text-center mb-12">
+                Open source. Free to use. Pay only for premium features.
+              </p>
+
+              <ScrollArrow />
+            </GridSmallBackground>
+          </AuroraBackground>
+
+          <div className="w-full flex flex-col items-center min-h-max pt-24" id="pricing">
+            <div className="w-[90%] flex flex-col md:flex-row md:items-center gap-3 md:h-[30rem]">
+              <div className="w-full bg-accent/20 border rounded-2xl p-6 h-full flex flex-col">
+                <div className="text-sm font-semibold">Personal</div>
+                <div className="text-xs opacity-80 mt-2">
+                  For individuals who wants to start building LLM-powered
+                  applications
+                </div>
+                <div className="mt-6 text-2xl font-semibold">Free</div>
+                <div className="h-full"></div>
+                <div className="mt-4 flex flex-col justify-end gap-4">
+                  <CheckItem
+                    title="Unlimited AI agents runs"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Connect your LLMs providers"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Add tools to agents"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Real-time streaming"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="LLM output validation"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Full type-safety"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Smart error recovery"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Temporary memory"
+                    className="w-full"
+                  />
+                </div>
+              </div>
+              <div className="w-full bg-accent/20 border rounded-2xl p-6 h-full flex flex-col">
+                <div className="text-sm font-semibold">Basic</div>
+                <div className="text-xs opacity-80 mt-2">
+                  To scale your LLM app, have long-term memory, and expand AI agents knowledge
+                </div>
+                <div className="flex items-center gap-2 mt-6">
+                  <div className="text-2xl font-semibold">$16</div>
+                  <div className="opacity-70 text-sm">/month</div>
+                </div>
+                <div className="h-full"></div>
+                <div className="mt-4 flex flex-col gap-4">
+                  <div className="text-xs opacity-70">
+                    Everything in the free plan, plus:
+                  </div>
+                  <CheckItem
+                    title="Serverless managed long-term memory"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Expand agents knowledge from files & websites"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Real-time voice responses"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Higher rate limits"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Faster audio files processing"
+                    className="w-full"
+                  />
+                </div>
+              </div>
+              <div className="w-full bg-accent/20 border rounded-2xl p-6 h-full flex flex-col">
+                <div className="text-sm font-semibold">Scale</div>
+                <div className="text-xs opacity-80 mt-2">
+                  For scaling teams that requires higher rate limits, requests, and volumes
+                </div>
+                <div className="flex items-center gap-2 mt-6">
+                  <div className="text-2xl font-semibold">$56</div>
+                  <div className="opacity-70 text-sm">/month</div>
+                </div>
+                <div className="h-full"></div>
+                <div className="mt-4 flex flex-col gap-4">
+                  <div className="text-xs opacity-70">
+                    Everything in the Basic plan, plus:
+                  </div>
+                  <CheckItem
+                    title="Higher memory storage & requests"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Higher knowledge monthly requests"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="More voice responses characters"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Even higher rate limits (almost none)"
+                    className="w-full"
+                  />
+                  <CheckItem
+                    title="Direct support and assistant"
+                    className="w-full"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="w-full flex flex-col items-center justify-center lg:p-12">
-          <div id="pricing" className="text-3xl font-semibold mb-4">
-            Pricing
+        <div className="w-full flex flex-col items-center justify-center lg:p-12 mt-48">
+          <div className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-8">
+            {"Let's"} break it down
           </div>
           <div className="w-full p-6">
             <div className="w-full border-1 border-b-1 flex flex-col lg:flex-row">

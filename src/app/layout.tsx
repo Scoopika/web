@@ -43,10 +43,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteConfig.url,
     title: siteConfig.name,
-    description: "Integrate personalized multimodal AI agents in your application in minutes",
+    description: "Build reliable multimodal LLM-powered applications 10x faster",
     siteName: siteConfig.name,
     images: [
-      "/images/developer-platform.png"
+      "/images/scoopika-new.png"
     ]
   },
   verification: {

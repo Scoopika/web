@@ -17,6 +17,7 @@ import Icons from "@/components/icons";
 import NavItem, { type Item } from "@/components/navItem";
 import NextLink from "next/link";
 import SvgLogo from "./main/logo";
+import { BsGithub } from "react-icons/bs";
 
 interface Props {
   active?: string;
@@ -30,7 +31,7 @@ interface Props {
 
 const initialItems: Props["items"] = [
   { name: "Home", href: "/", type: "link" },
-  { name: "Dashboard", href: "/app", type: "link" },
+  { name: "Dashboard", href: "https://app.scoopika.com/login", type: "link" },
   { name: "Pricing", href: "/pricing", type: "link" },
   {
     name: "Docs",
@@ -104,15 +105,24 @@ const Navbar: FC<Props> = ({
         {children && children}
       </NavbarContent>
       <NavbarContent justify="end">
-        <div className="hidden md:flex">{!className && <ThemeToggle />}</div>
+        <Button
+          size="sm"
+          isIconOnly
+          startContent={<BsGithub size={18} />}
+          variant="light"
+          className="border"
+          as={Link}
+          href="https://github.com/scoopika"
+          target="_blank"
+        />
         {!session ? (
           <Button
             color="primary"
             size="sm"
             endContent={<Icons.ChevronRIghtIcon size={18} />}
-            className="font-semibold"
+            className="font-semibold hidden sm:block"
             as={Link}
-            href="/login"
+            href="https://app.scoopika.com/login"
           >
             Log in
           </Button>
@@ -123,7 +133,7 @@ const Navbar: FC<Props> = ({
             endContent={<Icons.ChevronRIghtIcon size={18} />}
             className="font-semibold"
             as={Link}
-            href="/app"
+            href="https://app.scoopika.com/"
           >
             App
           </Button>
