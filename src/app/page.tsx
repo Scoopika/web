@@ -42,6 +42,7 @@ import {
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+import { Offer, Plans } from "./pricing/page";
 
 const words = ["multimodal", "reliable", "unique", "interactive"];
 
@@ -679,8 +680,7 @@ export default async function Home() {
               <CheckItem title="Rabbit R1 (but the real software)" />
             </div>
           </div>
-          <div className="w-full flex items-center justify-end">
-          </div>
+          <div className="w-full flex items-center justify-end"></div>
         </div>
       </div>
 
@@ -821,6 +821,40 @@ export default async function Home() {
                 Follow us to stay up to date with our latest news and updates
               </div>
             </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
+        <div className="w-full flex flex-col gap-12 lg:pl-20 lg:pr-20 min-h-max">
+          <div className="w-full">
+            <div className="w-full flex items-center">
+              <h2
+                style={{
+                  textShadow: "10px 5px 35px rgba(255, 255, 255, .2)",
+                }}
+                className="text-3xl md:text-4xl lg:text-5xl w-full text-start w-full"
+              >
+                Pricing
+              </h2>
+              <div
+                className="w-5 h-5 rounded-full blur-2xl opacity-20"
+                style={{
+                  boxShadow: "0px 5px 200px 120px #8b5cf6",
+                }}
+              ></div>
+            </div>
+          </div>
+          <div className="w-full flex flex-col lg:flex-row lg:items-center gap-10 lg:h-[30rem]">
+            <Plans />
+          </div>
+          <div className="w-full flex flex-col lg:flex-row lg:items-center gap-10">
+            <Offer />
+          </div>
+          <div className="w-full flex items-center justify-center">
+            <Button as={Link} href="/pricing" size="sm" variant="light" radius="full" className="border-1" endContent={<FaChevronRight />}>
+              Learn more about pricing
+            </Button>
           </div>
         </div>
       </div>

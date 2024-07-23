@@ -10,10 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  FaBrain,
-  FaDatabase,
-} from "react-icons/fa6";
+import { FaBrain, FaDatabase } from "react-icons/fa6";
 import { RiRobot2Fill, RiVoiceprintLine } from "react-icons/ri";
 import { FaCirclePlay } from "react-icons/fa6";
 import { MdOutlineStream } from "react-icons/md";
@@ -72,6 +69,177 @@ const Cell = ({ feature }: { feature: Feature }) => {
         <div>{feature.scale}</div>
       </div>
     </div>
+  );
+};
+
+export const Plans = () => {
+  return (
+    <>
+      <div className="w-full overflow-hidden border rounded-2xl p-6 h-full flex flex-col">
+        <div
+          className="max-w-max p-1 pl-3 pr-3 border bg-accent/30 rounded-md text-green-400 border-green-400/20 text-xs mb-4"
+          style={{
+            boxShadow: "0px 0px 130px 10px #4ade80",
+          }}
+        >
+          HOBBY
+        </div>
+        <div className="text-xs opacity-80 mt-2">
+          For developers building their impressive LLM-powered side projects &
+          apps
+        </div>
+        <div className="mt-6 text-2xl font-semibold">Free</div>
+        <div className="h-full"></div>
+        <div className="mt-4 flex flex-col justify-end gap-4">
+          <CheckItem title="Unlimited AI agents runs" className="w-full" />
+          <CheckItem title="Connect your LLMs providers" className="w-full" />
+          <CheckItem title="Add tools to agents" className="w-full" />
+          <CheckItem title="Real-time streaming" className="w-full" />
+          <CheckItem title="LLM output validation" className="w-full" />
+          <CheckItem title="Full type-safety" className="w-full" />
+          <CheckItem title="Smart error recovery" className="w-full" />
+        </div>
+      </div>
+      <div className="w-full bg-accent/20 overflow-hidden border rounded-2xl p-6 h-full flex flex-col">
+        <div
+          className="max-w-max p-1 pl-3 pr-3 border bg-accent/30 rounded-md text-violet-400 border-violet-400/20 text-xs mb-4"
+          style={{
+            boxShadow: "0px 0px 130px 10px #a78bfa",
+          }}
+        >
+          PRO
+        </div>
+        <div className="text-xs opacity-80 mt-2">
+          For developers & small teams that need voice responses, long-term
+          memory, or agents with custom knowledge
+        </div>
+        <div className="flex items-center gap-2 mt-6">
+          <div className="text-2xl font-semibold">$25</div>
+          <div className="opacity-70 text-sm">/month</div>
+        </div>
+        <div className="h-full"></div>
+        <div className="mt-4 flex flex-col gap-4">
+          <div className="text-xs opacity-70">
+            Everything in the free plan, plus:
+          </div>
+          <CheckItem
+            title="Serverless managed long-term memory"
+            className="w-full"
+          />
+          <CheckItem
+            title="Expand agents knowledge from files & websites"
+            className="w-full"
+          />
+          <CheckItem title="Real-time voice responses" className="w-full" />
+          <CheckItem title="Higher rate limits" className="w-full" />
+          <CheckItem title="Faster audio files processing" className="w-full" />
+        </div>
+      </div>
+      <div className="w-full overflow-hidden border rounded-2xl p-6 h-full flex flex-col">
+        <div
+          className="max-w-max p-1 pl-3 pr-3 border bg-accent/30 rounded-md text-indigo-400 border-indigo-400/20 text-xs mb-4"
+          style={{
+            boxShadow: "0px 0px 130px 10px #818cf8",
+          }}
+        >
+          SCALE
+        </div>
+        <div className="text-xs opacity-80 mt-2">
+          For bigger teams that need higher rate limits, requests, volumes, and
+          memory storage
+        </div>
+        <div className="flex items-center gap-2 mt-6">
+          <div className="text-2xl font-semibold">$70</div>
+          <div className="opacity-70 text-sm">/month</div>
+        </div>
+        <div className="h-full"></div>
+        <div className="mt-4 flex flex-col gap-4">
+          <div className="text-xs opacity-70">
+            Everything in the Basic plan, plus:
+          </div>
+          <CheckItem
+            title="Higher memory storage & requests"
+            className="w-full"
+          />
+          <CheckItem
+            title="Higher knowledge monthly requests"
+            className="w-full"
+          />
+          <CheckItem
+            title="More voice responses characters"
+            className="w-full"
+          />
+          <CheckItem
+            title="Even higher rate limits (almost none)"
+            className="w-full"
+          />
+          <CheckItem title="Direct support and assistant" className="w-full" />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export const Offer = () => {
+  return (
+    <>
+      <div className="w-full overflow-hidden bg-accent/20 border rounded-2xl h-full flex">
+        <div className="w-full p-10 flex flex-col">
+          <h3 className="text-2xl font-semibold">Special Offer</h3>
+          <div className="opacity-80 mt-2 mb-10">
+            {"We'll"} build your full AI feature in a week with Scoopika, you
+            name it, we build it!
+          </div>
+          <div className="h-full"></div>
+          <div className="mt-4 flex flex-col gap-4">
+            <div className="text-xs opacity-70">
+              You get 3 months of the scale plan, plus:
+            </div>
+            <CheckItem
+              title="Build any AI feature you want with Scoopika"
+              className="w-full"
+            />
+            <CheckItem
+              title="We handle both server-side & client-side development"
+              className="w-full"
+            />
+            <CheckItem
+              title="UI/UX is on us, based on your product design"
+              className="w-full"
+            />
+            <CheckItem
+              title="Need full app? We got you too!"
+              className="w-full"
+            />
+          </div>
+        </div>
+        <div className="w-full w-full md:min-w-[30%] md:max-w-[30%] rounded-inherit border-t-1 md:border-t-0 md:border-l-1 bg-accent/20 flex flex-col items-center justify-center p-6">
+          <div
+            className="max-w-max p-1 pl-3 pr-3 border bg-accent/30 rounded-md text-rose-400 border-rose-400/20 text-xs mb-3 rotate-[-10deg]"
+            style={{
+              boxShadow: "0px 0px 130px 10px #fb7185",
+            }}
+          >
+            LIMITED DEAL
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="text-2xl font-semibold">$750</div>
+          </div>
+          <Button
+            as={Link}
+            href="mailto:team@scoopika.com"
+            size="sm"
+            color="primary"
+            className="font-semibold mt-6 w-full"
+          >
+            Contact us
+          </Button>
+          <div className="text-xs opacity-70 mt-2">
+            Limited to only 10 clients, get your spot now!
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
@@ -293,123 +461,15 @@ export default async function Page() {
             </GridSmallBackground>
           </AuroraBackground>
 
-          <div className="w-full flex flex-col items-center min-h-max pt-24" id="pricing">
-            <div className="w-[90%] flex flex-col md:flex-row md:items-center gap-3 md:h-[30rem]">
-              <div className="w-full bg-accent/20 border rounded-2xl p-6 h-full flex flex-col">
-                <div className="text-sm font-semibold">Personal</div>
-                <div className="text-xs opacity-80 mt-2">
-                  For individuals who wants to start building LLM-powered
-                  applications
-                </div>
-                <div className="mt-6 text-2xl font-semibold">Free</div>
-                <div className="h-full"></div>
-                <div className="mt-4 flex flex-col justify-end gap-4">
-                  <CheckItem
-                    title="Unlimited AI agents runs"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Connect your LLMs providers"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Add tools to agents"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Real-time streaming"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="LLM output validation"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Full type-safety"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Smart error recovery"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Temporary memory"
-                    className="w-full"
-                  />
-                </div>
-              </div>
-              <div className="w-full bg-accent/20 border rounded-2xl p-6 h-full flex flex-col">
-                <div className="text-sm font-semibold">Basic</div>
-                <div className="text-xs opacity-80 mt-2">
-                  To scale your LLM app, have long-term memory, and expand AI agents knowledge
-                </div>
-                <div className="flex items-center gap-2 mt-6">
-                  <div className="text-2xl font-semibold">$16</div>
-                  <div className="opacity-70 text-sm">/month</div>
-                </div>
-                <div className="h-full"></div>
-                <div className="mt-4 flex flex-col gap-4">
-                  <div className="text-xs opacity-70">
-                    Everything in the free plan, plus:
-                  </div>
-                  <CheckItem
-                    title="Serverless managed long-term memory"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Expand agents knowledge from files & websites"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Real-time voice responses"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Higher rate limits"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Faster audio files processing"
-                    className="w-full"
-                  />
-                </div>
-              </div>
-              <div className="w-full bg-accent/20 border rounded-2xl p-6 h-full flex flex-col">
-                <div className="text-sm font-semibold">Scale</div>
-                <div className="text-xs opacity-80 mt-2">
-                  For scaling teams that requires higher rate limits, requests, and volumes
-                </div>
-                <div className="flex items-center gap-2 mt-6">
-                  <div className="text-2xl font-semibold">$56</div>
-                  <div className="opacity-70 text-sm">/month</div>
-                </div>
-                <div className="h-full"></div>
-                <div className="mt-4 flex flex-col gap-4">
-                  <div className="text-xs opacity-70">
-                    Everything in the Basic plan, plus:
-                  </div>
-                  <CheckItem
-                    title="Higher memory storage & requests"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Higher knowledge monthly requests"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="More voice responses characters"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Even higher rate limits (almost none)"
-                    className="w-full"
-                  />
-                  <CheckItem
-                    title="Direct support and assistant"
-                    className="w-full"
-                  />
-                </div>
-              </div>
+          <div
+            className="w-full flex flex-col items-center min-h-max pt-24"
+            id="pricing"
+          >
+            <div className="w-[90%] flex flex-col lg:flex-row lg:items-center gap-10 lg:h-[30rem]">
+              <Plans />
+            </div>
+            <div className="w-[90%] flex flex-col lg:flex-row lg:items-center gap-10 mt-10">
+              <Offer />
             </div>
           </div>
         </div>
