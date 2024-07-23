@@ -227,3 +227,21 @@
     opacity: 1;
   }
 }
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.moving-gradient {
+  background: linear-gradient(270deg, white, #b3b3b3, #9f9f9f, #7f7f7f, #7f7f7f, #9f9f9f, #b3b3b3, white);
+  background-size: 700% 700%;
+  animation: gradient-animation 10s ease infinite;
+}
