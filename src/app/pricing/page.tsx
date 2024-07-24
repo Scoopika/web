@@ -509,7 +509,7 @@ export default async function Page() {
 
               <div className="w-full flex flex-col">
                 <div className="p-8 flex flex-col gap-3 w-full border-r-1 border-t-1">
-                  <h3 className="font-semibold mb-4">Basic - $16/month</h3>
+                  <h3 className="font-semibold mb-4">Basic - $25/month</h3>
                   <div className="text-xs opacity-70 mb-1">
                     Everything in Hobby, plus:
                   </div>
@@ -544,7 +544,7 @@ export default async function Page() {
 
               <div className="w-full flex flex-col">
                 <div className="p-8 flex flex-col gap-3 w-full bg-accent/30 border-t-1">
-                  <h3 className="font-semibold mb-4">Scale - $56/month</h3>
+                  <h3 className="font-semibold mb-4">Scale - $70/month</h3>
                   <div className="text-xs opacity-70 mb-1">
                     Everything in Basic, plus:
                   </div>
