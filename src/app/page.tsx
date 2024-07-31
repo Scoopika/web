@@ -187,9 +187,10 @@ export default async function Home() {
               </h1>
             </div>
             <p className="opacity-80 text-xs md:text-sm lg:text-base mt-8">
-              Open-source platform providing all the tools needed to build
-              multimodal AI-powered applications utilizing LLMs and AI agents,
-              perfect for creating AI chat interfaces and data extraction.
+              Open-source toolkit for developers to easily build modern fast,
+              reliable, Multimodal LLM-powered web applications, with built-in
+              errors recovery, responses streaming, multimodal inputs handling,
+              and LLM-output validation
             </p>
             <div className="flex flex-col md:flex-row md:items-center gap-6 mt-8">
               <Button
@@ -284,138 +285,8 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
+      <div className="w-full p-8 pt-20 md:p-12 dark min-h-max">
         <div className="w-full flex flex-col gap-12 lg:pl-20 lg:pr-20 min-h-max">
-          <Link
-            href="/lost-in-the-galaxy"
-            className="border rounded-xl bg-accent/20 p-6"
-          >
-            <div className="text-xs max-w-max border border-violet-400 bg-violet-400/5 p-0.5 pl-2 pr-2 rounded-full mb-4">
-              Live now
-            </div>
-            <div>Lost in the galaxy</div>
-            <div className="text-sm opacity-70">
-              40-days event building open source AI products in public using
-              Scoopika
-            </div>
-            <div className="text-sm mt-4 flex items-center gap-2">
-              Join us
-              <FaChevronRight />
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
-        <div className="w-full flex flex-col gap-12 lg:pl-20 lg:pr-20 min-h-max">
-          <div className="w-full">
-            <div className="w-full flex items-center">
-              <h2
-                style={{
-                  textShadow: "10px 5px 35px rgba(255, 255, 255, .2)",
-                }}
-                className="text-3xl md:text-4xl lg:text-5xl w-full text-start w-full"
-              >
-                Simple Process
-              </h2>
-              <div
-                className="w-5 h-5 rounded-full blur-2xl"
-                style={{
-                  boxShadow: "0px 5px 200px 120px rgba(255, 255, 255, .05)",
-                }}
-              ></div>
-            </div>
-          </div>
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex gap-10">
-            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
-              <div className="w-full h-48 border rounded-xl bg-accent/10 flex items-center justify-center gap-2 overflow-hidden group">
-                <img
-                  src="https://fireworks.ai/images/fireworks-logos/apple-touch-icon.png"
-                  className="w-12 h-12 p-2 border rounded-xl bg-accent/20 group-hover:border-purple-600 transitiona-all duration-500"
-                />
-                <img
-                  src="https://static.vecteezy.com/system/resources/previews/022/227/364/original/openai-chatgpt-logo-icon-free-png.png"
-                  className="w-16 h-16 p-3 border rounded-xl bg-accent/20 group-hover:border-green-400 transitiona-all duration-300"
-                />
-                <img
-                  src="https://cdn-1.webcatalog.io/catalog/together-ai/together-ai-social-preview.png?v=1714781863270"
-                  className="w-12 h-12 p-2 border rounded-xl bg-accent/20 object-cover group-hover:border-white transitiona-all duration-500"
-                />
-              </div>
-              <div className="mt-8">
-                <div className="text-lg mb-3">00. Connect your provider</div>
-                <div className="text-sm opacity-70">
-                  Safely connect your LLM provider that will power your app from
-                  the platform or your code in seconds
-                </div>
-              </div>
-            </div>
-            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
-              <div className="w-full h-48 border rounded-xl bg-accent/10 flex items-center justify-center gap-2 overflow-hidden">
-                <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400" />
-                <div className="flex flex-col gap-2 items-center justify-center">
-                  <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400 max-w-max" />
-
-                  <div
-                    className="p-2 pl-4 pr-4 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400"
-                    style={{
-                      boxShadow: "0px 0px 100px 0px #8b5cf6",
-                    }}
-                  >
-                    Create AI agent
-                  </div>
-                  <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400 max-w-max" />
-                </div>
-
-                <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400" />
-              </div>
-              <div className="mt-8">
-                <div className="text-lg mb-3">01. Create AI bot/agent</div>
-                <div className="text-sm opacity-70">
-                  AI agents can be used to build automation apps, AI
-                  conversational bots (text & voice), or for data extraction
-                  tasks.
-                </div>
-              </div>
-            </div>
-            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
-              <div className="w-full h-48 border rounded-xl bg-accent/10 overflow-hidden p-4 group">
-                <div className="relative text-xs opacity-70 transition-all group-hover:-translate-y-24">
-                  <pre>{runCode}</pre>
-                </div>
-              </div>
-              <div className="mt-8">
-                <div className="text-lg mb-3">02. Build</div>
-                <div className="text-sm opacity-70">
-                  Use the agent in your app or deploy a Scoopika endpoint in
-                  seconds with your favorite cloud hosting service.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
-        <div className="w-full flex flex-col gap-12 lg:pl-20 lg:pr-20 min-h-max">
-          <div className="w-full">
-            <div className="w-full flex items-center">
-              <h2
-                style={{
-                  textShadow: "10px 5px 35px rgba(255, 255, 255, .2)",
-                }}
-                className="text-3xl md:text-4xl lg:text-5xl w-full text-start w-full"
-              >
-                Features that matter
-              </h2>
-              <div
-                className="w-5 h-5 rounded-full blur-2xl opacity-20"
-                style={{
-                  boxShadow: "0px 5px 200px 120px #8b5cf6",
-                }}
-              ></div>
-            </div>
-          </div>
           <div className="w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 flex gap-10">
             <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
               <div className="w-full h-48 border rounded-xl bg-accent/10 flex flex-col items-center justify-center gap-2 overflow-hidden group p-4">
@@ -651,6 +522,96 @@ export default async function Home() {
                 }}
                 className="text-3xl md:text-4xl lg:text-5xl w-full text-start w-full"
               >
+                Simple Process
+              </h2>
+              <div
+                className="w-5 h-5 rounded-full blur-2xl"
+                style={{
+                  boxShadow: "0px 5px 200px 120px rgba(255, 255, 255, .05)",
+                }}
+              ></div>
+            </div>
+          </div>
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex gap-10">
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 flex items-center justify-center gap-2 overflow-hidden group">
+                <img
+                  src="https://fireworks.ai/images/fireworks-logos/apple-touch-icon.png"
+                  className="w-12 h-12 p-2 border rounded-xl bg-accent/20 group-hover:border-purple-600 transitiona-all duration-500"
+                />
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/022/227/364/original/openai-chatgpt-logo-icon-free-png.png"
+                  className="w-16 h-16 p-3 border rounded-xl bg-accent/20 group-hover:border-green-400 transitiona-all duration-300"
+                />
+                <img
+                  src="https://cdn-1.webcatalog.io/catalog/together-ai/together-ai-social-preview.png?v=1714781863270"
+                  className="w-12 h-12 p-2 border rounded-xl bg-accent/20 object-cover group-hover:border-white transitiona-all duration-500"
+                />
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">00. Connect your provider</div>
+                <div className="text-sm opacity-70">
+                  Connect the LLM provider that will power your AI agents safely
+                  from your servers and never share them with our servers
+                </div>
+              </div>
+            </div>
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 flex items-center justify-center gap-2 overflow-hidden">
+                <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400" />
+                <div className="flex flex-col gap-2 items-center justify-center">
+                  <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400 max-w-max" />
+
+                  <div
+                    className="p-2 pl-4 pr-4 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400"
+                    style={{
+                      boxShadow: "0px 0px 100px 0px #8b5cf6",
+                    }}
+                  >
+                    Create AI agent
+                  </div>
+                  <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400 max-w-max" />
+                </div>
+
+                <div className="p-1 pl-2 pr-2 text-sm border-violet-500 bg-violet-500/5 border rounded-xl text-violet-400" />
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">01. Create AI bot/agent</div>
+                <div className="text-sm opacity-70">
+                  AI agents can be used to build automation apps, AI
+                  conversational bots (text & voice), or for data extraction
+                  tasks.
+                </div>
+              </div>
+            </div>
+            <div className="h-full border rounded-xl bg-accent/20 backdrop-blur p-6">
+              <div className="w-full h-48 border rounded-xl bg-accent/10 overflow-hidden p-4 group">
+                <div className="relative text-xs opacity-70 transition-all group-hover:-translate-y-36">
+                  <pre>{runCode}</pre>
+                </div>
+              </div>
+              <div className="mt-8">
+                <div className="text-lg mb-3">02. Build</div>
+                <div className="text-sm opacity-70">
+                  Use the agent in your app or deploy it as an API endpoint in
+                  seconds with your favorite web framework.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full p-8 pt-20 md:p-12 md:pt-36 dark min-h-max">
+        <div className="w-full flex flex-col gap-12 lg:pl-20 lg:pr-20 min-h-max">
+          <div className="w-full">
+            <div className="w-full flex items-center">
+              <h2
+                style={{
+                  textShadow: "10px 5px 35px rgba(255, 255, 255, .2)",
+                }}
+                className="text-3xl md:text-4xl lg:text-5xl w-full text-start w-full"
+              >
                 Why Scoopika?
               </h2>
             </div>
@@ -852,7 +813,15 @@ export default async function Home() {
             <Offer />
           </div>
           <div className="w-full flex items-center justify-center">
-            <Button as={Link} href="/pricing" size="sm" variant="light" radius="full" className="border-1" endContent={<FaChevronRight />}>
+            <Button
+              as={Link}
+              href="/pricing"
+              size="sm"
+              variant="light"
+              radius="full"
+              className="border-1"
+              endContent={<FaChevronRight />}
+            >
               Learn more about pricing
             </Button>
           </div>

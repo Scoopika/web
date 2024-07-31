@@ -24,6 +24,7 @@ import { Metadata } from "next";
 import GridSmallBackground from "@/components/backgrounds/grid";
 import ScrollArrow from "@/components/landing/scrollArrow";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+import { IconBooks, IconBrain, IconCircleDashedCheck, IconDatabase, IconDatabaseImport, IconForms, IconMail, IconMessage, IconMicrophone, IconPlayerPlay, IconSend, IconTimeline, IconWaveSawTool, IconWaveSine, IconZoomExclamation } from "@tabler/icons-react";
 
 interface Feature {
   id?: string;
@@ -249,80 +250,73 @@ export default async function Page() {
   const mainFeatures = {
     free: [
       {
-        text: "Personalized AI agents",
-        icon: <RiRobot2Fill size={16} />,
+        text: "Unlimited agents runs",
+        icon: <IconPlayerPlay size={18} />,
       },
       {
-        text: "Unlimited text runs",
-        icon: <FaCirclePlay size={16} />,
+        text: "Multimodal inputs (slow audio processing)",
+        icon: <IconForms size={18} />,
       },
       {
         text: "Real-time streaming",
-        icon: <MdOutlineStream size={16} />,
+        icon: <IconSend size={18} />,
+      },
+      {
+        text: "Auto errors recovery",
+        icon: <IconZoomExclamation size={18} />,
+      },
+      {
+        text: "LLM output validation",
+        icon: <IconCircleDashedCheck size={18} />,
       },
     ],
     basic: [
       {
-        text: "Agents can speak and listen",
-        icon: <MdVolumeUp />,
+        text: "AI agents voice responses",
+        icon: <IconWaveSawTool size={18} />,
       },
       {
-        text: "Persistent chat sessions",
-        icon: <FaDatabase />,
+        text: "Persistent conversations memory",
+        icon: <IconDatabase size={18} />,
       },
       {
-        text: "Custom knowledge sources",
-        icon: <FaBrain />,
+        text: "Expand LLMs knowledge",
+        icon: <IconBooks size={18} />,
+      },
+      {
+        text: "Fast audio inputs processing",
+        icon: <IconMicrophone size={18} />,
+      },
+      {
+        text: "Email support",
+        icon: <IconMail size={18} />,
       },
     ],
     scale: [
       {
-        text: "Higher volumes for storage and audio",
-        icon: <IoAnalytics />,
+        text: "Faster voice responses generation",
+        icon: <IconWaveSawTool size={18} />,
       },
       {
-        text: "Faster speech generation",
-        icon: <RiVoiceprintLine />,
+        text: "Higher memory stores storage",
+        icon: <IconDatabaseImport size={18} />,
       },
       {
-        text: "Scale to millions globally",
-        icon: <AiOutlineGlobal />,
+        text: "More knowledge requests",
+        icon: <IconTimeline size={18} />,
+      },
+      {
+        text: "Higher rate limits for everything",
+        icon: <IconWaveSine size={18} />,
+      },
+      {
+        text: "Direct support",
+        icon: <IconMessage size={18} />,
       },
     ],
   };
 
   const features: Feature[] = [
-    {
-      title: "Created agents",
-      description: "The number of agents you can create",
-      free: "2",
-      basic: "10",
-      scale: "10",
-    },
-    {
-      title: "Multi-agent boxes",
-      description: "The number of boxes you can create",
-      free: "1",
-      basic: "4",
-      scale: "4",
-    },
-    {
-      id: "tools",
-      title: "Tools per Agent",
-      description: "The number of tools you can add to an agent",
-      free: "3 API tools & Unlimited functions",
-      basic: "Unlimited",
-      scale: "Unlimited",
-    },
-    {
-      id: "loads",
-      title: "Loads",
-      description:
-        "Each time your application loads an agent data from the platform (once every ~15 minutes when using the Scoopika endpoint)",
-      free: "5K / month",
-      basic: "200K / month",
-      scale: "1M / month",
-    },
     {
       id: "store",
       title: "Memory",
@@ -388,22 +382,22 @@ export default async function Page() {
     {
       title: "What can I do with the free plan?",
       description:
-        " You can create 2 AI agents, and access all the base features of Scoopika from LLM output validation, to external tools and real-time streaming hooks. Scoopika runs on your servers so you get unlimited runs (requests), though any conversations with the agent won't be persistent and will use an in-memory history. the free plan gives you a good advantage to add a reliable AI assistant to your app with text-based communication",
+        "You can connect any LLM providers, AI agents for text generation and JSON data generation. Handle multimodal inputs with built-in errors recovery and start building LLM-powered application, but with temp conversations memory or expanding the model's knowledge",
     },
     {
       title: "What can I do with the basic plan?",
       description:
-        "You can create multiple AI agents, and use them with unlimited API tools & custom functions, with voice-based communication, custom knowledge sources, and long-term memory.",
+        "You can generate voice responses in real-time, have faster multimodal inputs processing, long-term persistent conversations history, and expand model's knowledge from PDFs and websites.",
     },
     {
       title: "What can I do with the scale plan?",
       description:
-        "The scale plan has the same features as the basic plan, but with higher limits on everything. it's meant for applications with high traffics",
+        "Build any LLM-powered application on a high scale, with much higher rate limits",
     },
     {
       title: "How LLM costs are handled?",
       description:
-        "Scoopika does not handle LLM costs for you. you'll pass your API keys for the LLM providers you're using from your code. all keys are kept safe on your servers and are never shared with us unless you add them to your Scoopika account so they are used across your apps (optional).",
+        "You connect LLM providers from your code, and Scoopika doesn't have anything to do with your LLMs costs. Scoopika will not intoduce extra costs or send extra tokens to the LLMs",
     },
     {
       title: "Can I cancel my plan at anytime?",
@@ -495,15 +489,6 @@ export default async function Page() {
                       {feature.text}
                     </div>
                   ))}
-                  <Button
-                    size="sm"
-                    color="secondary"
-                    className="font-semibold mt-4"
-                    as={Link}
-                    href="/login"
-                  >
-                    Get started
-                  </Button>
                 </div>
               </div>
 
@@ -522,23 +507,6 @@ export default async function Page() {
                       {feature.text}
                     </div>
                   ))}
-                  {session ? (
-                    <UpgradeButton
-                      size="sm"
-                      className="mt-4 bg-transparent border-1 border-foreground text-foreground"
-                      type="basic"
-                    />
-                  ) : (
-                    <Button
-                      size="sm"
-                      color="primary"
-                      className="mt-4 bg-transparent border-1 border-foreground text-foreground"
-                      as={Link}
-                      href="/login?callback=pricing"
-                    >
-                      Get started
-                    </Button>
-                  )}
                 </div>
               </div>
 
@@ -557,18 +525,6 @@ export default async function Page() {
                       {feature.text}
                     </div>
                   ))}
-                  {session ? (
-                    <UpgradeButton size="sm" className="mt-4" type="scale" />
-                  ) : (
-                    <Button
-                      size="sm"
-                      color="primary"
-                      as={Link}
-                      href="/login?callback=pricing"
-                    >
-                      Get started
-                    </Button>
-                  )}
                 </div>
               </div>
             </div>
